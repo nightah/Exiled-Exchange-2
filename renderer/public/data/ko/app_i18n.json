@@ -238,6 +238,12 @@
     "search_text": "단어 혹은 Regex를 검색하세요",
     "friendly_name": "약칭"
   },
+  "trade_viewer": {
+    "name": "거래소 뷰어",
+    "price": "가격:",
+    "thanks": "감사합니다!",
+    "andXMore": "그리고 {0}개 더"
+  },
   "filter_generator": {
     "name": "Filter Generator",
     "editor": "Editor",

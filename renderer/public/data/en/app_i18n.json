@@ -246,6 +246,12 @@
     "search_text": "search text or regex",
     "friendly_name": "friendly name"
   },
+  "trade_viewer": {
+    "name": "Trade Viewer",
+    "price": "for",
+    "thanks": "Thanks for the trade!",
+    "andXMore": "and {0} more"
+  },
   "filter_generator": {
     "name": "Filter Generator",
     "editor": "Editor",

@@ -246,6 +246,12 @@
     "search_text": "buscar texto o expresión regular",
     "friendly_name": "nombre amigable"
   },
+  "trade_viewer": {
+    "name": "Visor de Intercambios",
+    "price": "Precio:",
+    "thanks": "¡Gracias!",
+    "andXMore": "y {0} más"
+  },
   "filter_generator": {
     "name": "Generador de Filtros",
     "editor": "Editor",

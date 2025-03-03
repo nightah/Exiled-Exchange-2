@@ -241,6 +241,12 @@
     "search_text": "搜尋文字或正則表達式",
     "friendly_name": "友好名稱"
   },
+  "trade_viewer": {
+    "name": "交易查看器",
+    "price": "價格:",
+    "thanks": "谢谢你",
+    "andXMore": "及其他 {0} 個"
+  },
   "filter_generator": {
     "name": "Filter Generator",
     "editor": "Editor",

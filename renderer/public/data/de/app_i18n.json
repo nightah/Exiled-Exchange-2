@@ -246,6 +246,12 @@
     "search_text": "Text oder Regex suchen",
     "friendly_name": "Anzeigename"
   },
+  "trade_viewer": {
+    "name": "Handelsbetrachter",
+    "price": "Preis:",
+    "thanks": "Danke schön!",
+    "andXMore": "und {0} weitere"
+  },
   "image_strip": {
     "name": "Bildleiste"
   },

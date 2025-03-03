@@ -41,7 +41,7 @@ export function saveConfig(opts?: { isTemporary: boolean }) {
     Host.sendEvent({
       name: "CLIENT->MAIN::save-config",
       payload: {
-        contents: JSON.stringify(AppConfig()),
+        contents: JSON.stringify(AppConfig(), null, 2),
         isTemporary: opts?.isTemporary ?? false,
       },
     });
@@ -150,7 +150,7 @@ export interface Config {
 }
 
 export const defaultConfig = (): Config => ({
-  configVersion: 23,
+  configVersion: 25,
   overlayKey: "Shift + Space",
   overlayBackground: "rgba(129, 139, 149, 0.15)",
   overlayBackgroundClose: true,
@@ -569,6 +569,16 @@ function upgradeConfig(_config: Config): Config {
       false;
 
     config.configVersion = 24;
+  }
+
+  if (config.configVersion < 25) {
+    config.widgets.push({
+      ...defaultConfig().widgets.find((w) => w.wmType === "trade-viewer")!,
+      wmId: Math.max(0, ...config.widgets.map((_) => _.wmId)) + 1,
+      wmZorder: null,
+    });
+
+    config.configVersion = 25;
   }
 
   return config as unknown as Config;
