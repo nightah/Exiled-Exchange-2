@@ -4,6 +4,7 @@ import { app } from "electron";
 import { guessFileLocation } from "./utils";
 import { ServerEvents } from "../server";
 import { Logger } from "../RemoteLogger";
+import type { EventEmitter } from "events";
 
 const POSSIBLE_PATH =
   process.platform === "win32"
@@ -33,6 +34,8 @@ const POSSIBLE_PATH =
 
 export class GameLogWatcher {
   private _wantedPath: string | null = null;
+  private _resolvedPath: string | null = null;
+  private _isEnabled: boolean = false;
   get actualPath() {
     return this._state?.path ?? null;
   }
@@ -48,35 +51,59 @@ export class GameLogWatcher {
   constructor(
     private server: ServerEvents,
     private logger: Logger,
-  ) {}
+    private internalEvents: EventEmitter,
+  ) {
+    this.internalEvents.on("config", async (rawConfig) => {
+      const config: { isLogWatcherEnabled: boolean } = JSON.parse(rawConfig);
+      this._isEnabled = config.isLogWatcherEnabled;
 
-  async restart(logFile: string) {
-    if (this._wantedPath !== logFile) {
-      this._wantedPath = logFile;
-      if (this._state) {
+      if (this._state && !this._isEnabled) {
         unwatchFile(this._state.path);
         await this._state.file.close();
         this._state = null;
+      } else if (!this._state && this._isEnabled) {
+        this.tryStart();
       }
-    } else {
+    });
+  }
+
+  async setup(logFile: string) {
+    if (this._wantedPath === logFile) {
       return;
+    }
+
+    this._wantedPath = logFile;
+    if (this._state) {
+      unwatchFile(this._state.path);
+      await this._state.file.close();
+      this._state = null;
     }
 
     if (!logFile.length) {
       const guessedPath = await guessFileLocation(POSSIBLE_PATH);
-      if (guessedPath != null) {
-        logFile = guessedPath;
-      } else {
+      if (guessedPath === null) {
+        this._resolvedPath = null;
         return;
       }
+      this._resolvedPath = guessedPath;
+    }
+  }
+
+  async tryStart() {
+    if (!this._resolvedPath || !this._isEnabled) {
+      return;
     }
 
     try {
-      const file = await fs.open(logFile, "r");
+      const file = await fs.open(this._resolvedPath, "r");
       const stats = await file.stat();
-      watchFile(logFile, { interval: 450 }, this.handleFileChange.bind(this));
+      watchFile(
+        this._resolvedPath,
+        { interval: 450 },
+        this.handleFileChange.bind(this),
+      );
       this._state = {
-        path: logFile,
+        path: this._resolvedPath,
         file,
         offset: stats.size,
         isReading: false,

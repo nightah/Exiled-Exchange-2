@@ -16,6 +16,7 @@ import { GameLogWatcher } from "./host-files/GameLogWatcher";
 import { HttpProxy } from "./proxy";
 import { installExtension, VUEJS_DEVTOOLS } from "electron-devtools-installer";
 import { FilterGenerator } from "./filter-generator/FilterGenerator";
+import { EventEmitter } from "events";
 
 if (!app.requestSingleInstanceLock()) {
   app.exit();
@@ -30,8 +31,9 @@ let tray: AppTray;
 
 app.on("ready", async () => {
   tray = new AppTray(eventPipe);
+  const internalEvents = new EventEmitter();
   const logger = new Logger(eventPipe);
-  const gameLogWatcher = new GameLogWatcher(eventPipe, logger);
+  const gameLogWatcher = new GameLogWatcher(eventPipe, logger, internalEvents);
   const gameConfig = new GameConfig(eventPipe, logger);
   const poeWindow = new GameWindow();
   const appUpdater = new AppUpdater(eventPipe);
@@ -66,22 +68,26 @@ app.on("ready", async () => {
         gameConfig,
         eventPipe,
       );
-      eventPipe.onEventAnyClient("CLIENT->MAIN::update-host-config", (cfg) => {
-        overlay.updateOpts(cfg.overlayKey, cfg.windowTitle);
-        shortcuts.updateActions(
-          cfg.shortcuts,
-          cfg.stashScroll,
-          cfg.logKeys,
-          cfg.restoreClipboard,
-          cfg.language,
-        );
-        gameLogWatcher.restart(cfg.clientLog ?? "");
-        gameConfig.readConfig(cfg.gameConfig ?? "");
-        appUpdater.checkAtStartup();
-        tray.overlayKey = cfg.overlayKey;
-      });
+      eventPipe.onEventAnyClient(
+        "CLIENT->MAIN::update-host-config",
+        async (cfg) => {
+          overlay.updateOpts(cfg.overlayKey, cfg.windowTitle);
+          shortcuts.updateActions(
+            cfg.shortcuts,
+            cfg.stashScroll,
+            cfg.logKeys,
+            cfg.restoreClipboard,
+            cfg.language,
+          );
+          await gameLogWatcher.setup(cfg.clientLog ?? "");
+          gameLogWatcher.tryStart();
+          gameConfig.readConfig(cfg.gameConfig ?? "");
+          appUpdater.checkAtStartup();
+          tray.overlayKey = cfg.overlayKey;
+        },
+      );
       uIOhook.start();
-      const port = await startServer(appUpdater, logger);
+      const port = await startServer(appUpdater, logger, internalEvents);
       // TODO: move up (currently crashes)
       logger.write(`info ${os.type()} ${os.release} / v${app.getVersion()}`);
       overlay.loadAppPage(port);
