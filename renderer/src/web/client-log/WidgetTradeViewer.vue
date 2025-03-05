@@ -1,5 +1,5 @@
 <template>
-  <Widget :config="config" move-handles="corners" readonly :inline-edit="false">
+  <Widget :config="config" move-handles="corners" :inline-edit="false">
     <div
       :class="['widget-default-style', $style['trade-viewer']]"
       v-if="!isMinimized || activeTrades.length"
@@ -11,7 +11,11 @@
         <span class="truncate">{{ t("trade_viewer.name") }}</span>
       </div>
       <div class="flex flex-col gap-y-1 overflow-y-auto min-h-0">
+        <div v-if="!isLogWatcherEnabled" class="p-3">
+          {{ t("trade_viewer.logging_is_disabled") }}
+        </div>
         <div
+          v-else
           v-for="(trade, tradeIdx) in activeTrades.slice(0, 4)"
           :key="trade.id"
           class="rounded p-2 text-gray-100 border-b-gray-800 border-b-2 last:border-b-0"
@@ -160,12 +164,13 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { inject, ref, type Ref, shallowRef } from "vue";
+import { computed, inject, ref, type Ref, shallowRef } from "vue";
 import Widget from "../overlay/Widget.vue";
 import { useI18n } from "vue-i18n";
 import { Host, MainProcess } from "@/web/background/IPC";
 import type { WidgetManager } from "../overlay/interfaces.js";
 import { parseLine } from "./client-log";
+import { AppConfig } from "../Config";
 
 const props = defineProps<{
   config: TradeViewerWidget;
@@ -187,6 +192,7 @@ const { t } = useI18n();
 const isMinimized: Ref<boolean> = ref(true);
 let countTimePID: ReturnType<typeof setInterval> | undefined;
 const activeTrades: Ref<Array<TradeRequest>> = ref([]);
+const isLogWatcherEnabled = computed(() => AppConfig().isLogWatcherEnabled);
 
 if (props.config.wmFlags[0] === "uninitialized") {
   props.config.wmFlags = ["invisible-on-blur"];

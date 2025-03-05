@@ -250,7 +250,13 @@
     "name": "Trade Viewer",
     "price": "for",
     "thanks": "Thanks for the trade!",
-    "andXMore": "and {0} more"
+    "andXMore": "and {0} more",
+    "logging_header": "Listen to game chat for trade requests",
+    "logging_disable": "Disable",
+    "logging_disable_text": "Turn off the feature and free up some PC resources",
+    "logging_enable": "Enable",
+    "logging_enable_text": "You will receive notifications about trade requests in game",
+    "logging_is_disabled": "The feature is turned off. To use it you need to enable it in the widget settings."
   },
   "filter_generator": {
     "name": "Filter Generator",

@@ -144,6 +144,7 @@ import SettingsStashSearch from "../stash-search/stash-search-editor.vue";
 import SettingsStopwatch from "../stopwatch/settings-stopwatch.vue";
 import SettingsItemSearch from "../item-search/settings-item-search.vue";
 import ConversionWarningBanner from "../conversion-warn-banner/ConversionWarningBanner.vue";
+import SettingsTradeViewer from "../client-log/TradeViewerSettings.vue";
 
 function shuffle<T>(array: T[]): T[] {
   let currentIndex = array.length;
@@ -313,6 +314,8 @@ function menuByType(type?: string) {
       return [[SettingsPricecheck]];
     case "item-search":
       return [[SettingsItemSearch]];
+    case "trade-viewer":
+      return [[SettingsTradeViewer]];
     default:
       return [
         [SettingsHotkeys, SettingsChat],

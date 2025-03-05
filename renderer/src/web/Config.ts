@@ -147,6 +147,7 @@ export interface Config {
   enableAlphas: boolean;
   alphas: [];
   tipsFrequency: TipsFrequency;
+  isLogWatcherEnabled: boolean;
 }
 
 export const defaultConfig = (): Config => ({
@@ -221,6 +222,7 @@ export const defaultConfig = (): Config => ({
   enableAlphas: false,
   alphas: [],
   tipsFrequency: TipsFrequency.Normal,
+  isLogWatcherEnabled: false,
 });
 
 function upgradeConfig(_config: Config): Config {
@@ -578,6 +580,7 @@ function upgradeConfig(_config: Config): Config {
       wmZorder: null,
     });
 
+    config.isLogWatcherEnabled = false;
     config.configVersion = 25;
   }
 
