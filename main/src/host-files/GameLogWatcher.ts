@@ -79,6 +79,8 @@ export class GameLogWatcher {
       this._state = null;
     }
 
+    this._resolvedPath = logFile;
+
     if (!logFile.length) {
       const guessedPath = await guessFileLocation(POSSIBLE_PATH);
       if (guessedPath === null) {
