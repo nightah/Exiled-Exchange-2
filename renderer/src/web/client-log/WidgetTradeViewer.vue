@@ -2,7 +2,7 @@
   <Widget :config="config" move-handles="corners" :inline-edit="false">
     <div
       :class="['widget-default-style', $style['trade-viewer']]"
-      v-if="!isMinimized || activeTrades.length"
+      v-if="!isElectron || !isMinimized || activeTrades.length"
       style="min-width: 5rem"
     >
       <div
@@ -31,7 +31,7 @@
               </div>
               <button
                 class="flex-grow-0 rounded p-1 pt-1.5 pb-0.5 text-gray-100 bg-gray-800 absolute -top-1.5 right-0 leading-4"
-                v-if="!isMinimized"
+                v-if="!isElectron || !isMinimized"
                 @click="ignoreTrade(trade)"
               >
                 <i class="fas fa-times text-gray-400 w-4 h-4" />
@@ -48,7 +48,7 @@
               v-for="(buyer, buyerIdx) in Object.keys(trade.buyers).filter(
                 (_, idx) => idx < 4,
               )"
-              v-if="!isMinimized"
+              v-if="!isElectron || !isMinimized"
               class="flex flex-row gap-1 items-center mt-1 leading-4"
             >
               <div
@@ -193,6 +193,7 @@ const isMinimized: Ref<boolean> = ref(true);
 let countTimePID: ReturnType<typeof setInterval> | undefined;
 const activeTrades: Ref<Array<TradeRequest>> = ref([]);
 const isLogWatcherEnabled = computed(() => AppConfig().isLogWatcherEnabled);
+const isElectron = navigator.userAgent.includes("Electron");
 
 if (props.config.wmFlags[0] === "uninitialized") {
   props.config.wmFlags = ["invisible-on-blur"];
