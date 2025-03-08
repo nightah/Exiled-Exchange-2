@@ -2,7 +2,7 @@
 import { CLIENT_STRINGS as _$ } from "@/assets/data";
 import { AppConfig } from "@/web/Config";
 
-const enum MessageChannel {
+export const enum MessageChannel {
   SYSTEM = "system",
   TRADE = "trade",
   GLOBAL = "global",
@@ -13,7 +13,7 @@ const enum MessageChannel {
 }
 
 interface LogEntry {
-  сhannel: MessageChannel;
+  channel: MessageChannel;
   guildTag?: string;
   charName?: string;
   body: string;
@@ -42,19 +42,19 @@ export function parseLine(line: string) {
   const entry = {} as LogEntry;
   let match: RegExpMatchArray | null;
   if ((match = text.match(_$.CHAT_GLOBAL))) {
-    entry.сhannel = MessageChannel.GLOBAL;
+    entry.channel = MessageChannel.GLOBAL;
   } else if ((match = text.match(_$.CHAT_TRADE))) {
-    entry.сhannel = MessageChannel.TRADE;
+    entry.channel = MessageChannel.TRADE;
   } else if ((match = text.match(_$.CHAT_SYSTEM))) {
-    entry.сhannel = MessageChannel.SYSTEM;
+    entry.channel = MessageChannel.SYSTEM;
   } else if ((match = text.match(_$.CHAT_WHISPER_TO))) {
-    entry.сhannel = MessageChannel.WHISPER_TO;
+    entry.channel = MessageChannel.WHISPER_TO;
   } else if ((match = text.match(_$.CHAT_WHISPER_FROM))) {
-    entry.сhannel = MessageChannel.WHISPER_FROM;
+    entry.channel = MessageChannel.WHISPER_FROM;
   } else if ((match = text.match(_$.CHAT_PARTY))) {
-    entry.сhannel = MessageChannel.PARTY;
+    entry.channel = MessageChannel.PARTY;
   } else if ((match = text.match(_$.CHAT_GUILD))) {
-    entry.сhannel = MessageChannel.GUILD;
+    entry.channel = MessageChannel.GUILD;
   } else {
     return;
   }
@@ -63,7 +63,7 @@ export function parseLine(line: string) {
   entry.charName = match.groups!.char_name;
   entry.body = match.groups!.body;
 
-  if (entry.сhannel === MessageChannel.WHISPER_FROM) {
+  if (entry.channel === MessageChannel.WHISPER_FROM) {
     if ((match = entry.body.match(TRADE_WHISPER[AppConfig().language]))) {
       const [pAmount, pTag] = [
         match.groups!.price.split(" ", 1).toString(),

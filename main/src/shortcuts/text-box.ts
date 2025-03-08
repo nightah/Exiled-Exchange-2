@@ -4,7 +4,6 @@ import type { HostClipboard } from "./HostClipboard";
 import type { OverlayWindow } from "../windowing/OverlayWindow";
 
 const PLACEHOLDER_LAST = "@last";
-const PLACEHOLDER_WHISPER_REGEX = /[@\s]/g
 
 export function clearAndPasteInChat(text: string, clipboard: Electron.Clipboard, modifiers: number[]) {
   clipboard.writeText(text);
@@ -13,19 +12,15 @@ export function clearAndPasteInChat(text: string, clipboard: Electron.Clipboard,
   uIOhook.keyTap(Key.V, modifiers);
 }
 
-export async function pasteWithPlaceholderInChat(text: string, clipboard: Electron.Clipboard, modifiers: number[], whisper: boolean) {
+export function pasteWithPlaceholderInChat(text: string, player: string, clipboard: Electron.Clipboard, modifiers: number[], whisper: boolean) {
   uIOhook.keyTap(Key.Enter, modifiers)
   if (whisper) {
     const replacements = text.split(PLACEHOLDER_LAST).length -1;
     let first = replacements >= 1;
-    uIOhook.keyTap(Key.A, modifiers);
-    uIOhook.keyTap(Key.C, modifiers);
-    await new Promise(resolve => setTimeout(resolve, 50));
-    const player = clipboard.readText().replace(PLACEHOLDER_WHISPER_REGEX, "");
     clipboard.writeText(text.replaceAll(PLACEHOLDER_LAST, () => {
           if (first) {
             first = false;
-            return "@" + player;
+            return `@${player}`;
           }
           return player;
         })
@@ -47,6 +42,7 @@ export async function sendInChat() {
 
 export async function typeInChat(
     text: string | string[],
+    player: string,
     send: boolean,
     clipboard: HostClipboard,
     overlay: OverlayWindow,
@@ -57,9 +53,9 @@ export async function typeInChat(
     const modifiers = process.platform === "darwin" ? [Key.Meta] : [Key.Ctrl];
     if (typeof text === "string") {
       if (text.endsWith(PLACEHOLDER_LAST)) {
-        await pasteWithPlaceholderInChat(text, clipboard, modifiers, false)
+        pasteWithPlaceholderInChat(text, player, clipboard, modifiers, false)
       } else if (text.startsWith(PLACEHOLDER_LAST)) {
-        await pasteWithPlaceholderInChat(text, clipboard, modifiers, true)
+        pasteWithPlaceholderInChat(text, player, clipboard, modifiers, true)
       } else {
         clearAndPasteInChat(text, clipboard, modifiers)
       }

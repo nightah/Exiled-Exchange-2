@@ -27,6 +27,7 @@ export class Shortcuts {
   private logKeys = false;
   private areaTracker: WidgetAreaTracker;
   private clipboard: HostClipboard;
+  private lastWhisperedPlayer: string = "null";
 
   static async create(
     logger: Logger,
@@ -56,6 +57,9 @@ export class Shortcuts {
   ) {
     this.areaTracker = new WidgetAreaTracker(server, overlay);
     this.clipboard = new HostClipboard(logger);
+    this.server.onEventAnyClient("CLIENT->MAIN::last-whispered-player", (e) => {
+      this.lastWhisperedPlayer = e.playerName;
+    });
 
     this.poeWindow.on("active-change", (isActive) => {
       process.nextTick(() => {
@@ -75,7 +79,7 @@ export class Shortcuts {
           stashSearch(e.text, this.clipboard, this.overlay);
           break;
         case "paste-in-chat":
-          typeInChat(e.text, e.send, this.clipboard, this.overlay).then(
+          typeInChat(e.text, "", e.send, this.clipboard, this.overlay).then(
             () => {},
           );
           break;
@@ -208,6 +212,7 @@ export class Shortcuts {
           } else if (entry.action.type === "paste-in-chat") {
             typeInChat(
               entry.action.text,
+              this.lastWhisperedPlayer,
               entry.action.send,
               this.clipboard,
               this.overlay,

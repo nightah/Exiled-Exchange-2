@@ -37,6 +37,7 @@ export interface ShortcutAction {
     | {
         type: "paste-in-chat";
         text: string;
+        player: string;
         send: boolean;
       }
     | {
@@ -80,6 +81,7 @@ export type IpcEvent =
   | IpcSaveConfig
   | IpcUpdaterState
   | IpcGameLog
+  | IpcLastWhisperedPlayer
   | IpcClientIsActive
   | IpcLogEntry
   | IpcHostConfig
@@ -194,6 +196,13 @@ type IpcGameLog = Event<
   }
 >;
 
+type IpcLastWhisperedPlayer = Event<
+    "CLIENT->MAIN::last-whispered-player",
+    {
+        playerName: string;
+    }
+>;
+
 type IpcUpdaterState = Event<"MAIN->CLIENT::updater-state", UpdateInfo>;
 
 // Hotkeyable actions are defined in `ShortcutAction`.
@@ -213,6 +222,7 @@ type IpcUserAction = Event<
   | {
     action: "paste-in-chat";
     text: string | string[];
+    player: string;
     send: boolean;
   }
 >;

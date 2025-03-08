@@ -169,7 +169,7 @@ import Widget from "../overlay/Widget.vue";
 import { useI18n } from "vue-i18n";
 import { Host, MainProcess } from "@/web/background/IPC";
 import type { WidgetManager } from "../overlay/interfaces.js";
-import { parseLine } from "./client-log";
+import { MessageChannel, parseLine } from "./client-log";
 import { AppConfig } from "../Config";
 
 const props = defineProps<{
@@ -211,6 +211,20 @@ Host.onEvent("MAIN->OVERLAY::focus-change", (state) => {
 Host.onEvent("MAIN->CLIENT::game-log", (e) => {
   for (const line of e.lines) {
     const message = parseLine(line);
+
+    switch (message?.channel) {
+      case MessageChannel.WHISPER_FROM:
+        break;
+      case MessageChannel.WHISPER_TO:
+        break;
+      default:
+        continue;
+    }
+
+    Host.sendEvent({
+      name: "CLIENT->MAIN::last-whispered-player",
+      payload: {playerName: message.charName as string},
+    });
 
     if (!message?.charName || !message?.trade) {
       continue;
@@ -257,35 +271,36 @@ Host.onEvent("MAIN->CLIENT::game-log", (e) => {
   }
 });
 
-function sendChatEvent(text: string | string[], send: boolean) {
+function sendChatEvent(text: string | string[], player: string, send: boolean) {
   MainProcess.sendEvent({
     name: "CLIENT->MAIN::user-action",
     payload: {
       action: "paste-in-chat",
       text,
+      player,
       send,
     },
   });
 }
 
 function messagePlayer(player: string) {
-  sendChatEvent(`@${player} `, false);
+  sendChatEvent(`@${player} `, player, false);
 }
 
 function invitePlayer(player: string) {
-  sendChatEvent(`/invite ${player}`, true);
+  sendChatEvent(`/invite ${player}`, player, true);
 }
 
 function kickPlayer(player: string) {
-  sendChatEvent(`/kick ${player}`, true)
+  sendChatEvent(`/kick ${player}`, player, true)
 }
 
 function tradePlayer(player: string) {
-  sendChatEvent(`/tradewith ${player}`, true);
+  sendChatEvent(`/tradewith ${player}`, player, true);
 }
 
 function sendThanks(player: string, trade: TradeRequest) {
-  sendChatEvent([`@${player} Thanks ${player}, good luck and have a nice day!`, `/kick ${player}`], true);
+  sendChatEvent([`@${player} Thanks ${player}, good luck and have a nice day!`, `/kick ${player}`], player, true);
   ignoreTrade(trade);
 }
 
