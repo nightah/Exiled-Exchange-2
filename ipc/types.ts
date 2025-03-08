@@ -212,7 +212,7 @@ type IpcUserAction = Event<
     }
   | {
     action: "paste-in-chat";
-    text: string;
+    text: string | string[];
     send: boolean;
   }
 >;

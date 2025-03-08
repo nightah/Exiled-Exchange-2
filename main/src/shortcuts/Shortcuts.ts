@@ -1,11 +1,11 @@
-import { screen, globalShortcut } from "electron";
+import { globalShortcut, screen } from "electron";
 import { uIOhook, UiohookKey, UiohookWheelEvent } from "uiohook-napi";
 import {
   isModKey,
   KeyToElectron,
   mergeTwoHotkeys,
 } from "../../../ipc/KeyToCode";
-import { typeInChat, stashSearch } from "./text-box";
+import { stashSearch, typeInChat } from "./text-box";
 import { WidgetAreaTracker } from "../windowing/WidgetAreaTracker";
 import { HostClipboard } from "./HostClipboard";
 import { OcrWorker } from "../vision/link-main";
@@ -36,7 +36,7 @@ export class Shortcuts {
     server: ServerEvents,
   ) {
     const ocrWorker = await OcrWorker.create();
-    const shortcuts = new Shortcuts(
+    return new Shortcuts(
       logger,
       overlay,
       poeWindow,
@@ -44,7 +44,6 @@ export class Shortcuts {
       server,
       ocrWorker,
     );
-    return shortcuts;
   }
 
   private constructor(
@@ -76,7 +75,9 @@ export class Shortcuts {
           stashSearch(e.text, this.clipboard, this.overlay);
           break;
         case "paste-in-chat":
-          typeInChat(e.text, e.send, this.clipboard, this.overlay);
+          typeInChat(e.text, e.send, this.clipboard, this.overlay).then(
+            () => {},
+          );
           break;
       }
     });

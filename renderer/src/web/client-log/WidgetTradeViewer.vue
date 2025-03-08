@@ -81,6 +81,13 @@
                 <i class="fas fa-user-plus text-gray-400 w-4 h-4" />
               </button>
               <button
+                  class="flex-grow-0 rounded p-1 pt-1.5 pb-0.5 text-gray-100 bg-gray-800"
+                  v-if="buyerIdx !== 3 || Object.keys(trade.buyers).length <= 4"
+                  @click="kickPlayer(buyer)"
+              >
+                <i class="fas fa-user-minus text-gray-400 w-4 h-4" />
+              </button>
+              <button
                 class="flex-grow-0 rounded p-1 pt-1.5 pb-0.5 text-gray-100 bg-gray-800"
                 v-if="buyerIdx !== 3 || Object.keys(trade.buyers).length <= 4"
                 @click="tradePlayer(buyer)"
@@ -178,7 +185,7 @@ interface TradeRequest {
 const wm = inject<WidgetManager>("wm")!;
 const { t } = useI18n();
 const isMinimized: Ref<boolean> = ref(true);
-let countTimePID: ReturnType<typeof setInterval> | undefined = undefined;
+let countTimePID: ReturnType<typeof setInterval> | undefined;
 const activeTrades: Ref<Array<TradeRequest>> = ref([]);
 
 if (props.config.wmFlags[0] === "uninitialized") {
@@ -244,7 +251,7 @@ Host.onEvent("MAIN->CLIENT::game-log", (e) => {
   }
 });
 
-function sendChatEvent(text: string, send: boolean) {
+function sendChatEvent(text: string | string[], send: boolean) {
   MainProcess.sendEvent({
     name: "CLIENT->MAIN::user-action",
     payload: {
@@ -260,15 +267,19 @@ function messagePlayer(player: string) {
 }
 
 function invitePlayer(player: string) {
-  sendChatEvent(`/invite ${player} `, true);
+  sendChatEvent(`/invite ${player}`, true);
+}
+
+function kickPlayer(player: string) {
+  sendChatEvent(`/kick ${player}`, true)
 }
 
 function tradePlayer(player: string) {
-  sendChatEvent(`/trade ${player} `, true);
+  sendChatEvent(`/tradewith ${player}`, true);
 }
 
 function sendThanks(player: string, trade: TradeRequest) {
-  sendChatEvent(`@${player} ${t("trade_viewer.thanks")}`, true);
+  sendChatEvent([`@${player} Thanks ${player}, good luck and have a nice day!`, `/kick ${player}`], true);
   ignoreTrade(trade);
 }
 
@@ -331,4 +342,3 @@ function countExcessProfit() {
     .join(", ");
 }
 </script>
-<script setup lang="ts"></script>
