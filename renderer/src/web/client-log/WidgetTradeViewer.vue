@@ -48,7 +48,7 @@
               v-for="(buyer, buyerIdx) in Object.keys(trade.buyers).filter(
                 (_, idx) => idx < 4,
               )"
-              v-if="!isElectron || !isMinimized"
+              v-if="!isMinimized"
               class="flex flex-row gap-1 items-center mt-1 leading-4"
             >
               <div
