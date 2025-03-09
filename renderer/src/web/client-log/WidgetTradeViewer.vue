@@ -85,9 +85,9 @@
                 <i class="fas fa-user-plus text-gray-400 w-4 h-4" />
               </button>
               <button
-                  class="flex-grow-0 rounded p-1 pt-1.5 pb-0.5 text-gray-100 bg-gray-800"
-                  v-if="buyerIdx !== 3 || Object.keys(trade.buyers).length <= 4"
-                  @click="kickPlayer(buyer)"
+                class="flex-grow-0 rounded p-1 pt-1.5 pb-0.5 text-gray-100 bg-gray-800"
+                v-if="buyerIdx !== 3 || Object.keys(trade.buyers).length <= 4"
+                @click="kickPlayer(buyer)"
               >
                 <i class="fas fa-user-minus text-gray-400 w-4 h-4" />
               </button>
@@ -224,7 +224,7 @@ Host.onEvent("MAIN->CLIENT::game-log", (e) => {
 
     Host.sendEvent({
       name: "CLIENT->MAIN::last-whispered-player",
-      payload: {playerName: message.charName as string},
+      payload: { playerName: message.charName as string },
     });
 
     if (!message?.charName || !message?.trade) {
@@ -293,7 +293,7 @@ function invitePlayer(player: string) {
 }
 
 function kickPlayer(player: string) {
-  sendChatEvent(`/kick ${player}`, player, true)
+  sendChatEvent(`/kick ${player}`, player, true);
 }
 
 function tradePlayer(player: string) {
@@ -301,7 +301,14 @@ function tradePlayer(player: string) {
 }
 
 function sendThanks(player: string, trade: TradeRequest) {
-  sendChatEvent([`@${player} Thanks ${player}, good luck and have a nice day!`, `/kick ${player}`], player, true);
+  sendChatEvent(
+    [
+      `@${player} Thanks ${player}, good luck and have a nice day!`,
+      `/kick ${player}`,
+    ],
+    player,
+    true,
+  );
   ignoreTrade(trade);
 }
 

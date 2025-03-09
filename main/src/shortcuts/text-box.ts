@@ -6,101 +6,113 @@ import type { OverlayWindow } from "../windowing/OverlayWindow";
 const PLACEHOLDER_LAST = "@last";
 const PLACEHOLDER_CHAIN = "&&";
 
-export function clearAndPasteInChat(text: string, clipboard: Electron.Clipboard, modifiers: number[]) {
-  clipboard.writeText(text);
-  uIOhook.keyTap(Key.Enter);
-  uIOhook.keyTap(Key.A, modifiers);
-  uIOhook.keyTap(Key.V, modifiers);
+function keyTapWithModifiers(key: number, modifiers: number[]) {
+  uIOhook.keyTap(key, modifiers);
 }
 
-export function pasteWithPlaceholderInChat(text: string, player: string, clipboard: Electron.Clipboard, modifiers: number[], whisper: boolean) {
-  uIOhook.keyTap(Key.Enter, modifiers)
-  if (whisper) {
-    const replacements = text.split(PLACEHOLDER_LAST).length -1;
-    let first = replacements >= 1;
-    clipboard.writeText(text.replaceAll(PLACEHOLDER_LAST, () => {
-          if (first) {
-            first = false;
-            return `@${player}`;
-          }
-          return player;
-        })
-    );
-  } else {
-    clipboard.writeText(text.replace(PLACEHOLDER_LAST, ""));
-    uIOhook.keyTap(Key.Home);
-    // press twice to focus input when using controller
-    uIOhook.keyTap(Key.Home);
-    uIOhook.keyTap(Key.Delete);
+function replacePlaceholders(
+  text: string,
+  player: string,
+  whisper: boolean,
+): string {
+  if (!text.includes(PLACEHOLDER_LAST)) return text;
+  if (!whisper) return text.replace(PLACEHOLDER_LAST, "");
+
+  let firstReplacement: boolean = whisper;
+  return text.replaceAll(PLACEHOLDER_LAST, () => {
+    if (firstReplacement) {
+      firstReplacement = false;
+      return `@${player}`;
+    }
+    return player;
+  });
+}
+
+function splitText(text: string | string[]): string[] {
+  return typeof text === "string" && text.includes(PLACEHOLDER_CHAIN)
+    ? text.split(PLACEHOLDER_CHAIN)
+    : Array.isArray(text)
+      ? text
+      : [text];
+}
+
+async function delay(ms: number) {
+  await new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+export function clearAndPasteInChat(
+  text: string,
+  clipboard: Electron.Clipboard,
+  modifiers: number[],
+) {
+  clipboard.writeText(text);
+  keyTapWithModifiers(Key.Enter, []);
+  keyTapWithModifiers(Key.A, modifiers);
+  keyTapWithModifiers(Key.V, modifiers);
+}
+
+export function pasteWithPlaceholderInChat(
+  text: string,
+  player: string,
+  clipboard: Electron.Clipboard,
+  modifiers: number[],
+  whisper: boolean,
+) {
+  keyTapWithModifiers(Key.Enter, modifiers);
+  clipboard.writeText(replacePlaceholders(text, player, whisper));
+
+  if (!whisper) {
+    keyTapWithModifiers(Key.Home, []);
+    keyTapWithModifiers(Key.Home, []); // Press twice to focus input when using a controller
+    keyTapWithModifiers(Key.Delete, []);
   }
-  uIOhook.keyTap(Key.V, modifiers);
+
+  keyTapWithModifiers(Key.V, modifiers);
 }
 
 export async function sendInChat() {
-  uIOhook.keyTap(Key.Enter);
-  await new Promise(resolve => setTimeout(resolve, 50));
+  keyTapWithModifiers(Key.Enter, []);
+  await delay(50);
 }
 
 export async function typeInChat(
-    text: string | string[],
-    player: string,
-    send: boolean,
-    clipboard: HostClipboard,
-    overlay: OverlayWindow,
+  text: string | string[],
+  player: string,
+  send: boolean,
+  clipboard: HostClipboard,
+  overlay: OverlayWindow,
 ) {
   clipboard.restoreShortly(async (clipboard) => {
     overlay.assertGameActive();
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await delay(50);
+
     const modifiers = process.platform === "darwin" ? [Key.Meta] : [Key.Ctrl];
-    let chain: boolean = false
+    const texts = splitText(text);
 
-    if (typeof text === "string" && text.includes(PLACEHOLDER_CHAIN)) {
-      text = text.split("&&")
-      chain = true
-    }
-
-    if (typeof text === "string") {
-      if (text.endsWith(PLACEHOLDER_LAST)) {
-        pasteWithPlaceholderInChat(text, player, clipboard, modifiers, false)
-      } else if (text.startsWith(PLACEHOLDER_LAST)) {
-        pasteWithPlaceholderInChat(text, player, clipboard, modifiers, true)
+    for (const line of texts) {
+      const whisper = line.startsWith(PLACEHOLDER_LAST);
+      if (line.includes(PLACEHOLDER_LAST)) {
+        pasteWithPlaceholderInChat(line, player, clipboard, modifiers, whisper);
       } else {
-        clearAndPasteInChat(text, clipboard, modifiers)
+        clearAndPasteInChat(line, clipboard, modifiers);
       }
-      if (send) {
-        await sendInChat()
-      }
-    } else if (text.length > 1) {
-      for (let i = 0; i < text.length; i++) {
-        if (chain && text[i].includes(PLACEHOLDER_LAST)) {
-          let whisper: boolean = false
-          if (text[i].startsWith(PLACEHOLDER_LAST)) {
-            whisper = true
-          }
-          pasteWithPlaceholderInChat(text[i], player, clipboard, modifiers, whisper)
-        } else {
-          clearAndPasteInChat(text[i], clipboard, modifiers)
-        }
-        if (send) {
-          await sendInChat()
-        }
-      }
+      if (send) await sendInChat();
     }
   });
 }
 
 export function stashSearch(
-    text: string,
-    clipboard: HostClipboard,
-    overlay: OverlayWindow,
+  text: string,
+  clipboard: HostClipboard,
+  overlay: OverlayWindow,
 ) {
   clipboard.restoreShortly((clipboard) => {
     overlay.assertGameActive();
     clipboard.writeText(text);
-    uIOhook.keyTap(Key.F, [Key.Ctrl]);
-    uIOhook.keyTap(Key.V, [
+    keyTapWithModifiers(Key.F, [Key.Ctrl]);
+    keyTapWithModifiers(Key.V, [
       process.platform === "darwin" ? Key.Meta : Key.Ctrl,
     ]);
-    uIOhook.keyTap(Key.Enter);
+    keyTapWithModifiers(Key.Enter, []);
   });
 }
