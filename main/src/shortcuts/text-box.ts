@@ -4,6 +4,7 @@ import type { HostClipboard } from "./HostClipboard";
 import type { OverlayWindow } from "../windowing/OverlayWindow";
 
 const PLACEHOLDER_LAST = "@last";
+const PLACEHOLDER_CHAIN = "&&";
 
 export function clearAndPasteInChat(text: string, clipboard: Electron.Clipboard, modifiers: number[]) {
   clipboard.writeText(text);
@@ -51,6 +52,13 @@ export async function typeInChat(
     overlay.assertGameActive();
     await new Promise(resolve => setTimeout(resolve, 50));
     const modifiers = process.platform === "darwin" ? [Key.Meta] : [Key.Ctrl];
+    let chain: boolean = false
+
+    if (typeof text === "string" && text.includes(PLACEHOLDER_CHAIN)) {
+      text = text.split("&&")
+      chain = true
+    }
+
     if (typeof text === "string") {
       if (text.endsWith(PLACEHOLDER_LAST)) {
         pasteWithPlaceholderInChat(text, player, clipboard, modifiers, false)
@@ -64,7 +72,15 @@ export async function typeInChat(
       }
     } else if (text.length > 1) {
       for (let i = 0; i < text.length; i++) {
-        clearAndPasteInChat(text[i], clipboard, modifiers)
+        if (chain && text[i].includes(PLACEHOLDER_LAST)) {
+          let whisper: boolean = false
+          if (text[i].startsWith(PLACEHOLDER_LAST)) {
+            whisper = true
+          }
+          pasteWithPlaceholderInChat(text[i], player, clipboard, modifiers, whisper)
+        } else {
+          clearAndPasteInChat(text[i], clipboard, modifiers)
+        }
         if (send) {
           await sendInChat()
         }
