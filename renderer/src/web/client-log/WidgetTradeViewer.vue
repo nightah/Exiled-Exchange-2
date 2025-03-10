@@ -223,7 +223,7 @@ Host.onEvent("MAIN->CLIENT::game-log", (e) => {
     }
 
     Host.sendEvent({
-      name: "CLIENT->MAIN::last-whispered-player",
+      name: "CLIENT->MAIN::game-log-variables",
       payload: { playerName: message.charName as string },
     });
 
@@ -272,32 +272,31 @@ Host.onEvent("MAIN->CLIENT::game-log", (e) => {
   }
 });
 
-function sendChatEvent(text: string | string[], player: string, send: boolean) {
+function sendChatEvent(text: string | string[], send: boolean) {
   MainProcess.sendEvent({
     name: "CLIENT->MAIN::user-action",
     payload: {
       action: "paste-in-chat",
       text,
-      player,
       send,
     },
   });
 }
 
 function messagePlayer(player: string) {
-  sendChatEvent(`@${player} `, player, false);
+  sendChatEvent(`@${player} `, false);
 }
 
 function invitePlayer(player: string) {
-  sendChatEvent(`/invite ${player}`, player, true);
+  sendChatEvent(`/invite ${player}`, true);
 }
 
 function kickPlayer(player: string) {
-  sendChatEvent(`/kick ${player}`, player, true);
+  sendChatEvent(`/kick ${player}`, true);
 }
 
 function tradePlayer(player: string) {
-  sendChatEvent(`/tradewith ${player}`, player, true);
+  sendChatEvent(`/tradewith ${player}`, true);
 }
 
 function sendThanks(player: string, trade: TradeRequest) {
@@ -306,7 +305,6 @@ function sendThanks(player: string, trade: TradeRequest) {
       `@${player} Thanks ${player}, good luck and have a nice day!`,
       `/kick ${player}`,
     ],
-    player,
     true,
   );
   ignoreTrade(trade);

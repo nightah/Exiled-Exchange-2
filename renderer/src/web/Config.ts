@@ -656,7 +656,6 @@ function getConfigForHost(): HostConfig {
         action: {
           type: "paste-in-chat",
           text: command.text,
-          player: "",
           send: command.send,
         },
       });

@@ -37,7 +37,6 @@ export interface ShortcutAction {
     | {
         type: "paste-in-chat";
         text: string;
-        player: string;
         send: boolean;
       }
     | {
@@ -81,7 +80,7 @@ export type IpcEvent =
   | IpcSaveConfig
   | IpcUpdaterState
   | IpcGameLog
-  | IpcLastWhisperedPlayer
+  | IpcGameLogVariables
   | IpcClientIsActive
   | IpcLogEntry
   | IpcHostConfig
@@ -196,8 +195,8 @@ type IpcGameLog = Event<
   }
 >;
 
-type IpcLastWhisperedPlayer = Event<
-    "CLIENT->MAIN::last-whispered-player",
+type IpcGameLogVariables = Event<
+    "CLIENT->MAIN::game-log-variables",
     {
         playerName: string;
     }
@@ -222,7 +221,6 @@ type IpcUserAction = Event<
   | {
     action: "paste-in-chat";
     text: string | string[];
-    player: string;
     send: boolean;
   }
 >;

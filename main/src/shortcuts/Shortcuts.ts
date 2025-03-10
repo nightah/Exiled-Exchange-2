@@ -27,7 +27,7 @@ export class Shortcuts {
   private logKeys = false;
   private areaTracker: WidgetAreaTracker;
   private clipboard: HostClipboard;
-  private lastWhisperedPlayer: string = "null";
+  private gameLogVariables = new Map<any, any>([["lastWhisperedPlayer", "undefined"]]);
 
   static async create(
     logger: Logger,
@@ -57,8 +57,8 @@ export class Shortcuts {
   ) {
     this.areaTracker = new WidgetAreaTracker(server, overlay);
     this.clipboard = new HostClipboard(logger);
-    this.server.onEventAnyClient("CLIENT->MAIN::last-whispered-player", (e) => {
-      this.lastWhisperedPlayer = e.playerName;
+    this.server.onEventAnyClient("CLIENT->MAIN::game-log-variables", (e) => {
+      this.gameLogVariables.set("lastWhisperedPlayer", e.playerName);
     });
 
     this.poeWindow.on("active-change", (isActive) => {
@@ -79,7 +79,7 @@ export class Shortcuts {
           stashSearch(e.text, this.clipboard, this.overlay);
           break;
         case "paste-in-chat":
-          typeInChat(e.text, "", e.send, this.clipboard, this.overlay).then(
+          typeInChat(e.text, this.gameLogVariables, e.send, this.clipboard, this.overlay).then(
             () => {},
           );
           break;
@@ -212,10 +212,12 @@ export class Shortcuts {
           } else if (entry.action.type === "paste-in-chat") {
             typeInChat(
               entry.action.text,
-              this.lastWhisperedPlayer,
+              this.gameLogVariables,
               entry.action.send,
               this.clipboard,
               this.overlay,
+            ).then(
+              () => {},
             );
           } else if (entry.action.type === "trigger-event") {
             this.server.sendEventTo("broadcast", {

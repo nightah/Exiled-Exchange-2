@@ -15,8 +15,8 @@ function replacePlaceholders(
   player: string,
   whisper: boolean,
 ): string {
-  if (!text.includes(PLACEHOLDER_LAST)) return text;
-  if (!whisper) return text.replace(PLACEHOLDER_LAST, "");
+  if (text.match(new RegExp(PLACEHOLDER_LAST, "g") || [])?.length === 1)
+    return text.replace(`${PLACEHOLDER_LAST} `, "");
 
   let firstReplacement: boolean = whisper;
   return text.replaceAll(PLACEHOLDER_LAST, () => {
@@ -77,7 +77,7 @@ export async function sendInChat() {
 
 export async function typeInChat(
   text: string | string[],
-  player: string,
+  gameLogVariables: Map<any, any>,
   send: boolean,
   clipboard: HostClipboard,
   overlay: OverlayWindow,
@@ -92,7 +92,13 @@ export async function typeInChat(
     for (const line of texts) {
       const whisper = line.startsWith(PLACEHOLDER_LAST);
       if (line.includes(PLACEHOLDER_LAST)) {
-        pasteWithPlaceholderInChat(line, player, clipboard, modifiers, whisper);
+        pasteWithPlaceholderInChat(
+          line,
+          gameLogVariables.get("lastWhisperedPlayer"),
+          clipboard,
+          modifiers,
+          whisper,
+        );
       } else {
         clearAndPasteInChat(line, clipboard, modifiers);
       }
