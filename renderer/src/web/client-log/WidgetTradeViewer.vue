@@ -58,8 +58,8 @@
                   buyerIdx !== 3 || Object.keys(trade.buyers).length <= 4
                     ? buyer
                     : t("trade_viewer.andXMore", [
-                        Object.keys(trade.buyers).length - 3,
-                      ])
+                      Object.keys(trade.buyers).length - 3,
+                    ])
                 }}
               </div>
 
@@ -169,7 +169,7 @@ import Widget from "../overlay/Widget.vue";
 import { useI18n } from "vue-i18n";
 import { Host, MainProcess } from "@/web/background/IPC";
 import type { WidgetManager } from "../overlay/interfaces.js";
-import { MessageChannel, parseLine } from "./client-log";
+import { parseLine } from "./client-log";
 import { AppConfig } from "../Config";
 
 const props = defineProps<{
@@ -213,64 +213,63 @@ Host.onEvent("MAIN->CLIENT::game-log", (e) => {
   for (const line of e.lines) {
     const message = parseLine(line);
 
-    switch (message?.channel) {
-      case MessageChannel.WHISPER_FROM:
-        break;
-      case MessageChannel.WHISPER_TO:
-        break;
-      default:
-        continue;
-    }
+    if (!isTradeMessage(message)) continue;
 
-    Host.sendEvent({
-      name: "CLIENT->MAIN::game-log-variables",
-      payload: { playerName: message.charName as string },
-    });
-
-    if (!message?.charName || !message?.trade) {
-      continue;
-    }
-
-    const tradeId = [
-      message.trade.item.name.toLowerCase().replaceAll(/[\s,]+/g, "-"),
-      (message.trade.tab?.name ?? "bulk")
-        .toLowerCase()
-        .replaceAll(/[\s,]+/g, "-"),
-      message.trade.tab?.left,
-      message.trade.tab?.top,
-    ]
-      .filter((e) => e)
-      .join("-");
-
-    const existingTrade = activeTrades.value.find(
-      (trade) => trade.id === tradeId,
-    );
+    const tradeId = createTradeId(message?.trade);
+    const existingTrade = findExistingTrade(tradeId);
 
     if (existingTrade) {
-      existingTrade.buyers[message.charName] = {
-        ref: shallowRef(parseTimeSince(Date.now())),
-        timestamp: Date.now(),
-      };
+      updateExistingTrade(existingTrade, message);
     } else {
-      activeTrades.value.push({
-        id: tradeId,
-        item: message.trade.item.name,
-        priceName: message.trade.price.name,
-        priceAmount: message.trade.price.amount,
-        stashName: message.trade.tab?.name,
-        stashLeft: message.trade.tab?.left,
-        stashTop: message.trade.tab?.top,
-        buyers: {
-          [message.charName]: {
-            ref: shallowRef(parseTimeSince(Date.now())),
-            timestamp: Date.now(),
-          },
-        },
-      });
-      updateCountTimeInterval();
+      createNewTrade(message, tradeId);
     }
   }
 });
+
+function isTradeMessage(message: any): boolean {
+  return message?.charName && message?.trade;
+}
+
+function createTradeId(trade: any): string {
+  return [
+    trade.item.name.toLowerCase().replaceAll(/[\s,]+/g, "-"),
+    (trade.tab?.name ?? "bulk").toLowerCase().replaceAll(/[\s,]+/g, "-"),
+    trade.tab?.left,
+    trade.tab?.top,
+  ]
+    .filter(Boolean)
+    .join("-");
+}
+
+function findExistingTrade(tradeId: string) {
+  return activeTrades.value.find((trade) => trade.id === tradeId);
+}
+
+function updateExistingTrade(existingTrade: any, message: any) {
+  existingTrade.buyers[message.charName] = {
+    ref: shallowRef(parseTimeSince(Date.now())),
+    timestamp: Date.now(),
+  };
+}
+
+function createNewTrade(message: any, tradeId: string) {
+  activeTrades.value.push({
+    id: tradeId,
+    item: message.trade.item.name,
+    priceName: message.trade.price.name,
+    priceAmount: message.trade.price.amount,
+    stashName: message.trade.tab?.name,
+    stashLeft: message.trade.tab?.left,
+    stashTop: message.trade.tab?.top,
+    buyers: {
+      [message.charName]: {
+        ref: shallowRef(parseTimeSince(Date.now())),
+        timestamp: Date.now(),
+      },
+    },
+  });
+  updateCountTimeInterval();
+}
 
 function sendChatEvent(text: string | string[], send: boolean) {
   MainProcess.sendEvent({

@@ -198,7 +198,8 @@ type IpcGameLog = Event<
 type IpcGameLogVariables = Event<
     "CLIENT->MAIN::game-log-variables",
     {
-        playerName: string;
+      areaName: string | undefined;
+      playerName: string | undefined;
     }
 >;
 

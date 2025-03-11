@@ -20,6 +20,10 @@ type UiohookKeyT = keyof typeof UiohookKey;
 const UiohookToName = Object.fromEntries(
   Object.entries(UiohookKey).map(([k, v]) => [v, k]),
 );
+export const gameLogKeys = {
+  playerName: "playerName",
+  areaName: "areaName",
+};
 
 export class Shortcuts {
   private actions: ShortcutAction[] = [];
@@ -27,7 +31,10 @@ export class Shortcuts {
   private logKeys = false;
   private areaTracker: WidgetAreaTracker;
   private clipboard: HostClipboard;
-  private gameLogVariables = new Map<any, any>([["lastWhisperedPlayer", "undefined"]]);
+  private gameLogVariables = new Map<string, string | undefined>([
+    [gameLogKeys.playerName, undefined],
+    [gameLogKeys.areaName, undefined],
+  ]);
 
   static async create(
     logger: Logger,
@@ -58,7 +65,11 @@ export class Shortcuts {
     this.areaTracker = new WidgetAreaTracker(server, overlay);
     this.clipboard = new HostClipboard(logger);
     this.server.onEventAnyClient("CLIENT->MAIN::game-log-variables", (e) => {
-      this.gameLogVariables.set("lastWhisperedPlayer", e.playerName);
+      Object.entries(gameLogKeys).forEach(([key, value]) => {
+        if (e[key as keyof typeof e] !== undefined) {
+          this.gameLogVariables.set(value, e[key as keyof typeof e]);
+        }
+      });
     });
 
     this.poeWindow.on("active-change", (isActive) => {
