@@ -376,7 +376,13 @@
     "tip_frequency_5": "Very Rarely",
     "tip_frequency_6": "Never",
     "tips_header": "Cycle Through All Tips:",
-    "tip_number_header": "Tip #{0}"
+    "tip_number_header": "Tip #{0}",
+    "placeholder_text": "The following placeholders are available for use:",
+    "placeholder_last": "• {last} (Last whispered player)",
+    "placeholder_area": "• {area} (Current area within game)",
+    "placeholder_chain": "• {chain} (Chaining commands: \"{last} ty{chain}/kick {last}\")",
+    "placeholder_note": "To utilise the {last} placeholder more than once in a single command or the {area} placeholder in a command, users need to ensure their PoE Log File in the General Settings section is reachable.",
+    "placeholder_note_kakao": "Korean clients are limited to the use of the {last} placeholder only once throughout a single command, chaining is still permitted with the aforementioned limitation."
   },
   "price_check": {
     "name": "Price check",

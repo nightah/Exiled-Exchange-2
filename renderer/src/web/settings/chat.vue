@@ -1,5 +1,25 @@
 <template>
-  <div class="max-w-md p-2">
+  <div class="w-full p-2">
+    <div class="mb-2 bg-gray-700 rounded px-2 py-1 leading-none">
+      <i class="fas fa-info-circle"></i> {{ t("settings.placeholder_text") }}
+      <br />
+      <br />
+      {{ t("settings.placeholder_last", placeholders) }}
+      <span v-if="lang !== 'ko'">
+        <br />
+        {{ t("settings.placeholder_area", placeholders) }}
+      </span>
+      <br />
+      {{ t("settings.placeholder_chain", placeholders) }}
+      <br />
+      <br />
+      <span v-if="lang !== 'ko'">{{
+        t("settings.placeholder_note", placeholders)
+      }}</span>
+      <span v-else>{{
+        t("settings.placeholder_note_kakao", placeholders)
+      }}</span>
+    </div>
     <div class="flex flex-col gap-y-4 mb-4">
       <div
         class="flex flex-col gap-y-1"
@@ -36,6 +56,7 @@ import { useI18n } from "vue-i18n";
 import UiToggle from "@/web/ui/UiToggle.vue";
 import { configProp } from "./utils";
 import HotkeyInput from "./HotkeyInput.vue";
+import { AppConfig } from "@/web/Config";
 
 export default defineComponent({
   name: "settings.chat",
@@ -43,9 +64,13 @@ export default defineComponent({
   props: configProp(),
   setup(props) {
     const { t } = useI18n();
+    const lang = AppConfig().language;
+    const placeholders = { last: "@last", area: "@area", chain: "&&" };
 
     return {
       t,
+      lang,
+      placeholders,
       commands: computed(() => props.config.commands),
       addComand() {
         props.config.commands.push({

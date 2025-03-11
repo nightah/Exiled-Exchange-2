@@ -58,8 +58,8 @@
                   buyerIdx !== 3 || Object.keys(trade.buyers).length <= 4
                     ? buyer
                     : t("trade_viewer.andXMore", [
-                      Object.keys(trade.buyers).length - 3,
-                    ])
+                        Object.keys(trade.buyers).length - 3,
+                      ])
                 }}
               </div>
 
