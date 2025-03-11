@@ -36,9 +36,6 @@ export class GameLogWatcher {
   private _wantedPath: string | null = null;
   private _resolvedPath: string | null = null;
   private _isEnabled: boolean = false;
-  get actualPath() {
-    return this._state?.path ?? null;
-  }
 
   private _state: {
     offset: number;
@@ -68,9 +65,7 @@ export class GameLogWatcher {
   }
 
   async setup(logFile: string) {
-    if (this._wantedPath === logFile) {
-      return;
-    }
+    if (this._wantedPath === logFile) return;
 
     this._wantedPath = logFile;
     if (this._state) {
@@ -85,6 +80,9 @@ export class GameLogWatcher {
       const guessedPath = await guessFileLocation(POSSIBLE_PATH);
       if (guessedPath === null) {
         this._resolvedPath = null;
+        this.logger.write(
+          "error [GameLogWatcher] Failed to locate PoE log file.",
+        );
         return;
       }
       this._resolvedPath = guessedPath;
@@ -92,9 +90,9 @@ export class GameLogWatcher {
   }
 
   async tryStart() {
-    if (!this._resolvedPath || !this._isEnabled) {
-      return;
-    }
+    if (!this._resolvedPath || !this._isEnabled) return;
+
+    await this.initializeGameLogVariables();
 
     try {
       const file = await fs.open(this._resolvedPath, "r");
@@ -111,8 +109,11 @@ export class GameLogWatcher {
         isReading: false,
         readBuff: Buffer.allocUnsafe(64 * 1024),
       };
+      this.logger.write(
+        `info [GameLogWatcher] Watching PoE log file:\n${this._resolvedPath}`,
+      );
     } catch {
-      this.logger.write("error [GameLogWatcher] Failed to watch file.");
+      this.logger.write("error [GameLogWatcher] Failed to watch PoE log file.");
     }
   }
 
@@ -146,6 +147,66 @@ export class GameLogWatcher {
       this.readToEOF();
     } else {
       this._state.isReading = false;
+    }
+  }
+
+  private async initializeGameLogVariables() {
+    if (!this._resolvedPath) return;
+
+    try {
+      const file = await fs.open(this._resolvedPath, "r");
+      const stats = await file.stat();
+      const readBuff = Buffer.allocUnsafe(64 * 1024);
+      const { bytesRead } = await file.read(
+        readBuff,
+        0,
+        readBuff.length,
+        stats.size - readBuff.length,
+      );
+
+      if (bytesRead) {
+        const str = readBuff.toString("utf8", 0, bytesRead);
+        const lines = str
+          .split("\n")
+          .map((line) => line.trim())
+          .filter((line) => line.length);
+
+        let lastToFromMessage = "";
+        let lastGeneratingLevelMessage = "";
+
+        const toFromPattern = /(@To\s|@From\s)[\w\s]+:.*$/;
+        const generatingLevelPattern = /Generating level.*$/;
+
+        for (let i = lines.length - 1; i >= 0; i--) {
+          const line = lines[i];
+
+          if (!lastToFromMessage && toFromPattern.test(line)) {
+            lastToFromMessage = line;
+          }
+
+          if (
+            !lastGeneratingLevelMessage &&
+            generatingLevelPattern.test(line)
+          ) {
+            lastGeneratingLevelMessage = line;
+          }
+
+          if (lastToFromMessage && lastGeneratingLevelMessage) {
+            await file.close();
+            break;
+          }
+        }
+
+        const payload = [lastToFromMessage, lastGeneratingLevelMessage];
+        this.server.sendEventTo("broadcast", {
+          name: "MAIN->CLIENT::game-log",
+          payload: { lines: payload },
+        });
+      }
+    } catch (error) {
+      this.logger.write(
+        "error [GameLogWatcher] Failed to initialize game log variables from PoE log file.",
+      );
     }
   }
 }

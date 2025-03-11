@@ -4,7 +4,7 @@ import type { HostClipboard } from "./HostClipboard";
 import type { OverlayWindow } from "../windowing/OverlayWindow";
 import { gameLogKeys } from "./Shortcuts";
 
-const PLACEHOLDERS = { CHAIN: "&&", AREA: "@area", LAST: "@last"}
+const PLACEHOLDERS = { CHAIN: "&&", AREA: "@area", LAST: "@last" };
 
 export async function typeInChat(
   text: string | string[],
@@ -78,13 +78,19 @@ function replacePlaceholders(
   }
 
   if (text.includes(PLACEHOLDERS.AREA)) {
-    text = text.replaceAll(PLACEHOLDERS.AREA, <string>gameLogVariables.get(gameLogKeys.areaName) ?? "Unknown Location")
+    text = text.replaceAll(
+      PLACEHOLDERS.AREA,
+      <string>gameLogVariables.get(gameLogKeys.areaName) ?? "Unknown Location",
+    );
   }
 
   let firstReplacement: boolean = whisper;
   return text.replaceAll(PLACEHOLDERS.LAST, () => {
-    const playerName = gameLogVariables.get(gameLogKeys.playerName) ?? "undefined";
-    return firstReplacement ? ((firstReplacement = false), `@${playerName}`) : playerName;
+    const playerName =
+      gameLogVariables.get(gameLogKeys.playerName) ?? "undefined";
+    return firstReplacement
+      ? ((firstReplacement = false), `@${playerName}`)
+      : playerName;
   });
 }
 

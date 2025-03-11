@@ -80,8 +80,7 @@ app.on("ready", async () => {
             cfg.language,
           );
           await gameLogWatcher.setup(cfg.clientLog ?? "");
-          gameLogWatcher.tryStart();
-          gameConfig.readConfig(cfg.gameConfig ?? "");
+          await gameConfig.readConfig(cfg.gameConfig ?? "");
           appUpdater.checkAtStartup();
           tray.overlayKey = cfg.overlayKey;
         },

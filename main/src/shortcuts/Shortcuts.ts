@@ -90,8 +90,12 @@ export class Shortcuts {
           stashSearch(e.text, this.clipboard, this.overlay);
           break;
         case "paste-in-chat":
-          typeInChat(e.text, this.gameLogVariables, e.send, this.clipboard, this.overlay).then(
-            () => {},
+          typeInChat(
+            e.text,
+            this.gameLogVariables,
+            e.send,
+            this.clipboard,
+            this.overlay,
           );
           break;
       }
@@ -227,8 +231,6 @@ export class Shortcuts {
               entry.action.send,
               this.clipboard,
               this.overlay,
-            ).then(
-              () => {},
             );
           } else if (entry.action.type === "trigger-event") {
             this.server.sendEventTo("broadcast", {
