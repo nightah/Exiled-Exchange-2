@@ -5,7 +5,9 @@
         t("settings.debug_hotkeys")
       }}</ui-checkbox>
     </div>
-    <pre class="p-2 overflow-y-scroll flex-1">{{ logs }}</pre>
+    <pre class="p-2 overflow-y-scroll flex-1 break-words whitespace-pre-wrap">{{
+      logs
+    }}</pre>
   </div>
 </template>
 

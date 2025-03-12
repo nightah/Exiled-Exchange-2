@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-md p-2">
+  <div class="w-full p-2">
     <div class="mb-4">
       <div class="flex-1 mb-1">{{ t(":language") }}</div>
       <select v-model="language" class="p-1 rounded bg-gray-700 w-24">
@@ -43,7 +43,7 @@
     <ui-checkbox class="mb-4" v-model="restoreClipboard">{{
       t(":restore_clipboard")
     }}</ui-checkbox>
-    <div class="mb-2">
+    <div class="mb-2 w-full">
       <div class="flex-1 mb-1">{{ t(":poe_log_file") }}</div>
       <input
         v-model.trim="clientLog"
@@ -51,7 +51,7 @@
         placeholder="...?/Grinding Gear Games/Path of Exile 2/logs/Client.txt"
       />
     </div>
-    <div class="mb-4">
+    <div class="mb-4 w-full">
       <div class="flex-1 mb-1">{{ t(":poe_cfg_file") }}</div>
       <input
         v-model.trim="gameConfig"
