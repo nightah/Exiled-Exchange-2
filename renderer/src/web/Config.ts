@@ -718,5 +718,6 @@ function getConfigForHost(): HostConfig {
     logKeys: config.logKeys,
     windowTitle: config.windowTitle,
     language: config.language,
+    isLogWatcherEnabled: config.isLogWatcherEnabled,
   };
 }

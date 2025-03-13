@@ -2,7 +2,6 @@ import type { ServerEvents } from "../server";
 import { app } from "electron";
 import fs from "fs/promises";
 import path from "path";
-import type { EventEmitter } from "events";
 
 export class ConfigStore {
   private isTmpFile = false;
@@ -12,12 +11,8 @@ export class ConfigStore {
     "config.json",
   );
 
-  constructor(
-    server: ServerEvents,
-    private internalEvents: EventEmitter,
-  ) {
+  constructor(server: ServerEvents) {
     server.onEventAnyClient("CLIENT->MAIN::save-config", (cfg) => {
-      this.internalEvents.emit("config", cfg.contents);
       this.save(cfg.contents, cfg.isTemporary);
       server.sendEventTo("broadcast", {
         name: "MAIN->CLIENT::config-changed",
@@ -31,7 +26,6 @@ export class ConfigStore {
     try {
       contents = await fs.readFile(this.cfgPath, "utf8");
     } catch {}
-    this.internalEvents.emit("config", contents);
     return contents;
   }
 

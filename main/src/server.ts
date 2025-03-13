@@ -90,9 +90,8 @@ server.on("upgrade", (req, socket, head) => {
 export async function startServer(
   appUpdater: AppUpdater,
   logger: Logger,
-  internalEvents: EventEmitter,
 ): Promise<number> {
-  const configStore = new ConfigStore(eventPipe, internalEvents);
+  const configStore = new ConfigStore(eventPipe);
 
   websocketServer.on("connection", (socket) => {
     lastActiveClient = socket;

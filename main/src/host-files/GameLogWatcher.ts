@@ -4,7 +4,6 @@ import { app } from "electron";
 import { guessFileLocation } from "./utils";
 import { ServerEvents } from "../server";
 import { Logger } from "../RemoteLogger";
-import type { EventEmitter } from "events";
 
 const POSSIBLE_PATH =
   process.platform === "win32"
@@ -34,8 +33,10 @@ const POSSIBLE_PATH =
 
 export class GameLogWatcher {
   private _wantedPath: string | null = null;
-  private _resolvedPath: string | null = null;
-  private _isEnabled: boolean = false;
+  private _resolvedPath: string = "";
+  get actualPath() {
+    return this._state?.path ?? null;
+  }
 
   private _state: {
     offset: number;
@@ -48,51 +49,47 @@ export class GameLogWatcher {
   constructor(
     private server: ServerEvents,
     private logger: Logger,
-    private internalEvents: EventEmitter,
-  ) {
-    this.internalEvents.on("config", async (rawConfig) => {
-      const config: { isLogWatcherEnabled: boolean } = JSON.parse(rawConfig);
-      this._isEnabled = config.isLogWatcherEnabled;
+  ) {}
 
-      if (this._state && !this._isEnabled) {
+  async tryStart(logFile: string, isEnabled: boolean) {
+    if (this._wantedPath !== logFile) {
+      this._wantedPath = logFile;
+      if (this._state) {
         unwatchFile(this._state.path);
         await this._state.file.close();
         this._state = null;
-      } else if (!this._state && this._isEnabled) {
-        this.tryStart();
       }
-    });
-  }
 
-  async setup(logFile: string) {
-    if (this._wantedPath === logFile) return;
+      this._resolvedPath = logFile;
 
-    this._wantedPath = logFile;
-    if (this._state) {
-      unwatchFile(this._state.path);
-      await this._state.file.close();
-      this._state = null;
-    }
-
-    this._resolvedPath = logFile;
-
-    if (!logFile.length) {
-      const guessedPath = await guessFileLocation(POSSIBLE_PATH);
-      if (guessedPath === null) {
-        this._resolvedPath = null;
-        this.logger.write(
-          "error [GameLogWatcher] Failed to locate PoE log file.",
-        );
-        return;
+      if (!logFile.length) {
+        const guessedPath = await guessFileLocation(POSSIBLE_PATH);
+        if (guessedPath === null) {
+          this._resolvedPath = "";
+          this.logger.write(
+            "error [GameLogWatcher] Failed to locate PoE log file.",
+          );
+          return;
+        }
+        this._resolvedPath = guessedPath;
       }
-      this._resolvedPath = guessedPath;
     }
-  }
-
-  async tryStart() {
-    if (!this._resolvedPath || !this._isEnabled) return;
 
     await this.initializeGameLogVariables();
+
+    if (!isEnabled) {
+      if (this._state) {
+        unwatchFile(this._state.path);
+        await this._state.file.close();
+        this._state = null;
+      }
+
+      return;
+    }
+
+    if (this._state) {
+      return;
+    }
 
     try {
       const file = await fs.open(this._resolvedPath, "r");

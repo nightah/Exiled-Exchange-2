@@ -16,7 +16,6 @@ import { GameLogWatcher } from "./host-files/GameLogWatcher";
 import { HttpProxy } from "./proxy";
 import { installExtension, VUEJS_DEVTOOLS } from "electron-devtools-installer";
 import { FilterGenerator } from "./filter-generator/FilterGenerator";
-import { EventEmitter } from "events";
 
 if (!app.requestSingleInstanceLock()) {
   app.exit();
@@ -31,9 +30,8 @@ let tray: AppTray;
 
 app.on("ready", async () => {
   tray = new AppTray(eventPipe);
-  const internalEvents = new EventEmitter();
   const logger = new Logger(eventPipe);
-  const gameLogWatcher = new GameLogWatcher(eventPipe, logger, internalEvents);
+  const gameLogWatcher = new GameLogWatcher(eventPipe, logger);
   const gameConfig = new GameConfig(eventPipe, logger);
   const poeWindow = new GameWindow();
   const appUpdater = new AppUpdater(eventPipe);
@@ -79,14 +77,14 @@ app.on("ready", async () => {
             cfg.restoreClipboard,
             cfg.language,
           );
-          await gameLogWatcher.setup(cfg.clientLog ?? "");
-          await gameConfig.readConfig(cfg.gameConfig ?? "");
+          gameLogWatcher.tryStart(cfg.clientLog ?? "", cfg.isLogWatcherEnabled);
+          gameConfig.readConfig(cfg.gameConfig ?? "");
           appUpdater.checkAtStartup();
           tray.overlayKey = cfg.overlayKey;
         },
       );
       uIOhook.start();
-      const port = await startServer(appUpdater, logger, internalEvents);
+      const port = await startServer(appUpdater, logger);
       // TODO: move up (currently crashes)
       logger.write(`info ${os.type()} ${os.release} / v${app.getVersion()}`);
       overlay.loadAppPage(port);

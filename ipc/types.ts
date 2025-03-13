@@ -8,6 +8,7 @@ export interface HostConfig {
   logKeys: boolean;
   windowTitle: string;
   language: string;
+  isLogWatcherEnabled: boolean;
 }
 
 export interface ShortcutAction {
