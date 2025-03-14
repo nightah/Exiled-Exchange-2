@@ -155,14 +155,13 @@ function splitFirstWord(str: string): [string, string] {
 const TRADE_WHISPER = {
   "en": /^Hi, I would like to buy your (?<item>.+) listed for (?<price>.+) in (?<league>.+) \(stash tab "(?<tabName>.*)"; position: left (?<tabLeft>\d+), top (?<tabTop>\d+)\)(?<message>.+)?$/,
   "ru": /^Здравствуйте, хочу купить у вас (?<item>.+) за (?<price>.+) в лиге (?<league>.+) \(секция "(?<tabName>.*)"; позиция: (?<tabLeft>\d+) столбец, (?<tabTop>\d+) ряд\)(?<message>.+)?$/,
-  "ko": /^안녕하세요, (?<league>.+)\(보관함 탭 "(?<tabName>.*)", 위치: 왼쪽 (?<tabLeft>\d+), 상단 (?<tabTop>\d+)\)에 (?<price>.+)\(으\)로 올려놓은 (?<item>.+)\(을\)를 구매하고 싶습니다(?<message>.+)?$/,
-  "de": /^Hi, ich möchte '(?<item>.+)' zum angebotenen Preis von (?<price>.+) in der (?<league>.+)-Liga kaufen \(Truhenfach "(?<tabName>.*)"; Position: (?<tabLeft>\d+) von links, (?<tabTop>\d+) von oben\)(?<message>.+)?$/,
+  "ko": /^안녕하세요, (?<price>.+)\(으\)로 올려놓은 (?<league>.+) 리그의 (?<item>.+)\(을\)를 구매하고 싶습니다 \(보관함 탭 "(?<tabName>.+)", 위치: 왼쪽 (?<tabLeft>\d+), 상단 (?<tabTop>\d+)\)(?<message>.*)?$/,
+  "de": /^Hi, ich möchte '\s?(?<item>.+)' zum angebotenen Preis von (?<price>.+) in der (?<league>.+)-Liga kaufen \(Truhenfach "(?<tabName>.*)"; Position: (?<tabLeft>\d+) von links, (?<tabTop>\d+) von oben\)(?<message>.+)?$/,
   "fr": /^Bonjour, je souhaiterais t'acheter (?<item>.+) pour (?<price>.+) dans la ligue (?<league>.+) \(onglet de réserve "(?<tabName>.*)" ; (?<tabLeft>\d+)e en partant de la gauche, (?<tabTop>\d+)e en partant du haut\)(?<message>.+)?$/,
-  "es": /^Hola, quisiera comprar tu (?<item>.+) listado por (?<price>.+) en (?<league>.+) \(pestaña de alijo "(?<tabName>.*)"; posición: izquierda(?<tabLeft>\d+), arriba (?<tabTop>\d+)\)(?<message>.+)?$/,
-  "pt": /^Olá, eu gostaria de comprar o seu item (?<item>.+) listado por (?<price>.+) na (?<league>.+) \(aba do baú: "(?<tabName>.*)"; posição: esquerda (?<tabLeft>\d+), topo (?<tabTop>\d+)\)(?<message>.+)?$/,
-  "th": /^สวัสดี, เราต้องการจะชื้อของคุณ (?<item>.+) ใน ราคา (?<price>.+) ใน (?<league>.+) \(stash tab "(?<tabName>.*)"; ตำแหน่ง: ซ้าย (?<tabLeft>\d+), บน (?<tabTop>\d+)\)(?<message>.+)?$/,
-  "cmn-Hant":
-    /^你好，我想購買 (?<item>.+) 標價 (?<price>.+) 在 (?<league>.+) \(倉庫頁 "(?<tabName>.*)"; 位置: 左 (?<tabLeft>\d+), 上 (?<tabTop>\d+)\)(?<message>.+)?$/,
+  "es": /^Hola, quisiera comprar tu (?<item>.+) listado por (?<price>.+) en (?<league>.+) \(pestaña de alijo "(?<tabName>.*)"; posición: izquierda (?<tabLeft>\d+), arriba (?<tabTop>\d+)\)(?<message>.+)?$/,
+  "pt": /^Olá, eu gostaria de comprar seu (?<item>.+) listado por (?<price>.+) na (?<league>.+) \(aba do baú: "(?<tabName>.*)"; posição: esquerda (?<tabLeft>\d+), topo (?<tabTop>\d+)\)(?<message>.+)?$/,
+  "th": /^สวัสดี เราต้องการซื้อ (?<item>.+) ที่คุณตั้งขายไว้ในราคา (?<price>.+) ในลีก (?<league>.+) \(แท็บ "(?<tabName>.*)" ตำแหน่ง: ซ้าย (?<tabLeft>\d+), บน (?<tabTop>\d+)\)(?<message>.+)?$/,
+  "cmn-Hant": /^你好，我想購買 (?<item>.+) 標價 (?<price>.+) 在 (?<league>.+) \(倉庫頁 "(?<tabName>.*)"; 位置: 左 (?<tabLeft>\d+), 上 (?<tabTop>\d+)\)(?<message>.+)?$/,
   "ja": /^こんにちは、(?<league>.+) リーグで (?<price>.+) で売っている、あなたの (?<item>.+) を購入したいです \(スタッシュタブ "(?<tabName>.*)"; 位置: 左から (?<tabLeft>\d+), 上から (?<tabTop>\d+)\)(?<message>.+)?$/,
 };
 
