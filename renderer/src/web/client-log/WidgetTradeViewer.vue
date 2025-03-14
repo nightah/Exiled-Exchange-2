@@ -22,8 +22,24 @@
         >
           <template v-if="activeTrades.length <= 4 || tradeIdx < 3">
             <div class="relative pr-6">
-              <div class="text-base leading-4">{{ trade.item }}</div>
-              <div class="pl-3 leading-5">
+              <div
+                class="flex-grow-0 rounded p-1 pt-1.5 pb-0.5 text-gray-100 absolute left-[-.5rem] top-[45%] transform -translate-y-1/2 leading-4"
+                v-if="!isElectron || !isMinimized"
+              >
+                <i
+                  :class="[
+                    'fas',
+                    trade.type === 'buy'
+                      ? 'fa-right-to-bracket'
+                      : 'fa-right-from-bracket',
+                    'text-gray-400',
+                    'w-4',
+                    'h-4',
+                  ]"
+                />
+              </div>
+              <div class="text-base pl-6 leading-4">{{ trade.item }}</div>
+              <div class="pl-6 leading-5">
                 {{ t("trade_viewer.price") }} {{ trade.priceAmount }}x
                 {{ trade.priceName }}
                 ({{ trade.stashName }}, x: {{ trade.stashLeft }}, y:
@@ -178,6 +194,7 @@ const props = defineProps<{
 
 interface TradeRequest {
   id: string;
+  type: string;
   item: string;
   priceName: string;
   priceAmount: number;
@@ -211,7 +228,7 @@ Host.onEvent("MAIN->OVERLAY::focus-change", (state) => {
 
 Host.onEvent("MAIN->CLIENT::game-log", (e) => {
   for (const line of e.lines) {
-    const message = parseLine(line);
+    const message = parseLine(line, e.initialization);
 
     if (!isTradeMessage(message)) continue;
 
@@ -255,6 +272,7 @@ function updateExistingTrade(existingTrade: any, message: any) {
 function createNewTrade(message: any, tradeId: string) {
   activeTrades.value.push({
     id: tradeId,
+    type: message.trade.type,
     item: message.trade.item.name,
     priceName: message.trade.price.name,
     priceAmount: message.trade.price.amount,

@@ -22,6 +22,7 @@ interface LogEntry {
 }
 
 interface TradeDetails {
+  type: string;
   item: {
     name: string;
     amount?: number;
@@ -87,10 +88,10 @@ export function parseLine(line: string, initialization: boolean) {
     });
 
     if (initialization) return;
-  }
 
-  if (entry.channel === MessageChannel.WHISPER_FROM) {
-    entry.trade = parseTradeWhisper(entry.body);
+    const tradeType =
+      entry.channel === MessageChannel.WHISPER_TO ? "buy" : "sell";
+    entry.trade = parseTradeWhisper(entry.body, tradeType);
   }
 
   return entry;
@@ -110,15 +111,28 @@ function parseGeneratingLevel(line: string) {
   };
 }
 
-function parseTradeWhisper(body: string): TradeDetails | undefined {
+function parseTradeWhisper(
+  body: string,
+  tradeType: string,
+): TradeDetails | undefined {
   const lang = AppConfig().language;
-  let match = body.match(TRADE_WHISPER[lang]);
+  let match: RegExpMatchArray | null = null;
+
+  if (tradeType === "sell") {
+    match = body.match(TRADE_WHISPER[lang]);
+  } else {
+    for (const regex of Object.values(TRADE_WHISPER)) {
+      match = body.match(regex);
+      if (match) break;
+    }
+  }
 
   if (match) {
     const { price, item, tabName, tabLeft, tabTop } = match.groups ?? {};
     const [pAmount, pTag] = splitFirstWord(price);
 
     return {
+      type: tradeType,
       item: { name: item },
       price: { amount: Number(pAmount), name: pTag },
       tab: {
@@ -135,6 +149,7 @@ function parseTradeWhisper(body: string): TradeDetails | undefined {
     const [iAmount, iName] = splitFirstWord(match.groups?.item ?? "");
 
     return {
+      type: tradeType,
       item: { amount: Number(iAmount), name: iName },
       price: { amount: Number(pAmount), name: pName },
     };
@@ -161,7 +176,8 @@ const TRADE_WHISPER = {
   "es": /^Hola, quisiera comprar tu (?<item>.+) listado por (?<price>.+) en (?<league>.+) \(pestaña de alijo "(?<tabName>.*)"; posición: izquierda (?<tabLeft>\d+), arriba (?<tabTop>\d+)\)(?<message>.+)?$/,
   "pt": /^Olá, eu gostaria de comprar seu (?<item>.+) listado por (?<price>.+) na (?<league>.+) \(aba do baú: "(?<tabName>.*)"; posição: esquerda (?<tabLeft>\d+), topo (?<tabTop>\d+)\)(?<message>.+)?$/,
   "th": /^สวัสดี เราต้องการซื้อ (?<item>.+) ที่คุณตั้งขายไว้ในราคา (?<price>.+) ในลีก (?<league>.+) \(แท็บ "(?<tabName>.*)" ตำแหน่ง: ซ้าย (?<tabLeft>\d+), บน (?<tabTop>\d+)\)(?<message>.+)?$/,
-  "cmn-Hant": /^你好，我想購買 (?<item>.+) 標價 (?<price>.+) 在 (?<league>.+) \(倉庫頁 "(?<tabName>.*)"; 位置: 左 (?<tabLeft>\d+), 上 (?<tabTop>\d+)\)(?<message>.+)?$/,
+  "cmn-Hant":
+    /^你好，我想購買 (?<item>.+) 標價 (?<price>.+) 在 (?<league>.+) \(倉庫頁 "(?<tabName>.*)"; 位置: 左 (?<tabLeft>\d+), 上 (?<tabTop>\d+)\)(?<message>.+)?$/,
   "ja": /^こんにちは、(?<league>.+) リーグで (?<price>.+) で売っている、あなたの (?<item>.+) を購入したいです \(スタッシュタブ "(?<tabName>.*)"; 位置: 左から (?<tabLeft>\d+), 上から (?<tabTop>\d+)\)(?<message>.+)?$/,
 };
 
