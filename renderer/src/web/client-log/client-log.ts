@@ -37,16 +37,18 @@ interface TradeDetails {
   };
 }
 
-export function parseLine(line: string) {
+export function parseLine(line: string, initialization: boolean) {
   const text = line.split("] ").slice(1).join("] ");
   if (!text) return;
 
   const zoneInfo = parseGeneratingLevel(text);
-  zoneInfo &&
+  if (zoneInfo) {
     Host.sendEvent({
       name: "CLIENT->MAIN::game-log-variables",
       payload: { playerName: undefined, areaName: zoneInfo.areaName },
     });
+    return;
+  }
 
   let entry: LogEntry | null = null;
 
@@ -83,6 +85,8 @@ export function parseLine(line: string) {
       name: "CLIENT->MAIN::game-log-variables",
       payload: { playerName: entry.charName, areaName: undefined },
     });
+
+    if (initialization) return;
   }
 
   if (entry.channel === MessageChannel.WHISPER_FROM) {

@@ -193,6 +193,7 @@ type IpcGameLog = Event<
   "MAIN->CLIENT::game-log",
   {
     lines: string[];
+    initialization: boolean;
   }
 >;
 

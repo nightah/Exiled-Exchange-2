@@ -135,7 +135,7 @@ export class GameLogWatcher {
         .filter((line) => line.length);
       this.server.sendEventTo("broadcast", {
         name: "MAIN->CLIENT::game-log",
-        payload: { lines },
+        payload: { lines, initialization: false },
       });
     }
 
@@ -197,7 +197,7 @@ export class GameLogWatcher {
         const payload = [lastToFromMessage, lastGeneratingLevelMessage];
         this.server.sendEventTo("broadcast", {
           name: "MAIN->CLIENT::game-log",
-          payload: { lines: payload },
+          payload: { lines: payload, initialization: true },
         });
       }
     } catch (error) {
