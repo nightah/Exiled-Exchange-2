@@ -33,6 +33,7 @@ export default {
   CORRUPTED: 'Verderbt',
   UNIDENTIFIED: 'Nicht identifiziert',
   ITEM_SUPERIOR: /^(.*) \(hochwertig\)$/,
+  ITEM_EXCEPTIONAL: /^Außergewöhnlich (.*)$/,
   MAP_BLIGHTED: /^Befallene (.*)$/,
   MAP_BLIGHT_RAVAGED: /^Extrem befallene (.*)$/,
   INFLUENCE_SHAPER: 'Schöpfer-Gegenstand',

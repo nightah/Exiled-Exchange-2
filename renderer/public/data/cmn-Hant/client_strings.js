@@ -30,6 +30,7 @@ export default {
   CORRUPTED: '已汙染',
   UNIDENTIFIED: '未鑑定',
   ITEM_SUPERIOR: /^精良的 (.*)$/,
+  ITEM_EXCEPTIONAL: /^卓越 (.+)$/,
   MAP_BLIGHTED: /^凋落的 (.*)$/,
   MAP_BLIGHT_RAVAGED: /^凋落蔓延的 (.*)$/,
   INFLUENCE_SHAPER: '塑者之物',

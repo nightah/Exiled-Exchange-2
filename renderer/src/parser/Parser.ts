@@ -56,6 +56,7 @@ interface ParserState extends ParsedItem {
 const parsers: Array<ParserFn | { virtual: VirtualParserFn }> = [
   parseUnidentified,
   { virtual: parseSuperior },
+  { virtual: parseExceptional },
   parseSynthesised,
   parseCategoryByHelpText,
   { virtual: normalizeName },
@@ -1228,6 +1229,19 @@ function parseSuperior(item: ParserState) {
   ) {
     if (_$.ITEM_SUPERIOR.test(item.name)) {
       item.name = _$REF.ITEM_SUPERIOR.exec(item.name)![1];
+    }
+  }
+}
+
+function parseExceptional(item: ParserState) {
+  if (
+    item.rarity === ItemRarity.Normal ||
+    (item.rarity === ItemRarity.Magic && item.isUnidentified) ||
+    (item.rarity === ItemRarity.Rare && item.isUnidentified) ||
+    (item.rarity === ItemRarity.Unique && item.isUnidentified)
+  ) {
+    if (_$.ITEM_EXCEPTIONAL.test(item.name)) {
+      item.name = _$REF.ITEM_EXCEPTIONAL.exec(item.name)![1];
     }
   }
 }

@@ -33,6 +33,7 @@ export default {
   CORRUPTED: 'コラプト状態',
   UNIDENTIFIED: '未鑑定',
   ITEM_SUPERIOR: /^上質な (.*)$/,
+  ITEM_EXCEPTIONAL: /^例外 (.*)$/,
   MAP_BLIGHTED: /^ブライトに覆われた(.*)$/,
   MAP_BLIGHT_RAVAGED: /^ブライトに破壊された(.*)$/,
   INFLUENCE_SHAPER: 'シェイパーアイテム',

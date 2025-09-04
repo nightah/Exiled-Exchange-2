@@ -65,6 +65,8 @@ export default {
   UNIDENTIFIED: 'Não Identificado',
   // QualityItem
   ITEM_SUPERIOR: /^(.*)$ Superior/,
+  // ExceptionalItem
+  ITEM_EXCEPTIONAL: /^(.*) Excepcional$/,
   // InfectedMap
   MAP_BLIGHTED: /^(.*)$ Infestado/,
   // UberInfectedMap

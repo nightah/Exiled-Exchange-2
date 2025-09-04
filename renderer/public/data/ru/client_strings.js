@@ -30,6 +30,7 @@ export default {
   CORRUPTED: 'Осквернено',
   UNIDENTIFIED: 'Неопознано',
   ITEM_SUPERIOR: /^(.*) высокого качества$/,
+  ITEM_EXCEPTIONAL: /^Образцовый предмет: (.*)$/,
   MAP_BLIGHTED: /^Заражённая (.*)$/,
   MAP_BLIGHT_RAVAGED: /^Разорённая Скверной (.*)$/,
   INFLUENCE_SHAPER: 'Предмет Создателя',

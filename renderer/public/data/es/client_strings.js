@@ -30,6 +30,7 @@ export default {
   CORRUPTED: 'Corrupto',
   UNIDENTIFIED: 'Sin identificar',
   ITEM_SUPERIOR: /^Superior (.*)$/,
+  ITEM_EXCEPTIONAL: /^Excepcional (.*)$/,
   MAP_BLIGHTED: /^infestado (.*)$/,
   MAP_BLIGHT_RAVAGED: /^devastado por la plaga (.*)$/,
   INFLUENCE_SHAPER: 'Objeto del Creador',
