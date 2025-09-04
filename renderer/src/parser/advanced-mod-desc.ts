@@ -159,9 +159,7 @@ export function parseModType(lines: string[]): {
     modType = ModifierType.Implicit;
     lines = removeLinesEnding(lines, IMPLICIT_LINE);
   } else if (lines.some((line) => line.endsWith(FRACTURED_LINE))) {
-    // HACK: Trade site doesn't have fractured modifier
-    modType = ModifierType.Explicit;
-    // modType = ModifierType.Fractured;
+    modType = ModifierType.Fractured;
     lines = removeLinesEnding(lines, FRACTURED_LINE);
   } else if (lines.some((line) => line.endsWith(CRAFTED_LINE))) {
     modType = ModifierType.Crafted;
