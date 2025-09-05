@@ -277,7 +277,9 @@ interface FetchResult {
       type: "~price";
     };
     account: Account;
+    in_demand?: boolean;
   };
+  gone?: boolean;
 }
 
 export interface DisplayItem {
@@ -308,6 +310,8 @@ export interface PricingResult {
   accountStatus: "offline" | "online" | "afk";
   ign: string;
   displayItem: DisplayItem;
+  inDemand?: boolean;
+  gone?: boolean;
 }
 
 export function createTradeRequest(
@@ -1050,6 +1054,8 @@ export async function requestResults(
           : "online"
         : "offline",
       displayItem,
+      inDemand: result.listing.in_demand,
+      gone: result.gone,
     };
   });
 }
