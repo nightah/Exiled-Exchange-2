@@ -77,6 +77,7 @@ const parsers: Array<ParserFn | { virtual: VirtualParserFn }> = [
   parseSpirit,
   parsePriceNote,
   parseUnneededText,
+  parseFracturedText,
   parseTimelostRadius,
   parseStackSize,
   parseCorrupted,
@@ -136,6 +137,7 @@ export function parseClipboard(clipboard: string): Result<ParsedItem, string> {
     parsed.value.rawText = clipboard;
 
     // each section can be parsed at most by one parser
+    // and each parser can only be used to parse one section
     for (const parser of parsers) {
       if (typeof parser === "object") {
         const error = parser.virtual(parsed.value);
@@ -1148,6 +1150,13 @@ function parsePriceNote(section: string[], item: ParsedItem) {
   }
 
   return isParsed;
+}
+
+function parseFracturedText(section: string[], _item: ParsedItem) {
+  for (const line of section) {
+    if (line === _$.FRACTURED_ITEM) return "SECTION_PARSED";
+  }
+  return "SECTION_SKIPPED";
 }
 
 function parseUnneededText(section: string[], item: ParsedItem) {

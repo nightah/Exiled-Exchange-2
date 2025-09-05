@@ -124,5 +124,6 @@ export default {
   TIMELESS_SMALL_PASSIVES: '範圍內小型天賦也會賦予 {0}',
   TIMELESS_NOTABLE_PASSIVES: '範圍內核心天賦也會賦予 {0}',
   GRANTS_SKILL: '賦予技能: ',
-  RELOAD_SPEED: '重新裝填時間: '
+  RELOAD_SPEED: '重新裝填時間: ',
+  FRACTURED_ITEM: '破裂之物'
 }
