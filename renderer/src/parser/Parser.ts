@@ -64,7 +64,6 @@ const parsers: Array<ParserFn | { virtual: VirtualParserFn }> = [
   parseVaalGemName,
   { virtual: findInDatabase },
   // -----------
-  parseFracturedText,
   parseItemLevel,
   parseRequirements,
   parseTalismanTier,
@@ -78,6 +77,7 @@ const parsers: Array<ParserFn | { virtual: VirtualParserFn }> = [
   parseSpirit,
   parsePriceNote,
   parseUnneededText,
+  parseFracturedText,
   parseTimelostRadius,
   parseStackSize,
   parseCorrupted,
