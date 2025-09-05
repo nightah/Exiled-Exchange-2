@@ -36,6 +36,7 @@ import {
   groupLinesByMod,
   parseModInfoLine,
   ADDED_RUNE_LINE,
+  DESECRATED_LINE,
 } from "./advanced-mod-desc";
 import { calcPropPercentile, QUALITY_STATS } from "./calc-q20";
 
@@ -916,7 +917,7 @@ export function parseModifiersPoe2(section: string[], item: ParsedItem) {
 
   let foundAnyMods = false;
 
-  const enchantOrScourgeOrRune = section.find(
+  const hasEndingTag = section.find(
     (line) =>
       line.endsWith(ENCHANT_LINE) ||
       line.endsWith(SCOURGE_LINE) ||
@@ -924,16 +925,23 @@ export function parseModifiersPoe2(section: string[], item: ParsedItem) {
       line.endsWith(ADDED_RUNE_LINE),
   );
 
-  if (enchantOrScourgeOrRune) {
+  if (hasEndingTag) {
     const { lines } = parseModType(section);
+    let modType;
+
+    if (hasEndingTag.endsWith(ENCHANT_LINE)) {
+      modType = ModifierType.Enchant;
+    } else if (hasEndingTag.endsWith(SCOURGE_LINE)) {
+      modType = ModifierType.Scourge;
+    } else if (hasEndingTag.endsWith(ADDED_RUNE_LINE)) {
+      modType = ModifierType.AddedRune;
+    } else if (hasEndingTag.endsWith(RUNE_LINE)) {
+      modType = ModifierType.Rune;
+    } else {
+      throw new Error("Invalid ending tag");
+    }
     const modInfo: ModifierInfo = {
-      type: enchantOrScourgeOrRune.endsWith(ENCHANT_LINE)
-        ? ModifierType.Enchant
-        : enchantOrScourgeOrRune.endsWith(SCOURGE_LINE)
-          ? ModifierType.Scourge
-          : enchantOrScourgeOrRune.endsWith(ADDED_RUNE_LINE)
-            ? ModifierType.AddedRune
-            : ModifierType.Rune,
+      type: modType,
       tags: [],
     };
     foundAnyMods = parseStatsFromMod(lines, item, { info: modInfo, stats: [] });
@@ -977,6 +985,7 @@ function parseModifiers(section: string[], item: ParsedItem) {
       line.endsWith(ENCHANT_LINE) ||
       line.endsWith(SCOURGE_LINE) ||
       line.endsWith(RUNE_LINE) ||
+      line.endsWith(DESECRATED_LINE) ||
       isModInfoLine(line),
   );
 
@@ -1431,20 +1440,6 @@ function parseStatsFromMod(
   item.newMods.push(modifier);
 
   if (modifier.info.type === ModifierType.Veiled) {
-    const found = STAT_BY_MATCH_STR(modifier.info.name!);
-    if (found) {
-      modifier.stats.push({
-        stat: found.stat,
-        translation: found.matcher,
-      });
-    } else {
-      if (item.rarity !== ItemRarity.Unique) {
-        item.unknownModifiers.push({
-          text: modifier.info.name!,
-          type: modifier.info.type,
-        });
-      }
-    }
     return true;
   }
 

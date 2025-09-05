@@ -214,6 +214,7 @@ interface TradeRequest {
           mirrored?: FilterBoolean;
           sanctum_gold?: FilterRange;
           unidentified_tier?: FilterRange;
+          veiled?: FilterBoolean;
         };
       };
       trade_filters?: {
@@ -782,18 +783,9 @@ export function createTradeRequest(
   stats = stats.filter(
     (stat) => !INTERNAL_TRADE_IDS.includes(stat.tradeId[0] as any),
   );
-  // if (filters.veiled) {
-  //   for (const statRef of filters.veiled.statRefs) {
-  //     stats.push({
-  //       disabled: filters.veiled.disabled,
-  //       statRef: undefined!,
-  //       text: undefined!,
-  //       tag: undefined!,
-  //       sources: undefined!,
-  //       tradeId: STAT_BY_REF(statRef)!.trade.ids[ModifierType.Veiled]
-  //     })
-  //   }
-  // }
+  if (filters.veiled && !filters.veiled.disabled) {
+    propSet(query.filters, "misc_filters.filters.veiled.option", String(true));
+  }
 
   // if (filters.influences) {
   //   for (const influence of filters.influences) {

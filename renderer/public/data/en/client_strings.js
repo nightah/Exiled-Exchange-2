@@ -88,9 +88,9 @@ export default {
   // SynthesisedItem
   ITEM_SYNTHESISED: /^Synthesised (.*)$/,
   // ItemDisplayVeiledPrefix
-  VEILED_PREFIX: 'Veiled Prefix',
+  VEILED_PREFIX: 'Desecrated Prefix',
   // ItemDisplayVeiledSuffix
-  VEILED_SUFFIX: 'Veiled Suffix',
+  VEILED_SUFFIX: 'Desecrated Suffix',
   // ItemDisplayChargesNCharges
   FLASK_CHARGES: /^Currently has \d+ Charges$/,
   // MetamorphosisItemisedMapBoss
