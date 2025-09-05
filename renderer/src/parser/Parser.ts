@@ -64,6 +64,7 @@ const parsers: Array<ParserFn | { virtual: VirtualParserFn }> = [
   parseVaalGemName,
   { virtual: findInDatabase },
   // -----------
+  parseFracturedText,
   parseItemLevel,
   parseRequirements,
   parseTalismanTier,
@@ -136,6 +137,7 @@ export function parseClipboard(clipboard: string): Result<ParsedItem, string> {
     parsed.value.rawText = clipboard;
 
     // each section can be parsed at most by one parser
+    // and each parser can only be used to parse one section
     for (const parser of parsers) {
       if (typeof parser === "object") {
         const error = parser.virtual(parsed.value);
@@ -146,8 +148,7 @@ export function parseClipboard(clipboard: string): Result<ParsedItem, string> {
         const result = parser(section, parsed.value);
         if (result === "SECTION_PARSED") {
           sections = sections.filter((s) => s !== section);
-          // we don't break here since another section may be parsed by the same parser
-          // this still adheres to the rule of one parser per section
+          break;
         } else if (result === "PARSER_SKIPPED") {
           break;
         }
@@ -1151,6 +1152,13 @@ function parsePriceNote(section: string[], item: ParsedItem) {
   return isParsed;
 }
 
+function parseFracturedText(section: string[], _item: ParsedItem) {
+  for (const line of section) {
+    if (line === _$.FRACTURED_ITEM) return "SECTION_PARSED";
+  }
+  return "SECTION_SKIPPED";
+}
+
 function parseUnneededText(section: string[], item: ParsedItem) {
   if (
     item.category !== ItemCategory.Quiver &&
@@ -1168,8 +1176,7 @@ function parseUnneededText(section: string[], item: ParsedItem) {
     item.category !== ItemCategory.Staff &&
     item.category !== ItemCategory.Shield &&
     item.category !== ItemCategory.Spear &&
-    item.category !== ItemCategory.Buckler &&
-    item.category !== ItemCategory.Bow
+    item.category !== ItemCategory.Buckler
   ) {
     return "PARSER_SKIPPED";
   }
@@ -1184,8 +1191,7 @@ function parseUnneededText(section: string[], item: ParsedItem) {
       line.startsWith(_$.SANCTUM_HELP) ||
       line.startsWith(_$.PRECURSOR_TABLET_HELP) ||
       line.startsWith(_$.LOGBOOK_HELP) ||
-      line.startsWith(_$.GRANTS_SKILL) ||
-      line.startsWith(_$.FRACTURED_ITEM)
+      line.startsWith(_$.GRANTS_SKILL)
     ) {
       return "SECTION_PARSED";
     }
