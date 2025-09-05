@@ -1177,9 +1177,8 @@ function parseUnneededText(section: string[], item: ParsedItem) {
     item.category !== ItemCategory.Shield &&
     item.category !== ItemCategory.Spear &&
     item.category !== ItemCategory.Buckler
-  ) {
+  )
     return "PARSER_SKIPPED";
-  }
 
   for (const line of section) {
     if (
