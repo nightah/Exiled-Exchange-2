@@ -267,6 +267,7 @@ interface FetchResult {
       es?: number;
     };
     pseudoMods?: string[];
+    desecratedMods?: string[];
   };
   listing: {
     indexed: string;
@@ -969,6 +970,9 @@ export async function requestResults(
     const enchantMods = result.item.enchantMods?.map((s) =>
       parseAffixStrings(s),
     );
+    const desecratedMods = result.item.desecratedMods?.map((s) =>
+      parseAffixStrings(s),
+    );
     const pseudoMods = result.item.pseudoMods?.map((s) => {
       if (s.startsWith("Sum: ")) {
         const pseudoRes = +s.slice(5);
@@ -1004,7 +1008,8 @@ export async function requestResults(
     const displayItem: PricingResult["displayItem"] = {
       runeMods,
       implicitMods,
-      explicitMods,
+      // HACK: fix the implementation at some point
+      explicitMods: (explicitMods ?? []).concat(desecratedMods ?? []),
       enchantMods,
       pseudoMods,
       extended,
