@@ -158,5 +158,6 @@ export default {
   TIMELESS_SMALL_PASSIVES: 'Малые пассивные умения в радиусе также дают: {0}',
   TIMELESS_NOTABLE_PASSIVES: 'Значимые пассивные умения в радиусе также дают: {0}',
   GRANTS_SKILL: 'Дарует умение: ',
-  RELOAD_SPEED: 'Время перезарядки: '
+  RELOAD_SPEED: 'Время перезарядки: ',
+  FRACTURED_ITEM: 'Расколотый предмет'
 }

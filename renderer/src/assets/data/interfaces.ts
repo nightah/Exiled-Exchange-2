@@ -231,6 +231,7 @@ export interface TranslationDict {
   TIMELESS_NOTABLE_PASSIVES: string;
   GRANTS_SKILL: string;
   RELOAD_SPEED: string;
+  FRACTURED_ITEM: string;
 }
 
 export interface Filter {

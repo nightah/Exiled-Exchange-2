@@ -146,7 +146,8 @@ export function parseClipboard(clipboard: string): Result<ParsedItem, string> {
         const result = parser(section, parsed.value);
         if (result === "SECTION_PARSED") {
           sections = sections.filter((s) => s !== section);
-          break;
+          // we don't break here since another section may be parsed by the same parser
+          // this still adheres to the rule of one parser per section
         } else if (result === "PARSER_SKIPPED") {
           break;
         }
@@ -1167,9 +1168,11 @@ function parseUnneededText(section: string[], item: ParsedItem) {
     item.category !== ItemCategory.Staff &&
     item.category !== ItemCategory.Shield &&
     item.category !== ItemCategory.Spear &&
-    item.category !== ItemCategory.Buckler
-  )
+    item.category !== ItemCategory.Buckler &&
+    item.category !== ItemCategory.Bow
+  ) {
     return "PARSER_SKIPPED";
+  }
 
   for (const line of section) {
     if (
@@ -1181,7 +1184,8 @@ function parseUnneededText(section: string[], item: ParsedItem) {
       line.startsWith(_$.SANCTUM_HELP) ||
       line.startsWith(_$.PRECURSOR_TABLET_HELP) ||
       line.startsWith(_$.LOGBOOK_HELP) ||
-      line.startsWith(_$.GRANTS_SKILL)
+      line.startsWith(_$.GRANTS_SKILL) ||
+      line.startsWith(_$.FRACTURED_ITEM)
     ) {
       return "SECTION_PARSED";
     }
