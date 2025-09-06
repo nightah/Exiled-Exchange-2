@@ -1,4 +1,9 @@
-import { ItemCategory, ItemRarity, ParsedItem } from "@/parser";
+import {
+  ItemCategory,
+  itemIsModifiable,
+  ItemRarity,
+  ParsedItem,
+} from "@/parser";
 import { ModifierType } from "@/parser/modifiers";
 
 export function maxUsefulItemLevel(category: ItemCategory | undefined) {
@@ -18,8 +23,7 @@ export function likelyFinishedItem(item: ParsedItem) {
     item.rarity === ItemRarity.Unique ||
     item.statsByType.some((calc) => calc.type === ModifierType.Crafted) ||
     item.quality === 20 || // quality > 20 can be used for selling bases, quality < 20 drops sometimes
-    item.isCorrupted ||
-    item.isMirrored
+    !itemIsModifiable(item)
   );
 }
 

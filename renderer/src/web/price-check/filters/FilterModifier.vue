@@ -146,7 +146,12 @@ import ModifierAnointment from "./FilterModifierAnointment.vue";
 import FilterModifierItemHasEmpty from "./FilterModifierItemHasEmpty.vue";
 import FilterModifierTiers from "./FilterModifierTiers.vue";
 import { AppConfig } from "@/web/Config";
-import { ItemCategory, ItemRarity, ParsedItem } from "@/parser";
+import {
+  ItemCategory,
+  itemIsModifiable,
+  ItemRarity,
+  ParsedItem,
+} from "@/parser";
 import { FilterTag, StatFilter, INTERNAL_TRADE_IDS } from "./interfaces";
 import SourceInfo from "./SourceInfo.vue";
 import FilterModifierItemIsElemental from "./FilterModifierItemIsElemental.vue";
@@ -208,7 +213,7 @@ export default defineComponent({
           "item.energy_shield",
           "item.total_dps",
           "item.physical_dps",
-        ].includes(props.filter.tradeId[0]) && !props.item.isCorrupted
+        ].includes(props.filter.tradeId[0]) && itemIsModifiable(props.item)
       );
     });
 

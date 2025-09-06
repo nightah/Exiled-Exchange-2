@@ -19,6 +19,7 @@ import {
   ParsedItem,
   ItemInfluence,
   ItemRarity,
+  itemIsModifiable,
 } from "./ParsedItem";
 import { magicBasetype } from "./magic-name";
 import {
@@ -93,6 +94,7 @@ const parsers: Array<ParserFn | { virtual: VirtualParserFn }> = [
   parseMirroredTablet,
   parseFilledCoffin,
   parseMirrored,
+  parseSanctified,
   parseSentinelCharge,
   parseLogbookArea,
   parseLogbookArea,
@@ -626,7 +628,7 @@ function parseRuneSockets(section: string[], item: ParsedItem) {
   if (section[0].startsWith(_$.SOCKETS)) {
     const sockets = section[0].slice(_$.SOCKETS.length).trimEnd();
     const current = sockets.split("S").length - 1;
-    if (item.isCorrupted) {
+    if (!itemIsModifiable(item)) {
       item.runeSockets = {
         empty: 0,
         current,
@@ -642,7 +644,7 @@ function parseRuneSockets(section: string[], item: ParsedItem) {
 
     return "SECTION_PARSED";
   }
-  if (categoryMax && !item.isCorrupted) {
+  if (categoryMax && itemIsModifiable(item)) {
     item.runeSockets = {
       empty: categoryMax,
       current: 0,
@@ -1071,6 +1073,16 @@ function parseMirrored(section: string[], item: ParsedItem) {
   if (section.length === 1) {
     if (section[0] === _$.MIRRORED) {
       item.isMirrored = true;
+      return "SECTION_PARSED";
+    }
+  }
+  return "SECTION_SKIPPED";
+}
+
+function parseSanctified(section: string[], item: ParsedItem) {
+  if (section.length === 1) {
+    if (section[0] === _$.SANCTIFIED) {
+      item.isSanctified = true;
       return "SECTION_PARSED";
     }
   }

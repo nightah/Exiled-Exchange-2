@@ -1,4 +1,9 @@
-import { ParsedItem, ItemRarity, ItemCategory } from "@/parser";
+import {
+  ParsedItem,
+  ItemRarity,
+  ItemCategory,
+  itemIsModifiable,
+} from "@/parser";
 import {
   ModifierType,
   StatCalculated,
@@ -266,7 +271,7 @@ export function initUiModFilters(
     }
   }
 
-  if (!item.isCorrupted && !item.isMirrored) {
+  if (itemIsModifiable(item)) {
     ctx.statsByType = ctx.statsByType.filter(
       (mod) => mod.type !== ModifierType.Fractured,
     );
@@ -434,7 +439,7 @@ export function calculatedStatToFilter(
   if (roll && !filter.option) {
     if (
       (item.rarity === ItemRarity.Magic &&
-        (item.isUnmodifiable || item.isCorrupted || item.isMirrored)) ||
+        (item.isUnmodifiable || !itemIsModifiable(item))) ||
       stat.ref === "Has # Charm Slots"
     ) {
       percent = 0;
@@ -655,8 +660,7 @@ export function finalFilterTweaks(ctx: FiltersCreationContext) {
 
   if (
     item.rarity === ItemRarity.Magic &&
-    !item.isCorrupted &&
-    !item.isMirrored &&
+    itemIsModifiable(item) &&
     item.itemLevel &&
     maxUsefulItemLevel(item.category) > item.itemLevel
   ) {
@@ -738,7 +742,7 @@ function showHasEmptyModifier(
 ): ItemHasEmptyModifier | false {
   const { item } = ctx;
 
-  if (item.isCorrupted || item.isMirrored) {
+  if (!itemIsModifiable(item)) {
     return false;
   }
 

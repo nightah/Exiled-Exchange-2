@@ -34,6 +34,7 @@
 import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 import type { ParsedItem } from "@/parser";
+import { itemIsModifiable } from "@/parser";
 import * as actions from "./hotkeyable-actions";
 import ConversionWarningBanner from "../conversion-warn-banner/ConversionWarningBanner.vue";
 
@@ -58,7 +59,7 @@ function openCoE() {
 
 const showCoE = computed(() => {
   const { item } = props;
-  return item.info.craftable && !item.isCorrupted && !item.isMirrored;
+  return item.info.craftable && itemIsModifiable(item);
 });
 
 const weaponDPS = computed(() => {
