@@ -6,7 +6,6 @@ import {
   InternalTradeId,
   WeightStatGroup,
   ItemIsElementalModifier,
-  ItemHasEmptyModifier,
 } from "../filters/interfaces";
 import { setProperty as propSet } from "dot-prop";
 import { DateTime } from "luxon";
@@ -19,11 +18,7 @@ import {
   RATE_LIMIT_RULES,
   preventQueueCreation,
 } from "./common";
-import {
-  ITEM_CATEGORY_TO_EMPTY_PREFIX,
-  PSEUDO_ID_TO_TRADE_REQUEST,
-  STAT_BY_REF,
-} from "@/assets/data";
+import { PSEUDO_ID_TO_TRADE_REQUEST, STAT_BY_REF } from "@/assets/data";
 import { RateLimiter } from "./RateLimiter";
 import { ModifierType } from "@/parser/modifiers";
 import { Cache } from "./Cache";
@@ -80,19 +75,14 @@ export const CATEGORY_TO_TRADE_ID = new Map([
   [ItemCategory.Buckler, "armour.buckler"],
 ]);
 
-// const TOTAL_MODS_TEXT = {
-//   CRAFTED_MODIFIERS: [
-//     "# Crafted Modifiers",
-//     "# Crafted Prefix Modifiers",
-//     "# Crafted Suffix Modifiers",
-//   ],
-//   EMPTY_MODIFIERS: [
-//     "# Empty Modifiers",
-//     "# Empty Prefix Modifiers",
-//     "# Empty Suffix Modifiers",
-//   ],
-//   TOTAL_MODIFIERS: ["# Modifiers", "# Prefix Modifiers", "# Suffix Modifiers"],
-// };
+const TOTAL_MODS_TEXT = {
+  EMPTY_MODIFIERS: [
+    "# Empty Modifiers",
+    "# Empty Prefix Modifiers",
+    "# Empty Suffix Modifiers",
+  ],
+  TOTAL_MODIFIERS: ["# Modifiers", "# Prefix Modifiers", "# Suffix Modifiers"],
+};
 
 // const INFLUENCE_PSEUDO_TEXT = {
 //   [ItemInfluence.Shaper]: 'Has Shaper Influence',
@@ -212,6 +202,7 @@ interface TradeRequest {
           gem_sockets?: FilterRange;
           identified?: FilterBoolean;
           mirrored?: FilterBoolean;
+          sanctified?: FilterBoolean;
           sanctum_gold?: FilterRange;
           unidentified_tier?: FilterRange;
           veiled?: FilterBoolean;
@@ -267,6 +258,7 @@ interface FetchResult {
       es?: number;
     };
     pseudoMods?: string[];
+    desecratedMods?: string[];
   };
   listing: {
     indexed: string;
@@ -478,7 +470,11 @@ export function createTradeRequest(
     );
   }
 
-  if (filters.corrupted?.value === false || filters.corrupted?.exact) {
+  if (
+    (filters.corrupted?.value === false || filters.corrupted?.exact) &&
+    filters.corrupted &&
+    (!filters.sanctified || (filters.sanctified && filters.sanctified.disabled))
+  ) {
     propSet(
       query.filters,
       "misc_filters.filters.corrupted.option",
@@ -506,6 +502,29 @@ export function createTradeRequest(
     );
   }
 
+  if (
+    filters.sanctified ||
+    (filters.corrupted?.value === true && !filters.corrupted?.exact)
+  ) {
+    if (filters.sanctified?.disabled) {
+      propSet(
+        query.filters,
+        "misc_filters.filters.sanctified.option",
+        String(false),
+      );
+    }
+  } else if (
+    item.rarity === ItemRarity.Normal ||
+    item.rarity === ItemRarity.Magic ||
+    item.rarity === ItemRarity.Rare
+  ) {
+    propSet(
+      query.filters,
+      "misc_filters.filters.sanctified.option",
+      String(false),
+    );
+  }
+
   // TRADE FILTERS
 
   // BREAK ==============================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
@@ -513,68 +532,24 @@ export function createTradeRequest(
   // Meta internal stuff, crafting as empty and setting dps/pdps/edps
   for (const stat of stats) {
     if (stat.tradeId[0] === "item.has_empty_modifier") {
-      // NOTE: TEMP WHILE WE DON'T HAVE THESE STATS
-      if (item.rarity === ItemRarity.Magic) {
-        if (
-          stat.option!.value === ItemHasEmptyModifier.Suffix ||
-          stat.option!.value === ItemHasEmptyModifier.Any ||
-          !item.category ||
-          item.isCorrupted
-        )
-          continue;
-        const emptyPrefixSuffix = getEmptyPrefixSuffix(item.category);
-        if (!emptyPrefixSuffix) continue;
-        emptyPrefixSuffix.disabled = stat.disabled;
-        query.stats.push(emptyPrefixSuffix);
-      }
-      continue;
+      const TARGET_ID = {
+        EMPTY_MODIFIERS: STAT_BY_REF(
+          TOTAL_MODS_TEXT.EMPTY_MODIFIERS[stat.option!.value],
+        )!.trade.ids[ModifierType.Pseudo][0],
+      };
 
-      // const TARGET_ID = {
-      //   CRAFTED_MODIFIERS: STAT_BY_REF(
-      //     TOTAL_MODS_TEXT.CRAFTED_MODIFIERS[stat.option!.value],
-      //   )!.trade.ids[ModifierType.Pseudo][0],
-      //   EMPTY_MODIFIERS: STAT_BY_REF(
-      //     TOTAL_MODS_TEXT.EMPTY_MODIFIERS[stat.option!.value],
-      //   )!.trade.ids[ModifierType.Pseudo][0],
-      //   TOTAL_MODIFIERS: STAT_BY_REF(TOTAL_MODS_TEXT.TOTAL_MODIFIERS[0])!.trade
-      //     .ids[ModifierType.Pseudo][0],
-      // };
-
-      // query.stats.push({
-      //   type: "count",
-      //   value: { min: 1, max: 1 },
-      //   disabled: stat.disabled,
-      //   filters: [
-      //     {
-      //       id: TARGET_ID.EMPTY_MODIFIERS,
-      //       value: { min: 1, max: 1 },
-      //       disabled: stat.disabled,
-      //     },
-      //     {
-      //       id: TARGET_ID.CRAFTED_MODIFIERS,
-      //       value: { min: 1, max: undefined },
-      //       disabled: stat.disabled,
-      //     },
-      //   ],
-      // });
-
-      // query.stats.push({
-      //   type: "count",
-      //   value: { min: 1, max: 1 },
-      //   disabled: stat.disabled,
-      //   filters: [
-      //     {
-      //       id: TARGET_ID.EMPTY_MODIFIERS,
-      //       value: { min: 1, max: 1 },
-      //       disabled: stat.disabled,
-      //     },
-      //     {
-      //       id: TARGET_ID.TOTAL_MODIFIERS,
-      //       value: { min: 6, max: undefined },
-      //       disabled: stat.disabled,
-      //     },
-      //   ],
-      // });
+      query.stats.push({
+        type: "count",
+        value: { min: 1, max: 1 },
+        disabled: stat.disabled,
+        filters: [
+          {
+            id: TARGET_ID.EMPTY_MODIFIERS,
+            value: { min: 1, max: 1 },
+            disabled: stat.disabled,
+          },
+        ],
+      });
     } else if (
       // https://github.com/SnosMe/awakened-poe-trade/issues/758
       item.category === ItemCategory.Flask &&
@@ -781,6 +756,9 @@ export function createTradeRequest(
           typeof input.max === "number" ? input.max : undefined,
         );
         break;
+      case "item.rarity_magic":
+        propSet(query.filters, "type_filters.filters.rarity.option", "magic");
+        break;
     }
   }
 
@@ -969,6 +947,9 @@ export async function requestResults(
     const enchantMods = result.item.enchantMods?.map((s) =>
       parseAffixStrings(s),
     );
+    const desecratedMods = result.item.desecratedMods?.map((s) =>
+      parseAffixStrings(s),
+    );
     const pseudoMods = result.item.pseudoMods?.map((s) => {
       if (s.startsWith("Sum: ")) {
         const pseudoRes = +s.slice(5);
@@ -1004,7 +985,8 @@ export async function requestResults(
     const displayItem: PricingResult["displayItem"] = {
       runeMods,
       implicitMods,
-      explicitMods,
+      // HACK: fix the implementation at some point
+      explicitMods: (explicitMods ?? []).concat(desecratedMods ?? []),
       enchantMods,
       pseudoMods,
       extended,
@@ -1133,14 +1115,4 @@ function pseudoPseudoToQuery(id: string, stat: StatFilter) {
   filter.value = { ...getMinMax(stat.roll) };
   filter.disabled = stat.disabled;
   return filter;
-}
-
-function getEmptyPrefixSuffix(itemCategory: ItemCategory) {
-  // only if we have that category
-  if (!ITEM_CATEGORY_TO_EMPTY_PREFIX[itemCategory]) return;
-  const emptyPrefixSuffix = ITEM_CATEGORY_TO_EMPTY_PREFIX[itemCategory];
-  if (!emptyPrefixSuffix) return;
-  if (emptyPrefixSuffix.type === "not") {
-    return emptyPrefixSuffix;
-  }
 }

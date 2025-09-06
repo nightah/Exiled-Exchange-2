@@ -124,6 +124,8 @@ export default {
   TIMELESS_SMALL_PASSIVES: 'Kleine Passive Fertigkeiten im Radius gewähren auch {0}',
   TIMELESS_NOTABLE_PASSIVES: 'Bedeutende Passive Fertigkeiten im Radius gewähren auch {0}',
   GRANTS_SKILL: 'Gewährt Fertigkeit: ',
-  RELOAD_SPEED: 'Nachladezeit: '
+  RELOAD_SPEED: 'Nachladezeit: ',
+  FRACTURED_ITEM: 'Brüchiger Gegenstand',
+  SANCTIFIED: 'Geheiligt'
 }
 

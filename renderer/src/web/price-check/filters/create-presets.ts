@@ -5,11 +5,12 @@ import {
   initUiModFilters,
   initWeightFilters,
 } from "./create-stat-filters";
-import { ModifierType, sumStatsByModType } from "@/parser/modifiers";
+import { sumStatsByModType } from "@/parser/modifiers";
 import { ItemCategory, ItemRarity, ParsedItem } from "@/parser";
 import type { FilterPreset } from "./interfaces";
 import { PriceCheckWidget } from "@/web/overlay/widgets";
 import { handleApplyItemEdits } from "./fill-runes";
+import { hasCraftingValue, likelyFinishedItem } from "./common";
 
 const ROMAN_NUMERALS = ["I", "II", "III", "IV", "V"];
 
@@ -51,7 +52,6 @@ export function createPresets(
       item.rarity !== ItemRarity.Unique) ||
     (item.category === ItemCategory.SanctumRelic &&
       item.rarity !== ItemRarity.Unique) ||
-    item.category === ItemCategory.Charm ||
     item.category === ItemCategory.Tincture ||
     item.category === ItemCategory.Map ||
     item.category === ItemCategory.MemoryLine ||
@@ -85,32 +85,6 @@ export function createPresets(
     weightFilters: initWeightFilters(item, opts),
   };
 
-  const likelyFinishedItem =
-    item.rarity === ItemRarity.Unique ||
-    item.statsByType.some((calc) => calc.type === ModifierType.Crafted) ||
-    item.quality === 20 || // quality > 20 can be used for selling bases, quality < 20 drops sometimes
-    item.isCorrupted ||
-    item.isMirrored;
-
-  const hasCraftingValue =
-    // Base useful crafting item (synth and influence not in poe2 yet though)
-    item.isSynthesised ||
-    item.isFractured ||
-    item.influences.length ||
-    // Clusters (deprecated)
-    item.category === ItemCategory.ClusterJewel ||
-    // Jewels
-    (item.category === ItemCategory.Jewel &&
-      item.rarity === ItemRarity.Magic) ||
-    // High ilvl, non jewel
-    (item.category !== ItemCategory.Jewel &&
-      item.category !== ItemCategory.AbyssJewel &&
-      item.itemLevel! >= 82) ||
-    (item.itemLevel! >= 81 &&
-      (item.category === ItemCategory.Wand ||
-        item.category === ItemCategory.Spear ||
-        item.category === ItemCategory.Staff));
-
   // Apply runes if we should
   if (
     (item.rarity === ItemRarity.Magic || item.rarity === ItemRarity.Rare) &&
@@ -126,7 +100,7 @@ export function createPresets(
     );
   }
 
-  if (likelyFinishedItem || !hasCraftingValue) {
+  if (likelyFinishedItem(item) || !hasCraftingValue(item)) {
     return { active: pseudoPreset.id, presets: [pseudoPreset] };
   }
 

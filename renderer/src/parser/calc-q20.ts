@@ -1,4 +1,4 @@
-import { ParsedItem } from "./ParsedItem";
+import { itemIsModifiable, ParsedItem } from "./ParsedItem";
 import { stat } from "@/assets/data";
 import { StatRoll, StatSource, statSourcesTotal } from "./modifiers";
 
@@ -49,9 +49,9 @@ export function propAt20Quality(
 ): { roll: StatRoll; sources: StatSource[] } {
   const { incr, flat, sources } = calcPropBase(statRefs, item);
   const base = calcFlat(total, incr.value, item.quality) - flat.value;
-  const quality = item.isCorrupted
-    ? (item.quality ?? 0)
-    : Math.max(20, item.quality ?? 0);
+  const quality = itemIsModifiable(item)
+    ? Math.max(20, item.quality ?? 0)
+    : (item.quality ?? 0);
   return {
     roll: {
       value: calcIncreased(base + flat.value, incr.value, quality),

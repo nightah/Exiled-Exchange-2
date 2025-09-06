@@ -90,7 +90,10 @@
     "veiled": "Velado",
     "foil_unique": "Único Brilhante",
     "mirrored": "Espelhado",
-    "not_mirrored": "Não espelhado"
+    "not_mirrored": "Não espelhado",
+    "sanctified": "Santificado",
+    "not_sanctified": "Não Santificado",
+    "rarity_magic": "Raridade: Mágico"
   },
   "item_category": {
     "prop": "Categoria: {0}",
@@ -160,6 +163,7 @@
     "hide_anointment": "É provável que o comprador altere a unção",
     "hide_for_crafting": "Selecionar apenas se estiver verificando o preço como item base para fabricação",
     "hide_empty_mod": "Selecionar apenas se o item tiver 6 modificadores (1 dos quais fabricado) ou se tiver 5 modificadores",
+    "hide_low_ilvl": "Item has too low an item level to roll all mods",
     "tag_implicit": "implícito",
     "tag_fractured": "fraturado",
     "tag_crafts": "fabricado",

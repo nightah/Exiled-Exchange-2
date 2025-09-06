@@ -92,11 +92,14 @@
     "foil_unique": "Foil Unique",
     "mirrored": "Mirrored",
     "not_mirrored": "Not Mirrored",
+    "sanctified": "Sanctified",
+    "not_sanctified": "Not Sanctified",
     "mod_grade": "Grade: {0}",
     "has_elemental_affix": "Any",
     "has_elemental_fire_affix": "Fire",
     "has_elemental_cold_affix": "Cold",
-    "has_elemental_lightning_affix": "Lightning"
+    "has_elemental_lightning_affix": "Lightning",
+    "rarity_magic": "Rarity: Magic"
   },
   "item_category": {
     "prop": "Category: {0}",
@@ -166,6 +169,7 @@
     "hide_anointment": "Buyer will likely change instilment",
     "hide_for_crafting": "Select only if price-checking as base item for crafting",
     "hide_empty_mod": "Select only if item has 6 modifiers (1 of which is crafted) or if it has 5 modifiers",
+    "hide_low_ilvl": "Item has too low an item level to roll all mods",
     "tag_implicit": "implicit",
     "tag_fractured": "fractured",
     "tag_crafted": "crafted",

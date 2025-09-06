@@ -7,6 +7,7 @@ import { CATEGORY_TO_TRADE_ID } from "../trade/pathofexile-trade";
 import { PriceCheckWidget } from "@/web/overlay/widgets";
 import { isArmourOrWeaponOrCaster } from "@/parser/Parser";
 import { ARMOUR, WEAPON } from "@/parser/meta";
+import { maxUsefulItemLevel } from "./common";
 
 export const SPECIAL_SUPPORT_GEM = [
   "Empower Support",
@@ -216,11 +217,23 @@ export function createFilters(
     };
   }
 
-  if (item.quality && item.quality >= 20) {
-    if (item.category && CATEGORIES_WITH_USEFUL_QUALITY.has(item.category)) {
+  if (item.quality) {
+    if (item.quality >= 20 && item.category === ItemCategory.Flask) {
+      // show if 20 but only enable if greater than 20
       filters.quality = {
         value: item.quality,
         disabled: item.quality <= 20,
+      };
+    } else if (
+      // Require Exceptional quality for non-flasks (most will be 20 anyways so can be ignored)
+      item.quality > 20 &&
+      item.category &&
+      CATEGORIES_WITH_USEFUL_QUALITY.has(item.category)
+    ) {
+      filters.quality = {
+        value: item.quality,
+        // Not by default if rare, since most of craft is likely already done (and don't care about it on finished items)
+        disabled: item.rarity === ItemRarity.Rare,
       };
     }
   }
@@ -323,6 +336,10 @@ export function createFilters(
     filters.mirrored = { disabled: false };
   }
 
+  if (item.isSanctified) {
+    filters.sanctified = { disabled: false };
+  }
+
   if (!item.isFractured && opts.exact) {
     filters.fractured = { value: false };
   }
@@ -347,8 +364,6 @@ export function createFilters(
       item.category !== ItemCategory.HeistBlueprint &&
       item.category !== ItemCategory.HeistContract &&
       item.category !== ItemCategory.MemoryLine &&
-      item.category !== ItemCategory.SanctumRelic &&
-      item.category !== ItemCategory.Charm &&
       item.info.refName !== "Expedition Logbook"
     ) {
       if (item.category === ItemCategory.ClusterJewel) {
@@ -360,11 +375,11 @@ export function createFilters(
       } else {
         // TODO limit level by item type
         filters.itemLevel = {
-          value: Math.min(item.itemLevel, 86),
+          value: Math.min(item.itemLevel, maxUsefulItemLevel(item.category)),
           disabled:
             !opts.exact ||
             item.category === ItemCategory.Flask ||
-            item.category === ItemCategory.Tincture,
+            item.category === ItemCategory.Charm,
         };
       }
     }

@@ -92,11 +92,14 @@
     "foil_unique": "貼模傳奇",
     "mirrored": "已複製",
     "not_mirrored": "未複製",
+    "sanctified": "聖化的",
+    "not_sanctified": "Not Sanctified",
     "mod_grade": "等級: {0}",
     "has_elemental_affix": "Any",
     "has_elemental_fire_affix": "Fire",
     "has_elemental_cold_affix": "Cold",
-    "has_elemental_lightning_affix": "Lightning"
+    "has_elemental_lightning_affix": "Lightning",
+    "rarity_magic": "稀有度: 魔法"
   },
   "item_category": {
     "prop": "類別：{0}",
@@ -162,6 +165,7 @@
     "hide_anointment": "買家可能會更改塗抹",
     "hide_for_crafting": "僅在作為基礎物品價格檢查時選擇",
     "hide_empty_mod": "僅在物品有 6 個詞綴（其中 1 個已製作）或有 5 個詞綴時選擇",
+    "hide_low_ilvl": "Item has too low an item level to roll all mods",
     "tag_implicit": "隨機",
     "tag_fractured": "破裂",
     "tag_crafted": "已製作",

@@ -67,6 +67,7 @@ export interface ParsedItem {
   isCorrupted: boolean;
   isUnmodifiable?: boolean;
   isMirrored?: boolean;
+  isSanctified?: boolean;
   influences: ItemInfluence[];
   logbookAreaMods?: ParsedModifier[][];
   sentinelCharge?: number;
@@ -109,4 +110,8 @@ export function createVirtualItem(
     influences: props.influences ?? [],
     rawText: "VIRTUAL_ITEM",
   };
+}
+
+export function itemIsModifiable(item: ParsedItem) {
+  return !item.isCorrupted && !item.isMirrored && !item.isSanctified;
 }

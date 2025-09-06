@@ -1,4 +1,9 @@
-import { ParsedItem, ItemRarity, ItemCategory } from "@/parser";
+import {
+  ParsedItem,
+  ItemRarity,
+  ItemCategory,
+  itemIsModifiable,
+} from "@/parser";
 import {
   ModifierType,
   StatCalculated,
@@ -21,6 +26,7 @@ import { applyRules as applyMirroredTabletRules } from "./pseudo/reflection-rule
 import { filterItemProp, filterBasePercentile } from "./pseudo/item-property";
 import { decodeOils, applyAnointmentRules } from "./pseudo/anointments";
 import { StatBetter, CLIENT_STRINGS, STAT_BY_REF } from "@/assets/data";
+import { maxUsefulItemLevel } from "./common";
 
 export interface FiltersCreationContext {
   readonly item: ParsedItem;
@@ -265,7 +271,7 @@ export function initUiModFilters(
     }
   }
 
-  if (!item.isCorrupted && !item.isMirrored) {
+  if (itemIsModifiable(item)) {
     ctx.statsByType = ctx.statsByType.filter(
       (mod) => mod.type !== ModifierType.Fractured,
     );
@@ -433,7 +439,7 @@ export function calculatedStatToFilter(
   if (roll && !filter.option) {
     if (
       (item.rarity === ItemRarity.Magic &&
-        (item.isUnmodifiable || item.isCorrupted || item.isMirrored)) ||
+        (item.isUnmodifiable || !itemIsModifiable(item))) ||
       stat.ref === "Has # Charm Slots"
     ) {
       percent = 0;
@@ -605,7 +611,7 @@ function filterAdjustmentForNegate(roll: NonNullable<StatFilter["roll"]>) {
   roll.max = typeof swap.min === "number" ? -1 * swap.min : undefined;
 }
 
-function finalFilterTweaks(ctx: FiltersCreationContext) {
+export function finalFilterTweaks(ctx: FiltersCreationContext) {
   const { item } = ctx;
 
   if (
@@ -650,6 +656,23 @@ function finalFilterTweaks(ctx: FiltersCreationContext) {
         filter.hidden = "filters.hide_for_crafting";
       }
     }
+  }
+
+  if (
+    item.rarity === ItemRarity.Magic &&
+    itemIsModifiable(item) &&
+    item.itemLevel &&
+    maxUsefulItemLevel(item.category) > item.itemLevel
+  ) {
+    ctx.filters.push({
+      tradeId: ["item.rarity_magic"],
+      text: "Rarity: Magic",
+      statRef: "Rarity: Magic",
+      disabled: true,
+      hidden: "filters.hide_low_ilvl",
+      tag: FilterTag.Pseudo,
+      sources: [],
+    });
   }
 
   if (
@@ -719,6 +742,10 @@ function showHasEmptyModifier(
 ): ItemHasEmptyModifier | false {
   const { item } = ctx;
 
+  if (!itemIsModifiable(item)) {
+    return false;
+  }
+
   if (item.rarity === ItemRarity.Magic) {
     const magicRandomMods = item.newMods.filter(
       (mod) => mod.info.type === ModifierType.Explicit,
@@ -742,39 +769,24 @@ function showHasEmptyModifier(
     }
   }
 
-  if (item.rarity !== ItemRarity.Rare || item.isCorrupted || item.isMirrored)
+  if (item.rarity !== ItemRarity.Rare) {
     return false;
+  }
 
   const randomMods = item.newMods.filter(
     (mod) =>
       mod.info.type === ModifierType.Explicit ||
       mod.info.type === ModifierType.Fractured ||
-      mod.info.type === ModifierType.Veiled ||
-      mod.info.type === ModifierType.Crafted,
+      mod.info.type === ModifierType.Veiled,
   );
 
-  const craftedMod = randomMods.find(
-    (mod) => mod.info.type === ModifierType.Crafted,
-  );
-
-  if (
-    (randomMods.length === 5 && !craftedMod) ||
-    (randomMods.length === 6 && craftedMod)
-  ) {
-    let prefixes = randomMods.filter(
+  if (randomMods.length === 5) {
+    const prefixes = randomMods.filter(
       (mod) => mod.info.generation === "prefix",
     ).length;
-    let suffixes = randomMods.filter(
+    const suffixes = randomMods.filter(
       (mod) => mod.info.generation === "suffix",
     ).length;
-
-    if (craftedMod) {
-      if (craftedMod.info.generation === "prefix") {
-        prefixes -= 1;
-      } else {
-        suffixes -= 1;
-      }
-    }
 
     if (prefixes === 2) return ItemHasEmptyModifier.Prefix;
     if (suffixes === 2) return ItemHasEmptyModifier.Suffix;

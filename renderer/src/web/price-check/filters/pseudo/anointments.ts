@@ -1,5 +1,5 @@
 import { ModifierType, StatCalculated } from "@/parser/modifiers";
-import type { ParsedItem } from "@/parser";
+import { itemIsModifiable, type ParsedItem } from "@/parser";
 import type { StatFilter } from "../interfaces";
 
 const EMOTIONS = [
@@ -60,7 +60,7 @@ export function applyAnointmentRules(filters: StatFilter[], item: ParsedItem) {
 
   if (item.talismanTier) {
     anointment.disabled = false;
-  } else if (!item.isCorrupted && !item.isMirrored) {
+  } else if (itemIsModifiable(item)) {
     const oils = anointment.oils!;
     if (
       !(

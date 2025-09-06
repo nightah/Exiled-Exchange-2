@@ -19,6 +19,7 @@ import {
   ParsedItem,
   ItemInfluence,
   ItemRarity,
+  itemIsModifiable,
 } from "./ParsedItem";
 import { magicBasetype } from "./magic-name";
 import {
@@ -77,6 +78,7 @@ const parsers: Array<ParserFn | { virtual: VirtualParserFn }> = [
   parseSpirit,
   parsePriceNote,
   parseUnneededText,
+  parseFracturedText,
   parseTimelostRadius,
   parseStackSize,
   parseCorrupted,
@@ -92,6 +94,7 @@ const parsers: Array<ParserFn | { virtual: VirtualParserFn }> = [
   parseMirroredTablet,
   parseFilledCoffin,
   parseMirrored,
+  parseSanctified,
   parseSentinelCharge,
   parseLogbookArea,
   parseLogbookArea,
@@ -136,6 +139,7 @@ export function parseClipboard(clipboard: string): Result<ParsedItem, string> {
     parsed.value.rawText = clipboard;
 
     // each section can be parsed at most by one parser
+    // and each parser can only be used to parse one section
     for (const parser of parsers) {
       if (typeof parser === "object") {
         const error = parser.virtual(parsed.value);
@@ -624,7 +628,7 @@ function parseRuneSockets(section: string[], item: ParsedItem) {
   if (section[0].startsWith(_$.SOCKETS)) {
     const sockets = section[0].slice(_$.SOCKETS.length).trimEnd();
     const current = sockets.split("S").length - 1;
-    if (item.isCorrupted) {
+    if (!itemIsModifiable(item)) {
       item.runeSockets = {
         empty: 0,
         current,
@@ -640,7 +644,7 @@ function parseRuneSockets(section: string[], item: ParsedItem) {
 
     return "SECTION_PARSED";
   }
-  if (categoryMax && !item.isCorrupted) {
+  if (categoryMax && itemIsModifiable(item)) {
     item.runeSockets = {
       empty: categoryMax,
       current: 0,
@@ -996,6 +1000,16 @@ function parseModifiers(section: string[], item: ParsedItem) {
   if (isModInfoLine(recognizedLine)) {
     for (const { modLine, statLines } of groupLinesByMod(section)) {
       const { modType, lines } = parseModType(statLines);
+
+      // HACK: fix Heart of the Well, can't run `parseModInfoLine` since it's veiled mods are missing a name
+      if (
+        modType === ModifierType.Veiled &&
+        item.info.refName === "Heart of the Well"
+      ) {
+        item.isVeiled = true;
+        return "SECTION_PARSED";
+      }
+
       const modInfo = parseModInfoLine(modLine, modType);
       if (
         item.category === ItemCategory.Relic &&
@@ -1059,6 +1073,16 @@ function parseMirrored(section: string[], item: ParsedItem) {
   if (section.length === 1) {
     if (section[0] === _$.MIRRORED) {
       item.isMirrored = true;
+      return "SECTION_PARSED";
+    }
+  }
+  return "SECTION_SKIPPED";
+}
+
+function parseSanctified(section: string[], item: ParsedItem) {
+  if (section.length === 1) {
+    if (section[0] === _$.SANCTIFIED) {
+      item.isSanctified = true;
       return "SECTION_PARSED";
     }
   }
@@ -1150,6 +1174,15 @@ function parsePriceNote(section: string[], item: ParsedItem) {
   return isParsed;
 }
 
+function parseFracturedText(section: string[], _item: ParsedItem) {
+  for (const line of section) {
+    if (line === _$.FRACTURED_ITEM) {
+      return "SECTION_PARSED";
+    }
+  }
+  return "SECTION_SKIPPED";
+}
+
 function parseUnneededText(section: string[], item: ParsedItem) {
   if (
     item.category !== ItemCategory.Quiver &&
@@ -1168,8 +1201,9 @@ function parseUnneededText(section: string[], item: ParsedItem) {
     item.category !== ItemCategory.Shield &&
     item.category !== ItemCategory.Spear &&
     item.category !== ItemCategory.Buckler
-  )
+  ) {
     return "PARSER_SKIPPED";
+  }
 
   for (const line of section) {
     if (
@@ -1236,7 +1270,7 @@ function parseSuperior(item: ParserState) {
     (item.rarity === ItemRarity.Rare && item.isUnidentified) ||
     (item.rarity === ItemRarity.Unique && item.isUnidentified)
   ) {
-    if (_$.ITEM_SUPERIOR.test(item.name)) {
+    if (_$REF.ITEM_SUPERIOR.test(item.name)) {
       item.name = _$REF.ITEM_SUPERIOR.exec(item.name)![1];
     }
   }
@@ -1249,7 +1283,7 @@ function parseExceptional(item: ParserState) {
     (item.rarity === ItemRarity.Rare && item.isUnidentified) ||
     (item.rarity === ItemRarity.Unique && item.isUnidentified)
   ) {
-    if (_$.ITEM_EXCEPTIONAL.test(item.name)) {
+    if (_$REF.ITEM_EXCEPTIONAL.test(item.name)) {
       item.name = _$REF.ITEM_EXCEPTIONAL.exec(item.name)![1];
     }
   }

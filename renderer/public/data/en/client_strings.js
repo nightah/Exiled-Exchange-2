@@ -225,5 +225,9 @@ export default {
   // ItemDisplayGrantsSkill
   GRANTS_SKILL: 'Grants Skill: ',
   // SkillPopupReloadTime
-  RELOAD_SPEED: 'Reload Time: '
+  RELOAD_SPEED: 'Reload Time: ',
+  // ItemPopupFracturedItem
+  FRACTURED_ITEM: 'Fractured Item',
+  // ItemPopupSanctified
+  SANCTIFIED: 'Sanctified'
 }

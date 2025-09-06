@@ -224,5 +224,7 @@ export default {
   TIMELESS_NOTABLE_PASSIVES: 'Habilidades Passivas Notáveis no Raio também concedem {0}',
   // ItemDisplayGrantsSkill
   GRANTS_SKILL: 'Concede Habilidade: ',
-  RELOAD_SPEED: 'Tempo de Recarregamento: '
+  RELOAD_SPEED: 'Tempo de Recarregamento: ',
+  FRACTURED_ITEM: 'Item Fixado',
+  SANCTIFIED: 'Santificado'
 }

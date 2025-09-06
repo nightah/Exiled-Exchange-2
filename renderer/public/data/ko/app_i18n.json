@@ -89,11 +89,14 @@
     "foil_unique": "반짝이",
     "mirrored": "복제된",
     "not_mirrored": "복제되지 않은",
+    "sanctified": "축성",
+    "not_sanctified": "Not Sanctified",
     "mod_grade": "등급: {0}",
     "has_elemental_affix": "Any",
     "has_elemental_fire_affix": "Fire",
     "has_elemental_cold_affix": "Cold",
-    "has_elemental_lightning_affix": "Lightning"
+    "has_elemental_lightning_affix": "Lightning",
+    "rarity_magic": "아이템 희귀도: 마법"
   },
   "item_category": {
     "prop": "유형: {0}",
@@ -159,6 +162,7 @@
     "hide_anointment": "購入者はおそらくアノイントを変更するでしょう",
     "hide_for_crafting": "제작을 위한 베이스 아이템 가격을 체크할 때만 선택하세요",
     "hide_empty_mod": "접사가 5개 혹은 작업대 접사를 포함해서 6개인 아이템만 보려면 선택하세요",
+    "hide_low_ilvl": "Item has too low an item level to roll all mods",
     "tag_implicit": "고정 속성",
     "tag_fractured": "분열된",
     "tag_crafted": "제작된",
