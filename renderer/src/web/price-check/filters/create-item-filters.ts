@@ -7,7 +7,7 @@ import { CATEGORY_TO_TRADE_ID } from "../trade/pathofexile-trade";
 import { PriceCheckWidget } from "@/web/overlay/widgets";
 import { isArmourOrWeaponOrCaster } from "@/parser/Parser";
 import { ARMOUR, WEAPON } from "@/parser/meta";
-import { hasCraftingValue, maxUsefulItemLevel } from "./common";
+import { maxUsefulItemLevel } from "./common";
 
 export const SPECIAL_SUPPORT_GEM = [
   "Empower Support",
@@ -306,12 +306,13 @@ export function createFilters(
     filters.rarity = {
       value: "normal",
     };
-  } else if (item.rarity === ItemRarity.Magic) {
+  } else if (item.rarity === ItemRarity.Magic && opts.exact) {
     filters.rarity = {
       value: "magic",
     };
   } else if (
     item.rarity === ItemRarity.Normal ||
+    item.rarity === ItemRarity.Magic ||
     item.rarity === ItemRarity.Rare
   ) {
     filters.rarity = {

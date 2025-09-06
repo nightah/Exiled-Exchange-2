@@ -605,7 +605,7 @@ function filterAdjustmentForNegate(roll: NonNullable<StatFilter["roll"]>) {
   roll.max = typeof swap.min === "number" ? -1 * swap.min : undefined;
 }
 
-function finalFilterTweaks(ctx: FiltersCreationContext) {
+export function finalFilterTweaks(ctx: FiltersCreationContext) {
   const { item } = ctx;
 
   if (
@@ -719,6 +719,10 @@ function showHasEmptyModifier(
 ): ItemHasEmptyModifier | false {
   const { item } = ctx;
 
+  if (item.isCorrupted || item.isMirrored) {
+    return false;
+  }
+
   if (item.rarity === ItemRarity.Magic) {
     const magicRandomMods = item.newMods.filter(
       (mod) => mod.info.type === ModifierType.Explicit,
@@ -742,39 +746,24 @@ function showHasEmptyModifier(
     }
   }
 
-  if (item.rarity !== ItemRarity.Rare || item.isCorrupted || item.isMirrored)
+  if (item.rarity !== ItemRarity.Rare) {
     return false;
+  }
 
   const randomMods = item.newMods.filter(
     (mod) =>
       mod.info.type === ModifierType.Explicit ||
       mod.info.type === ModifierType.Fractured ||
-      mod.info.type === ModifierType.Veiled ||
-      mod.info.type === ModifierType.Crafted,
+      mod.info.type === ModifierType.Veiled,
   );
 
-  const craftedMod = randomMods.find(
-    (mod) => mod.info.type === ModifierType.Crafted,
-  );
-
-  if (
-    (randomMods.length === 5 && !craftedMod) ||
-    (randomMods.length === 6 && craftedMod)
-  ) {
-    let prefixes = randomMods.filter(
+  if (randomMods.length === 5) {
+    const prefixes = randomMods.filter(
       (mod) => mod.info.generation === "prefix",
     ).length;
-    let suffixes = randomMods.filter(
+    const suffixes = randomMods.filter(
       (mod) => mod.info.generation === "suffix",
     ).length;
-
-    if (craftedMod) {
-      if (craftedMod.info.generation === "prefix") {
-        prefixes -= 1;
-      } else {
-        suffixes -= 1;
-      }
-    }
 
     if (prefixes === 2) return ItemHasEmptyModifier.Prefix;
     if (suffixes === 2) return ItemHasEmptyModifier.Suffix;

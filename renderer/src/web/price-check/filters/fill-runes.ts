@@ -7,6 +7,7 @@ import { ModifierType, sumStatsByModType } from "@/parser/modifiers";
 import {
   calculatedStatToFilter,
   FiltersCreationContext,
+  finalFilterTweaks,
 } from "./create-stat-filters";
 import { AppConfig } from "@/web/Config";
 import { PriceCheckWidget } from "@/web/overlay/widgets";
@@ -120,6 +121,11 @@ function createNewStatFilter(
     AppConfig<PriceCheckWidget>("price-check")!.usePseudo &&
       ["en", "ru", "ko", "cmn-Hant"].includes(AppConfig().language),
   );
+  if (item.isVeiled) {
+    ctx.statsByType = ctx.statsByType.filter(
+      (mod) => mod.type !== ModifierType.Veiled,
+    );
+  }
 
   ctx.filters.push(
     ...ctx.statsByType.map((mod) =>
@@ -131,6 +137,14 @@ function createNewStatFilter(
       ),
     ),
   );
+  if (item.isVeiled) {
+    ctx.filters.forEach((filter) => {
+      filter.disabled = true;
+    });
+  }
+
+  finalFilterTweaks(ctx);
+
   ctx.filters = ctx.filters.map((filter) => {
     if (
       filter.sources.some(
