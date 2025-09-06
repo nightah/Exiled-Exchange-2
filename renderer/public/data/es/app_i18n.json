@@ -96,7 +96,8 @@
     "has_elemental_affix": "Any",
     "has_elemental_fire_affix": "Fire",
     "has_elemental_cold_affix": "Cold",
-    "has_elemental_lightning_affix": "Lightning"
+    "has_elemental_lightning_affix": "Lightning",
+    "rarity_magic": "Rareza: Mágico"
   },
   "item_category": {
     "prop": "Categoría: {0}",
@@ -166,6 +167,7 @@
     "hide_anointment": "Es probable que el comprador cambie la unción",
     "hide_for_crafting": "Seleccionar solo si se está comprobando el precio como objeto base para creación",
     "hide_empty_mod": "Seleccionar solo si el objeto tiene 6 modificadores (1 de los cuales es elaborado) o si tiene 5 modificadores",
+    "hide_low_ilvl": "Item has too low an item level to roll all mods",
     "tag_implicit": "implícito",
     "tag_fractured": "fracturado",
     "tag_crafted": "elaborado",

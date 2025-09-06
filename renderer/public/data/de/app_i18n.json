@@ -96,7 +96,8 @@
     "has_elemental_affix": "Any",
     "has_elemental_fire_affix": "Fire",
     "has_elemental_cold_affix": "Cold",
-    "has_elemental_lightning_affix": "Lightning"
+    "has_elemental_lightning_affix": "Lightning",
+    "rarity_magic": "Seltenheit: Magisch"
   },
   "item_category": {
     "prop": "Kategorie: {0}",
@@ -166,6 +167,7 @@
     "hide_anointment": "Käufer wird Anointierung wahrscheinlich ändern",
     "hide_for_crafting": "Nur auswählen, wenn Preisprüfung als Basisgegenstand für Crafting",
     "hide_empty_mod": "Nur auswählen, wenn der Gegenstand 6 Modifikatoren (davon 1 gefertigt) hat oder wenn er 5 Modifikatoren hat",
+    "hide_low_ilvl": "Item has too low an item level to roll all mods",
     "tag_implicit": "implizit",
     "tag_fractured": "gebrochen",
     "tag_crafted": "gefertigt",

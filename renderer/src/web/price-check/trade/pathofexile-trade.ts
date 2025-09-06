@@ -744,6 +744,9 @@ export function createTradeRequest(
           typeof input.max === "number" ? input.max : undefined,
         );
         break;
+      case "item.rarity_magic":
+        propSet(query.filters, "type_filters.filters.rarity.option", "magic");
+        break;
     }
   }
 
