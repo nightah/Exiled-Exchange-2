@@ -217,11 +217,23 @@ export function createFilters(
     };
   }
 
-  if (item.quality && item.quality >= 20) {
-    if (item.category && CATEGORIES_WITH_USEFUL_QUALITY.has(item.category)) {
+  if (item.quality) {
+    if (item.quality >= 20 && item.category === ItemCategory.Flask) {
+      // show if 20 but only enable if greater than 20
       filters.quality = {
         value: item.quality,
-        disabled: item.quality <= 20 || item.rarity === ItemRarity.Rare,
+        disabled: item.quality <= 20,
+      };
+    } else if (
+      // Require Exceptional quality for non-flasks (most will be 20 anyways so can be ignored)
+      item.quality > 20 &&
+      item.category &&
+      CATEGORIES_WITH_USEFUL_QUALITY.has(item.category)
+    ) {
+      filters.quality = {
+        value: item.quality,
+        // Not by default if rare, since most of craft is likely already done (and don't care about it on finished items)
+        disabled: item.rarity === ItemRarity.Rare,
       };
     }
   }
