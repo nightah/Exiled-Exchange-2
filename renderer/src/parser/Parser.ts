@@ -998,6 +998,16 @@ function parseModifiers(section: string[], item: ParsedItem) {
   if (isModInfoLine(recognizedLine)) {
     for (const { modLine, statLines } of groupLinesByMod(section)) {
       const { modType, lines } = parseModType(statLines);
+
+      // HACK: fix Heart of the Well, can't run `parseModInfoLine` since it's veiled mods are missing a name
+      if (
+        modType === ModifierType.Veiled &&
+        item.info.refName === "Heart of the Well"
+      ) {
+        item.isVeiled = true;
+        return "SECTION_PARSED";
+      }
+
       const modInfo = parseModInfoLine(modLine, modType);
       if (
         item.category === ItemCategory.Relic &&
@@ -1154,7 +1164,9 @@ function parsePriceNote(section: string[], item: ParsedItem) {
 
 function parseFracturedText(section: string[], _item: ParsedItem) {
   for (const line of section) {
-    if (line === _$.FRACTURED_ITEM) return "SECTION_PARSED";
+    if (line === _$.FRACTURED_ITEM) {
+      return "SECTION_PARSED";
+    }
   }
   return "SECTION_SKIPPED";
 }
@@ -1177,8 +1189,9 @@ function parseUnneededText(section: string[], item: ParsedItem) {
     item.category !== ItemCategory.Shield &&
     item.category !== ItemCategory.Spear &&
     item.category !== ItemCategory.Buckler
-  )
+  ) {
     return "PARSER_SKIPPED";
+  }
 
   for (const line of section) {
     if (
