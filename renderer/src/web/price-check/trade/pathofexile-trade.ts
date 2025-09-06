@@ -532,22 +532,6 @@ export function createTradeRequest(
   // Meta internal stuff, crafting as empty and setting dps/pdps/edps
   for (const stat of stats) {
     if (stat.tradeId[0] === "item.has_empty_modifier") {
-      // // NOTE: TEMP WHILE WE DON'T HAVE THESE STATS
-      // if (item.rarity === ItemRarity.Magic) {
-      //   if (
-      //     stat.option!.value === ItemHasEmptyModifier.Suffix ||
-      //     stat.option!.value === ItemHasEmptyModifier.Any ||
-      //     !item.category ||
-      //     item.isCorrupted
-      //   )
-      //     continue;
-      //   const emptyPrefixSuffix = getEmptyPrefixSuffix(item.category);
-      //   if (!emptyPrefixSuffix) continue;
-      //   emptyPrefixSuffix.disabled = stat.disabled;
-      //   query.stats.push(emptyPrefixSuffix);
-      // }
-      // continue;
-
       const TARGET_ID = {
         EMPTY_MODIFIERS: STAT_BY_REF(
           TOTAL_MODS_TEXT.EMPTY_MODIFIERS[stat.option!.value],
