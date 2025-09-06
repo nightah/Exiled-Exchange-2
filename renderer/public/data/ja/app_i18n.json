@@ -92,6 +92,8 @@
     "foil_unique": "フォイルユニーク",
     "mirrored": "ミラー化",
     "not_mirrored": "非ミラー",
+    "sanctified": "聖別化",
+    "not_sanctified": "Not Sanctified",
     "mod_grade": "グレード: {0}",
     "has_elemental_affix": "Any",
     "has_elemental_fire_affix": "Fire",

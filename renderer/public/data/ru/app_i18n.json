@@ -108,6 +108,8 @@
     "foil_unique": "Реликвия",
     "mirrored": "Отражено",
     "not_mirrored": "Не отражено",
+    "sanctified": "Освящено",
+    "not_sanctified": "Не освящено",
     "mod_grade": "Грейд: {0}",
     "has_elemental_affix": "Any",
     "has_elemental_fire_affix": "Fire",

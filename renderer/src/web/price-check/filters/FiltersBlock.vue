@@ -119,6 +119,18 @@
           "
         />
         <filter-btn-logical
+          v-if="filters.sanctified"
+          active
+          :filter="filters.sanctified"
+          :text="
+            t(
+              filters.sanctified.disabled
+                ? 'item.not_sanctified'
+                : 'item.sanctified',
+            )
+          "
+        />
+        <filter-btn-logical
           v-if="hasStats"
           :collapse="statsVisibility.disabled"
           :filter="statsVisibility"

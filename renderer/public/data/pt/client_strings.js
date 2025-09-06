@@ -225,5 +225,6 @@ export default {
   // ItemDisplayGrantsSkill
   GRANTS_SKILL: 'Concede Habilidade: ',
   RELOAD_SPEED: 'Tempo de Recarregamento: ',
-  FRACTURED_ITEM: 'Item Fixado'
+  FRACTURED_ITEM: 'Item Fixado',
+  SANCTIFIED: 'Santificado'
 }

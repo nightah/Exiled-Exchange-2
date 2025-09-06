@@ -50,6 +50,9 @@ export interface ItemFilters {
   mirrored?: {
     disabled: boolean;
   };
+  sanctified?: {
+    disabled: boolean;
+  };
   foil?: {
     disabled: boolean;
   };

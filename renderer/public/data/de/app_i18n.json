@@ -92,6 +92,8 @@
     "foil_unique": "Foil Unique",
     "mirrored": "Spiegelbildlich",
     "not_mirrored": "Nicht spiegelbildlich",
+    "sanctified": "Geheiligt",
+    "not_sanctified": "Nicht geheiligt",
     "mod_grade": "Grad: {0}",
     "has_elemental_affix": "Any",
     "has_elemental_fire_affix": "Fire",

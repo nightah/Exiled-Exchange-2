@@ -202,6 +202,7 @@ interface TradeRequest {
           gem_sockets?: FilterRange;
           identified?: FilterBoolean;
           mirrored?: FilterBoolean;
+          sanctified?: FilterBoolean;
           sanctum_gold?: FilterRange;
           unidentified_tier?: FilterRange;
           veiled?: FilterBoolean;
@@ -469,7 +470,11 @@ export function createTradeRequest(
     );
   }
 
-  if (filters.corrupted?.value === false || filters.corrupted?.exact) {
+  if (
+    (filters.corrupted?.value === false || filters.corrupted?.exact) &&
+    filters.corrupted &&
+    (!filters.sanctified || (filters.sanctified && filters.sanctified.disabled))
+  ) {
     propSet(
       query.filters,
       "misc_filters.filters.corrupted.option",
@@ -493,6 +498,29 @@ export function createTradeRequest(
     propSet(
       query.filters,
       "misc_filters.filters.mirrored.option",
+      String(false),
+    );
+  }
+
+  if (
+    filters.sanctified ||
+    (filters.corrupted?.value === true && !filters.corrupted?.exact)
+  ) {
+    if (filters.sanctified?.disabled) {
+      propSet(
+        query.filters,
+        "misc_filters.filters.sanctified.option",
+        String(false),
+      );
+    }
+  } else if (
+    item.rarity === ItemRarity.Normal ||
+    item.rarity === ItemRarity.Magic ||
+    item.rarity === ItemRarity.Rare
+  ) {
+    propSet(
+      query.filters,
+      "misc_filters.filters.sanctified.option",
       String(false),
     );
   }

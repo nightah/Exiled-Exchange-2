@@ -336,6 +336,10 @@ export function createFilters(
     filters.mirrored = { disabled: false };
   }
 
+  if (item.isSanctified) {
+    filters.sanctified = { disabled: false };
+  }
+
   if (!item.isFractured && opts.exact) {
     filters.fractured = { value: false };
   }

@@ -232,6 +232,7 @@ export interface TranslationDict {
   GRANTS_SKILL: string;
   RELOAD_SPEED: string;
   FRACTURED_ITEM: string;
+  SANCTIFIED: string;
 }
 
 export interface Filter {

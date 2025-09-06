@@ -89,6 +89,8 @@
     "foil_unique": "반짝이",
     "mirrored": "복제된",
     "not_mirrored": "복제되지 않은",
+    "sanctified": "축성",
+    "not_sanctified": "Not Sanctified",
     "mod_grade": "등급: {0}",
     "has_elemental_affix": "Any",
     "has_elemental_fire_affix": "Fire",

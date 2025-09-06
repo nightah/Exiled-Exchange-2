@@ -125,5 +125,6 @@ export default {
   TIMELESS_NOTABLE_PASSIVES: '範囲内の特殊パッシブスキルは{0}も付与する',
   GRANTS_SKILL: 'スキルを付与: ',
   RELOAD_SPEED: '再装填時間: ',
-  FRACTURED_ITEM: 'フラクチャーアイテム'
+  FRACTURED_ITEM: 'フラクチャーアイテム',
+  SANCTIFIED: '聖別化'
 }

@@ -159,5 +159,6 @@ export default {
   TIMELESS_NOTABLE_PASSIVES: 'Значимые пассивные умения в радиусе также дают: {0}',
   GRANTS_SKILL: 'Дарует умение: ',
   RELOAD_SPEED: 'Время перезарядки: ',
-  FRACTURED_ITEM: 'Расколотый предмет'
+  FRACTURED_ITEM: 'Расколотый предмет',
+  SANCTIFIED: 'Освящено'
 }

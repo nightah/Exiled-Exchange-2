@@ -92,6 +92,8 @@
     "foil_unique": "Único Brillante",
     "mirrored": "Reflejado",
     "not_mirrored": "No reflejado",
+    "sanctified": "Santificado",
+    "not_sanctified": "No santificado",
     "mod_grade": "Grade: {0}",
     "has_elemental_affix": "Any",
     "has_elemental_fire_affix": "Fire",

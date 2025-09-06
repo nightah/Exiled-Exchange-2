@@ -124,5 +124,6 @@ export default {
   TIMELESS_NOTABLE_PASSIVES: 'Las habilidades pasivas notables dentro del radio también otorgan {0}',
   GRANTS_SKILL: 'Otorga la habilidad: ',
   RELOAD_SPEED: 'Tiempo de recarga: ',
-  FRACTURED_ITEM: 'Objeto fracturado'
+  FRACTURED_ITEM: 'Objeto fracturado',
+  SANCTIFIED: 'Santificado'
 }
