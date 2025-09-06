@@ -7,6 +7,7 @@ import { CATEGORY_TO_TRADE_ID } from "../trade/pathofexile-trade";
 import { PriceCheckWidget } from "@/web/overlay/widgets";
 import { isArmourOrWeaponOrCaster } from "@/parser/Parser";
 import { ARMOUR, WEAPON } from "@/parser/meta";
+import { hasCraftingValue, maxUsefulItemLevel } from "./common";
 
 export const SPECIAL_SUPPORT_GEM = [
   "Empower Support",
@@ -220,7 +221,7 @@ export function createFilters(
     if (item.category && CATEGORIES_WITH_USEFUL_QUALITY.has(item.category)) {
       filters.quality = {
         value: item.quality,
-        disabled: item.quality <= 20,
+        disabled: item.quality <= 20 || item.rarity === ItemRarity.Rare,
       };
     }
   }
@@ -305,13 +306,12 @@ export function createFilters(
     filters.rarity = {
       value: "normal",
     };
-  } else if (item.rarity === ItemRarity.Magic && opts.exact) {
+  } else if (item.rarity === ItemRarity.Magic) {
     filters.rarity = {
       value: "magic",
     };
   } else if (
     item.rarity === ItemRarity.Normal ||
-    item.rarity === ItemRarity.Magic ||
     item.rarity === ItemRarity.Rare
   ) {
     filters.rarity = {
@@ -347,8 +347,6 @@ export function createFilters(
       item.category !== ItemCategory.HeistBlueprint &&
       item.category !== ItemCategory.HeistContract &&
       item.category !== ItemCategory.MemoryLine &&
-      item.category !== ItemCategory.SanctumRelic &&
-      item.category !== ItemCategory.Charm &&
       item.info.refName !== "Expedition Logbook"
     ) {
       if (item.category === ItemCategory.ClusterJewel) {
@@ -360,11 +358,11 @@ export function createFilters(
       } else {
         // TODO limit level by item type
         filters.itemLevel = {
-          value: Math.min(item.itemLevel, 86),
+          value: Math.min(item.itemLevel, maxUsefulItemLevel(item.category)),
           disabled:
             !opts.exact ||
             item.category === ItemCategory.Flask ||
-            item.category === ItemCategory.Tincture,
+            item.category === ItemCategory.Charm,
         };
       }
     }
