@@ -13,7 +13,7 @@ body:
       label: FAQ
       description: Please check the [FAQ](https://kvan7.github.io/Exiled-Exchange-2/faq), [Common Issues Page](https://kvan7.github.io/Exiled-Exchange-2/issues), and for [pinned issues and existing issues](https://github.com/Kvan7/Exiled-Exchange-2/issues?q=is%3Aissue) before submitting an issue
       options:
-        - label: I have checked the FAQ, Common Issues, and for existing issues and my problem was not there
+        - label: I have checked the [FAQ](https://kvan7.github.io/Exiled-Exchange-2/faq), [Common Issues Page](https://kvan7.github.io/Exiled-Exchange-2/issues), and for [pinned issues and existing issues](https://github.com/Kvan7/Exiled-Exchange-2/issues?q=is%3Aissue) and my problem was not there
           required: true
   - type: dropdown
     id: common-bug
@@ -25,7 +25,7 @@ body:
         - Not Recognized Modifier
         - No modifiers found
         - Other
-      default: 0
+      default: 3
     validations:
       required: true
   - type: textarea
@@ -34,7 +34,7 @@ body:
       label: What happened?
       description: Also what did you expect to happen?
       placeholder: Tell us what you see!
-      value: "A bug happened!"
+      value: "Change this text please"
     validations:
       required: true
   - type: dropdown
@@ -59,7 +59,7 @@ body:
     id: item
     attributes:
       label: Item Copy text
-      description: If your bug relates in ANY way to an item, copy the item's text and paste it here. You can do so with `ctrl + alt + c` when hovering over the item.
+      description: If your bug relates in **ANY** way to an item, **PLEASE** copy the item's text and paste it here. You can do so with `ctrl + alt + c` when hovering over the item.
       render: shell
   - type: textarea
     id: logs
