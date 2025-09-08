@@ -462,6 +462,14 @@ export function createTradeRequest(
     );
   }
 
+  if (filters.areaLevel && !filters.areaLevel.disabled) {
+    propSet(
+      query.filters,
+      "misc_filters.filters.area_level.min",
+      filters.areaLevel.value,
+    );
+  }
+
   if (filters.unidentified && !filters.unidentified.disabled) {
     propSet(
       query.filters,
