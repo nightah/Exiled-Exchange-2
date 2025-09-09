@@ -21,7 +21,7 @@ export default {
   QUALITY: '퀄리티: ',
   PHYSICAL_DAMAGE: '물리 피해: ',
   ELEMENTAL_DAMAGE: '원소 피해: ',
-  CRIT_CHANCE: '치명타 확률: ',
+  CRIT_CHANCE: '치명타 명중 확률: ',
   ATTACK_SPEED: '초당 공격 횟수: ',
   ARMOUR: '방어도: ',
   EVASION: '회피: ',
