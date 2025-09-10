@@ -29,8 +29,8 @@ export const usePoeninja = createGlobalState(() => {
   const leagues = useLeagues();
 
   const xchgRate = shallowRef<number | undefined>(undefined);
-  const xchgRate1 = shallowRef<number | undefined>(undefined);
-  xchgRate1.value = undefined;
+  // const xchgRate1 = shallowRef<number | undefined>(undefined);
+  // xchgRate1.value = undefined;
 
   const isLoading = shallowRef(false);
   let PRICES_DB: PriceDatabase = [];
@@ -40,7 +40,14 @@ export const usePoeninja = createGlobalState(() => {
 
   async function load(force: boolean = false) {
     const league = leagues.selected.value;
-    if (!league || !league.isPopular || league.realm !== "pc-ggg") return;
+    if (
+      !league ||
+      !league.isPopular ||
+      league.realm !== "pc-ggg" ||
+      // FIXME: only have non hc abyssal cached rn
+      league.id !== "Rise of the Abyssal"
+    )
+      return;
     if (
       !force &&
       (Date.now() - lastUpdateTime < UPDATE_INTERVAL_MS ||
@@ -84,6 +91,7 @@ export const usePoeninja = createGlobalState(() => {
     load();
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function selectedLeagueToUrl(): string {
     const league = leagues.selectedId.value!;
     switch (league) {
@@ -116,7 +124,9 @@ export const usePoeninja = createGlobalState(() => {
 
       return {
         ...info,
-        url: `https://poe.ninja/poe2/economy/${selectedLeagueToUrl()}/${url}`,
+        // url: `https://poe.ninja/poe2/economy/${selectedLeagueToUrl()}/${url}`,
+        // TODO: Currently i'm only supporting in league non hc
+        url: `https://poe.ninja/poe2/economy/abyss/${url}`,
       };
     }
     return null;
@@ -162,8 +172,7 @@ export const usePoeninja = createGlobalState(() => {
   });
 
   return {
-    // xchgRate: readonly(xchgRate),
-    xchgRate: readonly(xchgRate1),
+    xchgRate: readonly(xchgRate),
     findPriceByQuery,
     autoCurrency,
     queuePricesFetch,

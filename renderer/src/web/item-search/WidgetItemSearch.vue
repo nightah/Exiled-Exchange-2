@@ -307,13 +307,13 @@ function selectItem(
     price = findPriceByQuery({
       ns: item.namespace,
       name: `${opts.altQuality} ${item.refName}`,
-      variant: "1",
+      // variant: "1",
     });
   } else {
     price = findPriceByQuery({
       ns: item.namespace,
       name: item.refName,
-      variant: item.unique!.base,
+      // variant: item.unique!.base,
     });
   }
   const isAdded = addItem({

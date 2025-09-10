@@ -217,7 +217,7 @@ export default defineComponent({
     );
 
     const selectedResults = computed(() => {
-      const arr = Array(20);
+      const arr = Array(8);
       if (!slowdown.isReady.value || !result.value) return arr;
 
       const listed = result.value[selectedCurr.value].listedLazy.value;
