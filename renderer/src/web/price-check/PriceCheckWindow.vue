@@ -225,7 +225,6 @@ export default defineComponent({
         requestPricePrediction: false,
         rememberCurrency: false,
         // New Settings EE2
-        usePseudo: false,
         defaultAllSelected: false,
         itemHoverTooltip: "keybind",
         autoFillEmptyRuneSockets: false,
@@ -255,8 +254,11 @@ export default defineComponent({
     },
   },
   setup(props) {
+    const leagueId = computed(() => AppConfig().leagueId);
+
     watch(
-      () => props.config.usePseudo,
+      // FIXME: check if this is working as intended
+      () => leagueId.value,
       () => {
         const runeFilter = (item: BaseType) =>
           Object.values(item.rune!).some((runeStat) =>

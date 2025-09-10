@@ -467,10 +467,6 @@ function upgradeConfig(_config: Config): Config {
   }
 
   if (config.configVersion < 18) {
-    const priceCheck = config.widgets.find(
-      (w) => w.wmType === "price-check",
-    ) as widget.PriceCheckWidget;
-    priceCheck.usePseudo = false;
     config.enableAlphas = false;
     config.alphas = [];
     config.preferredTradeSite = "default";

@@ -13,12 +13,6 @@
         :currency-ratio="true"
       />
       <div class="flex-1"></div>
-      <trade-links
-        v-if="list && showPseudoLink"
-        :get-link="makeTradeLinkPseudo"
-        text="filters.tag_pseudo"
-        class="mr-1"
-      />
       <trade-links v-if="list" :get-link="makeTradeLink" />
     </div>
 
@@ -241,14 +235,6 @@ export default defineComponent({
       openTradeLink() {
         showBrowser(makeTradeLink());
       },
-      showPseudoLink: computed(
-        () =>
-          props.weightFilters.length &&
-          !(
-            widget.value.usePseudo &&
-            ["en", "ru", "ko", "cmn-Hant"].includes(AppConfig().language)
-          ),
-      ),
       // Shift key state and methods
       isShiftPressed,
       ItemCategory,

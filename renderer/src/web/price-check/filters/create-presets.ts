@@ -23,7 +23,6 @@ export function createPresets(
     activateStockFilter: boolean;
     searchStatRange: number;
     useEn: boolean;
-    usePseudo: boolean;
     defaultAllSelected: boolean;
     autoFillEmptyRuneSockets: PriceCheckWidget["autoFillEmptyRuneSockets"];
   },

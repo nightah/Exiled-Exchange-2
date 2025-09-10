@@ -12,8 +12,6 @@ import {
 } from "../create-stat-filters";
 import type { StatFilter } from "../interfaces";
 import { ARMOUR_STATS, WEAPON_STATS } from "./item-property";
-import { AppConfig } from "@/web/Config";
-import { PriceCheckWidget } from "@/web/overlay/widgets";
 import { tryParseTranslation } from "@/parser/stat-translations";
 
 const RESISTANCES_INFO = [
@@ -81,35 +79,35 @@ interface PseudoRule {
 
 const PSEUDO_RULES: PseudoRule[] = [
   {
-    pseudo: stat("+#% total Elemental Resistance"),
+    pseudo: stat("#% total Elemental Resistance"),
     disabled: false,
     stats: RESISTANCES_INFO.filter((info) => info.elements.length).map(
       (info) => ({ ref: info.ref, multiplier: info.elements.length }),
     ),
   },
   {
-    pseudo: stat("+#% total to Fire Resistance"),
+    pseudo: stat("#% total to Fire Resistance"),
     group: "to_x_ele_res",
     stats: RESISTANCES_INFO.filter((info) =>
       info.elements.includes("fire"),
     ).map((info) => ({ ref: info.ref })),
   },
   {
-    pseudo: stat("+#% total to Cold Resistance"),
+    pseudo: stat("#% total to Cold Resistance"),
     group: "to_x_ele_res",
     stats: RESISTANCES_INFO.filter((info) =>
       info.elements.includes("cold"),
     ).map((info) => ({ ref: info.ref })),
   },
   {
-    pseudo: stat("+#% total to Lightning Resistance"),
+    pseudo: stat("#% total to Lightning Resistance"),
     group: "to_x_ele_res",
     stats: RESISTANCES_INFO.filter((info) =>
       info.elements.includes("lightning"),
     ).map((info) => ({ ref: info.ref })),
   },
   // {
-  //   pseudo: stat("+#% total to Chaos Resistance"),
+  //   pseudo: stat("#% total to Chaos Resistance"),
   //   stats: RESISTANCES_INFO.filter((info) => info.chaos === true).map(
   //     (info) => ({ ref: info.ref }),
   //   ),
@@ -125,7 +123,7 @@ const PSEUDO_RULES: PseudoRule[] = [
   //   },
   // },
   // {
-  //   pseudo: stat("+# total to all Attributes"),
+  //   pseudo: stat("# total to all Attributes"),
   //   group: "to_all_attrs",
   //   stats: [
   //     { ref: stat("# to all Attributes") },
@@ -133,28 +131,28 @@ const PSEUDO_RULES: PseudoRule[] = [
   //   ],
   // },
   // {
-  //   pseudo: stat("+# total to Strength"),
+  //   pseudo: stat("# total to Strength"),
   //   group: "to_x_attr",
   //   stats: ATTRIBUTES_INFO.filter((info) =>
   //     info.attributes.includes("str"),
   //   ).map((info) => ({ ref: info.ref })),
   // },
   // {
-  //   pseudo: stat("+# total to Dexterity"),
+  //   pseudo: stat("# total to Dexterity"),
   //   group: "to_x_attr",
   //   stats: ATTRIBUTES_INFO.filter((info) =>
   //     info.attributes.includes("dex"),
   //   ).map((info) => ({ ref: info.ref })),
   // },
   // {
-  //   pseudo: stat("+# total to Intelligence"),
+  //   pseudo: stat("# total to Intelligence"),
   //   group: "to_x_attr",
   //   stats: ATTRIBUTES_INFO.filter((info) =>
   //     info.attributes.includes("int"),
   //   ).map((info) => ({ ref: info.ref })),
   // },
   // {
-  //   pseudo: stat("+# total maximum Life"),
+  //   pseudo: stat("# total maximum Life"),
   //   disabled: false,
   //   stats: [
   //     { ref: stat("# to maximum Life"), required: true },
@@ -164,7 +162,7 @@ const PSEUDO_RULES: PseudoRule[] = [
   //   ],
   // },
   // {
-  //   pseudo: stat("+# total maximum Mana"),
+  //   pseudo: stat("# total maximum Mana"),
   //   stats: [
   //     { ref: stat("# to maximum Mana"), required: true },
   //     ...ATTRIBUTES_INFO.filter((info) => info.attributes.includes("int")).map(
@@ -173,7 +171,7 @@ const PSEUDO_RULES: PseudoRule[] = [
   //   ],
   // },
   // {
-  //   pseudo: stat("+# total maximum Spirit"),
+  //   pseudo: stat("# total maximum Spirit"),
   //   stats: [{ ref: stat("# to Spirit") }],
   // },
   // {
@@ -181,20 +179,20 @@ const PSEUDO_RULES: PseudoRule[] = [
   //   stats: [{ ref: stat("#% increased maximum Energy Shield") }],
   // },
   // {
-  //   pseudo: stat("+# total maximum Energy Shield"),
+  //   pseudo: stat("# total maximum Energy Shield"),
   //   stats: [
   //     { ref: stat("# to maximum Energy Shield") }, // global
   //   ],
   // },
   // {
-  //   pseudo: stat("+#% total Attack Speed"),
+  //   pseudo: stat("#% total Attack Speed"),
   //   stats: [
   //     { ref: stat("#% increased Attack Speed") }, // global
   //     // { ref: stat('#% increased Attack and Cast Speed') }
   //   ],
   // },
   // {
-  //   pseudo: stat("+#% total Cast Speed"),
+  //   pseudo: stat("#% total Cast Speed"),
   //   stats: [
   //     { ref: stat("#% increased Cast Speed") },
   //     // { ref: stat('#% increased Attack and Cast Speed') }
@@ -209,12 +207,12 @@ const PSEUDO_RULES: PseudoRule[] = [
   //   stats: [{ ref: stat("#% increased Global Physical Damage") }],
   // },
   // {
-  //   pseudo: stat("+#% Global Critical Hit Chance"),
+  //   pseudo: stat("#% Global Critical Hit Chance"),
   //   group: "global_crit_chance",
   //   stats: [{ ref: stat("#% increased Global Critical Hit Chance") }],
   // },
   // {
-  //   pseudo: stat("+#% total Critical Hit Chance for Spells"),
+  //   pseudo: stat("#% total Critical Hit Chance for Spells"),
   //   replaces: "global_crit_chance",
   //   stats: [
   //     {
@@ -225,8 +223,8 @@ const PSEUDO_RULES: PseudoRule[] = [
   //   ],
   // },
   // {
-  //   pseudo: stat("+#% Global Critical Hit Multiplier"),
-  //   stats: [{ ref: stat("+#% to Global Critical Hit Multiplier") }],
+  //   pseudo: stat("#% Global Critical Hit Multiplier"),
+  //   stats: [{ ref: stat("#% to Global Critical Hit Multiplier") }],
   // },
   // {
   //   pseudo: stat("#% increased Elemental Damage"),
@@ -335,10 +333,8 @@ export function filterInPseudo(filter: StatFilter) {
   );
 }
 
-export function filterPseudo(ctx: FiltersCreationContext, usePseudo: boolean) {
+export function filterPseudo(ctx: FiltersCreationContext) {
   const filterByGroup = new Map<string, StatFilter[]>();
-
-  if (!usePseudo) return;
 
   rulesLoop: for (const rule of PSEUDO_RULES) {
     const sources = filterPseudoSources(ctx.statsByType, ({ stat }, source) => {
@@ -486,8 +482,7 @@ const PSEUDO_REF_SET = new Set([
 export function refEffectsPseudos(ref: string): boolean {
   // If it is in these pseudos
   return (
-    (AppConfig<PriceCheckWidget>("price-check")!.usePseudo &&
-      PSEUDO_REF_SET.has(ref)) ||
+    PSEUDO_REF_SET.has(ref) ||
     ARMOUR_STATS.has(ref) ||
     WEAPON_STATS.has(ref) ||
     ref === "Adds # to # Chaos Damage"

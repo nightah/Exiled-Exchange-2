@@ -114,10 +114,6 @@
       t(":open_editor_above")
     }}</ui-checkbox>
 
-    <ui-checkbox class="mb-4" v-model="usePseudo">{{
-      t(":use_pseudo")
-    }}</ui-checkbox>
-
     <div class="mb-2">
       <div class="flex-1 mb-1">{{ t(":use_tooltip_hover") }}</div>
       <div class="mb-1 flex">
@@ -239,7 +235,6 @@ export default defineComponent({
         () => configWidget.value,
         "builtinBrowser",
       ),
-      usePseudo: configModelValue(() => configWidget.value, "usePseudo"),
       requestPricePrediction: configModelValue(
         () => configWidget.value,
         "requestPricePrediction",
