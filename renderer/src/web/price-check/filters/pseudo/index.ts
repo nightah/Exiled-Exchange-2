@@ -296,35 +296,35 @@ const PSEUDO_RULES: PseudoRule[] = [
   //     { ref: stat("#% increased Elemental Damage") },
   //   ],
   // },
-  {
-    pseudo: stat("#% increased Burning Damage"),
-    replaces: "incr_fire_dmg",
-    stats: [
-      { ref: stat("#% increased Burning Damage"), required: true },
-      { ref: stat("#% increased Fire Damage") },
-      { ref: stat("#% increased Elemental Damage") },
-    ],
-  },
-  {
-    pseudo: stat("# Life Regenerated per Second"),
-    stats: [{ ref: stat("Regenerate # Life per second") }],
-  },
-  {
-    pseudo: stat("#% of Life Regenerated per Second"),
-    stats: [{ ref: stat("Regenerate #% of Life per second") }],
-  },
-  {
-    pseudo: stat("#% of Physical Attack Damage Leeched as Life"),
-    stats: [{ ref: stat("#% of Physical Attack Damage Leeched as Life") }],
-  },
-  {
-    pseudo: stat("#% of Physical Attack Damage Leeched as Mana"),
-    stats: [{ ref: stat("#% of Physical Attack Damage Leeched as Mana") }],
-  },
-  {
-    pseudo: stat("#% increased Mana Regeneration Rate"),
-    stats: [{ ref: stat("#% increased Mana Regeneration Rate") }],
-  },
+  // {
+  //   pseudo: stat("#% increased Burning Damage"),
+  //   replaces: "incr_fire_dmg",
+  //   stats: [
+  //     { ref: stat("#% increased Burning Damage"), required: true },
+  //     { ref: stat("#% increased Fire Damage") },
+  //     { ref: stat("#% increased Elemental Damage") },
+  //   ],
+  // },
+  // {
+  //   pseudo: stat("# Life Regenerated per Second"),
+  //   stats: [{ ref: stat("Regenerate # Life per second") }],
+  // },
+  // {
+  //   pseudo: stat("#% of Life Regenerated per Second"),
+  //   stats: [{ ref: stat("Regenerate #% of Life per second") }],
+  // },
+  // {
+  //   pseudo: stat("#% of Physical Attack Damage Leeched as Life"),
+  //   stats: [{ ref: stat("#% of Physical Attack Damage Leeched as Life") }],
+  // },
+  // {
+  //   pseudo: stat("#% of Physical Attack Damage Leeched as Mana"),
+  //   stats: [{ ref: stat("#% of Physical Attack Damage Leeched as Mana") }],
+  // },
+  // {
+  //   pseudo: stat("#% increased Mana Regeneration Rate"),
+  //   stats: [{ ref: stat("#% increased Mana Regeneration Rate") }],
+  // },
 ];
 
 export function filterPseudo(ctx: FiltersCreationContext) {
