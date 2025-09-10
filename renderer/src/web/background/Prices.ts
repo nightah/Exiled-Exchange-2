@@ -1,30 +1,28 @@
 import { shallowRef, watch, readonly } from "vue";
 import { createGlobalState } from "@vueuse/core";
-// import { Host } from "@/web/background/IPC";
+import { Host } from "@/web/background/IPC";
 import { useLeagues } from "./Leagues";
 
 interface NinjaDenseInfo {
-  chaos: number;
-  graph: Array<number | null>;
+  exalted: number;
+  graph?: Array<number | null>;
   name: string;
-  variant?: string;
 }
 
 type PriceDatabase = Array<{ ns: string; url: string; lines: string }>;
 const RETRY_INTERVAL_MS = 4 * 60 * 1000;
-// const UPDATE_INTERVAL_MS = 31 * 60 * 1000;
-// const INTEREST_SPAN_MS = 20 * 60 * 1000;
+const UPDATE_INTERVAL_MS = 31 * 60 * 1000;
+const INTEREST_SPAN_MS = 20 * 60 * 1000;
 
 interface DbQuery {
   ns: string;
   name: string;
-  variant: string | undefined;
 }
 
 export interface CurrencyValue {
   min: number;
   max: number;
-  currency: "exalted" | "div";
+  currency: "chaos" | "exalted" | "div";
 }
 
 export const usePoeninja = createGlobalState(() => {
@@ -36,47 +34,46 @@ export const usePoeninja = createGlobalState(() => {
 
   const isLoading = shallowRef(false);
   let PRICES_DB: PriceDatabase = [];
-  // const lastUpdateTime = 0;
-  // let downloadController: AbortController | undefined;
-  // let lastInterestTime = 0;
+  let lastUpdateTime = 0;
+  let downloadController: AbortController | undefined;
+  let lastInterestTime = 0;
 
   async function load(force: boolean = false) {
-    // const league = leagues.selected.value;
-    // if (!league || !league.isPopular || league.realm !== "pc-ggg") return;
-    // if (
-    //   !force &&
-    //   (Date.now() - lastUpdateTime < UPDATE_INTERVAL_MS ||
-    //     Date.now() - lastInterestTime > INTEREST_SPAN_MS)
-    // )
-    //   return;
-    // if (downloadController) downloadController.abort();
-    // try {
-    //   isLoading.value = true;
-    //   downloadController = new AbortController();
-    //   const response = await Host.proxy(
-    //     `poe.ninja/api/data/DenseOverviews?league=${league.id}&language=en`,
-    //     {
-    //       signal: downloadController.signal,
-    //     },
-    //   );
-    //   const jsonBlob = await response.text();
-    //   PRICES_DB = splitJsonBlob(jsonBlob);
-    //   const divine = findPriceByQuery({
-    //     ns: "ITEM",
-    //     name: "Divine Orb",
-    //     variant: undefined,
-    //   });
-    //   if (divine && divine.chaos >= 30) {
-    //     xchgRate.value = divine.chaos;
-    //   }
-    //   lastUpdateTime = Date.now();
-    // } finally {
-    //   isLoading.value = false;
-    // }
+    const league = leagues.selected.value;
+    if (!league || !league.isPopular || league.realm !== "pc-ggg") return;
+    if (
+      !force &&
+      (Date.now() - lastUpdateTime < UPDATE_INTERVAL_MS ||
+        Date.now() - lastInterestTime > INTEREST_SPAN_MS)
+    )
+      return;
+    if (downloadController) downloadController.abort();
+    try {
+      isLoading.value = true;
+      downloadController = new AbortController();
+      const response = await Host.proxy(
+        `poe.ninja/api/data/DenseOverviews?league=${league.id}&language=en`,
+        {
+          signal: downloadController.signal,
+        },
+      );
+      const jsonBlob = await response.text();
+      PRICES_DB = splitJsonBlob(jsonBlob);
+      const divine = findPriceByQuery({
+        ns: "ITEM",
+        name: "Divine Orb",
+      });
+      if (divine && divine.exalted >= 30) {
+        xchgRate.value = divine.exalted;
+      }
+      lastUpdateTime = Date.now();
+    } finally {
+      isLoading.value = false;
+    }
   }
 
   function queuePricesFetch() {
-    // lastInterestTime = Date.now();
+    lastInterestTime = Date.now();
     load();
   }
 
@@ -96,8 +93,7 @@ export const usePoeninja = createGlobalState(() => {
     // NOTE: order of keys is important
     const searchString = JSON.stringify({
       name: query.name,
-      variant: query.variant,
-      chaos: 0,
+      exalted: 0,
     }).replace(":0}", ":");
 
     for (const { ns, url, lines } of PRICES_DB) {
@@ -113,7 +109,7 @@ export const usePoeninja = createGlobalState(() => {
 
       return {
         ...info,
-        url: `https://poe.ninja/${selectedLeagueToUrl()}/${url}/${denseInfoToDetailsId(info)}`,
+        url: `https://poe.ninja/poe2/economy/${selectedLeagueToUrl()}/${url}`,
       };
     }
     return null;
@@ -168,74 +164,59 @@ export const usePoeninja = createGlobalState(() => {
   };
 });
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function denseInfoToDetailsId(info: NinjaDenseInfo): string {
-  return (info.variant ? `${info.name}, ${info.variant}` : info.name)
+  return info.name
     .normalize("NFKD")
     .replace(/[^a-zA-Z0-9:\- ]/g, "")
     .toLowerCase()
     .replace(/ /g, "-");
 }
 
-// function splitJsonBlob(jsonBlob: string): PriceDatabase {
-//   const NINJA_OVERVIEW = '{"type":"';
-//   const NAMESPACE_MAP: Array<{ ns: string; url: string; type: string }> = [
-//     { ns: "ITEM", url: "currency", type: "Currency" },
-//     { ns: "ITEM", url: "fragments", type: "Fragment" },
-//     { ns: "ITEM", url: "delirium-orbs", type: "DeliriumOrb" },
-//     { ns: "ITEM", url: "scarabs", type: "Scarab" },
-//     { ns: "ITEM", url: "artifacts", type: "Artifact" },
-//     { ns: "ITEM", url: "base-types", type: "BaseType" },
-//     { ns: "ITEM", url: "fossils", type: "Fossil" },
-//     { ns: "ITEM", url: "resonators", type: "Resonator" },
-//     { ns: "ITEM", url: "incubators", type: "Incubator" },
-//     { ns: "ITEM", url: "oils", type: "Oil" },
-//     { ns: "ITEM", url: "vials", type: "Vial" },
-//     { ns: "ITEM", url: "invitations", type: "Invitation" },
-//     { ns: "ITEM", url: "blighted-maps", type: "BlightedMap" },
-//     { ns: "ITEM", url: "blight-ravaged-maps", type: "BlightRavagedMap" },
-//     { ns: "ITEM", url: "essences", type: "Essence" },
-//     { ns: "ITEM", url: "maps", type: "Map" },
-//     { ns: "ITEM", url: "tattoos", type: "Tattoo" },
-//     { ns: "ITEM", url: "omens", type: "Omen" },
-//     { ns: "ITEM", url: "coffins", type: "Coffin" },
-//     { ns: "DIVINATION_CARD", url: "divination-cards", type: "DivinationCard" },
-//     { ns: "CAPTURED_BEAST", url: "beasts", type: "Beast" },
-//     { ns: "UNIQUE", url: "unique-jewels", type: "UniqueJewel" },
-//     { ns: "UNIQUE", url: "unique-flasks", type: "UniqueFlask" },
-//     { ns: "UNIQUE", url: "unique-weapons", type: "UniqueWeapon" },
-//     { ns: "UNIQUE", url: "unique-armours", type: "UniqueArmour" },
-//     { ns: "UNIQUE", url: "unique-accessories", type: "UniqueAccessory" },
-//     { ns: "UNIQUE", url: "unique-maps", type: "UniqueMap" },
-//     { ns: "UNIQUE", url: "unique-relics", type: "UniqueRelic" },
-//     { ns: "GEM", url: "skill-gems", type: "SkillGem" },
-//   ];
+function splitJsonBlob(jsonBlob: string): PriceDatabase {
+  const NINJA_OVERVIEW = '{"type":"';
+  const NAMESPACE_MAP: Array<{ ns: string; url: string; type: string }> = [
+    { ns: "ITEM", url: "currency", type: "Currency" },
+    { ns: "ITEM", url: "fragments", type: "Fragments" },
+    { ns: "ITEM", url: "abyssal-bones", type: "Abyss" },
+    { ns: "ITEM", url: "uncut-gems", type: "UncutGems" },
+    { ns: "ITEM", url: "lineage-support-gems", type: "LineageSupportGems" },
+    { ns: "ITEM", url: "essences", type: "Essences" },
+    { ns: "ITEM", url: "soul-cores", type: "Ultimatum" },
+    { ns: "ITEM", url: "talismans", type: "Talismans" },
+    { ns: "ITEM", url: "runes", type: "Runes" },
+    { ns: "ITEM", url: "omens", type: "Ritual" },
+    { ns: "ITEM", url: "expedition", type: "Expedition" },
+    { ns: "ITEM", url: "distilled-emotions", type: "Delirium" },
+    { ns: "ITEM", url: "breach-catalyst", type: "Breach" },
+  ];
 
-//   const database: PriceDatabase = [];
-//   let startPos = jsonBlob.indexOf(NINJA_OVERVIEW);
-//   if (startPos === -1) return [];
+  const database: PriceDatabase = [];
+  let startPos = jsonBlob.indexOf(NINJA_OVERVIEW);
+  if (startPos === -1) return [];
 
-//   while (true) {
-//     const endPos = jsonBlob.indexOf(NINJA_OVERVIEW, startPos + 1);
+  while (true) {
+    const endPos = jsonBlob.indexOf(NINJA_OVERVIEW, startPos + 1);
 
-//     const type = jsonBlob.slice(
-//       startPos + NINJA_OVERVIEW.length,
-//       jsonBlob.indexOf('"', startPos + NINJA_OVERVIEW.length),
-//     );
-//     const lines = jsonBlob.slice(
-//       startPos,
-//       endPos === -1 ? jsonBlob.length : endPos,
-//     );
+    const type = jsonBlob.slice(
+      startPos + NINJA_OVERVIEW.length,
+      jsonBlob.indexOf('"', startPos + NINJA_OVERVIEW.length),
+    );
+    const lines = jsonBlob.slice(
+      startPos,
+      endPos === -1 ? jsonBlob.length : endPos,
+    );
 
-//     const isSupported = NAMESPACE_MAP.find((entry) => entry.type === type);
-//     if (isSupported) {
-//       database.push({ ns: isSupported.ns, url: isSupported.url, lines });
-//     }
+    const isSupported = NAMESPACE_MAP.find((entry) => entry.type === type);
+    if (isSupported) {
+      database.push({ ns: isSupported.ns, url: isSupported.url, lines });
+    }
 
-//     if (endPos === -1) break;
-//     startPos = endPos;
-//   }
-//   return database;
-// }
+    if (endPos === -1) break;
+    startPos = endPos;
+  }
+  return database;
+}
 
 export function displayRounding(
   value: number,

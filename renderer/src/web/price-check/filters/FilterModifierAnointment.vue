@@ -48,7 +48,7 @@ export default defineComponent({
           variant: undefined,
         });
         if (price) {
-          totalChaos += price.chaos;
+          totalChaos += price.exalted;
         } else {
           totalChaos = undefined;
           break;
