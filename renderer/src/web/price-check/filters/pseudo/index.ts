@@ -15,11 +15,11 @@ import { ARMOUR_STATS, WEAPON_STATS } from "./item-property";
 import { tryParseTranslation } from "@/parser/stat-translations";
 
 const RESISTANCES_INFO = [
-  // {
-  //   ref: stat("#% to All Resistances"),
-  //   elements: ["fire", "cold", "lightning"],
-  //   chaos: true,
-  // },
+  {
+    ref: stat("#% to All Resistances"),
+    elements: ["fire", "cold", "lightning"],
+    chaos: true,
+  },
   {
     ref: stat("#% to all Elemental Resistances"),
     elements: ["fire", "cold", "lightning"],
@@ -36,33 +36,33 @@ const RESISTANCES_INFO = [
   //   ref: stat("#% to Cold and Lightning Resistances"),
   //   elements: ["cold", "lightning"],
   // },
-  // { ref: stat("#% to Chaos Resistance"), elements: [""], chaos: true },
-  // {
-  //   ref: stat("#% to Fire and Chaos Resistances"),
-  //   elements: ["fire"],
-  //   chaos: true,
-  // },
-  // {
-  //   ref: stat("#% to Cold and Chaos Resistances"),
-  //   elements: ["cold"],
-  //   chaos: true,
-  // },
-  // {
-  //   ref: stat("#% to Lightning and Chaos Resistances"),
-  //   elements: ["lightning"],
-  //   chaos: true,
-  // },
+  { ref: stat("#% to Chaos Resistance"), elements: [""], chaos: true },
+  {
+    ref: stat("#% to Fire and Chaos Resistances"),
+    elements: ["fire"],
+    chaos: true,
+  },
+  {
+    ref: stat("#% to Cold and Chaos Resistances"),
+    elements: ["cold"],
+    chaos: true,
+  },
+  {
+    ref: stat("#% to Lightning and Chaos Resistances"),
+    elements: ["lightning"],
+    chaos: true,
+  },
 ];
 
-// const ATTRIBUTES_INFO = [
-//   { ref: stat("# to all Attributes"), attributes: ["str", "dex", "int"] },
-//   { ref: stat("# to Strength"), attributes: ["str"] },
-//   { ref: stat("# to Dexterity"), attributes: ["dex"] },
-//   { ref: stat("# to Intelligence"), attributes: ["int"] },
-//   { ref: stat("# to Strength and Intelligence"), attributes: ["str", "int"] },
-//   { ref: stat("# to Strength and Dexterity"), attributes: ["str", "dex"] },
-//   { ref: stat("# to Dexterity and Intelligence"), attributes: ["dex", "int"] },
-// ];
+const ATTRIBUTES_INFO = [
+  { ref: stat("# to all Attributes"), attributes: ["str", "dex", "int"] },
+  { ref: stat("# to Strength"), attributes: ["str"] },
+  { ref: stat("# to Dexterity"), attributes: ["dex"] },
+  { ref: stat("# to Intelligence"), attributes: ["int"] },
+  { ref: stat("# to Strength and Intelligence"), attributes: ["str", "int"] },
+  { ref: stat("# to Strength and Dexterity"), attributes: ["str", "dex"] },
+  { ref: stat("# to Dexterity and Intelligence"), attributes: ["dex", "int"] },
+];
 
 interface PseudoRule {
   group?: string;
@@ -106,84 +106,84 @@ const PSEUDO_RULES: PseudoRule[] = [
       info.elements.includes("lightning"),
     ).map((info) => ({ ref: info.ref })),
   },
-  // {
-  //   pseudo: stat("#% total to Chaos Resistance"),
-  //   stats: RESISTANCES_INFO.filter((info) => info.chaos === true).map(
-  //     (info) => ({ ref: info.ref }),
-  //   ),
-  //   mutate(filter) {
-  //     if (
-  //       filter.sources.length === 1 &&
-  //       filter.sources[0].modifier.info.type === ModifierType.Crafted
-  //     ) {
-  //       filter.hidden = "filters.hide_crafted_chaos";
-  //     } else {
-  //       filter.disabled = false;
-  //     }
-  //   },
-  // },
-  // {
-  //   pseudo: stat("# total to all Attributes"),
-  //   group: "to_all_attrs",
-  //   stats: [
-  //     { ref: stat("# to all Attributes") },
-  //     // NOTE: not including other sources from `ATTRIBUTES_INFO`
-  //   ],
-  // },
-  // {
-  //   pseudo: stat("# total to Strength"),
-  //   group: "to_x_attr",
-  //   stats: ATTRIBUTES_INFO.filter((info) =>
-  //     info.attributes.includes("str"),
-  //   ).map((info) => ({ ref: info.ref })),
-  // },
-  // {
-  //   pseudo: stat("# total to Dexterity"),
-  //   group: "to_x_attr",
-  //   stats: ATTRIBUTES_INFO.filter((info) =>
-  //     info.attributes.includes("dex"),
-  //   ).map((info) => ({ ref: info.ref })),
-  // },
-  // {
-  //   pseudo: stat("# total to Intelligence"),
-  //   group: "to_x_attr",
-  //   stats: ATTRIBUTES_INFO.filter((info) =>
-  //     info.attributes.includes("int"),
-  //   ).map((info) => ({ ref: info.ref })),
-  // },
-  // {
-  //   pseudo: stat("# total maximum Life"),
-  //   disabled: false,
-  //   stats: [
-  //     { ref: stat("# to maximum Life"), required: true },
-  //     ...ATTRIBUTES_INFO.filter((info) => info.attributes.includes("str")).map(
-  //       (info) => ({ ref: info.ref, multiplier: 5 / 10 }),
-  //     ),
-  //   ],
-  // },
-  // {
-  //   pseudo: stat("# total maximum Mana"),
-  //   stats: [
-  //     { ref: stat("# to maximum Mana"), required: true },
-  //     ...ATTRIBUTES_INFO.filter((info) => info.attributes.includes("int")).map(
-  //       (info) => ({ ref: info.ref, multiplier: 5 / 10 }),
-  //     ),
-  //   ],
-  // },
+  {
+    pseudo: stat("#% total to Chaos Resistance"),
+    stats: RESISTANCES_INFO.filter((info) => info.chaos === true).map(
+      (info) => ({ ref: info.ref }),
+    ),
+    mutate(filter) {
+      if (
+        filter.sources.length === 1 &&
+        filter.sources[0].modifier.info.type === ModifierType.Crafted
+      ) {
+        filter.hidden = "filters.hide_crafted_chaos";
+      } else {
+        filter.disabled = false;
+      }
+    },
+  },
+  {
+    pseudo: stat("+# total to all Attributes"),
+    group: "to_all_attrs",
+    stats: [
+      { ref: stat("# to all Attributes") },
+      // NOTE: not including other sources from `ATTRIBUTES_INFO`
+    ],
+  },
+  {
+    pseudo: stat("+# total to Strength"),
+    group: "to_x_attr",
+    stats: ATTRIBUTES_INFO.filter((info) =>
+      info.attributes.includes("str"),
+    ).map((info) => ({ ref: info.ref })),
+  },
+  {
+    pseudo: stat("+# total to Dexterity"),
+    group: "to_x_attr",
+    stats: ATTRIBUTES_INFO.filter((info) =>
+      info.attributes.includes("dex"),
+    ).map((info) => ({ ref: info.ref })),
+  },
+  {
+    pseudo: stat("+# total to Intelligence"),
+    group: "to_x_attr",
+    stats: ATTRIBUTES_INFO.filter((info) =>
+      info.attributes.includes("int"),
+    ).map((info) => ({ ref: info.ref })),
+  },
+  {
+    pseudo: stat("+# total maximum Life"),
+    disabled: false,
+    stats: [
+      { ref: stat("# to maximum Life"), required: true },
+      ...ATTRIBUTES_INFO.filter((info) => info.attributes.includes("str")).map(
+        (info) => ({ ref: info.ref, multiplier: 5 / 10 }),
+      ),
+    ],
+  },
+  {
+    pseudo: stat("+# total maximum Mana"),
+    stats: [
+      { ref: stat("# to maximum Mana"), required: true },
+      ...ATTRIBUTES_INFO.filter((info) => info.attributes.includes("int")).map(
+        (info) => ({ ref: info.ref, multiplier: 5 / 10 }),
+      ),
+    ],
+  },
   // {
   //   pseudo: stat("# total maximum Spirit"),
   //   stats: [{ ref: stat("# to Spirit") }],
   // },
-  // {
-  //   pseudo: stat("#% total increased maximum Energy Shield"),
-  //   stats: [{ ref: stat("#% increased maximum Energy Shield") }],
-  // },
-  // {
-  //   pseudo: stat("# total maximum Energy Shield"),
-  //   stats: [
-  //     { ref: stat("# to maximum Energy Shield") }, // global
-  //   ],
-  // },
+  {
+    pseudo: stat("#% total increased maximum Energy Shield"),
+    stats: [{ ref: stat("#% increased maximum Energy Shield") }],
+  },
+  {
+    pseudo: stat("+# total maximum Energy Shield"),
+    stats: [
+      { ref: stat("# to maximum Energy Shield") }, // global
+    ],
+  },
   // {
   //   pseudo: stat("#% total Attack Speed"),
   //   stats: [
@@ -198,10 +198,10 @@ const PSEUDO_RULES: PseudoRule[] = [
   //     // { ref: stat('#% increased Attack and Cast Speed') }
   //   ],
   // },
-  // {
-  //   pseudo: stat("#% increased Movement Speed"),
-  //   stats: [{ ref: stat("#% increased Movement Speed") }],
-  // },
+  {
+    pseudo: stat("#% increased Movement Speed"),
+    stats: [{ ref: stat("#% increased Movement Speed") }],
+  },
   // {
   //   pseudo: stat("#% total increased Physical Damage"),
   //   stats: [{ ref: stat("#% increased Global Physical Damage") }],
@@ -296,35 +296,35 @@ const PSEUDO_RULES: PseudoRule[] = [
   //     { ref: stat("#% increased Elemental Damage") },
   //   ],
   // },
-  // {
-  //   pseudo: stat("#% increased Burning Damage"),
-  //   replaces: "incr_fire_dmg",
-  //   stats: [
-  //     { ref: stat("#% increased Burning Damage"), required: true },
-  //     { ref: stat("#% increased Fire Damage") },
-  //     { ref: stat("#% increased Elemental Damage") },
-  //   ],
-  // },
-  // {
-  //   pseudo: stat("# Life Regenerated per Second"),
-  //   stats: [{ ref: stat("Regenerate # Life per second") }],
-  // },
-  // {
-  //   pseudo: stat("#% of Life Regenerated per Second"),
-  //   stats: [{ ref: stat("Regenerate #% of Life per second") }],
-  // },
-  // {
-  //   pseudo: stat("#% of Physical Attack Damage Leeched as Life"),
-  //   stats: [{ ref: stat("#% of Physical Attack Damage Leeched as Life") }],
-  // },
-  // {
-  //   pseudo: stat("#% of Physical Attack Damage Leeched as Mana"),
-  //   stats: [{ ref: stat("#% of Physical Attack Damage Leeched as Mana") }],
-  // },
-  // {
-  //   pseudo: stat("#% increased Mana Regeneration Rate"),
-  //   stats: [{ ref: stat("#% increased Mana Regeneration Rate") }],
-  // },
+  {
+    pseudo: stat("#% increased Burning Damage"),
+    replaces: "incr_fire_dmg",
+    stats: [
+      { ref: stat("#% increased Burning Damage"), required: true },
+      { ref: stat("#% increased Fire Damage") },
+      { ref: stat("#% increased Elemental Damage") },
+    ],
+  },
+  {
+    pseudo: stat("# Life Regenerated per Second"),
+    stats: [{ ref: stat("Regenerate # Life per second") }],
+  },
+  {
+    pseudo: stat("#% of Life Regenerated per Second"),
+    stats: [{ ref: stat("Regenerate #% of Life per second") }],
+  },
+  {
+    pseudo: stat("#% of Physical Attack Damage Leeched as Life"),
+    stats: [{ ref: stat("#% of Physical Attack Damage Leeched as Life") }],
+  },
+  {
+    pseudo: stat("#% of Physical Attack Damage Leeched as Mana"),
+    stats: [{ ref: stat("#% of Physical Attack Damage Leeched as Mana") }],
+  },
+  {
+    pseudo: stat("#% increased Mana Regeneration Rate"),
+    stats: [{ ref: stat("#% increased Mana Regeneration Rate") }],
+  },
 ];
 
 export function filterPseudo(ctx: FiltersCreationContext) {
