@@ -327,12 +327,6 @@ const PSEUDO_RULES: PseudoRule[] = [
   // },
 ];
 
-export function filterInPseudo(filter: StatFilter) {
-  return PSEUDO_RULES.some((rule) =>
-    rule.stats.some((stat) => stat.ref === filter.statRef),
-  );
-}
-
 export function filterPseudo(ctx: FiltersCreationContext) {
   const filterByGroup = new Map<string, StatFilter[]>();
 

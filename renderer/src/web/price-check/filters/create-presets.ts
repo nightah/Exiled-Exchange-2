@@ -1,9 +1,7 @@
 import { createFilters } from "./create-item-filters";
 import {
   createExactStatFilters,
-  createResistanceWeightFilter,
   initUiModFilters,
-  initWeightFilters,
 } from "./create-stat-filters";
 import { sumStatsByModType } from "@/parser/modifiers";
 import { ItemCategory, ItemRarity, ParsedItem } from "@/parser";
@@ -34,11 +32,6 @@ export function createPresets(
         id: ROMAN_NUMERALS[idx],
         filters: createFilters(item, { ...opts, exact: true }),
         stats: createExactStatFilters(item, sumStatsByModType(area), opts),
-        weightFilters: createResistanceWeightFilter(
-          item,
-          sumStatsByModType(area),
-          opts,
-        ),
       })),
     };
   }
@@ -66,11 +59,6 @@ export function createPresets(
           id: "filters.preset_exact",
           filters: createFilters(item, { ...opts, exact: true }),
           stats: createExactStatFilters(item, item.statsByType, opts),
-          weightFilters: createResistanceWeightFilter(
-            item,
-            item.statsByType,
-            opts,
-          ),
         },
       ],
     };
@@ -81,7 +69,6 @@ export function createPresets(
     id: "filters.preset_pseudo",
     filters: createFilters(item, { ...opts, exact: false }),
     stats: initUiModFilters(item, opts),
-    weightFilters: initWeightFilters(item, opts),
   };
 
   // Apply runes if we should
@@ -107,7 +94,6 @@ export function createPresets(
     id: "filters.preset_base_item",
     filters: createFilters(item, { ...opts, exact: true }),
     stats: createExactStatFilters(item, item.statsByType, opts),
-    weightFilters: createResistanceWeightFilter(item, item.statsByType, opts),
   };
 
   return {

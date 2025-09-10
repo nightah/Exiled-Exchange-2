@@ -4,7 +4,6 @@ import {
   StatFilter,
   INTERNAL_TRADE_IDS,
   InternalTradeId,
-  WeightStatGroup,
   ItemIsElementalModifier,
 } from "../filters/interfaces";
 import { setProperty as propSet } from "dot-prop";
@@ -18,11 +17,10 @@ import {
   RATE_LIMIT_RULES,
   preventQueueCreation,
 } from "./common";
-import { PSEUDO_ID_TO_TRADE_REQUEST, STAT_BY_REF } from "@/assets/data";
+import { STAT_BY_REF } from "@/assets/data";
 import { RateLimiter } from "./RateLimiter";
 import { ModifierType } from "@/parser/modifiers";
 import { Cache } from "./Cache";
-import { filterInPseudo } from "../filters/pseudo";
 import { parseAffixStrings } from "@/parser/Parser";
 
 export const CATEGORY_TO_TRADE_ID = new Map([
@@ -121,7 +119,7 @@ interface TradeRequest {
     name?: string | { discriminator: string; option: string };
     type?: string | { discriminator: string; option: string };
     stats: Array<{
-      type: "and" | "if" | "count" | "not" | "weight";
+      type: "and" | "if" | "count" | "not";
       value?: FilterRange;
       filters: Array<{
         id: string;
@@ -129,7 +127,6 @@ interface TradeRequest {
           min?: number;
           max?: number;
           option?: number | string;
-          weight?: number;
         };
         disabled?: boolean;
       }>;
@@ -310,7 +307,6 @@ export function createTradeRequest(
   filters: ItemFilters,
   stats: StatFilter[],
   item: ParsedItem,
-  weightGroups?: WeightStatGroup[],
 ) {
   const body: TradeRequest = {
     query: {
@@ -794,11 +790,6 @@ export function createTradeRequest(
 
   const qAnd = query.stats[0];
   for (const stat of stats) {
-    let overrideDisabled = false;
-    if (weightGroups && filterInPseudo(stat)) {
-      overrideDisabled = true;
-    }
-
     if (stat.statRef === "Only affects Passives in # Ring") {
       const metaSource = stat.roll!;
       const metamorphosisCount = metaSource.bounds!.max;
@@ -819,52 +810,19 @@ export function createTradeRequest(
       continue;
     }
 
-    if (stat.tradeId[0].startsWith("pseudo.")) {
-      query.stats.push(pseudoPseudoToQuery(stat.tradeId[0], stat));
-    } else if (stat.tradeId.length === 1) {
-      qAnd.filters.push(
-        tradeIdToQuery(stat.tradeId[0], stat, overrideDisabled),
-      );
+    if (stat.tradeId.length === 1) {
+      qAnd.filters.push(tradeIdToQuery(stat.tradeId[0], stat));
     } else {
       query.stats.push({
         type: "count",
         value: { min: 1 },
-        disabled: stat.disabled || overrideDisabled,
+        disabled: stat.disabled,
         filters: stat.tradeId.map((id) => tradeIdToQuery(id, stat)),
       });
     }
   }
 
-  if (weightGroups) {
-    for (const weightGroup of weightGroups) {
-      query.stats.push({
-        type: "weight",
-        value: weightGroup.value,
-        disabled: false,
-        filters: weightStatsToFilters(weightGroup.stats),
-      });
-    }
-  }
-
   return body;
-}
-
-function weightStatsToFilters(weightStats: StatFilter[]) {
-  const filters: any[] = [];
-
-  for (const stat of weightStats) {
-    for (const tradeId of stat.tradeId) {
-      filters.push({
-        disabled: false,
-        id: tradeId,
-        value: {
-          weight: stat.weight,
-        },
-      });
-    }
-  }
-
-  return filters;
 }
 
 const cache = new Cache();
@@ -1062,11 +1020,7 @@ function getMinMax(roll: StatFilter["roll"]) {
   return !roll.tradeInvert ? { min: a, max: b } : { min: b, max: a };
 }
 
-function tradeIdToQuery(
-  id: string,
-  stat: StatFilter,
-  overrideDisabled: boolean = false,
-) {
+function tradeIdToQuery(id: string, stat: StatFilter) {
   // NOTE: if there will be too many overrides in the future,
   //       consider moving them to stats.ndjson
 
@@ -1103,7 +1057,7 @@ function tradeIdToQuery(
       ...getMinMax(roll),
       // option: stat.option != null ? stat.option.value : undefined,
     },
-    disabled: stat.disabled || overrideDisabled,
+    disabled: stat.disabled,
   };
 }
 
@@ -1116,11 +1070,4 @@ function nameToQuery(name: string, filters: ItemFilters) {
       option: name,
     };
   }
-}
-
-function pseudoPseudoToQuery(id: string, stat: StatFilter) {
-  const filter = PSEUDO_ID_TO_TRADE_REQUEST[id];
-  filter.value = { ...getMinMax(stat.roll) };
-  filter.disabled = stat.disabled;
-  return filter;
 }

@@ -3,7 +3,6 @@ import type {
   BaseType,
   DropEntry,
   ItemCategoryToEmptyPrefix,
-  PseudoIdToTradeRequest,
   RuneDataByRune,
   RuneDataByTradeId,
   RuneSingleValue,
@@ -19,7 +18,6 @@ export let ITEM_DROP: DropEntry[];
 export let CLIENT_STRINGS: TranslationDict;
 export let CLIENT_STRINGS_REF: TranslationDict;
 export let APP_PATRONS: Array<{ from: string; months: number; style: number }>;
-export let PSEUDO_ID_TO_TRADE_REQUEST: PseudoIdToTradeRequest;
 export let RUNE_SINGLE_VALUE: RuneSingleValue;
 export let RUNE_DATA_BY_RUNE: RuneDataByRune;
 export let RUNE_DATA_BY_TRADE_ID: RuneDataByTradeId;
@@ -257,10 +255,6 @@ export async function init(lang: string, isTest = false) {
   ).json();
   APP_PATRONS = await (
     await fetch(`${import.meta.env.BASE_URL}data/patrons.json`)
-  ).json();
-
-  PSEUDO_ID_TO_TRADE_REQUEST = await (
-    await fetch(`${import.meta.env.BASE_URL}data/pseudo-pseudo.json`)
   ).json();
 
   ITEM_CATEGORY_TO_EMPTY_PREFIX = await (

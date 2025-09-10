@@ -115,11 +115,7 @@ import { createTradeRequest } from "./pathofexile-trade";
 import { getTradeEndpoint } from "./common";
 import { AppConfig } from "@/web/Config";
 import { PriceCheckWidget } from "@/web/overlay/interfaces";
-import {
-  ItemFilters,
-  StatFilter,
-  WeightStatGroup,
-} from "../filters/interfaces";
+import { ItemFilters, StatFilter } from "../filters/interfaces";
 import { ItemCategory, ParsedItem } from "@/parser";
 import { artificialSlowdown } from "./artificial-slowdown";
 import OnlineFilter from "./OnlineFilter.vue";
@@ -146,10 +142,6 @@ export default defineComponent({
       type: Object as PropType<ParsedItem>,
       required: true,
     },
-    weightFilters: {
-      type: Array as PropType<WeightStatGroup[]>,
-      required: true,
-    },
   },
   setup(props) {
     const widget = computed(() => AppConfig<PriceCheckWidget>("price-check")!);
@@ -171,10 +163,6 @@ export default defineComponent({
       return searchResult.value
         ? `https://${getTradeEndpoint()}/trade2/search/poe2/${props.filters.trade.league}/${searchResult.value.id}`
         : `https://${getTradeEndpoint()}/trade2/search/poe2/${props.filters.trade.league}?q=${JSON.stringify(createTradeRequest(props.filters, props.stats, props.item))}`;
-    }
-
-    function makeTradeLinkPseudo() {
-      return `https://${getTradeEndpoint()}/trade2/search/poe2/${props.filters.trade.league}?q=${JSON.stringify(createTradeRequest(props.filters, props.stats, props.item, props.weightFilters))}`;
     }
 
     // Shift Key Detection
@@ -231,7 +219,6 @@ export default defineComponent({
       }),
       showSeller: computed(() => widget.value.showSeller),
       makeTradeLink,
-      makeTradeLinkPseudo,
       openTradeLink() {
         showBrowser(makeTradeLink());
       },

@@ -10,7 +10,6 @@
       :stats="itemStats"
       :item="item"
       :presets="presets"
-      :weightFilters="weightFilters"
       @preset="selectPreset"
       @submit="doSearch = true"
       :rebuild-key="rebuildKey"
@@ -21,7 +20,6 @@
       :filters="itemFilters"
       :stats="itemStats"
       :item="item"
-      :weightFilters="weightFilters"
     />
     <trade-bulk
       v-if="tradeAPI === 'bulk' && doSearch"
@@ -149,12 +147,6 @@ export default defineComponent({
         presets.value.presets.find(
           (preset) => preset.id === presets.value.active,
         )!.stats,
-    );
-    const weightFilters = computed(
-      () =>
-        presets.value.presets.find(
-          (preset) => preset.id === presets.value.active,
-        )!.weightFilters,
     );
     const doSearch = ref(false);
     const tradeAPI = ref<"trade" | "bulk">("bulk");
@@ -365,7 +357,6 @@ export default defineComponent({
       t,
       itemFilters,
       itemStats,
-      weightFilters,
       doSearch,
       tradeAPI,
       tradeService,
