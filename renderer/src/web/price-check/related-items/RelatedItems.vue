@@ -78,8 +78,8 @@ function findItemByQueryId(queryId: string): BaseType | undefined {
 
 function findPriceByQueryId(queryId: string) {
   const [ns, encodedName] = queryId.split("::");
-  const [name, variant] = encodedName.split(" // ");
-  const priceEntry = findPriceByQuery({ ns, name, variant });
+  // const [name, variant] = encodedName.split(" // ");
+  const priceEntry = findPriceByQuery({ ns, name: encodedName });
   if (priceEntry) {
     return autoCurrency(priceEntry.exalted);
   }

@@ -8,12 +8,28 @@ body:
       value: |
         Thanks for taking the time to fill out this bug report!
   - type: checkboxes
-    id: terms
+    id: faq
     attributes:
       label: FAQ
-      description: Please check the [FAQ](https://kvan7.github.io/Exiled-Exchange-2/faq), [Common Issues Page](https://kvan7.github.io/Exiled-Exchange-2/issues), and for [pinned issues and existing issues](https://github.com/Kvan7/Exiled-Exchange-2/issues?q=is%3Aissue) before submitting an issue
+      description: Please check the [FAQ](https://kvan7.github.io/Exiled-Exchange-2/faq) before submitting an issue
       options:
-        - label: I have checked the [FAQ](https://kvan7.github.io/Exiled-Exchange-2/faq), [Common Issues Page](https://kvan7.github.io/Exiled-Exchange-2/issues), and for [pinned issues and existing issues](https://github.com/Kvan7/Exiled-Exchange-2/issues?q=is%3Aissue) and my problem was not there
+        - label: I have checked the [FAQ](https://kvan7.github.io/Exiled-Exchange-2/faq) and my problem was not there
+          required: true
+  - type: checkboxes
+    id: common-issues
+    attributes:
+      label: Common Issues
+      description: Please check the [Common Issues Page](https://kvan7.github.io/Exiled-Exchange-2/issues) before submitting an issue
+      options:
+        - label: I have checked the [Common Issues Page](https://kvan7.github.io/Exiled-Exchange-2/issues) and my problem was not there
+          required: true
+  - type: checkboxes
+    id: existing-issues
+    attributes:
+      label: Existing Issues
+      description: Please check the [pinned issues and existing issues](https://github.com/Kvan7/Exiled-Exchange-2/issues?q=is%3Aissue) before submitting an issue
+      options:
+        - label: I have checked the [pinned issues and existing issues](https://github.com/Kvan7/Exiled-Exchange-2/issues?q=is%3Aissue) and my problem was not there
           required: true
   - type: dropdown
     id: common-bug
@@ -43,27 +59,27 @@ body:
       label: Version
       description: What version of EE2 are you running? You can see this in Settings -> About
       options:
-        - 0.11.6
-        - 0.11.5
-        - 0.11.4
-        - 0.11.3
-        - 0.11.2
+        - 0.12.0
+        - 0.11.x
         - 0.10.x
         - 0.9.x
         - 0.8.x
         - Other
-      default: 0
     validations:
       required: true
   - type: textarea
     id: item
     attributes:
       label: Item Copy text
-      description: If your bug relates in **ANY** way to an item, **PLEASE** copy the item's text and paste it here. You can do so with `ctrl + alt + c` when hovering over the item.
+      description: PLEASE copy the item's text and paste it here. You can do so with `ctrl + alt + c` when hovering over the item, if your bug doesn't related to any items at all, write "None" (if it is about an item in any way and you write None it will be ignored)
       render: shell
+    validations:
+      required: true
   - type: textarea
     id: logs
     attributes:
-      label: Relevant log output
-      description: If able, please go to Settings -> Debug, and copy and paste what is in that text box. (No need for backticks)
+      label: Log output
+      description: Please go to Settings -> Debug, and copy and paste what is in that text box. (No need for backticks)
       render: shell
+    validations:
+      required: true
