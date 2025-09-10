@@ -7,7 +7,6 @@
     v-slot="{ isEditing }"
   >
     <div class="widget-default-style">
-      <ConversionWarningBanner />
       <div class="p-1 flex gap-1 items-center text-base">
         <template v-for="widget in widgets" :key="widget.wmId">
           <button
@@ -82,7 +81,6 @@ import { registry } from "./widget-registry";
 import { Host } from "@/web/background/IPC";
 import Widget from "./Widget.vue";
 import { useI18nNs } from "@/web/i18n";
-import ConversionWarningBanner from "../conversion-warn-banner/ConversionWarningBanner.vue";
 
 export default defineComponent({
   widget: {
@@ -105,7 +103,7 @@ export default defineComponent({
       };
     },
   } satisfies WidgetSpec,
-  components: { Widget, UiToggle, UiPopover, ConversionWarningBanner },
+  components: { Widget, UiToggle, UiPopover },
   props: {
     config: {
       type: Object as PropType<WidgetMenu>,

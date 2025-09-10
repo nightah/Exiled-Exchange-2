@@ -44,7 +44,6 @@
         :click-position="clickPosition"
         :item-editor-options="itemEditorOptions"
       />
-      <ConversionWarningBanner />
       <AppTitleBar
         @close="closePriceCheck"
         @click="openLeagueSelection"
@@ -179,7 +178,6 @@ import {
   WidgetManager,
   WidgetSpec,
 } from "../overlay/interfaces";
-import ConversionWarningBanner from "../conversion-warn-banner/ConversionWarningBanner.vue";
 import ItemEditor from "./filters/ItemEditor.vue";
 import {
   BaseType,
@@ -245,7 +243,6 @@ export default defineComponent({
     ItemQuickPrice,
     UiErrorBox,
     UiPopover,
-    ConversionWarningBanner,
   },
   props: {
     config: {
