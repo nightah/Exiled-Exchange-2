@@ -69,7 +69,7 @@ export const usePoeninja = createGlobalState(() => {
         PRICES_DB = [{ ns: "NAN", url: "NAN", lines: "NAN" }];
         console.log("Failed to load prices");
         // Set to now for now, determine better retry interval later
-        lastUpdateTime = Date.now() - UPDATE_INTERVAL_MS + RETRY_INTERVAL_MS;
+        lastUpdateTime = Date.now() - 3 * RETRY_INTERVAL_MS;
         return;
       }
       PRICES_DB = splitJsonBlob(jsonBlob);
