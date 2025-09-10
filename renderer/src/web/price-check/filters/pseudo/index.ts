@@ -114,7 +114,8 @@ const PSEUDO_RULES: PseudoRule[] = [
     mutate(filter) {
       if (
         filter.sources.length === 1 &&
-        filter.sources[0].modifier.info.type === ModifierType.Rune
+        (filter.sources[0].modifier.info.type === ModifierType.Rune ||
+          filter.sources[0].modifier.info.type === ModifierType.AddedRune)
       ) {
         filter.hidden = "filters.hide_crafted_chaos";
       } else {
