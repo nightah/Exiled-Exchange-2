@@ -1,8 +1,5 @@
 <template>
-  <div
-    v-if="show"
-    class="p-2 border-dashed border border-gray-600 rounded mt-2"
-  >
+  <div v-if="show" class="p-2 border-2 border-gray-600 rounded mt-2">
     <div class="flex text-gray-400 leading-none">
       <div class="w-1/2">
         {{ t("trade_result.you_have") }} <span class="font-sans">×</span>
@@ -48,11 +45,11 @@ export default defineComponent({
       const price =
         props.item.info.refName === "Divine Orb"
           ? {
-              min: n * one.chaos,
-              max: n * one.chaos,
+              min: n * one.exalted,
+              max: n * one.exalted,
               currency: "chaos" as const,
             }
-          : autoCurrency(n * one.chaos);
+          : autoCurrency(n * one.exalted);
 
       return `${displayRounding(price.min)} ${price.currency}`;
     }

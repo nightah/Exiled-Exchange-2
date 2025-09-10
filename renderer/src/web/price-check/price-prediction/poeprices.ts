@@ -60,14 +60,14 @@ export async function requestPoeprices(
     const xchgExalted = findPriceByQuery({
       ns: "ITEM",
       name: "Exalted Orb",
-      variant: undefined,
+      // variant: undefined,
     });
     if (!xchgExalted) {
       throw new Error("poeprices.info gave the price in Exalted Orbs.");
     }
     const converted = autoCurrency([
-      data.min * xchgExalted.chaos,
-      data.max * xchgExalted.chaos,
+      data.min * xchgExalted.exalted,
+      data.max * xchgExalted.exalted,
     ]);
     data.min = converted.min;
     data.max = converted.max;

@@ -13,6 +13,8 @@ const PROXY_HOSTS = [
   { host: "br.pathofexile.com", official: true },
   { host: "poe.ninja", official: false },
   { host: "www.poeprices.info", official: false },
+  // me :)
+  { host: "api.exiledexchange2.dev", official: false },
 ];
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class

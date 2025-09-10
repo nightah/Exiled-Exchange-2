@@ -3,30 +3,17 @@ import { itemIsModifiable, type ParsedItem } from "@/parser";
 import type { StatFilter } from "../interfaces";
 
 const EMOTIONS = [
-  "Distilled Ire",
-  "Distilled Guilt",
-  "Distilled Greed",
-  "Distilled Paranoia",
-  "Distilled Envy",
-  "Distilled Disgust",
-  "Distilled Despair",
-  "Distilled Fear",
-  "Distilled Suffering",
-  "Distilled Isolation",
+  "Diluted Liquid Ire",
+  "Diluted Liquid Guilt",
+  "Diluted Liquid Greed",
+  "Liquid Paranoia",
+  "Liquid Envy",
+  "Liquid Disgust",
+  "Liquid Despair",
+  "Concentrated Liquid Fear",
+  "Concentrated Liquid Suffering",
+  "Concentrated Liquid Isolation",
 ];
-
-// [
-//   "Diluted Liquid Ire",
-//   "Diluted Liquid Guilt",
-//   "Diluted Liquid Greed",
-//   "Liquid Paranoia",
-//   "Liquid Envy",
-//   "Liquid Disgust",
-//   "Liquid Despair",
-//   "Concentrated Liquid Fear",
-//   "Concentrated Liquid Suffering",
-//   "Concentrated Liquid Isolation",
-// ];
 
 export function decodeOils(calc: StatCalculated): string[] | undefined {
   if (calc.type !== ModifierType.Enchant) return;
@@ -65,7 +52,8 @@ export function applyAnointmentRules(filters: StatFilter[], item: ParsedItem) {
     if (
       !(
         oils.includes("Concentrated Liquid Isolation") ||
-        oils.includes("Concentrated Liquid Suffering")
+        oils.includes("Concentrated Liquid Suffering") ||
+        oils.includes("Concentrated Liquid Fear")
       )
     ) {
       anointment.hidden = "filters.hide_anointment";
