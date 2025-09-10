@@ -36,7 +36,7 @@ const RESISTANCES_INFO = [
   //   ref: stat("#% to Cold and Lightning Resistances"),
   //   elements: ["cold", "lightning"],
   // },
-  { ref: stat("#% to Chaos Resistance"), elements: [""], chaos: true },
+  { ref: stat("#% to Chaos Resistance"), elements: [], chaos: true },
   {
     ref: stat("#% to Fire and Chaos Resistances"),
     elements: ["fire"],
