@@ -52,12 +52,19 @@ export const usePoeninja = createGlobalState(() => {
       isLoading.value = true;
       downloadController = new AbortController();
       const response = await Host.proxy(
-        `poe.ninja/api/data/DenseOverviews?league=${league.id}&language=en`,
+        `api.exiledexchange2.dev/overviewData.json`,
         {
           signal: downloadController.signal,
         },
       );
       const jsonBlob = await response.text();
+      if (!jsonBlob.startsWith('{"ok":true,"data":[{')) {
+        PRICES_DB = [{ ns: "NAN", url: "NAN", lines: "NAN" }];
+        console.log("Failed to load prices");
+        // Set to now for now, determine better retry interval later
+        lastUpdateTime = Date.now() - UPDATE_INTERVAL_MS + RETRY_INTERVAL_MS;
+        return;
+      }
       PRICES_DB = splitJsonBlob(jsonBlob);
       const divine = findPriceByQuery({
         ns: "ITEM",
