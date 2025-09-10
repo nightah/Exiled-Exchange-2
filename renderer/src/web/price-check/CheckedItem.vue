@@ -10,7 +10,6 @@
       :stats="itemStats"
       :item="item"
       :presets="presets"
-      :weightFilters="weightFilters"
       @preset="selectPreset"
       @submit="doSearch = true"
       :rebuild-key="rebuildKey"
@@ -21,7 +20,6 @@
       :filters="itemFilters"
       :stats="itemStats"
       :item="item"
-      :weightFilters="weightFilters"
     />
     <trade-bulk
       v-if="tradeAPI === 'bulk' && doSearch"
@@ -36,11 +34,6 @@
         </button>
       </div>
       <div class="flex flex-row gap-1">
-        <trade-links
-          v-if="tradeAPI === 'trade' && showPseudoLink"
-          :get-link="makeTradeLinkPseudo"
-          text="filters.tag_pseudo"
-        />
         <trade-links v-if="tradeAPI === 'trade'" :get-link="makeTradeLink" />
       </div>
     </div>
@@ -141,7 +134,6 @@ export default defineComponent({
   setup(props, ctx) {
     const widget = computed(() => AppConfig<PriceCheckWidget>("price-check")!);
     const leagues = useLeagues();
-    const lang = computed(() => AppConfig().language);
 
     const presets = ref<{ active: string; presets: FilterPreset[] }>(null!);
     const itemFilters = computed(
@@ -155,12 +147,6 @@ export default defineComponent({
         presets.value.presets.find(
           (preset) => preset.id === presets.value.active,
         )!.stats,
-    );
-    const weightFilters = computed(
-      () =>
-        presets.value.presets.find(
-          (preset) => preset.id === presets.value.active,
-        )!.weightFilters,
     );
     const doSearch = ref(false);
     const tradeAPI = ref<"trade" | "bulk">("bulk");
@@ -192,9 +178,6 @@ export default defineComponent({
               item.info.refName === prevItem.info.refName)
               ? prevCurrency
               : undefined,
-          usePseudo:
-            widget.value.usePseudo &&
-            ["en", "ru", "ko", "cmn-Hant"].includes(lang.value),
           defaultAllSelected: widget.value.defaultAllSelected,
           autoFillEmptyRuneSockets: widget.value.autoFillEmptyRuneSockets,
         });
@@ -374,7 +357,6 @@ export default defineComponent({
       t,
       itemFilters,
       itemStats,
-      weightFilters,
       doSearch,
       tradeAPI,
       tradeService,
@@ -393,19 +375,8 @@ export default defineComponent({
       selectPreset(id: string) {
         presets.value.active = id;
       },
-      showPseudoLink: computed(
-        () =>
-          weightFilters.value.length &&
-          !(
-            widget.value.usePseudo &&
-            ["en", "ru", "ko", "cmn-Hant"].includes(AppConfig().language)
-          ),
-      ),
       makeTradeLink() {
         return `https://${getTradeEndpoint()}/trade2/search/poe2/${itemFilters.value.trade.league}?q=${JSON.stringify(createTradeRequest(itemFilters.value, itemStats.value, props.item))}`;
-      },
-      makeTradeLinkPseudo() {
-        return `https://${getTradeEndpoint()}/trade2/search/poe2/${itemFilters.value.trade.league}?q=${JSON.stringify(createTradeRequest(itemFilters.value, itemStats.value, props.item, weightFilters.value))}`;
       },
     };
   },

@@ -37,7 +37,6 @@
       class="grow layout-column"
       :onMouseenter="hidePodium"
     >
-      <ConversionWarningBanner />
       <AppTitleBar @close="cancel" :title="t('settings.title')" />
       <div class="flex grow min-h-0">
         <div
@@ -141,7 +140,6 @@ import SettingsMaps from "../map-check/settings-maps.vue";
 import SettingsStashSearch from "../stash-search/stash-search-editor.vue";
 import SettingsStopwatch from "../stopwatch/settings-stopwatch.vue";
 import SettingsItemSearch from "../item-search/settings-item-search.vue";
-import ConversionWarningBanner from "../conversion-warn-banner/ConversionWarningBanner.vue";
 
 function shuffle<T>(array: T[]): T[] {
   let currentIndex = array.length;
@@ -178,7 +176,7 @@ export default defineComponent({
       };
     },
   } satisfies WidgetSpec,
-  components: { AppTitleBar, ConversionWarningBanner },
+  components: { AppTitleBar },
   props: {
     config: {
       type: Object as PropType<Widget>,

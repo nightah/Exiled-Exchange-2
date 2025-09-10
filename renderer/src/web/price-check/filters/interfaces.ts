@@ -7,7 +7,6 @@ export interface FilterPreset {
   id: string;
   filters: ItemFilters;
   stats: StatFilter[];
-  weightFilters: WeightStatGroup[];
 }
 
 interface SearchFilter {
@@ -128,25 +127,11 @@ export interface StatFilter {
   };
   hidden?: string;
   disabled: boolean; // NOTE: mutable in UI
-  weight?: number;
   additionalInfo?: {
     [key: string]: StatFilterRoll;
   };
   editorAdded?: BaseType;
 }
-
-export interface WeightStatGroup {
-  stats: StatFilter[];
-  name: string;
-  value: {
-    min?: number;
-    max?: number;
-  };
-  disabled: boolean;
-}
-
-export const RESISTANCE_WEIGHT_GROUP: string =
-  "RESISTANCE_WEIGHT_GROUP" as const;
 
 export const INTERNAL_TRADE_IDS = [
   "item.base_percentile",

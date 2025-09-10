@@ -44,7 +44,6 @@
         :click-position="clickPosition"
         :item-editor-options="itemEditorOptions"
       />
-      <ConversionWarningBanner />
       <AppTitleBar
         @close="closePriceCheck"
         @click="openLeagueSelection"
@@ -179,7 +178,6 @@ import {
   WidgetManager,
   WidgetSpec,
 } from "../overlay/interfaces";
-import ConversionWarningBanner from "../conversion-warn-banner/ConversionWarningBanner.vue";
 import ItemEditor from "./filters/ItemEditor.vue";
 import {
   BaseType,
@@ -225,7 +223,6 @@ export default defineComponent({
         requestPricePrediction: false,
         rememberCurrency: false,
         // New Settings EE2
-        usePseudo: false,
         defaultAllSelected: false,
         itemHoverTooltip: "keybind",
         autoFillEmptyRuneSockets: false,
@@ -246,7 +243,6 @@ export default defineComponent({
     ItemQuickPrice,
     UiErrorBox,
     UiPopover,
-    ConversionWarningBanner,
   },
   props: {
     config: {
@@ -255,8 +251,11 @@ export default defineComponent({
     },
   },
   setup(props) {
+    const leagueId = computed(() => AppConfig().leagueId);
+
     watch(
-      () => props.config.usePseudo,
+      // FIXME: check if this is working as intended
+      () => leagueId.value,
       () => {
         const runeFilter = (item: BaseType) =>
           Object.values(item.rune!).some((runeStat) =>

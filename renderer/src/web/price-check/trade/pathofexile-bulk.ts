@@ -163,7 +163,7 @@ export function createTradeRequest(
   };
 }
 
-const SHOW_RESULTS = 20;
+const SHOW_RESULTS = 8;
 const API_FETCH_LIMIT = 100;
 
 export async function execBulkSearch(

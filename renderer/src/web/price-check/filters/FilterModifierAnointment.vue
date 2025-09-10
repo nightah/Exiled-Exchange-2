@@ -45,10 +45,9 @@ export default defineComponent({
         const price = findPriceByQuery({
           ns: "ITEM",
           name: oil.refName,
-          variant: undefined,
         });
         if (price) {
-          totalChaos += price.chaos;
+          totalChaos += price.exalted;
         } else {
           totalChaos = undefined;
           break;

@@ -116,11 +116,7 @@ function createNewStatFilter(
 
   recalculateItemProperties(newItem, item);
   filterItemProp(ctx);
-  filterPseudo(
-    ctx,
-    AppConfig<PriceCheckWidget>("price-check")!.usePseudo &&
-      ["en", "ru", "ko", "cmn-Hant"].includes(AppConfig().language),
-  );
+  filterPseudo(ctx);
   if (item.isVeiled) {
     ctx.statsByType = ctx.statsByType.filter(
       (mod) => mod.type !== ModifierType.Veiled,

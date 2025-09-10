@@ -243,18 +243,6 @@ export interface Filter {
   disabled: boolean;
 }
 
-export interface PseudoIdToTradeRequest {
-  [id: string]: {
-    filters: Filter[];
-    type: "weight";
-    value: {
-      min?: number;
-      max?: number;
-    };
-    disabled?: boolean;
-  };
-}
-
 export interface ItemCategoryToEmptyPrefix {
   [id: string]: {
     filters: Filter[];
