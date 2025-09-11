@@ -330,7 +330,9 @@
     "results_warn_tooltip": "Enable Exalted Only in Online Filter. You can disable this alert in settings.",
     "results_warn_title": "Price likely too high",
     "results_warn_message": "Trade site hiding results between {0} and {1} ex",
-    "fix_complex_query": "Disable \"Use pseudo mods\" in settings or log in with builtin browser"
+    "fix_complex_query": "Disable \"Use pseudo mods\" in settings or log in with builtin browser",
+    "likely_price_fixed": "Mostly non-standard currency: ",
+    "filter_exalt_divine": "Filter by Exalt/Divine"
   },
   "settings": {
     "title": "Settings - Exiled Exchange 2",

@@ -12,8 +12,7 @@ files:
 extraMetadata:
   main: "main.js"
 nsis:
-  oneClick: false
-  allowToChangeInstallationDirectory: true
+  oneClick: true
 win:
   target:
     - "nsis"
