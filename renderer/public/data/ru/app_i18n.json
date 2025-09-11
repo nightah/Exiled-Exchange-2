@@ -336,7 +336,9 @@
     "getting_price_from": "с poe.ninja \u2026",
     "you_have": "В наличии",
     "stack": "Стак",
-    "fix_complex_query": "Отключите \"Use pseudo mods\" в настройках или залогиньтесь во встроенном браузере"
+    "fix_complex_query": "Отключите \"Use pseudo mods\" в настройках или залогиньтесь во встроенном браузере",
+    "likely_price_fixed": "Mostly non-standard currency: ",
+    "filter_exalt_divine": "Filter by Exalt/Divine"
   },
   "settings": {
     "title": "Настройки - Exiled Exchange 2",

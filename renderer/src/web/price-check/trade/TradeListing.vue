@@ -6,12 +6,7 @@
         <span v-if="!list" class="text-gray-600">...</span>
         <span v-else>{{ list.total }}{{ list.inexact ? "+" : "" }}</span>
       </div>
-      <online-filter
-        v-if="list"
-        :by-time="true"
-        :filters="filters"
-        :currency-ratio="true"
-      />
+      <online-filter v-if="list" :by-time="true" :filters="filters" />
       <div class="flex-1"></div>
       <trade-links v-if="list" :get-link="makeTradeLink" />
     </div>
@@ -82,6 +77,23 @@
           </template>
         </tbody>
       </table>
+      <div
+        v-if="isLikelyPriceFixed"
+        class="p-2 border-2 border-gray-600 rounded mt-2"
+      >
+        <div class="flex text-gray-400 leading-none">
+          <div class="mt-1">
+            {{ t(":likely_price_fixed") }}
+          </div>
+          <div class="flex-1" />
+          <div class="pl-2">
+            <button class="btn" @click="execFilterExaltDivine">
+              {{ t(":filter_exalt_divine") }}
+              <i class="fas fa-history text-xs" />
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <ui-error-box v-else>
@@ -208,6 +220,9 @@ export default defineComponent({
       execSearch: () => {
         search(props.filters, props.stats, props.item);
       },
+      execFilterExaltDivine: () => {
+        props.filters.trade.currency = "exalted_divine";
+      },
       error,
       errorFix: computed(() => {
         console.log(error.value);
@@ -225,6 +240,27 @@ export default defineComponent({
       // Shift key state and methods
       isShiftPressed,
       ItemCategory,
+      isLikelyPriceFixed: computed(() => {
+        // if it isn't filling listings it probably is fine
+        if (groupedResults.value.length <= 15) {
+          return false;
+        }
+        const commonCurrencyPrices = groupedResults.value.filter((res) => {
+          return (
+            // is a common currency
+            /chaos|exalted|divine/i.test(res.priceCurrency) ||
+            // is a common very low value currency (but not enhanced versions)
+            res.priceCurrency === "aug" ||
+            res.priceCurrency === "regal" ||
+            res.priceCurrency === "transmute"
+          );
+        });
+        if (commonCurrencyPrices.length < 5) {
+          return true;
+        }
+
+        return false;
+      }),
     };
   },
 });
