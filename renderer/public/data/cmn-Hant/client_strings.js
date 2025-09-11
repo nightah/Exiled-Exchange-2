@@ -126,5 +126,6 @@ export default {
   GRANTS_SKILL: '賦予技能: ',
   RELOAD_SPEED: '重新裝填時間: ',
   FRACTURED_ITEM: '破裂之物',
-  SANCTIFIED: '聖化的'
+  SANCTIFIED: '聖化的',
+  HYPHEN: '到'
 }

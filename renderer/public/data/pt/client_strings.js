@@ -1,7 +1,7 @@
 // @ts-check
 /** @type{import('../../../src/assets/data/interfaces').TranslationDict} */
 export default {
-  // ItemDisplayStringNormal 
+  // ItemDisplayStringNormal
   RARITY_NORMAL: 'Normal',
   // ItemDisplayStringMagic
   RARITY_MAGIC: 'Mágico',
@@ -226,5 +226,6 @@ export default {
   GRANTS_SKILL: 'Concede Habilidade: ',
   RELOAD_SPEED: 'Tempo de Recarregamento: ',
   FRACTURED_ITEM: 'Item Fixado',
-  SANCTIFIED: 'Santificado'
+  SANCTIFIED: 'Santificado',
+  HYPHEN: '-'
 }

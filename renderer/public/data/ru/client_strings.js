@@ -160,5 +160,6 @@ export default {
   GRANTS_SKILL: 'Дарует умение: ',
   RELOAD_SPEED: 'Время перезарядки: ',
   FRACTURED_ITEM: 'Расколотый предмет',
-  SANCTIFIED: 'Освящено'
+  SANCTIFIED: 'Освящено',
+  HYPHEN: '-'
 }

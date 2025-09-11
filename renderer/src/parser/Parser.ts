@@ -747,7 +747,7 @@ function parseWeapon(section: string[], item: ParsedItem) {
       item.weaponPHYSICAL = getRollOrMinmaxAvg(
         line
           .slice(_$.PHYSICAL_DAMAGE.length)
-          .split("-")
+          .split(_$.HYPHEN)
           .map((str) => parseInt(str, 10)),
       );
       isParsed = "SECTION_PARSED";
@@ -759,7 +759,7 @@ function parseWeapon(section: string[], item: ParsedItem) {
         .split(", ")
         .map((element) =>
           getRollOrMinmaxAvg(
-            element.split("-").map((str) => parseInt(str, 10)),
+            element.split(_$.HYPHEN).map((str) => parseInt(str, 10)),
           ),
         )
         .reduce((sum, x) => sum + x, 0);
@@ -773,7 +773,7 @@ function parseWeapon(section: string[], item: ParsedItem) {
         .split(", ")
         .map((element) =>
           getRollOrMinmaxAvg(
-            element.split("-").map((str) => parseInt(str, 10)),
+            element.split(_$.HYPHEN).map((str) => parseInt(str, 10)),
           ),
         )
         .reduce((sum, x) => sum + x, 0);
@@ -791,7 +791,7 @@ function parseWeapon(section: string[], item: ParsedItem) {
         .split(", ")
         .map((element) =>
           getRollOrMinmaxAvg(
-            element.split("-").map((str) => parseInt(str, 10)),
+            element.split(_$.HYPHEN).map((str) => parseInt(str, 10)),
           ),
         )
         .reduce((sum, x) => sum + x, 0);
@@ -809,7 +809,7 @@ function parseWeapon(section: string[], item: ParsedItem) {
         .split(", ")
         .map((element) =>
           getRollOrMinmaxAvg(
-            element.split("-").map((str) => parseInt(str, 10)),
+            element.split(_$.HYPHEN).map((str) => parseInt(str, 10)),
           ),
         )
         .reduce((sum, x) => sum + x, 0);

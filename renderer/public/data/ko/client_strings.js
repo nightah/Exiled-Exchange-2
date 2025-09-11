@@ -126,5 +126,6 @@ export default {
   GRANTS_SKILL: '스킬 부여: ',
   RELOAD_SPEED: '재장전 시간: ',
   FRACTURED_ITEM: '분열된 아이템',
-  SANCTIFIED: '축성'
+  SANCTIFIED: '축성',
+  HYPHEN: '-'
 }

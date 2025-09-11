@@ -125,5 +125,6 @@ export default {
   GRANTS_SKILL: 'Otorga la habilidad: ',
   RELOAD_SPEED: 'Tiempo de recarga: ',
   FRACTURED_ITEM: 'Objeto fracturado',
-  SANCTIFIED: 'Santificado'
+  SANCTIFIED: 'Santificado',
+  HYPHEN: '-'
 }

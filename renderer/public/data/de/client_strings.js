@@ -126,6 +126,6 @@ export default {
   GRANTS_SKILL: 'Gewährt Fertigkeit: ',
   RELOAD_SPEED: 'Nachladezeit: ',
   FRACTURED_ITEM: 'Brüchiger Gegenstand',
-  SANCTIFIED: 'Geheiligt'
+  SANCTIFIED: 'Geheiligt',
+  HYPHEN: '-'
 }
-

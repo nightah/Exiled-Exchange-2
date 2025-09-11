@@ -126,5 +126,6 @@ export default {
   GRANTS_SKILL: 'スキルを付与: ',
   RELOAD_SPEED: '再装填時間: ',
   FRACTURED_ITEM: 'フラクチャーアイテム',
-  SANCTIFIED: '聖別化'
+  SANCTIFIED: '聖別化',
+  HYPHEN: '-'
 }
