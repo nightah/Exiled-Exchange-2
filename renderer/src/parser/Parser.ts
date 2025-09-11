@@ -926,7 +926,8 @@ export function parseModifiersPoe2(section: string[], item: ParsedItem) {
       line.endsWith(ENCHANT_LINE) ||
       line.endsWith(SCOURGE_LINE) ||
       line.endsWith(RUNE_LINE) ||
-      line.endsWith(ADDED_RUNE_LINE),
+      line.endsWith(ADDED_RUNE_LINE) ||
+      line.endsWith(DESECRATED_LINE),
   );
 
   if (hasEndingTag) {
@@ -941,6 +942,8 @@ export function parseModifiersPoe2(section: string[], item: ParsedItem) {
       modType = ModifierType.AddedRune;
     } else if (hasEndingTag.endsWith(RUNE_LINE)) {
       modType = ModifierType.Rune;
+    } else if (hasEndingTag.endsWith(DESECRATED_LINE)) {
+      modType = ModifierType.Desecrated;
     } else {
       throw new Error("Invalid ending tag");
     }
