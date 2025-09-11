@@ -79,6 +79,11 @@
         class="rounded px-1 bg-yellow-500 text-black ml-1"
         >{{ t("in demand") }}</span
       >
+      <span
+        v-if="!showSeller && result.gone"
+        class="rounded border px-1 border-red-500 text-red-500 ml-1"
+        >{{ t("Gone") }}</span
+      >
     </td>
     <td v-if="showSeller" class="px-2 whitespace-nowrap">
       <span
@@ -93,6 +98,11 @@
         v-if="result.inDemand"
         class="rounded px-1 bg-yellow-500 text-black ml-1"
         >{{ t("in demand") }}</span
+      >
+      <span
+        v-if="!showSeller && result.gone"
+        class="rounded border-2 px-1 border-red-500 text-red-500 ml-1"
+        >{{ t("Gone") }}</span
       >
     </td>
   </tr>
