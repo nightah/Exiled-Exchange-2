@@ -51,6 +51,7 @@ export function createExactStatFilters(
     ModifierType.Fractured,
     ModifierType.Enchant,
     ModifierType.Necropolis,
+    ModifierType.Sanctum,
   ];
 
   if (
