@@ -168,7 +168,8 @@ export function initUiModFilters(
       item.rarity === ItemRarity.Normal ? 100 : opts.searchStatRange,
     statsByType: item.statsByType.map((calc) => {
       if (
-        calc.type === ModifierType.Fractured &&
+        (calc.type === ModifierType.Fractured ||
+          calc.type === ModifierType.Desecrated) &&
         calc.stat.trade.ids[ModifierType.Explicit]
       ) {
         return { ...calc, type: ModifierType.Explicit };
@@ -188,10 +189,16 @@ export function initUiModFilters(
 
   if (itemIsModifiable(item)) {
     ctx.statsByType = ctx.statsByType.filter(
-      (mod) => mod.type !== ModifierType.Fractured,
+      (mod) =>
+        mod.type !== ModifierType.Fractured &&
+        mod.type !== ModifierType.Desecrated,
     );
     ctx.statsByType.push(
-      ...item.statsByType.filter((mod) => mod.type === ModifierType.Fractured),
+      ...item.statsByType.filter(
+        (mod) =>
+          mod.type === ModifierType.Fractured ||
+          mod.type === ModifierType.Desecrated,
+      ),
     );
   }
 
@@ -562,12 +569,15 @@ export function finalFilterTweaks(ctx: FiltersCreationContext) {
   }
 
   for (const filter of ctx.filters) {
-    if (filter.tag === FilterTag.Fractured) {
+    if (
+      filter.tag === FilterTag.Fractured ||
+      filter.tag === FilterTag.Desecrated
+    ) {
       const mod = ctx.item.statsByType.find(
         (mod) => mod.stat.ref === filter.statRef,
       )!;
       if (mod.stat.trade.ids[ModifierType.Explicit]) {
-        // hide only if fractured mod has corresponding explicit variant
+        // hide only if fractured or desecrated mod has corresponding explicit variant
         filter.hidden = "filters.hide_for_crafting";
       }
     }
