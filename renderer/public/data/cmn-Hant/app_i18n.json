@@ -145,7 +145,8 @@
     "weapon_crossbow": "十字弓",
     "weapon_spear": "長鋒",
     "weapon_flail": "鏈錘",
-    "armour_buckler": "輕盾"
+    "armour_buckler": "輕盾",
+    "map_tablet": "Tablet"
   },
   "filters": {
     "selected_some": "已選擇：{0}/{1}，屬性",

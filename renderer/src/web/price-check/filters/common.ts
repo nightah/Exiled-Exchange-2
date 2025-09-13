@@ -12,6 +12,9 @@ export function maxUsefulItemLevel(category: ItemCategory | undefined) {
     [ItemCategory.Staff]: 81,
     [ItemCategory.Spear]: 81,
     [ItemCategory.Relic]: 80,
+    [ItemCategory.Tablet]: 1,
+    [ItemCategory.Jewel]: 1,
+    [ItemCategory.Map]: 1,
   };
 
   const maxUsefulItemLevel = category ? (itemLevelCaps[category] ?? 82) : 82;

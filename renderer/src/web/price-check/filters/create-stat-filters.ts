@@ -76,10 +76,14 @@ export function createExactStatFilters(
   if (item.category === ItemCategory.Flask) {
     keepByType.push(ModifierType.Crafted);
   }
+  let searchInRange = Math.min(2, opts.searchStatRange);
+  if (item.category === ItemCategory.Tablet) {
+    searchInRange = 0;
+  }
 
   const ctx: FiltersCreationContext = {
     item,
-    searchInRange: Math.min(2, opts.searchStatRange),
+    searchInRange,
     filters: [],
     statsByType: statsByType.filter((calc) => keepByType.includes(calc.type)),
   };
@@ -143,7 +147,8 @@ export function createExactStatFilters(
     item.category === ItemCategory.MemoryLine ||
     item.category === ItemCategory.SanctumRelic ||
     item.category === ItemCategory.Charm ||
-    item.category === ItemCategory.Relic
+    item.category === ItemCategory.Relic ||
+    item.category === ItemCategory.Tablet
   ) {
     enableAllFilters(ctx.filters);
   }
@@ -360,6 +365,19 @@ export function calculatedStatToFilter(
   }
 
   if (roll && !filter.option) {
+    // Determine goodness first
+    let goodness: number | undefined;
+    if (calc.stat.better !== StatBetter.NotComparable) {
+      if (roll.min === roll.max) {
+        goodness = 1;
+      } else {
+        goodness = (roll.value - roll.min) / (roll.max - roll.min);
+        if (calc.stat.better === StatBetter.NegativeRoll) {
+          goodness = 1 - goodness;
+        }
+      }
+    }
+
     if (
       (item.rarity === ItemRarity.Magic &&
         (item.isUnmodifiable || !itemIsModifiable(item))) ||
@@ -369,7 +387,8 @@ export function calculatedStatToFilter(
     } else if (
       item.rarity === ItemRarity.Unique ||
       (item.rarity === ItemRarity.Magic &&
-        item.category === ItemCategory.Jewel) ||
+        (item.category === ItemCategory.Jewel ||
+          item.category === ItemCategory.Tablet)) ||
       calc.sources.some(
         ({ modifier }) =>
           modifier.info.tier === 1 &&
@@ -383,18 +402,6 @@ export function calculatedStatToFilter(
           roll.value <= roll.min);
       if (perfectRoll) {
         percent = 0;
-      }
-    }
-
-    let goodness: number | undefined;
-    if (calc.stat.better !== StatBetter.NotComparable) {
-      if (roll.min === roll.max) {
-        goodness = 1;
-      } else {
-        goodness = (roll.value - roll.min) / (roll.max - roll.min);
-        if (calc.stat.better === StatBetter.NegativeRoll) {
-          goodness = 1 - goodness;
-        }
       }
     }
 

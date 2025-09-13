@@ -1196,7 +1196,6 @@ function parseUnneededText(section: string[], item: ParsedItem) {
     item.category !== ItemCategory.Jewel &&
     item.category !== ItemCategory.Relic &&
     item.category !== ItemCategory.Tablet &&
-    item.category !== ItemCategory.TowerAugment &&
     item.info.refName !== "Expedition Logbook" &&
     item.category !== ItemCategory.Sceptre &&
     item.category !== ItemCategory.Wand &&

@@ -145,7 +145,8 @@
     "weapon_crossbow": "クロスボウ",
     "weapon_spear": "槍",
     "weapon_flail": "フレイル",
-    "armour_buckler": "バックラー"
+    "armour_buckler": "バックラー",
+    "map_tablet": "Tablet"
   },
   "filters": {
     "selected_some": "スタット {1}つの内{0}",
