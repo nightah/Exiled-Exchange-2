@@ -703,7 +703,8 @@ function showHasEmptyModifier(
     (mod) =>
       mod.info.type === ModifierType.Explicit ||
       mod.info.type === ModifierType.Fractured ||
-      mod.info.type === ModifierType.Veiled,
+      mod.info.type === ModifierType.Veiled ||
+      mod.info.type === ModifierType.Desecrated,
   );
 
   if (randomMods.length === 5) {
