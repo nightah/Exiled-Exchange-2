@@ -24,7 +24,7 @@ import { applyRules as applyMirroredTabletRules } from "./pseudo/reflection-rule
 import { filterItemProp, filterBasePercentile } from "./pseudo/item-property";
 import { decodeOils, applyAnointmentRules } from "./pseudo/anointments";
 import { StatBetter, CLIENT_STRINGS } from "@/assets/data";
-import { explicitModifierCount, maxUsefulItemLevel } from "./common";
+import { explicitModifierCount } from "./common";
 
 export interface FiltersCreationContext {
   readonly item: ParsedItem;
@@ -589,23 +589,6 @@ export function finalFilterTweaks(ctx: FiltersCreationContext) {
         filter.hidden = "filters.hide_for_crafting";
       }
     }
-  }
-
-  if (
-    item.rarity === ItemRarity.Magic &&
-    itemIsModifiable(item) &&
-    item.itemLevel &&
-    maxUsefulItemLevel(item.category) > item.itemLevel
-  ) {
-    ctx.filters.push({
-      tradeId: ["item.rarity_magic"],
-      text: "Rarity: Magic",
-      statRef: "Rarity: Magic",
-      disabled: true,
-      hidden: "filters.hide_low_ilvl",
-      tag: FilterTag.Pseudo,
-      sources: [],
-    });
   }
 
   if (
