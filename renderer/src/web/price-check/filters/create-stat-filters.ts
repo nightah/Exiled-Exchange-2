@@ -363,7 +363,7 @@ export function calculatedStatToFilter(
     if (
       (item.rarity === ItemRarity.Magic &&
         (item.isUnmodifiable || !itemIsModifiable(item))) ||
-      stat.ref === "Has # Charm Slots"
+      stat.ref === "Has # Charm Slot"
     ) {
       percent = 0;
     } else if (
