@@ -24,7 +24,7 @@ import { applyRules as applyMirroredTabletRules } from "./pseudo/reflection-rule
 import { filterItemProp, filterBasePercentile } from "./pseudo/item-property";
 import { decodeOils, applyAnointmentRules } from "./pseudo/anointments";
 import { StatBetter, CLIENT_STRINGS } from "@/assets/data";
-import { maxUsefulItemLevel } from "./common";
+import { explicitModifierCount, maxUsefulItemLevel } from "./common";
 
 export interface FiltersCreationContext {
   readonly item: ParsedItem;
@@ -673,48 +673,27 @@ function showHasEmptyModifier(
   }
 
   if (item.rarity === ItemRarity.Magic) {
-    const magicRandomMods = item.newMods.filter(
-      (mod) => mod.info.type === ModifierType.Explicit,
-    );
-    if (magicRandomMods.length) {
-      const magicPrefixes = magicRandomMods.filter(
-        (mod) => mod.info.generation === "prefix",
-      ).length;
-      const magicSuffixes = magicRandomMods.filter(
-        (mod) => mod.info.generation === "suffix",
-      ).length;
-      if (magicPrefixes && magicSuffixes) {
-        return false;
-      }
-      if (magicPrefixes > 0) {
-        return ItemHasEmptyModifier.Suffix;
-      } else if (magicSuffixes > 0) {
-        return ItemHasEmptyModifier.Prefix;
-      }
+    const { prefixes: magicPrefixes, suffixes: magicSuffixes } =
+      explicitModifierCount(item);
+    if (magicPrefixes && magicSuffixes) {
       return false;
     }
+    if (magicPrefixes > 0) {
+      return ItemHasEmptyModifier.Suffix;
+    } else if (magicSuffixes > 0) {
+      return ItemHasEmptyModifier.Prefix;
+    }
+    // magic but has no explicit mods (annulled to 0)
+    return false;
   }
 
   if (item.rarity !== ItemRarity.Rare) {
     return false;
   }
 
-  const randomMods = item.newMods.filter(
-    (mod) =>
-      mod.info.type === ModifierType.Explicit ||
-      mod.info.type === ModifierType.Fractured ||
-      mod.info.type === ModifierType.Veiled ||
-      mod.info.type === ModifierType.Desecrated,
-  );
+  const { prefixes, suffixes, total } = explicitModifierCount(item);
 
-  if (randomMods.length === 5) {
-    const prefixes = randomMods.filter(
-      (mod) => mod.info.generation === "prefix",
-    ).length;
-    const suffixes = randomMods.filter(
-      (mod) => mod.info.generation === "suffix",
-    ).length;
-
+  if (total === 5) {
     if (prefixes === 2) return ItemHasEmptyModifier.Prefix;
     if (suffixes === 2) return ItemHasEmptyModifier.Suffix;
   }
