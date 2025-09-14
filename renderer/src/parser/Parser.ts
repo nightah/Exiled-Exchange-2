@@ -1007,15 +1007,6 @@ function parseModifiers(section: string[], item: ParsedItem) {
     for (const { modLine, statLines } of groupLinesByMod(section)) {
       const { modType, lines } = parseModType(statLines);
 
-      // HACK: fix Heart of the Well, can't run `parseModInfoLine` since it's veiled mods are missing a name
-      if (
-        modType === ModifierType.Veiled &&
-        item.info.refName === "Heart of the Well"
-      ) {
-        item.isVeiled = true;
-        return "SECTION_PARSED";
-      }
-
       const modInfo = parseModInfoLine(modLine, modType);
       if (
         item.category === ItemCategory.Relic &&

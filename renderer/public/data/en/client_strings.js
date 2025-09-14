@@ -129,7 +129,7 @@ export default {
   // ItemPopupMirrored
   MIRRORED: 'Mirrored',
   // ModDescriptionLineTier ModDescriptionLineRank ModDescriptionLineLevel
-  MODIFIER_LINE: /^(?<type>[^"]+)(?:\s+"(?<name>[^"]+)")?(?:\s+\(Tier: (?<tier>\d+)\))?(?:\s+\(Rank: (?<rank>\d+)\))?$/,
+  MODIFIER_LINE: /^(?<type>[^"]+)(?:\s+"(?<name>[^"]*)")?(?:\s+\(Tier: (?<tier>\d+)\))?(?:\s+\(Rank: (?<rank>\d+)\))?$/,
   // ModDescriptionLinePrefix
   PREFIX_MODIFIER: 'Prefix Modifier',
   // ModDescriptionLineSuffix

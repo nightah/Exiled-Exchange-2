@@ -67,7 +67,7 @@ export default {
   HEIST_BLUEPRINT_GEMS: '異常なジェム',
   HEIST_BLUEPRINT_REPLICAS: 'レプリカまたは実験アイテム',
   MIRRORED: 'ミラー化',
-  MODIFIER_LINE: /^(?<type>[^"]+)(?:\s+"(?<name>[^"]+)")?(?:\s+\(ティア: (?<tier>\d+)\))?(?:\s+\(ランク: (?<rank>\d+)\))?$/,
+  MODIFIER_LINE: /^(?<type>[^"]+)(?:\s+"(?<name>[^"]*)")?(?:\s+\(ティア: (?<tier>\d+)\))?(?:\s+\(ランク: (?<rank>\d+)\))?$/,
   PREFIX_MODIFIER: 'プリフィックスモッド',
   SUFFIX_MODIFIER: 'サフィックスモッド',
   CRAFTED_PREFIX: 'マスタークラフトされたプリフィックスモッド',
