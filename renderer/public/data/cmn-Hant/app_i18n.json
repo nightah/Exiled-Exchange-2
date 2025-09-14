@@ -307,6 +307,7 @@
     "matched": "匹配：{0}",
     "trade": "交易",
     "price": "價格",
+    "normalized": "N-Price",
     "bulk": "批量",
     "stock": "庫存",
     "fulfill": "組數",

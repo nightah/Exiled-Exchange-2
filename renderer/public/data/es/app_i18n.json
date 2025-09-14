@@ -312,6 +312,7 @@
     "matched": "Coincide: {0}",
     "trade": "Intercambio",
     "price": "Precio",
+    "normalized": "N-Price",
     "bulk": "en lote",
     "stock": "Stock",
     "fulfill": "Cumplir",

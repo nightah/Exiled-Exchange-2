@@ -322,6 +322,7 @@
     "matched": "Найдено: {0}",
     "trade": "Трейд",
     "price": "Цена",
+    "normalized": "N-Price",
     "bulk": "опт",
     "stock": "Запас",
     "fulfill": "Сделки",
