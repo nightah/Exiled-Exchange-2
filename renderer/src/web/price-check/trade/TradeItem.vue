@@ -33,6 +33,15 @@
     <td v-if="item.stackSize" class="px-2 text-right">
       {{ result.stackSize }}
     </td>
+    <td v-else class="px-2 whitespace-nowrap">
+      <span
+        :class="{
+          'line-through': false,
+        }"
+        >{{ result.normalizedPrice }} {{ result.normalizedPriceCurrency }}</span
+      >
+    </td>
+
     <td v-if="itemLevel" class="px-2 whitespace-nowrap text-right">
       {{ result.itemLevel }}
     </td>
