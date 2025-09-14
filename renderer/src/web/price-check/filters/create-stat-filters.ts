@@ -595,7 +595,7 @@ export function finalFilterTweaks(ctx: FiltersCreationContext) {
     item.rarity === ItemRarity.Magic &&
     itemIsModifiable(item) &&
     item.itemLevel &&
-    maxUsefulItemLevel(item.category) > item.itemLevel
+    maxUsefulItemLevel(item.category) - 3 > item.itemLevel
   ) {
     ctx.filters.push({
       tradeId: ["item.rarity_magic"],
