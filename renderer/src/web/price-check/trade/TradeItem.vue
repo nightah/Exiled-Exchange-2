@@ -10,7 +10,19 @@
         :class="{
           'line-through': false,
         }"
-        >{{ result.priceAmount }} {{ result.priceCurrency }}</span
+        >{{ result.priceAmount }} {{ result.priceCurrency
+        }}{{
+          result.priceCurrency !== "exalted" &&
+          result.priceCurrency !== "divine"
+            ? ` (${result.normalizedPrice} ${
+                result.normalizedPriceCurrency === "exalted"
+                  ? "ex"
+                  : result.normalizedPriceCurrency === "chaos"
+                    ? "c"
+                    : result.normalizedPriceCurrency
+              })`
+            : ""
+        }}</span
       >
       <span
         v-if="result.listedTimes > 2"
@@ -32,14 +44,6 @@
     </td> -->
     <td v-if="item.stackSize" class="px-2 text-right">
       {{ result.stackSize }}
-    </td>
-    <td v-else class="px-2 whitespace-nowrap">
-      <span
-        :class="{
-          'line-through': false,
-        }"
-        >{{ result.normalizedPrice }} {{ result.normalizedPriceCurrency }}</span
-      >
     </td>
 
     <td v-if="itemLevel" class="px-2 whitespace-nowrap text-right">

@@ -21,9 +21,6 @@
             <th v-if="item.stackSize" class="trade-table-heading">
               <div class="px-2">{{ t(":stock") }}</div>
             </th>
-            <th v-else class="trade-table-heading">
-              <div class="px-2">{{ t(":normalized") }}</div>
-            </th>
             <th v-if="filters.itemLevel" class="trade-table-heading">
               <div class="px-2">{{ t(":item_level") }}</div>
             </th>

@@ -981,10 +981,22 @@ export async function requestResults(
     const query = getCurrencyDetailsId(
       result.listing.price?.currency ?? "no price",
     );
-    const normalizedPrice = cachedCurrencyByQuery(
-      query,
-      result.listing.price?.amount ?? 0,
-    ) ?? { min: 0, max: 0, currency: "exalted" };
+    const normalizedCurrency =
+      result.listing.price?.currency === "exalted"
+        ? // exalts aren't in db since they are the stable currency
+          {
+            min: result.listing.price.amount,
+            max: result.listing.price.amount,
+            currency: "exalted",
+          }
+        : // otherwise convert to stable
+          (cachedCurrencyByQuery(query, result.listing.price?.amount ?? 0) ?? {
+            min: 0,
+            max: 0,
+            currency: "exalted",
+          });
+    const normalizedPrice = displayRounding(normalizedCurrency.min);
+    const normalizedPriceCurrency = normalizedCurrency.currency;
 
     return {
       id: result.id,
@@ -1005,8 +1017,8 @@ export async function requestResults(
       priceAmount: result.listing.price?.amount ?? 0,
       priceCurrency: result.listing.price?.currency ?? "no price",
       priceCurrencyRank,
-      normalizedPrice: displayRounding(normalizedPrice.min),
-      normalizedPriceCurrency: normalizedPrice.currency,
+      normalizedPrice,
+      normalizedPriceCurrency,
       hasNote: result.item.note != null,
       isMine: result.listing.account.name === opts.accountName,
       isInstantBuyout: result.listing.fee != null,
