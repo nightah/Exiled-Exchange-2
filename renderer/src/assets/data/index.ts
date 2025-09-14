@@ -42,6 +42,8 @@ export let ITEMS_ITERATOR = function* (
 export let ALTQ_GEM_NAMES = function* (): Generator<string> {};
 export let REPLICA_UNIQUE_NAMES = function* (): Generator<string> {};
 
+export let TRADE_TAG_TO_REF = new Map<string, string>();
+
 export let STAT_BY_MATCH_STR = (
   name: string,
 ): { matcher: StatMatcher; stat: Stat } | undefined => undefined;
@@ -181,6 +183,11 @@ async function loadItems(language: string, isTest = false) {
   RUNE_SINGLE_VALUE = await (
     await fetch(`${import.meta.env.BASE_URL}data/rune-single-value.json`)
   ).json();
+
+  TRADE_TAG_TO_REF = new Map<string, string>();
+  for (const item of ITEMS_ITERATOR('"tradeTag":')) {
+    TRADE_TAG_TO_REF.set(item.tradeTag!, item.refName);
+  }
 }
 
 async function loadStats(language: string, isTest = false) {

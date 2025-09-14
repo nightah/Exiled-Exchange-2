@@ -285,6 +285,7 @@
     "matched": "Übereinstimmend: {0}",
     "trade": "Handel",
     "price": "Preis",
+    "normalized": "N-Price",
     "bulk": "Menge",
     "stock": "Lagerbestand",
     "fulfill": "Erfüllen",

@@ -312,6 +312,7 @@
     "matched": "Matched: {0}",
     "trade": "Trade",
     "price": "Price",
+    "normalized": "N-Price",
     "bulk": "bulk",
     "stock": "Stock",
     "fulfill": "Fulfill",

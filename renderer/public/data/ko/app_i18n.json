@@ -304,6 +304,7 @@
     "matched": "매치됨: {0}",
     "trade": "거래소",
     "price": "가격",
+    "normalized": "N-Price",
     "bulk": "갯수",
     "stock": "재고",
     "fulfill": "최대",

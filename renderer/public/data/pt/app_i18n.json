@@ -301,6 +301,7 @@
     "matched": "Correspondência: {0}",
     "trade": "Troca",
     "price": "Preço",
+    "normalized": "N-Price",
     "bulk": "em lote",
     "stock": "Estoque",
     "fulfill": "Cumprir",

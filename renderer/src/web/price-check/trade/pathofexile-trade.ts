@@ -22,6 +22,8 @@ import { RateLimiter } from "./RateLimiter";
 import { ModifierType } from "@/parser/modifiers";
 import { Cache } from "./Cache";
 import { parseAffixStrings } from "@/parser/Parser";
+import { displayRounding, usePoeninja } from "@/web/background/Prices";
+import { getCurrencyDetailsId } from "../trends/getDetailsId";
 
 export const CATEGORY_TO_TRADE_ID = new Map([
   [ItemCategory.Map, "map"],
@@ -293,6 +295,8 @@ export interface PricingResult {
   priceAmount: number;
   priceCurrency: string;
   priceCurrencyRank?: number;
+  normalizedPrice: string;
+  normalizedPriceCurrency: string;
   isMine: boolean;
   hasNote: boolean;
   isInstantBuyout: boolean;
@@ -878,6 +882,7 @@ export async function requestResults(
   opts: { accountName: string },
 ): Promise<PricingResult[]> {
   let data = cache.get<FetchResult[]>(resultIds);
+  const { cachedCurrencyByQuery } = usePoeninja();
 
   if (!data) {
     await RateLimiter.waitMulti(RATE_LIMIT_RULES.FETCH);
@@ -973,6 +978,26 @@ export async function requestResults(
       }
     }
 
+    const query = getCurrencyDetailsId(
+      result.listing.price?.currency ?? "no price",
+    );
+    const normalizedCurrency =
+      result.listing.price?.currency === "exalted"
+        ? // exalts aren't in db since they are the stable currency
+          {
+            min: result.listing.price.amount,
+            max: result.listing.price.amount,
+            currency: "exalted",
+          }
+        : // otherwise convert to stable
+          (cachedCurrencyByQuery(query, result.listing.price?.amount ?? 0) ?? {
+            min: 0,
+            max: 0,
+            currency: "exalted",
+          });
+    const normalizedPrice = displayRounding(normalizedCurrency.min);
+    const normalizedPriceCurrency = normalizedCurrency.currency;
+
     return {
       id: result.id,
       itemLevel:
@@ -992,6 +1017,8 @@ export async function requestResults(
       priceAmount: result.listing.price?.amount ?? 0,
       priceCurrency: result.listing.price?.currency ?? "no price",
       priceCurrencyRank,
+      normalizedPrice,
+      normalizedPriceCurrency,
       hasNote: result.item.note != null,
       isMine: result.listing.account.name === opts.accountName,
       isInstantBuyout: result.listing.fee != null,
