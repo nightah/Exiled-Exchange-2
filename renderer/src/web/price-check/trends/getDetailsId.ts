@@ -8,9 +8,10 @@ import { TRADE_TAG_TO_REF } from "@/assets/data";
 
 export function getCurrencyDetailsId(id: string) {
   if (!TRADE_TAG_TO_REF.has(id)) {
-    return;
+    // setting to not a value to get correct type
+    return { ns: "nan ns", name: "nan item", variant: undefined };
   }
-  const refName = TRADE_TAG_TO_REF.get(id);
+  const refName = TRADE_TAG_TO_REF.get(id)!;
   return {
     ns: "ITEM",
     name: refName,
