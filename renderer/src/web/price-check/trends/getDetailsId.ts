@@ -4,6 +4,19 @@ import {
   floorToBracket,
 } from "../filters/create-item-filters";
 import { ACCESSORY, ARMOUR, WEAPON } from "@/parser/meta";
+import { TRADE_TAG_TO_REF } from "@/assets/data";
+
+export function getCurrencyDetailsId(id: string) {
+  if (!TRADE_TAG_TO_REF.has(id)) {
+    return;
+  }
+  const refName = TRADE_TAG_TO_REF.get(id);
+  return {
+    ns: "ITEM",
+    name: refName,
+    variant: undefined,
+  };
+}
 
 export function isValuableBasetype(item: ParsedItem): boolean {
   if (
