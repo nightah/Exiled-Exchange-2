@@ -293,6 +293,8 @@ export interface PricingResult {
   priceAmount: number;
   priceCurrency: string;
   priceCurrencyRank?: number;
+  normalizedPrice: number;
+  normalizedPriceCurrency: string;
   isMine: boolean;
   hasNote: boolean;
   isInstantBuyout: boolean;
