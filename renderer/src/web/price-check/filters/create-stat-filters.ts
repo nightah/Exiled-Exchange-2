@@ -187,7 +187,9 @@ export function initUiModFilters(
 
   if (item.info.refName !== "Split Personality") {
     filterItemProp(ctx);
-    filterPseudo(ctx);
+    if (item.rarity !== ItemRarity.Unique) {
+      filterPseudo(ctx);
+    }
     if (item.info.refName === "Emperor's Vigilance") {
       filterBasePercentile(ctx);
     }
@@ -553,6 +555,14 @@ export function finalFilterTweaks(ctx: FiltersCreationContext) {
     applyFlaskRules(ctx.filters);
   }
 
+  if (
+    item.rarity === ItemRarity.Unique &&
+    item.info.refName !== "Morior Invictus" &&
+    item.info.refName !== "Darkness Enthroned"
+  ) {
+    hideAllRunes(ctx.filters);
+  }
+
   const hasEmptyModifier = showHasEmptyModifier(ctx);
   if (hasEmptyModifier !== false) {
     ctx.filters.push({
@@ -662,6 +672,15 @@ function applyFlaskRules(filters: StatFilter[]) {
   for (const filter of filters) {
     if (filter.tag === FilterTag.Enchant && !usedEnkindling) {
       filter.hidden = "hide_harvest_and_instilling";
+      filter.disabled = true;
+    }
+  }
+}
+
+function hideAllRunes(filters: StatFilter[]) {
+  for (const filter of filters) {
+    if (filter.tag === FilterTag.Rune || filter.tag === FilterTag.AddedRune) {
+      filter.hidden = "filters.hide_const_roll";
       filter.disabled = true;
     }
   }
