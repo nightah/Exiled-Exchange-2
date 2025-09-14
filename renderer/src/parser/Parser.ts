@@ -622,8 +622,11 @@ function parseStackSize(section: string[], item: ParsedItem) {
 }
 
 function parseRuneSockets(section: string[], item: ParsedItem) {
-  const categoryMax = getMaxSockets(item.category);
-  const armourOrWeapon = categoryMax && isArmourOrWeaponOrCaster(item.category);
+  const categoryMax = getMaxSockets(item);
+  const armourOrWeapon =
+    categoryMax &&
+    (isArmourOrWeaponOrCaster(item.category) ||
+      item.info.refName === "Darkness Enthroned");
   if (!armourOrWeapon) return "PARSER_SKIPPED";
   if (section[0].startsWith(_$.SOCKETS)) {
     const sockets = section[0].slice(_$.SOCKETS.length).trimEnd();
@@ -1594,7 +1597,12 @@ export function parseAffixStrings(clipboard: string): string {
     return part2 || part1;
   });
 }
-function getMaxSockets(category: ItemCategory | undefined) {
+function getMaxSockets(item: ParsedItem) {
+  if (item.info.refName === "Darkness Enthroned") {
+    return 2;
+  }
+
+  const { category } = item;
   switch (category) {
     case ItemCategory.BodyArmour:
     case ItemCategory.TwoHandedAxe:
