@@ -32,7 +32,13 @@ export function sumStatsByModType(
         out.some(
           (merged) =>
             merged.stat.ref === statA.stat.ref &&
-            merged.type === modA.info.type,
+            merged.type === modA.info.type &&
+            // Multiple allocations should not be merged
+            (statA.stat.ref !== "Allocates #" ||
+              merged.sources.some(
+                (src) =>
+                  src.stat.translation.string === statA.translation.string,
+              )),
         )
       ) {
         continue;
@@ -42,7 +48,10 @@ export function sumStatsByModType(
         (filtered, modB) => {
           if (modB.info.type === modA.info.type) {
             const targetStat = modB.stats.find(
-              (statB) => statB.stat.ref === statA.stat.ref,
+              (statB) =>
+                statB.stat.ref === statA.stat.ref &&
+                (statA.stat.ref !== "Allocates #" ||
+                  statB.translation.string === statA.translation.string),
             );
             if (targetStat) {
               const roll = (applyIncr(modB.info, targetStat) ?? targetStat)
