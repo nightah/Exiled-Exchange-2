@@ -622,8 +622,11 @@ function parseStackSize(section: string[], item: ParsedItem) {
 }
 
 function parseRuneSockets(section: string[], item: ParsedItem) {
-  const categoryMax = getMaxSockets(item.category);
-  const armourOrWeapon = categoryMax && isArmourOrWeaponOrCaster(item.category);
+  const categoryMax = getMaxSockets(item);
+  const armourOrWeapon =
+    categoryMax &&
+    (isArmourOrWeaponOrCaster(item.category) ||
+      item.info.refName === "Darkness Enthroned");
   if (!armourOrWeapon) return "PARSER_SKIPPED";
   if (section[0].startsWith(_$.SOCKETS)) {
     const sockets = section[0].slice(_$.SOCKETS.length).trimEnd();
@@ -747,7 +750,7 @@ function parseWeapon(section: string[], item: ParsedItem) {
       item.weaponPHYSICAL = getRollOrMinmaxAvg(
         line
           .slice(_$.PHYSICAL_DAMAGE.length)
-          .split("-")
+          .split(_$.HYPHEN)
           .map((str) => parseInt(str, 10)),
       );
       isParsed = "SECTION_PARSED";
@@ -759,7 +762,7 @@ function parseWeapon(section: string[], item: ParsedItem) {
         .split(", ")
         .map((element) =>
           getRollOrMinmaxAvg(
-            element.split("-").map((str) => parseInt(str, 10)),
+            element.split(_$.HYPHEN).map((str) => parseInt(str, 10)),
           ),
         )
         .reduce((sum, x) => sum + x, 0);
@@ -773,7 +776,7 @@ function parseWeapon(section: string[], item: ParsedItem) {
         .split(", ")
         .map((element) =>
           getRollOrMinmaxAvg(
-            element.split("-").map((str) => parseInt(str, 10)),
+            element.split(_$.HYPHEN).map((str) => parseInt(str, 10)),
           ),
         )
         .reduce((sum, x) => sum + x, 0);
@@ -791,7 +794,7 @@ function parseWeapon(section: string[], item: ParsedItem) {
         .split(", ")
         .map((element) =>
           getRollOrMinmaxAvg(
-            element.split("-").map((str) => parseInt(str, 10)),
+            element.split(_$.HYPHEN).map((str) => parseInt(str, 10)),
           ),
         )
         .reduce((sum, x) => sum + x, 0);
@@ -809,7 +812,7 @@ function parseWeapon(section: string[], item: ParsedItem) {
         .split(", ")
         .map((element) =>
           getRollOrMinmaxAvg(
-            element.split("-").map((str) => parseInt(str, 10)),
+            element.split(_$.HYPHEN).map((str) => parseInt(str, 10)),
           ),
         )
         .reduce((sum, x) => sum + x, 0);
@@ -926,7 +929,8 @@ export function parseModifiersPoe2(section: string[], item: ParsedItem) {
       line.endsWith(ENCHANT_LINE) ||
       line.endsWith(SCOURGE_LINE) ||
       line.endsWith(RUNE_LINE) ||
-      line.endsWith(ADDED_RUNE_LINE),
+      line.endsWith(ADDED_RUNE_LINE) ||
+      line.endsWith(DESECRATED_LINE),
   );
 
   if (hasEndingTag) {
@@ -941,6 +945,8 @@ export function parseModifiersPoe2(section: string[], item: ParsedItem) {
       modType = ModifierType.AddedRune;
     } else if (hasEndingTag.endsWith(RUNE_LINE)) {
       modType = ModifierType.Rune;
+    } else if (hasEndingTag.endsWith(DESECRATED_LINE)) {
+      modType = ModifierType.Desecrated;
     } else {
       throw new Error("Invalid ending tag");
     }
@@ -1000,15 +1006,6 @@ function parseModifiers(section: string[], item: ParsedItem) {
   if (isModInfoLine(recognizedLine)) {
     for (const { modLine, statLines } of groupLinesByMod(section)) {
       const { modType, lines } = parseModType(statLines);
-
-      // HACK: fix Heart of the Well, can't run `parseModInfoLine` since it's veiled mods are missing a name
-      if (
-        modType === ModifierType.Veiled &&
-        item.info.refName === "Heart of the Well"
-      ) {
-        item.isVeiled = true;
-        return "SECTION_PARSED";
-      }
 
       const modInfo = parseModInfoLine(modLine, modType);
       if (
@@ -1193,7 +1190,6 @@ function parseUnneededText(section: string[], item: ParsedItem) {
     item.category !== ItemCategory.Jewel &&
     item.category !== ItemCategory.Relic &&
     item.category !== ItemCategory.Tablet &&
-    item.category !== ItemCategory.TowerAugment &&
     item.info.refName !== "Expedition Logbook" &&
     item.category !== ItemCategory.Sceptre &&
     item.category !== ItemCategory.Wand &&
@@ -1480,6 +1476,10 @@ function parseStatsFromMod(
   const statIterator = linesToStatStrings(lines);
   let stat = statIterator.next();
   while (!stat.done) {
+    if (item.info.refName === "From Nothing") {
+      stat.value.string = stat.value.string.replace("()", "");
+    }
+
     const parsedStat = tryParseTranslation(stat.value, modifier.info.type);
     if (parsedStat) {
       modifier.stats.push(parsedStat);
@@ -1592,7 +1592,12 @@ export function parseAffixStrings(clipboard: string): string {
     return part2 || part1;
   });
 }
-function getMaxSockets(category: ItemCategory | undefined) {
+export function getMaxSockets(item: ParsedItem) {
+  if (item.info.refName === "Darkness Enthroned") {
+    return 2;
+  }
+
+  const { category } = item;
   switch (category) {
     case ItemCategory.BodyArmour:
     case ItemCategory.TwoHandedAxe:

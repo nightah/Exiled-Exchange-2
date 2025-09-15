@@ -146,7 +146,8 @@
     "armour_focus": "Fokus",
     "weapon_spear": "Speer",
     "weapon_flail": "Flegel",
-    "armour_buckler": "Faustschild"
+    "armour_buckler": "Faustschild",
+    "map_tablet": "Tablet"
   },
   "filters": {
     "selected_some": "{0} von {1}, Werte",
@@ -284,6 +285,7 @@
     "matched": "Übereinstimmend: {0}",
     "trade": "Handel",
     "price": "Preis",
+    "normalized": "N-Price",
     "bulk": "Menge",
     "stock": "Lagerbestand",
     "fulfill": "Erfüllen",

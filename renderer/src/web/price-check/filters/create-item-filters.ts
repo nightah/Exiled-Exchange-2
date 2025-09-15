@@ -298,6 +298,8 @@ export function createFilters(
 
   if (
     !item.isUnmodifiable &&
+    // Ignore tablet since only corrupted are rares, and we want to compare to them
+    item.category !== ItemCategory.Tablet &&
     (item.rarity === ItemRarity.Normal ||
       item.rarity === ItemRarity.Magic ||
       item.rarity === ItemRarity.Rare ||
@@ -318,7 +320,12 @@ export function createFilters(
     filters.rarity = {
       value: "normal",
     };
-  } else if (item.rarity === ItemRarity.Magic && opts.exact) {
+  } else if (
+    item.rarity === ItemRarity.Magic &&
+    opts.exact &&
+    // Ignore tablet since they should be compared to rare ones
+    item.category !== ItemCategory.Tablet
+  ) {
     filters.rarity = {
       value: "magic",
     };
@@ -357,10 +364,9 @@ export function createFilters(
 
   if (item.itemLevel) {
     if (
+      maxUsefulItemLevel(item.category) !== 1 &&
       item.rarity !== ItemRarity.Unique &&
       item.category !== ItemCategory.Map &&
-      item.category !==
-        ItemCategory.Jewel /* https://pathofexile.gamepedia.com/Jewel#Affixes */ &&
       item.category !== ItemCategory.HeistBlueprint &&
       item.category !== ItemCategory.HeistContract &&
       item.category !== ItemCategory.MemoryLine &&

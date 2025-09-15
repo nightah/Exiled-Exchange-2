@@ -64,7 +64,7 @@ export default {
   HEIST_BLUEPRINT_GEMS: '도둑의 장신구 또는 화폐',
   HEIST_BLUEPRINT_REPLICAS: '모조품 또는 실험적 아이템',
   MIRRORED: '복제',
-  MODIFIER_LINE: /^(?<type>[^"]+)(?:\s+"(?<name>[^"]+)")?(?:\s+\(등급: (?<tier>\d+)\))?(?:\s+\(단계: (?<rank>\d+)\))?$/,
+  MODIFIER_LINE: /^(?<type>[^"]+)(?:\s+"(?<name>[^"]*)")?(?:\s+\(등급: (?<tier>\d+)\))?(?:\s+\(단계: (?<rank>\d+)\))?$/,
   PREFIX_MODIFIER: '접두어 속성 부여',
   SUFFIX_MODIFIER: '접미어 속성 부여',
   CRAFTED_PREFIX: '대가의 제작 접두어 속성 부여',
@@ -126,5 +126,6 @@ export default {
   GRANTS_SKILL: '스킬 부여: ',
   RELOAD_SPEED: '재장전 시간: ',
   FRACTURED_ITEM: '분열된 아이템',
-  SANCTIFIED: '축성'
+  SANCTIFIED: '축성',
+  HYPHEN: '-'
 }

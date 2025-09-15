@@ -140,7 +140,8 @@
     "armour_focus": "Foco",
     "weapon_spear": "Lança",
     "weapon_flail": "Mangual",
-    "armour_buckler": "Broquel"
+    "armour_buckler": "Broquel",
+    "map_tablet": "Tablet"
   },
   "filters": {
     "selected_some": "{0} de {1}, estatísticas",
@@ -300,6 +301,7 @@
     "matched": "Correspondência: {0}",
     "trade": "Troca",
     "price": "Preço",
+    "normalized": "N-Price",
     "bulk": "em lote",
     "stock": "Estoque",
     "fulfill": "Cumprir",

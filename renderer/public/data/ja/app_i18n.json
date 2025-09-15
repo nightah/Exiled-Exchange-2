@@ -145,7 +145,8 @@
     "weapon_crossbow": "クロスボウ",
     "weapon_spear": "槍",
     "weapon_flail": "フレイル",
-    "armour_buckler": "バックラー"
+    "armour_buckler": "バックラー",
+    "map_tablet": "Tablet"
   },
   "filters": {
     "selected_some": "スタット {1}つの内{0}",
@@ -306,6 +307,7 @@
     "matched": "一致: {0}",
     "trade": "トレード",
     "price": "価格",
+    "normalized": "N-Price",
     "bulk": "一括",
     "stock": "在庫",
     "fulfill": "充足",

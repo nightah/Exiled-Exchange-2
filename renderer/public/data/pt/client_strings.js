@@ -1,7 +1,7 @@
 // @ts-check
 /** @type{import('../../../src/assets/data/interfaces').TranslationDict} */
 export default {
-  // ItemDisplayStringNormal 
+  // ItemDisplayStringNormal
   RARITY_NORMAL: 'Normal',
   // ItemDisplayStringMagic
   RARITY_MAGIC: 'Mágico',
@@ -129,7 +129,7 @@ export default {
   // ItemPopupMirrored
   MIRRORED: 'Espelhado',
   // ModDescriptionLineTier ModDescriptionLineRank ModDescriptionLineLevel
-  MODIFIER_LINE: /^(?<type>[^"]+)(?:\s+"(?<name>[^"]+)")?(?:\s*\(Tier: (?<tier>\d+)\))?(?:\s*\(Rank: (?<rank>\d+)\))?$/,
+  MODIFIER_LINE: /^(?<type>[^"]+)(?:\s+"(?<name>[^"]*)")?(?:\s*\(Tier: (?<tier>\d+)\))?(?:\s*\(Rank: (?<rank>\d+)\))?$/,
   // ModDescriptionLinePrefix
   PREFIX_MODIFIER: 'Mod Prefixo',
   // ModDescriptionLineSuffix
@@ -226,5 +226,6 @@ export default {
   GRANTS_SKILL: 'Concede Habilidade: ',
   RELOAD_SPEED: 'Tempo de Recarregamento: ',
   FRACTURED_ITEM: 'Item Fixado',
-  SANCTIFIED: 'Santificado'
+  SANCTIFIED: 'Santificado',
+  HYPHEN: '-'
 }

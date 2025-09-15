@@ -161,7 +161,8 @@
     "weapon_crossbow": "Арбалет",
     "weapon_spear": "Копьё",
     "weapon_flail": "Кистень",
-    "armour_buckler": "Баклер"
+    "armour_buckler": "Баклер",
+    "map_tablet": "Tablet"
   },
   "filters": {
     "selected_some": "Св-ва: {0} из {1}",
@@ -321,6 +322,7 @@
     "matched": "Найдено: {0}",
     "trade": "Трейд",
     "price": "Цена",
+    "normalized": "N-Price",
     "bulk": "опт",
     "stock": "Запас",
     "fulfill": "Сделки",

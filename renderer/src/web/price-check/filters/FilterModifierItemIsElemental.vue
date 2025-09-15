@@ -8,6 +8,7 @@
         $style[`type-${option.tag}`],
       ]"
       @click="option.select"
+      @contextmenu.prevent="option.context"
       type="button"
     >
       {{ t(option.text) }}
@@ -41,6 +42,18 @@ export default defineComponent({
         filter.additionalInfo[INTERNAL_TRADE_IDS[12 + value]];
       filter.roll = selectedRoll;
     }
+    function selectRightClick(value: ItemIsElementalModifier) {
+      const { filter } = props;
+      filter.option!.value = value;
+      filter.disabled = false;
+      if (!filter.additionalInfo) return;
+      const selectedRoll =
+        filter.additionalInfo[INTERNAL_TRADE_IDS[12 + value]];
+      // User is telling us they only want to block other elemental types
+      selectedRoll.min = "";
+      selectedRoll.max = "";
+      filter.roll = selectedRoll;
+    }
 
     const options = computed(() => {
       const { filter } = props;
@@ -64,6 +77,7 @@ export default defineComponent({
         .map(([value, text, tag]) => ({
           text,
           select: () => select(value),
+          context: () => selectRightClick(value),
           isSelected: filter.option!.value === value,
           tag,
         }));

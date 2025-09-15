@@ -233,6 +233,7 @@ export interface TranslationDict {
   RELOAD_SPEED: string;
   FRACTURED_ITEM: string;
   SANCTIFIED: string;
+  HYPHEN: string;
 }
 
 export interface Filter {

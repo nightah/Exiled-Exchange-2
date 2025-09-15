@@ -142,7 +142,8 @@
     "weapon_crossbow": "석궁",
     "weapon_spear": "창",
     "weapon_flail": "도리깨",
-    "armour_buckler": "버클러"
+    "armour_buckler": "버클러",
+    "map_tablet": "Tablet"
   },
   "filters": {
     "selected_some": "{1} 중 {0}개 선택",
@@ -303,6 +304,7 @@
     "matched": "매치됨: {0}",
     "trade": "거래소",
     "price": "가격",
+    "normalized": "N-Price",
     "bulk": "갯수",
     "stock": "재고",
     "fulfill": "최대",

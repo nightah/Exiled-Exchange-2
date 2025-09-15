@@ -64,7 +64,7 @@ export default {
   HEIST_BLUEPRINT_GEMS: '不尋常寶石',
   HEIST_BLUEPRINT_REPLICAS: '贗品或實驗性物品',
   MIRRORED: '已複製',
-  MODIFIER_LINE: /^(?<type>[^"]+)(?:\s+"(?<name>[^"]+)")?(?:\s*\(階層：(?<tier>\d+)\))?(?:\s*\(階級：(?<rank>\d+)\))?$/,
+  MODIFIER_LINE: /^(?<type>[^"]+)(?:\s+"(?<name>[^"]*)")?(?:\s*\(階層：(?<tier>\d+)\))?(?:\s*\(階級：(?<rank>\d+)\))?$/,
   PREFIX_MODIFIER: '前綴',
   SUFFIX_MODIFIER: '後綴',
   CRAFTED_PREFIX: '大師工藝前綴',
@@ -126,5 +126,6 @@ export default {
   GRANTS_SKILL: '賦予技能: ',
   RELOAD_SPEED: '重新裝填時間: ',
   FRACTURED_ITEM: '破裂之物',
-  SANCTIFIED: '聖化的'
+  SANCTIFIED: '聖化的',
+  HYPHEN: '到'
 }

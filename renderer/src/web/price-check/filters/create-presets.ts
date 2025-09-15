@@ -42,7 +42,7 @@ export function createPresets(
     item.rarity === ItemRarity.Normal ||
     (item.category === ItemCategory.Flask &&
       item.rarity !== ItemRarity.Unique) ||
-    (item.category === ItemCategory.SanctumRelic &&
+    (item.category === ItemCategory.Relic &&
       item.rarity !== ItemRarity.Unique) ||
     item.category === ItemCategory.Tincture ||
     item.category === ItemCategory.Map ||

@@ -33,7 +33,7 @@ export class OverlayWindow {
 
     if (process.argv.includes("--no-overlay")) return;
 
-    this.window = new BrowserWindow({
+    const windowOpts: Electron.BrowserWindowConstructorOptions = {
       icon: path.join(__dirname, process.env.STATIC!, "icon.png"),
       ...OVERLAY_WINDOW_OPTS,
       width: 800,
@@ -43,7 +43,16 @@ export class OverlayWindow {
         webviewTag: true,
         spellcheck: false,
       },
-    });
+    };
+
+    // Linux/X11: Special window configuration
+    if (process.platform === "linux") {
+      windowOpts.skipTaskbar = true;
+      windowOpts.focusable = true;
+      windowOpts.type = "notification"; // Best balance of focus handling and stability
+    }
+
+    this.window = new BrowserWindow(windowOpts);
 
     this.window.setMenu(
       Menu.buildFromTemplate([
@@ -63,6 +72,12 @@ export class OverlayWindow {
 
     this.window.webContents.setWindowOpenHandler((details) => {
       shell.openExternal(details.url);
+      // Linux: Return focus to game after external link
+      if (process.platform === "linux") {
+        setTimeout(() => {
+          OverlayController.focusTarget();
+        }, 100);
+      }
       return { action: "deny" };
     });
   }
@@ -87,6 +102,11 @@ export class OverlayWindow {
   assertOverlayActive = () => {
     if (!this.isInteractable) {
       this.isInteractable = true;
+      // Linux needs explicit focus management
+      if (process.platform === "linux" && this.window) {
+        this.window.setFocusable(true);
+        this.window.focus();
+      }
       OverlayController.activateOverlay();
       this.poeWindow.isActive = false;
     }
@@ -95,6 +115,10 @@ export class OverlayWindow {
   assertGameActive = () => {
     if (this.isInteractable) {
       this.isInteractable = false;
+      // Linux needs to release focus explicitly
+      if (process.platform === "linux" && this.window) {
+        this.window.setFocusable(false);
+      }
       OverlayController.focusTarget();
       this.poeWindow.isActive = true;
     }

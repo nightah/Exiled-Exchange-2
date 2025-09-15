@@ -18,6 +18,7 @@ export interface ParsedStat {
     value: number;
     min: number;
     max: number;
+    option?: number;
   };
   fromAddedRune?: BaseType;
 }
@@ -233,6 +234,7 @@ export function tryParseTranslation(
           value: number;
           min: number;
           max: number;
+          option?: number;
         }
       | undefined = combination.values.length
       ? {
@@ -248,6 +250,7 @@ export function tryParseTranslation(
           max: getRollOrMinmaxAvg(
             combination.values.map((stat) => stat.bounds?.max ?? stat.roll),
           ),
+          option: found.matcher.value,
         }
       : undefined;
 

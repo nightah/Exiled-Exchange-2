@@ -38,6 +38,11 @@ export const usePoeninja = createGlobalState(() => {
   let downloadController: AbortController | undefined;
   let lastInterestTime = 0;
 
+  let priceCache = new Map<
+    { ns: string; name: string; count: number },
+    CurrencyValue
+  >();
+
   async function load(force: boolean = false) {
     const league = leagues.selected.value;
     if (
@@ -80,6 +85,13 @@ export const usePoeninja = createGlobalState(() => {
       if (divine && divine.exalted >= 30) {
         xchgRate.value = divine.exalted;
       }
+
+      // Clear cache
+      priceCache = new Map<
+        { ns: string; name: string; count: number },
+        CurrencyValue
+      >();
+
       lastUpdateTime = Date.now();
     } finally {
       isLoading.value = false;
@@ -161,6 +173,21 @@ export const usePoeninja = createGlobalState(() => {
     return count / (xchgRate.value || 9999);
   }
 
+  function cachedCurrencyByQuery(query: DbQuery, count: number) {
+    const key = { ns: query.ns, name: query.name, count };
+    if (priceCache.has(key)) {
+      return priceCache.get(key)!;
+    }
+
+    const price = findPriceByQuery(query);
+    if (!price) {
+      return;
+    }
+    const currency = autoCurrency(price.exalted * count);
+    priceCache.set(key, currency);
+    return currency;
+  }
+
   setInterval(() => {
     load();
   }, RETRY_INTERVAL_MS);
@@ -176,6 +203,7 @@ export const usePoeninja = createGlobalState(() => {
     findPriceByQuery,
     autoCurrency,
     queuePricesFetch,
+    cachedCurrencyByQuery,
     initialLoading: () => isLoading.value && !PRICES_DB.length,
   };
 });

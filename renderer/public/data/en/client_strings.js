@@ -1,7 +1,7 @@
 // @ts-check
 /** @type{import('../../../src/assets/data/interfaces').TranslationDict} */
 export default {
-  // ItemDisplayStringNormal 
+  // ItemDisplayStringNormal
   RARITY_NORMAL: 'Normal',
   // ItemDisplayStringMagic
   RARITY_MAGIC: 'Magic',
@@ -129,7 +129,7 @@ export default {
   // ItemPopupMirrored
   MIRRORED: 'Mirrored',
   // ModDescriptionLineTier ModDescriptionLineRank ModDescriptionLineLevel
-  MODIFIER_LINE: /^(?<type>[^"]+)(?:\s+"(?<name>[^"]+)")?(?:\s+\(Tier: (?<tier>\d+)\))?(?:\s+\(Rank: (?<rank>\d+)\))?$/,
+  MODIFIER_LINE: /^(?<type>[^"]+)(?:\s+"(?<name>[^"]*)")?(?:\s+\(Tier: (?<tier>\d+)\))?(?:\s+\(Rank: (?<rank>\d+)\))?$/,
   // ModDescriptionLinePrefix
   PREFIX_MODIFIER: 'Prefix Modifier',
   // ModDescriptionLineSuffix
@@ -229,5 +229,7 @@ export default {
   // ItemPopupFracturedItem
   FRACTURED_ITEM: 'Fractured Item',
   // ItemPopupSanctified
-  SANCTIFIED: 'Sanctified'
+  SANCTIFIED: 'Sanctified',
+  // ItemDisplayWeaponDamageRange
+  HYPHEN: '-'
 }

@@ -19,6 +19,7 @@ export interface StatRoll {
   value: number;
   min: number;
   max: number;
+  option?: number;
 }
 
 export function sumStatsByModType(
@@ -32,7 +33,13 @@ export function sumStatsByModType(
         out.some(
           (merged) =>
             merged.stat.ref === statA.stat.ref &&
-            merged.type === modA.info.type,
+            merged.type === modA.info.type &&
+            // Multiple allocations should not be merged
+            (statA.stat.ref !== "Allocates #" ||
+              merged.sources.some(
+                (src) =>
+                  src.stat.translation.string === statA.translation.string,
+              )),
         )
       ) {
         continue;
@@ -42,7 +49,10 @@ export function sumStatsByModType(
         (filtered, modB) => {
           if (modB.info.type === modA.info.type) {
             const targetStat = modB.stats.find(
-              (statB) => statB.stat.ref === statA.stat.ref,
+              (statB) =>
+                statB.stat.ref === statA.stat.ref &&
+                (statA.stat.ref !== "Allocates #" ||
+                  statB.translation.string === statA.translation.string),
             );
             if (targetStat) {
               const roll = (applyIncr(modB.info, targetStat) ?? targetStat)
@@ -54,6 +64,7 @@ export function sumStatsByModType(
                   value: roll.value,
                   min: roll.min,
                   max: roll.max,
+                  option: roll.option,
                 },
               });
             }
@@ -102,7 +113,11 @@ export function translateStatWithRoll(
   if (!roll) {
     translation = matchers.find((m) => m.value == null) ?? matchers[0];
   } else {
-    translation = matchers.find((m) => m.value === roll.value);
+    if (roll.option) {
+      translation = matchers.find((m) => m.value === roll.option);
+    } else {
+      translation = matchers.find((m) => m.value === roll.value);
+    }
     if (!translation) {
       // TODO: for some stats reduced is better (m.negate === true)
       const sameSign = Math.sign(roll.min) === Math.sign(roll.max);

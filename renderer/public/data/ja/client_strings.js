@@ -67,7 +67,7 @@ export default {
   HEIST_BLUEPRINT_GEMS: '異常なジェム',
   HEIST_BLUEPRINT_REPLICAS: 'レプリカまたは実験アイテム',
   MIRRORED: 'ミラー化',
-  MODIFIER_LINE: /^(?<type>[^"]+)(?:\s+"(?<name>[^"]+)")?(?:\s+\(ティア: (?<tier>\d+)\))?(?:\s+\(ランク: (?<rank>\d+)\))?$/,
+  MODIFIER_LINE: /^(?<type>[^"]+)(?:\s+"(?<name>[^"]*)")?(?:\s+\(ティア: (?<tier>\d+)\))?(?:\s+\(ランク: (?<rank>\d+)\))?$/,
   PREFIX_MODIFIER: 'プリフィックスモッド',
   SUFFIX_MODIFIER: 'サフィックスモッド',
   CRAFTED_PREFIX: 'マスタークラフトされたプリフィックスモッド',
@@ -126,5 +126,6 @@ export default {
   GRANTS_SKILL: 'スキルを付与: ',
   RELOAD_SPEED: '再装填時間: ',
   FRACTURED_ITEM: 'フラクチャーアイテム',
-  SANCTIFIED: '聖別化'
+  SANCTIFIED: '聖別化',
+  HYPHEN: '-'
 }

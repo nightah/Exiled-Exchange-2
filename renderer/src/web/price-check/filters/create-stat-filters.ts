@@ -24,7 +24,8 @@ import { applyRules as applyMirroredTabletRules } from "./pseudo/reflection-rule
 import { filterItemProp, filterBasePercentile } from "./pseudo/item-property";
 import { decodeOils, applyAnointmentRules } from "./pseudo/anointments";
 import { StatBetter, CLIENT_STRINGS } from "@/assets/data";
-import { maxUsefulItemLevel } from "./common";
+import { explicitModifierCount, maxUsefulItemLevel } from "./common";
+import { getMaxSockets } from "@/parser/Parser";
 
 export interface FiltersCreationContext {
   readonly item: ParsedItem;
@@ -51,6 +52,7 @@ export function createExactStatFilters(
     ModifierType.Fractured,
     ModifierType.Enchant,
     ModifierType.Necropolis,
+    ModifierType.Sanctum,
   ];
 
   if (
@@ -75,10 +77,14 @@ export function createExactStatFilters(
   if (item.category === ItemCategory.Flask) {
     keepByType.push(ModifierType.Crafted);
   }
+  let searchInRange = Math.min(2, opts.searchStatRange);
+  if (item.category === ItemCategory.Tablet) {
+    searchInRange = 0;
+  }
 
   const ctx: FiltersCreationContext = {
     item,
-    searchInRange: Math.min(2, opts.searchStatRange),
+    searchInRange,
     filters: [],
     statsByType: statsByType.filter((calc) => keepByType.includes(calc.type)),
   };
@@ -142,7 +148,8 @@ export function createExactStatFilters(
     item.category === ItemCategory.MemoryLine ||
     item.category === ItemCategory.SanctumRelic ||
     item.category === ItemCategory.Charm ||
-    item.category === ItemCategory.Relic
+    item.category === ItemCategory.Relic ||
+    item.category === ItemCategory.Tablet
   ) {
     enableAllFilters(ctx.filters);
   }
@@ -181,7 +188,10 @@ export function initUiModFilters(
 
   if (item.info.refName !== "Split Personality") {
     filterItemProp(ctx);
-    filterPseudo(ctx);
+    // TODO: see if there are other options here, don't want to include trade site uniques with random runes
+    if (item.rarity !== ItemRarity.Unique || !getMaxSockets(item)) {
+      filterPseudo(ctx);
+    }
     if (item.info.refName === "Emperor's Vigilance") {
       filterBasePercentile(ctx);
     }
@@ -275,6 +285,13 @@ export function calculatedStatToFilter(
 ): StatFilter {
   const { stat, sources, type } = calc;
   let filter: StatFilter;
+
+  const roll = statSourcesTotal(
+    calc.sources,
+    item.info.refName === "Mirrored Tablet" ? "max" : "sum",
+  );
+  const translation = translateStatWithRoll(calc, roll);
+
   if (stat.trade.option) {
     filter = {
       tradeId:
@@ -282,23 +299,20 @@ export function calculatedStatToFilter(
           type === ModifierType.AddedRune ? ModifierType.Rune : type
         ],
       statRef: stat.ref,
-      text: sources[0].stat.translation.string,
+      text:
+        roll?.option === roll?.value
+          ? sources[0].stat.translation.string
+          : translation.string,
       tag:
         type === ModifierType.Enchant ? FilterTag.Enchant : FilterTag.Variant,
       oils: decodeOils(calc),
       sources,
       option: {
-        value: sources[0].contributes!.value,
+        value: sources[0].contributes!.option!,
       },
       disabled: false,
     };
   }
-
-  const roll = statSourcesTotal(
-    calc.sources,
-    item.info.refName === "Mirrored Tablet" ? "max" : "sum",
-  );
-  const translation = translateStatWithRoll(calc, roll);
 
   filter ??= {
     tradeId:
@@ -358,17 +372,31 @@ export function calculatedStatToFilter(
     }
   }
 
-  if (roll && !filter.option) {
+  if (roll && (!filter.option || roll.option !== roll.value)) {
+    // Determine goodness first
+    let goodness: number | undefined;
+    if (calc.stat.better !== StatBetter.NotComparable) {
+      if (roll.min === roll.max) {
+        goodness = 1;
+      } else {
+        goodness = (roll.value - roll.min) / (roll.max - roll.min);
+        if (calc.stat.better === StatBetter.NegativeRoll) {
+          goodness = 1 - goodness;
+        }
+      }
+    }
+
     if (
       (item.rarity === ItemRarity.Magic &&
         (item.isUnmodifiable || !itemIsModifiable(item))) ||
-      stat.ref === "Has # Charm Slots"
+      stat.ref === "Has # Charm Slot"
     ) {
       percent = 0;
     } else if (
       item.rarity === ItemRarity.Unique ||
       (item.rarity === ItemRarity.Magic &&
-        item.category === ItemCategory.Jewel) ||
+        (item.category === ItemCategory.Jewel ||
+          item.category === ItemCategory.Tablet)) ||
       calc.sources.some(
         ({ modifier }) =>
           modifier.info.tier === 1 &&
@@ -382,18 +410,6 @@ export function calculatedStatToFilter(
           roll.value <= roll.min);
       if (perfectRoll) {
         percent = 0;
-      }
-    }
-
-    let goodness: number | undefined;
-    if (calc.stat.better !== StatBetter.NotComparable) {
-      if (roll.min === roll.max) {
-        goodness = 1;
-      } else {
-        goodness = (roll.value - roll.min) / (roll.max - roll.min);
-        if (calc.stat.better === StatBetter.NegativeRoll) {
-          goodness = 1 - goodness;
-        }
       }
     }
 
@@ -545,6 +561,14 @@ export function finalFilterTweaks(ctx: FiltersCreationContext) {
     applyFlaskRules(ctx.filters);
   }
 
+  if (
+    item.rarity === ItemRarity.Unique &&
+    item.info.refName !== "Morior Invictus" &&
+    item.info.refName !== "Darkness Enthroned"
+  ) {
+    hideAllRunes(ctx.filters);
+  }
+
   const hasEmptyModifier = showHasEmptyModifier(ctx);
   if (hasEmptyModifier !== false) {
     ctx.filters.push({
@@ -587,7 +611,7 @@ export function finalFilterTweaks(ctx: FiltersCreationContext) {
     item.rarity === ItemRarity.Magic &&
     itemIsModifiable(item) &&
     item.itemLevel &&
-    maxUsefulItemLevel(item.category) > item.itemLevel
+    maxUsefulItemLevel(item.category) - 3 > item.itemLevel
   ) {
     ctx.filters.push({
       tradeId: ["item.rarity_magic"],
@@ -659,6 +683,15 @@ function applyFlaskRules(filters: StatFilter[]) {
   }
 }
 
+function hideAllRunes(filters: StatFilter[]) {
+  for (const filter of filters) {
+    if (filter.tag === FilterTag.Rune || filter.tag === FilterTag.AddedRune) {
+      filter.hidden = "filters.hide_const_roll";
+      filter.disabled = true;
+    }
+  }
+}
+
 // TODO
 // +1 Prefix Modifier allowed
 // -1 Suffix Modifier allowed
@@ -672,47 +705,27 @@ function showHasEmptyModifier(
   }
 
   if (item.rarity === ItemRarity.Magic) {
-    const magicRandomMods = item.newMods.filter(
-      (mod) => mod.info.type === ModifierType.Explicit,
-    );
-    if (magicRandomMods.length) {
-      const magicPrefixes = magicRandomMods.filter(
-        (mod) => mod.info.generation === "prefix",
-      ).length;
-      const magicSuffixes = magicRandomMods.filter(
-        (mod) => mod.info.generation === "suffix",
-      ).length;
-      if (magicPrefixes && magicSuffixes) {
-        return false;
-      }
-      if (magicPrefixes > 0) {
-        return ItemHasEmptyModifier.Suffix;
-      } else if (magicSuffixes > 0) {
-        return ItemHasEmptyModifier.Prefix;
-      }
+    const { prefixes: magicPrefixes, suffixes: magicSuffixes } =
+      explicitModifierCount(item);
+    if (magicPrefixes && magicSuffixes) {
       return false;
     }
+    if (magicPrefixes > 0) {
+      return ItemHasEmptyModifier.Suffix;
+    } else if (magicSuffixes > 0) {
+      return ItemHasEmptyModifier.Prefix;
+    }
+    // magic but has no explicit mods (annulled to 0)
+    return false;
   }
 
   if (item.rarity !== ItemRarity.Rare) {
     return false;
   }
 
-  const randomMods = item.newMods.filter(
-    (mod) =>
-      mod.info.type === ModifierType.Explicit ||
-      mod.info.type === ModifierType.Fractured ||
-      mod.info.type === ModifierType.Veiled,
-  );
+  const { prefixes, suffixes, total } = explicitModifierCount(item);
 
-  if (randomMods.length === 5) {
-    const prefixes = randomMods.filter(
-      (mod) => mod.info.generation === "prefix",
-    ).length;
-    const suffixes = randomMods.filter(
-      (mod) => mod.info.generation === "suffix",
-    ).length;
-
+  if (total === 5) {
     if (prefixes === 2) return ItemHasEmptyModifier.Prefix;
     if (suffixes === 2) return ItemHasEmptyModifier.Suffix;
   }

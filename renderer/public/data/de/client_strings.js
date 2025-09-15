@@ -67,7 +67,7 @@ export default {
   HEIST_BLUEPRINT_GEMS: 'Ungewöhnliche Gemmen',
   HEIST_BLUEPRINT_REPLICAS: 'Repliken oder Experimentelle Gegenstände',
   MIRRORED: 'Gespiegelt',
-  MODIFIER_LINE: /^(?<type>[^"]+)(?:\s+"(?<name>[^"]+)")?(?:\s+\(Level: (?<tier>\d+)\))?(?:\s+\(Rang: (?<rank>\d+)\))?$/,
+  MODIFIER_LINE: /^(?<type>[^"]+)(?:\s+"(?<name>[^"]*)")?(?:\s+\(Level: (?<tier>\d+)\))?(?:\s+\(Rang: (?<rank>\d+)\))?$/,
   PREFIX_MODIFIER: 'Präfix-Modifikator',
   SUFFIX_MODIFIER: 'Suffix-Modifikator',
   CRAFTED_PREFIX: 'Meister-Präfix-Modifikator',
@@ -126,6 +126,6 @@ export default {
   GRANTS_SKILL: 'Gewährt Fertigkeit: ',
   RELOAD_SPEED: 'Nachladezeit: ',
   FRACTURED_ITEM: 'Brüchiger Gegenstand',
-  SANCTIFIED: 'Geheiligt'
+  SANCTIFIED: 'Geheiligt',
+  HYPHEN: '-'
 }
-

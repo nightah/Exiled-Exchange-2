@@ -64,7 +64,7 @@ export default {
   HEIST_BLUEPRINT_GEMS: 'Необычные камни',
   HEIST_BLUEPRINT_REPLICAS: 'Копии или экспериментальные предметы',
   MIRRORED: 'Отражено',
-  MODIFIER_LINE: /^(?<type>[^"]+)(?:\s+"(?<name>[^"]+)")?(?:\s+\(Уровень: (?<tier>\d+)\))?(?:\s+\(Ранг: (?<rank>\d+)\))?$/,
+  MODIFIER_LINE: /^(?<type>[^"]+)(?:\s+"(?<name>[^"]*)")?(?:\s+\(Уровень: (?<tier>\d+)\))?(?:\s+\(Ранг: (?<rank>\d+)\))?$/,
   PREFIX_MODIFIER: 'Префикс',
   SUFFIX_MODIFIER: 'Суффикс',
   CRAFTED_PREFIX: 'Мастерский префикс',
@@ -160,5 +160,6 @@ export default {
   GRANTS_SKILL: 'Дарует умение: ',
   RELOAD_SPEED: 'Время перезарядки: ',
   FRACTURED_ITEM: 'Расколотый предмет',
-  SANCTIFIED: 'Освящено'
+  SANCTIFIED: 'Освящено',
+  HYPHEN: '-'
 }
