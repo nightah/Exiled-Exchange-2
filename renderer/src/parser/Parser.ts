@@ -1476,6 +1476,10 @@ function parseStatsFromMod(
   const statIterator = linesToStatStrings(lines);
   let stat = statIterator.next();
   while (!stat.done) {
+    if (item.info.refName === "From Nothing") {
+      stat.value.string = stat.value.string.replace("()", "");
+    }
+
     const parsedStat = tryParseTranslation(stat.value, modifier.info.type);
     if (parsedStat) {
       modifier.stats.push(parsedStat);

@@ -283,6 +283,13 @@ export function calculatedStatToFilter(
 ): StatFilter {
   const { stat, sources, type } = calc;
   let filter: StatFilter;
+
+  const roll = statSourcesTotal(
+    calc.sources,
+    item.info.refName === "Mirrored Tablet" ? "max" : "sum",
+  );
+  const translation = translateStatWithRoll(calc, roll);
+
   if (stat.trade.option) {
     filter = {
       tradeId:
@@ -290,23 +297,20 @@ export function calculatedStatToFilter(
           type === ModifierType.AddedRune ? ModifierType.Rune : type
         ],
       statRef: stat.ref,
-      text: sources[0].stat.translation.string,
+      text:
+        roll?.option === roll?.value
+          ? sources[0].stat.translation.string
+          : translation.string,
       tag:
         type === ModifierType.Enchant ? FilterTag.Enchant : FilterTag.Variant,
       oils: decodeOils(calc),
       sources,
       option: {
-        value: sources[0].contributes!.value,
+        value: sources[0].contributes!.option!,
       },
       disabled: false,
     };
   }
-
-  const roll = statSourcesTotal(
-    calc.sources,
-    item.info.refName === "Mirrored Tablet" ? "max" : "sum",
-  );
-  const translation = translateStatWithRoll(calc, roll);
 
   filter ??= {
     tradeId:
@@ -366,7 +370,7 @@ export function calculatedStatToFilter(
     }
   }
 
-  if (roll && !filter.option) {
+  if (roll && (!filter.option || roll.option !== roll.value)) {
     // Determine goodness first
     let goodness: number | undefined;
     if (calc.stat.better !== StatBetter.NotComparable) {

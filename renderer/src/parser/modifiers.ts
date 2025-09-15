@@ -19,6 +19,7 @@ export interface StatRoll {
   value: number;
   min: number;
   max: number;
+  option?: number;
 }
 
 export function sumStatsByModType(
@@ -63,6 +64,7 @@ export function sumStatsByModType(
                   value: roll.value,
                   min: roll.min,
                   max: roll.max,
+                  option: roll.option,
                 },
               });
             }
@@ -111,7 +113,11 @@ export function translateStatWithRoll(
   if (!roll) {
     translation = matchers.find((m) => m.value == null) ?? matchers[0];
   } else {
-    translation = matchers.find((m) => m.value === roll.value);
+    if (roll.option) {
+      translation = matchers.find((m) => m.value === roll.option);
+    } else {
+      translation = matchers.find((m) => m.value === roll.value);
+    }
     if (!translation) {
       // TODO: for some stats reduced is better (m.negate === true)
       const sameSign = Math.sign(roll.min) === Math.sign(roll.max);
