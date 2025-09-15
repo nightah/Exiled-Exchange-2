@@ -1150,16 +1150,14 @@ function parseSpirit(section: string[], item: ParsedItem) {
 }
 
 function parsePriceNote(section: string[], item: ParsedItem) {
-  let isParsed: SectionParseResult = "SECTION_SKIPPED";
-
   for (const line of section) {
     if (line.startsWith(_$.PRICE_NOTE)) {
-      isParsed = "SECTION_PARSED";
-      break;
+      item.note = line.slice(_$.PRICE_NOTE.length);
+      return "SECTION_PARSED";
     }
   }
 
-  return isParsed;
+  return "SECTION_SKIPPED";
 }
 
 function parseFracturedText(section: string[], _item: ParsedItem) {

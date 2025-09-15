@@ -85,6 +85,7 @@ export interface ParsedItem {
     wingsRevealed?: number;
     target?: "Enchants" | "Trinkets" | "Gems" | "Replicas";
   };
+  note?: string;
   category?: ItemCategory;
   info: BaseType;
   rawText: string;
