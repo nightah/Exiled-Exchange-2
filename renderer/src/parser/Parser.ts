@@ -995,7 +995,6 @@ function parseModifiers(section: string[], item: ParsedItem) {
       line.endsWith(ENCHANT_LINE) ||
       line.endsWith(SCOURGE_LINE) ||
       line.endsWith(RUNE_LINE) ||
-      line.endsWith(DESECRATED_LINE) ||
       isModInfoLine(line),
   );
 
