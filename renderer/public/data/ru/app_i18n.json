@@ -85,6 +85,7 @@
     "gem_level": "Уровень: {0}",
     "sentinel_charge": "Заряд: {0}",
     "find_in_stash": "Найти в тайнике",
+    "find_same_price": "Filter by Price",
     "parse_error": "Произошла ошибка при парсинге предмета",
     "parse_error_help": "Скорее всего, это ошибка, и вы можете сообщить о ней на GitHub.",
     "unknown": "Неизвестный предмет",

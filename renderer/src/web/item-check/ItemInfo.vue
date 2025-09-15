@@ -12,6 +12,13 @@
       <button class="btn flex-1 whitespace-nowrap" @click="stashSearch">
         {{ t("item.find_in_stash") }}
       </button>
+      <button
+        v-if="showPrice"
+        class="btn flex-1 whitespace-nowrap"
+        @click="findByPrice"
+      >
+        <i class="fas fa-dollar text-xs" />
+      </button>
     </div>
     <div
       v-if="weaponDPS"
@@ -53,11 +60,16 @@ function openPoedb() {
 function openCoE() {
   actions.openCoE(props.item);
 }
+function findByPrice() {
+  actions.findSamePricedItems(props.item);
+}
 
 const showCoE = computed(() => {
   const { item } = props;
   return item.info.craftable && itemIsModifiable(item);
 });
+
+const showPrice = computed(() => props.item.note);
 
 const weaponDPS = computed(() => {
   const { item } = props;

@@ -69,6 +69,7 @@
     "rune_sockets": "Sockets: {0}",
     "sentinel_charge": "Charge: {0}",
     "find_in_stash": "Find in Stash",
+    "find_same_price": "Filter by Price",
     "parse_error": "An error occurred while parsing the item",
     "parse_error_help": "This is probably a bug and you can report it on GitHub.",
     "unknown": "Unknown Item",

@@ -7,5 +7,6 @@ export interface ItemCheckWidget extends Widget {
   poedbKey: string | null;
   craftOfExileKey: string | null;
   stashSearchKey: string | null;
+  samePricedKey: string | null;
   maps: MapCheckConfig;
 }

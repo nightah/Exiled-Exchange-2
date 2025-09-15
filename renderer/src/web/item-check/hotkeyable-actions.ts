@@ -21,6 +21,7 @@ export function registerActions() {
         "open-craft-of-exile",
         "open-poedb",
         "search-similar",
+        "search-same-priced",
       ].includes(e.target)
     ) {
       return;
@@ -36,6 +37,8 @@ export function registerActions() {
       openPoedb(parsed.value);
     } else if (e.target === "search-similar") {
       findSimilarItems(parsed.value);
+    } else if (e.target === "search-same-priced") {
+      findSamePricedItems(parsed.value);
     }
   });
 }
@@ -57,6 +60,15 @@ export function openCoE(item: ParsedItem) {
 
 export function findSimilarItems(item: ParsedItem) {
   const text = JSON.stringify(item.info.name);
+  Host.sendEvent({
+    name: "CLIENT->MAIN::user-action",
+    payload: { action: "stash-search", text },
+  });
+}
+
+export function findSamePricedItems(item: ParsedItem) {
+  if (!item.note) return;
+  const text = JSON.stringify(item.note);
   Host.sendEvent({
     name: "CLIENT->MAIN::user-action",
     payload: { action: "stash-search", text },
