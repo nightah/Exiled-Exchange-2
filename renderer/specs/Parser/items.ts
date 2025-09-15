@@ -68,7 +68,6 @@ class TestItem implements ParsedItem {
   };
 
   rawText: string;
-  fromChat?: boolean | undefined;
 
   // #endregion
 

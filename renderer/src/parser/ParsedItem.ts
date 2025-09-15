@@ -88,7 +88,6 @@ export interface ParsedItem {
   category?: ItemCategory;
   info: BaseType;
   rawText: string;
-  fromChat?: boolean;
 }
 
 // NOTE: should match option values on trade
