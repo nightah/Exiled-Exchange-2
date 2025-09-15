@@ -47,7 +47,7 @@ export default defineComponent({
           ? {
               min: n * one.exalted,
               max: n * one.exalted,
-              currency: "chaos" as const,
+              currency: "exalted" as const,
             }
           : autoCurrency(n * one.exalted);
 
