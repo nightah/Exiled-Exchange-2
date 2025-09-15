@@ -1592,7 +1592,7 @@ export function parseAffixStrings(clipboard: string): string {
     return part2 || part1;
   });
 }
-function getMaxSockets(item: ParsedItem) {
+export function getMaxSockets(item: ParsedItem) {
   if (item.info.refName === "Darkness Enthroned") {
     return 2;
   }

@@ -25,6 +25,7 @@ import { filterItemProp, filterBasePercentile } from "./pseudo/item-property";
 import { decodeOils, applyAnointmentRules } from "./pseudo/anointments";
 import { StatBetter, CLIENT_STRINGS } from "@/assets/data";
 import { explicitModifierCount, maxUsefulItemLevel } from "./common";
+import { getMaxSockets } from "@/parser/Parser";
 
 export interface FiltersCreationContext {
   readonly item: ParsedItem;
@@ -187,7 +188,8 @@ export function initUiModFilters(
 
   if (item.info.refName !== "Split Personality") {
     filterItemProp(ctx);
-    if (item.rarity !== ItemRarity.Unique) {
+    // TODO: see if there are other options here, don't want to include trade site uniques with random runes
+    if (item.rarity !== ItemRarity.Unique || !getMaxSockets(item)) {
       filterPseudo(ctx);
     }
     if (item.info.refName === "Emperor's Vigilance") {
