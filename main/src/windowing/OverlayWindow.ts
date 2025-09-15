@@ -49,7 +49,7 @@ export class OverlayWindow {
     if (process.platform === "linux") {
       windowOpts.skipTaskbar = true;
       windowOpts.focusable = true;
-      windowOpts.type = 'notification';  // Best balance of focus handling and stability
+      windowOpts.type = "notification"; // Best balance of focus handling and stability
     }
 
     this.window = new BrowserWindow(windowOpts);
