@@ -1,6 +1,6 @@
 import { magicBasetype } from "@/parser/magic-name";
 import { beforeEach, describe, expect, test } from "vitest";
-import { setupTests } from "../vitest.setup";
+import { setupTests } from "@specs/vitest.setup";
 import { loadForLang } from "@/assets/data";
 
 describe("Check Magic Name (en)", () => {

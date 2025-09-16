@@ -9,10 +9,6 @@
       "path": "main"
     },
     {
-      "name": "Data Parser",
-      "path": "dataParser"
-    },
-    {
       "name": "docs",
       "path": "docs"
     },

@@ -1,7 +1,7 @@
 // itemTextToSections.test.ts
 import { __testExports } from "@/parser/Parser";
 import { beforeEach, describe, expect, test } from "vitest";
-import { setupTests } from "../vitest.setup";
+import { setupTests } from "@specs/vitest.setup";
 import {
   MagicItem,
   NormalItem,

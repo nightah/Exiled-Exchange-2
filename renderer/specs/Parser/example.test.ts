@@ -1,6 +1,6 @@
 import { expect, test } from "vitest";
 import { init } from "@/assets/data";
-import { setupTests } from "../vitest.setup";
+import { setupTests } from "@specs/vitest.setup";
 function sum(a: number, b: number) {
   return a + b;
 }
