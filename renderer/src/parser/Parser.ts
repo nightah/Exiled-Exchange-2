@@ -729,11 +729,13 @@ function parseWeapon(section: string[], item: ParsedItem) {
 
   for (const line of section) {
     if (line.startsWith(_$.CRIT_CHANCE)) {
+      // No regex since it can have decimals
       item.weaponCRIT = parseFloat(line.slice(_$.CRIT_CHANCE.length));
       isParsed = "SECTION_PARSED";
       continue;
     }
     if (line.startsWith(_$.ATTACK_SPEED)) {
+      // No regex since it can have decimals
       item.weaponAS = parseFloat(line.slice(_$.ATTACK_SPEED.length));
       isParsed = "SECTION_PARSED";
       continue;
@@ -743,7 +745,7 @@ function parseWeapon(section: string[], item: ParsedItem) {
         line
           .slice(_$.PHYSICAL_DAMAGE.length)
           .split(_$.HYPHEN)
-          .map((str) => parseInt(str, 10)),
+          .map((str) => parseInt(str.replace(/[^\d]/g, ""), 10)),
       );
       isParsed = "SECTION_PARSED";
       continue;
@@ -754,7 +756,9 @@ function parseWeapon(section: string[], item: ParsedItem) {
         .split(", ")
         .map((element) =>
           getRollOrMinmaxAvg(
-            element.split(_$.HYPHEN).map((str) => parseInt(str, 10)),
+            element
+              .split(_$.HYPHEN)
+              .map((str) => parseInt(str.replace(/[^\d]/g, ""), 10)),
           ),
         )
         .reduce((sum, x) => sum + x, 0);
@@ -768,7 +772,9 @@ function parseWeapon(section: string[], item: ParsedItem) {
         .split(", ")
         .map((element) =>
           getRollOrMinmaxAvg(
-            element.split(_$.HYPHEN).map((str) => parseInt(str, 10)),
+            element
+              .split(_$.HYPHEN)
+              .map((str) => parseInt(str.replace(/[^\d]/g, ""), 10)),
           ),
         )
         .reduce((sum, x) => sum + x, 0);
@@ -786,7 +792,9 @@ function parseWeapon(section: string[], item: ParsedItem) {
         .split(", ")
         .map((element) =>
           getRollOrMinmaxAvg(
-            element.split(_$.HYPHEN).map((str) => parseInt(str, 10)),
+            element
+              .split(_$.HYPHEN)
+              .map((str) => parseInt(str.replace(/[^\d]/g, ""), 10)),
           ),
         )
         .reduce((sum, x) => sum + x, 0);
@@ -804,7 +812,9 @@ function parseWeapon(section: string[], item: ParsedItem) {
         .split(", ")
         .map((element) =>
           getRollOrMinmaxAvg(
-            element.split(_$.HYPHEN).map((str) => parseInt(str, 10)),
+            element
+              .split(_$.HYPHEN)
+              .map((str) => parseInt(str.replace(/[^\d]/g, ""), 10)),
           ),
         )
         .reduce((sum, x) => sum + x, 0);
@@ -817,6 +827,7 @@ function parseWeapon(section: string[], item: ParsedItem) {
       continue;
     }
     if (line.startsWith(_$.RELOAD_SPEED)) {
+      // No regex since it can have decimals
       item.weaponReload = parseFloat(line.slice(_$.RELOAD_SPEED.length));
       isParsed = "SECTION_PARSED";
       continue;
@@ -1688,4 +1699,6 @@ export const __testExports = {
   itemTextToSections,
   parseNamePlate,
   isUncutSkillGem,
+  parseWeapon,
+  parseArmour,
 };

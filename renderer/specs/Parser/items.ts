@@ -58,6 +58,7 @@ class TestItem implements ParsedItem {
       }
     | undefined;
 
+  note?: string;
   category?: ItemCategory | undefined;
   info: BaseType = {
     name: "test",
@@ -145,6 +146,7 @@ MagicItem.category = ItemCategory.TwoHandedMace;
 MagicItem.rarity = ItemRarity.Magic;
 MagicItem.weaponPHYSICAL = 53.5;
 MagicItem.weaponLIGHTNING = 25.5;
+MagicItem.weaponELEMENTAL = MagicItem.weaponLIGHTNING;
 MagicItem.weaponCRIT = 5;
 MagicItem.weaponAS = 1.2;
 MagicItem.itemLevel = 32;
@@ -187,6 +189,8 @@ RareItem.weaponCOLD = 11;
 RareItem.weaponLIGHTNING = 43.5;
 RareItem.weaponELEMENTAL =
   RareItem.weaponFIRE + RareItem.weaponCOLD + RareItem.weaponLIGHTNING;
+RareItem.weaponAS = 1.2;
+RareItem.weaponCRIT = 5;
 RareItem.itemLevel = 80;
 
 RareItem.sectionCount = 5;
@@ -339,4 +343,114 @@ UncutSupportGem.info = {
 };
 
 UncutSupportGem.sectionCount = 5;
+// #endregion
+
+// #region HighDamageRareItem
+export const HighDamageRareItem = new TestItem(`Item Class: Crossbows
+Rarity: Rare
+Dragon Core
+Siege Crossbow
+--------
+Quality: +29% (augmented)
+Physical Damage: 414-1,043 (augmented)
+Critical Hit Chance: 5.00%
+Attacks per Second: 2.07 (augmented)
+Reload Time: 0.60 (augmented)
+--------
+Requires: Level 79, 89 (unmet) Str, 89 Dex
+--------
+Sockets: S S
+--------
+Item Level: 82
+--------
+36% increased Physical Damage (rune)
+--------
+{ Implicit Modifier }
+Grenade Skills Fire an additional Projectile (implicit)
+--------
+{ Prefix Modifier "Merciless" (Tier: 1) — Damage, Physical, Attack }
+173(170-179)% increased Physical Damage
+{ Prefix Modifier "Dictator's" (Tier: 1) — Damage, Physical, Attack }
+78(75-79)% increased Physical Damage
++175(175-200) to Accuracy Rating
+{ Prefix Modifier "Flaring" (Tier: 1) — Damage, Physical, Attack }
+Adds 54(37-55) to 94(63-94) Physical Damage (desecrated)
+{ Suffix Modifier "of Infamy" — Attack, Speed }
+25(23-25)% increased Attack Speed (fractured)
+{ Suffix Modifier "of the Sniper" (Tier: 1) }
++7 to Level of all Projectile Skills
+{ Suffix Modifier "of Bursting" (Tier: 1) — Attack }
+Loads 2 additional bolts
+--------
+Fractured Item
+`);
+HighDamageRareItem.category = ItemCategory.Crossbow;
+HighDamageRareItem.rarity = ItemRarity.Rare;
+HighDamageRareItem.weaponPHYSICAL = 728.5;
+HighDamageRareItem.weaponAS = 2.07;
+HighDamageRareItem.weaponCRIT = 5;
+HighDamageRareItem.weaponReload = 0.6;
+HighDamageRareItem.itemLevel = 82;
+
+HighDamageRareItem.sectionCount = 9;
+HighDamageRareItem.prefixCount = 3;
+HighDamageRareItem.suffixCount = 3;
+HighDamageRareItem.implicitCount = 1;
+
+HighDamageRareItem.runeSockets = {
+  empty: 0,
+  current: 2,
+  normal: 2,
+};
+// #endregion
+
+// #region ArmourHighValueRareItem
+export const ArmourHighValueRareItem = new TestItem(`Item Class: Body Armours
+Rarity: Rare
+Hate Pelt
+Soldier Cuirass
+--------
+Quality: +20% (augmented)
+Armour: 3075 (augmented)
+--------
+Requires: Level 65, 121 (unmet) Str
+--------
+Sockets: S S S
+--------
+Item Level: 80
+--------
+54% increased Armour, Evasion and Energy Shield (rune)
+--------
+{ Prefix Modifier "Impenetrable" (Tier: 1) — Defences }
+103(101-110)% increased Armour
+{ Prefix Modifier "Hardened" (Tier: 1) — Defences }
++70(70-86) to Armour
+41(39-42)% increased Armour
+{ Prefix Modifier "Unmoving" (Tier: 2) — Defences }
++256(226-256) to Armour (desecrated)
+{ Suffix Modifier "of the Titan" (Tier: 1) — Attribute }
++32(31-33) to Strength
+{ Suffix Modifier "of Allaying" (Tier: 3) — Physical, Ailment }
+48(50-46)% reduced Duration of Bleeding on You
+{ Suffix Modifier "of the Essence" (Tier: 1) }
+Hits against you have 44(40-50)% reduced Critical Damage Bonus
+--------
+Note: ~b/o 10 divine
+`);
+ArmourHighValueRareItem.category = ItemCategory.BodyArmour;
+ArmourHighValueRareItem.rarity = ItemRarity.Rare;
+ArmourHighValueRareItem.armourAR = 3075;
+ArmourHighValueRareItem.itemLevel = 80;
+
+ArmourHighValueRareItem.sectionCount = 8;
+ArmourHighValueRareItem.prefixCount = 3;
+ArmourHighValueRareItem.suffixCount = 3;
+ArmourHighValueRareItem.implicitCount = 1;
+
+ArmourHighValueRareItem.runeSockets = {
+  empty: 0,
+  current: 3,
+  normal: 2,
+};
+ArmourHighValueRareItem.note = "~b/o 10 divine";
 // #endregion
