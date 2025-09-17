@@ -37,7 +37,6 @@ import {
   groupLinesByMod,
   parseModInfoLine,
   ADDED_RUNE_LINE,
-  DESECRATED_LINE,
 } from "./advanced-mod-desc";
 import { calcPropPercentile, QUALITY_STATS } from "./calc-q20";
 
@@ -935,7 +934,6 @@ export function parseModifiersPoe2(section: string[], item: ParsedItem) {
       line.endsWith(SCOURGE_LINE) ||
       line.endsWith(RUNE_LINE) ||
       line.endsWith(ADDED_RUNE_LINE) ||
-      line.endsWith(DESECRATED_LINE) ||
       line.startsWith(_$.GRANTS_SKILL),
   );
 
@@ -951,8 +949,6 @@ export function parseModifiersPoe2(section: string[], item: ParsedItem) {
       modType = ModifierType.AddedRune;
     } else if (hasEndingTag.endsWith(RUNE_LINE)) {
       modType = ModifierType.Rune;
-    } else if (hasEndingTag.endsWith(DESECRATED_LINE)) {
-      modType = ModifierType.Desecrated;
     } else if (hasEndingTag.startsWith(_$.GRANTS_SKILL)) {
       modType = ModifierType.Skill;
     } else {
