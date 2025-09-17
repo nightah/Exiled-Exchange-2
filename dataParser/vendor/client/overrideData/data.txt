@@ -11,7 +11,7 @@ number of stackable unique jewels [1]
 
 
 Megalomaniac Diamond
-Allocates Passive Skill 
+Allocates Passive Skill
 Allocates Passive Skill
 Allocates Passive Skill
 

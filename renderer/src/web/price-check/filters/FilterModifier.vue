@@ -25,7 +25,7 @@
           >
             <span class="truncate"
               ><item-modifier-text
-                :text="timeLost ? timeLostText : text"
+                :text="showShortText ? shortText : text"
                 :roll="roll?.value"
             /></span>
             <span class="search-text-full whitespace-pre-wrap"
@@ -315,7 +315,7 @@ export default defineComponent({
       ),
       fontSize: computed(() => AppConfig().fontSize),
       isDisabled: computed(() => props.filter.disabled),
-      timeLostText: computed(() => {
+      shortText: computed(() => {
         if (
           props.item.category === ItemCategory.Jewel &&
           props.item.info.refName.startsWith("Time-Lost")
@@ -331,6 +331,8 @@ export default defineComponent({
             const match = raw.match(regex);
             if (match) return match[1];
           }
+        } else if (text.value.startsWith(_$.GRANTS_SKILL)) {
+          return text.value.slice(_$.GRANTS_SKILL.length);
         }
         return text.value;
       }),
@@ -354,10 +356,11 @@ export default defineComponent({
       ),
       inputFocus,
       toggleFilter,
-      timeLost: computed(
+      showShortText: computed(
         () =>
-          props.item.category === ItemCategory.Jewel &&
-          props.item.info.refName.startsWith("Time-Lost"),
+          (props.item.category === ItemCategory.Jewel &&
+            props.item.info.refName.startsWith("Time-Lost")) ||
+          text.value.startsWith(_$.GRANTS_SKILL),
       ),
     };
   },
@@ -503,6 +506,7 @@ export default defineComponent({
 .tag-rune {
   @apply bg-blue-600 text-blue-100;
 }
+.tag-skill,
 .tag-implicit,
 .tag-explicit {
   @apply -mx-1 text-gray-600;

@@ -7,7 +7,7 @@ import {
   requestResults,
   requestTradeResultList,
 } from "@/web/price-check/trade/pathofexile-trade";
-import { setupTests } from "../vitest.setup";
+import { setupTests } from "@specs/vitest.setup";
 import { loadForLang } from "@/assets/data";
 
 vi.mock("@/web/price-check/trade/pathofexile-trade", () => {

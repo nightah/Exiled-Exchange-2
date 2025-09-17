@@ -152,7 +152,7 @@ export interface Config {
 }
 
 export const defaultConfig = (): Config => ({
-  configVersion: 26,
+  configVersion: 27,
   overlayKey: "Shift + Space",
   overlayBackground: "rgba(129, 139, 149, 0.15)",
   overlayBackgroundClose: true,
@@ -573,6 +573,16 @@ function upgradeConfig(_config: Config): Config {
 
     config.configVersion = 26;
   }
+  if (config.configVersion < 27) {
+    // NOTE: v0.12.4 || poe0.3.0c
+
+    const itemCheck = config.widgets.find(
+      (w) => w.wmType === "item-check",
+    ) as ItemCheckWidget;
+    itemCheck.samePricedKey = null;
+
+    config.configVersion = 27;
+  }
 
   return config as unknown as Config;
 }
@@ -622,6 +632,12 @@ function getConfigForHost(): HostConfig {
     actions.push({
       shortcut: itemCheck.stashSearchKey,
       action: { type: "copy-item", target: "search-similar" },
+    });
+  }
+  if (itemCheck.samePricedKey) {
+    actions.push({
+      shortcut: itemCheck.samePricedKey,
+      action: { type: "copy-item", target: "search-same-priced" },
     });
   }
   if (itemCheck.hotkey) {

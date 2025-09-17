@@ -69,6 +69,7 @@
     "rune_sockets": "Ranuras: {0}",
     "sentinel_charge": "Carga: {0}",
     "find_in_stash": "Encontrar en el alijo",
+    "find_same_price": "Filter by Price",
     "parse_error": "Se produjo un error al analizar el objeto",
     "parse_error_help": "Esto probablemente sea un error. Puedes informarlo en GitHub.",
     "unknown": "Objeto desconocido",
@@ -171,6 +172,7 @@
     "hide_for_crafting": "Seleccionar solo si se está comprobando el precio como objeto base para creación",
     "hide_empty_mod": "Seleccionar solo si el objeto tiene 6 modificadores (1 de los cuales es elaborado) o si tiene 5 modificadores",
     "hide_low_ilvl": "Item has too low an item level to roll all mods",
+    "hide_not_max_level": "Non max level granted skills rarely add value",
     "tag_implicit": "implícito",
     "tag_fractured": "fracturado",
     "tag_crafted": "elaborado",
@@ -195,6 +197,7 @@
     "tag_added_rune": "Runa",
     "tag_sanctum": "Sanctum",
     "tag_desecrated": "profanado",
+    "tag_skill": "Skill",
     "fill_rune_iron": "Fill Runes(Iron)",
     "grade": "Grade {0}",
     "hybrid_note": "Tier may be incorrect due to the potential for a hybrid mod"

@@ -69,6 +69,7 @@
     "rune_sockets": "Fassungen: {0}",
     "sentinel_charge": "Ladung: {0}",
     "find_in_stash": "Im Versteck finden",
+    "find_same_price": "Filter by Price",
     "parse_error": "Ein Fehler ist beim Parsen des Gegenstands aufgetreten",
     "parse_error_help": "Dies ist wahrscheinlich ein Fehler. Du kannst ihn auf GitHub melden.",
     "unknown": "Unbekannter Gegenstand",
@@ -171,6 +172,7 @@
     "hide_for_crafting": "Nur auswählen, wenn Preisprüfung als Basisgegenstand für Crafting",
     "hide_empty_mod": "Nur auswählen, wenn der Gegenstand 6 Modifikatoren (davon 1 gefertigt) hat oder wenn er 5 Modifikatoren hat",
     "hide_low_ilvl": "Item has too low an item level to roll all mods",
+    "hide_not_max_level": "Non max level granted skills rarely add value",
     "tag_implicit": "implizit",
     "tag_fractured": "gebrochen",
     "tag_crafted": "gefertigt",
@@ -195,6 +197,7 @@
     "tag_added_rune": "Rune",
     "tag_sanctum": "Sanctum",
     "tag_desecrated": "Entweihtes",
+    "tag_skill": "Skill",
     "fill_rune_iron": "Fill Runes(Iron)",
     "grade": "Grad {0}",
     "hybrid_note": "Das Tier könnte aufgrund eines potenziellen Hybrid-Mods falsch sein"

@@ -9,10 +9,6 @@
       "path": "main"
     },
     {
-      "name": "Data Parser",
-      "path": "dataParser"
-    },
-    {
       "name": "docs",
       "path": "docs"
     },
@@ -57,6 +53,7 @@
       "heistweapon",
       "ilvl",
       "Invictus",
+      "Jewelery",
       "Kalandra",
       "keybind",
       "keybinds",
@@ -69,6 +66,7 @@
       "onesword",
       "onlineleague",
       "pdps",
+      "Poedb",
       "Poeninja",
       "runedagger",
       "stormcloud's",

@@ -85,6 +85,7 @@
     "gem_level": "Уровень: {0}",
     "sentinel_charge": "Заряд: {0}",
     "find_in_stash": "Найти в тайнике",
+    "find_same_price": "Filter by Price",
     "parse_error": "Произошла ошибка при парсинге предмета",
     "parse_error_help": "Скорее всего, это ошибка, и вы можете сообщить о ней на GitHub.",
     "unknown": "Неизвестный предмет",
@@ -183,6 +184,7 @@
     "hide_for_crafting": "Отмечайте, если проверяете цену в качестве базового предмета для крафта",
     "hide_empty_mod": "Выбирайте, только если у предмета 6 свойств (1 из которых ремесленное) или если у него 5 свойств",
     "hide_low_ilvl": "Item has too low an item level to roll all mods",
+    "hide_not_max_level": "Non max level granted skills rarely add value",
     "tag_crafted": "мастер",
     "tag_fractured": "расколотый",
     "tag_scourge": "преображен",
@@ -207,6 +209,7 @@
     "tag_added_rune": "Руна",
     "tag_sanctum": "Святилище",
     "tag_desecrated": "Очернённый",
+    "tag_skill": "Skill",
     "fill_rune_iron": "Fill Runes(Iron)",
     "grade": "Грейд {0}",
     "hybrid_note": "Tier may be incorrect due to the potential for a hybrid mod"

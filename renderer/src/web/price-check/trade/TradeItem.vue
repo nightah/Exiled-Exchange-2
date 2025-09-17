@@ -65,7 +65,9 @@
       {{ result.gemSockets }}
     </td>
     <td
-      v-if="quality || item.category === ItemCategory.Gem"
+      v-if="
+        (quality && !quality.disabled) || item.category === ItemCategory.Gem
+      "
       class="px-2 whitespace-nowrap text-blue-400 text-right"
     >
       {{ result.quality }}

@@ -63,6 +63,9 @@ export function stashSearch(
     overlay.assertGameActive();
     clipboard.writeText(text);
     uIOhook.keyTap(Key.F, [Key.Ctrl]);
+    // HACK: While https://www.pathofexile.com/forum/view-thread/3854775
+    uIOhook.keyTap(Key.Backspace);
+
     uIOhook.keyTap(Key.V, [
       process.platform === "darwin" ? Key.Meta : Key.Ctrl,
     ]);

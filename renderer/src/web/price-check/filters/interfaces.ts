@@ -193,4 +193,5 @@ export enum FilterTag {
   Rune = "rune",
   AddedRune = "added-rune",
   Desecrated = "desecrated",
+  Skill = "skill",
 }

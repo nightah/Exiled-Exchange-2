@@ -40,7 +40,10 @@
               <div class="px-2">{{ t(":gem_sockets") }}</div>
             </th>
             <th
-              v-if="filters.quality || item.category === ItemCategory.Gem"
+              v-if="
+                (filters.quality && !filters.quality.disabled) ||
+                item.category === ItemCategory.Gem
+              "
               class="trade-table-heading"
             >
               <div class="px-2">{{ t(":quality") }}</div>

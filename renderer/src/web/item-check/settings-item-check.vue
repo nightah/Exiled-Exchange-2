@@ -16,6 +16,10 @@
       <label class="flex-1">{{ t("item.find_in_stash") }}</label>
       <hotkey-input v-model="stashSearchKey" class="w-48" />
     </div>
+    <div class="flex">
+      <label class="flex-1">{{ t("item.find_same_price") }}</label>
+      <hotkey-input v-model="samePricedKey" class="w-48" />
+    </div>
   </div>
 </template>
 
@@ -51,6 +55,10 @@ const craftOfExileKey = configModelValue(
 const stashSearchKey = configModelValue(
   () => findWidget<ItemCheckWidget>("item-check", props.config)!,
   "stashSearchKey",
+);
+const samePricedKey = configModelValue(
+  () => findWidget<ItemCheckWidget>("item-check", props.config)!,
+  "samePricedKey",
 );
 const { t } = useI18n();
 </script>

@@ -37,7 +37,6 @@ import {
   groupLinesByMod,
   parseModInfoLine,
   ADDED_RUNE_LINE,
-  DESECRATED_LINE,
 } from "./advanced-mod-desc";
 import { calcPropPercentile, QUALITY_STATS } from "./calc-q20";
 
@@ -102,12 +101,14 @@ const parsers: Array<ParserFn | { virtual: VirtualParserFn }> = [
   parseModifiers, // enchant
   parseModifiers, // rune
   parseModifiers, // implicit
+  parseModifiers, // grant skill
   parseModifiers, // explicit
   // catch enchant and rune since they don't have curlys rn
   parseModifiersPoe2, // enchant
   parseModifiersPoe2, // rune
   // HACK: catch implicit and explicit for controllers
   parseModifiersPoe2, // implicit
+  parseModifiersPoe2, // grant skill
   parseModifiersPoe2, // explicit
   { virtual: transformToLegacyModifiers },
   { virtual: parseFractured },
@@ -120,11 +121,6 @@ const parsers: Array<ParserFn | { virtual: VirtualParserFn }> = [
 
 export function parseClipboard(clipboard: string): Result<ParsedItem, string> {
   try {
-    const chatRegex = /\[.*?\]|\[.*?\|.*?\]/;
-    const isFromChat = chatRegex.test(clipboard);
-    if (isFromChat) {
-      clipboard = parseAffixStrings(clipboard);
-    }
     let sections = itemTextToSections(clipboard);
 
     if (sections[0][2] === _$.CANNOT_USE_ITEM) {
@@ -155,9 +151,6 @@ export function parseClipboard(clipboard: string): Result<ParsedItem, string> {
           break;
         }
       }
-    }
-    if (parsed.isOk() && isFromChat) {
-      parsed.value.fromChat = isFromChat;
     }
     return Object.freeze(parsed);
   } catch (e) {
@@ -386,7 +379,7 @@ function parseNamePlate(section: string[]) {
   let line = section.shift();
   let uncutSkillGem = false;
   if (!line?.startsWith(_$.ITEM_CLASS)) {
-    // HACK: Uncut skill gems
+    // FIXME: Uncut skill gems (remove)
     if (line && section.unshift(line) && isUncutSkillGem(section)) {
       uncutSkillGem = true;
     } else {
@@ -737,11 +730,13 @@ function parseWeapon(section: string[], item: ParsedItem) {
 
   for (const line of section) {
     if (line.startsWith(_$.CRIT_CHANCE)) {
+      // No regex since it can have decimals
       item.weaponCRIT = parseFloat(line.slice(_$.CRIT_CHANCE.length));
       isParsed = "SECTION_PARSED";
       continue;
     }
     if (line.startsWith(_$.ATTACK_SPEED)) {
+      // No regex since it can have decimals
       item.weaponAS = parseFloat(line.slice(_$.ATTACK_SPEED.length));
       isParsed = "SECTION_PARSED";
       continue;
@@ -751,7 +746,7 @@ function parseWeapon(section: string[], item: ParsedItem) {
         line
           .slice(_$.PHYSICAL_DAMAGE.length)
           .split(_$.HYPHEN)
-          .map((str) => parseInt(str, 10)),
+          .map((str) => parseInt(str.replace(/[^\d]/g, ""), 10)),
       );
       isParsed = "SECTION_PARSED";
       continue;
@@ -762,7 +757,9 @@ function parseWeapon(section: string[], item: ParsedItem) {
         .split(", ")
         .map((element) =>
           getRollOrMinmaxAvg(
-            element.split(_$.HYPHEN).map((str) => parseInt(str, 10)),
+            element
+              .split(_$.HYPHEN)
+              .map((str) => parseInt(str.replace(/[^\d]/g, ""), 10)),
           ),
         )
         .reduce((sum, x) => sum + x, 0);
@@ -776,7 +773,9 @@ function parseWeapon(section: string[], item: ParsedItem) {
         .split(", ")
         .map((element) =>
           getRollOrMinmaxAvg(
-            element.split(_$.HYPHEN).map((str) => parseInt(str, 10)),
+            element
+              .split(_$.HYPHEN)
+              .map((str) => parseInt(str.replace(/[^\d]/g, ""), 10)),
           ),
         )
         .reduce((sum, x) => sum + x, 0);
@@ -794,7 +793,9 @@ function parseWeapon(section: string[], item: ParsedItem) {
         .split(", ")
         .map((element) =>
           getRollOrMinmaxAvg(
-            element.split(_$.HYPHEN).map((str) => parseInt(str, 10)),
+            element
+              .split(_$.HYPHEN)
+              .map((str) => parseInt(str.replace(/[^\d]/g, ""), 10)),
           ),
         )
         .reduce((sum, x) => sum + x, 0);
@@ -812,7 +813,9 @@ function parseWeapon(section: string[], item: ParsedItem) {
         .split(", ")
         .map((element) =>
           getRollOrMinmaxAvg(
-            element.split(_$.HYPHEN).map((str) => parseInt(str, 10)),
+            element
+              .split(_$.HYPHEN)
+              .map((str) => parseInt(str.replace(/[^\d]/g, ""), 10)),
           ),
         )
         .reduce((sum, x) => sum + x, 0);
@@ -825,6 +828,7 @@ function parseWeapon(section: string[], item: ParsedItem) {
       continue;
     }
     if (line.startsWith(_$.RELOAD_SPEED)) {
+      // No regex since it can have decimals
       item.weaponReload = parseFloat(line.slice(_$.RELOAD_SPEED.length));
       isParsed = "SECTION_PARSED";
       continue;
@@ -930,7 +934,7 @@ export function parseModifiersPoe2(section: string[], item: ParsedItem) {
       line.endsWith(SCOURGE_LINE) ||
       line.endsWith(RUNE_LINE) ||
       line.endsWith(ADDED_RUNE_LINE) ||
-      line.endsWith(DESECRATED_LINE),
+      line.startsWith(_$.GRANTS_SKILL),
   );
 
   if (hasEndingTag) {
@@ -945,8 +949,8 @@ export function parseModifiersPoe2(section: string[], item: ParsedItem) {
       modType = ModifierType.AddedRune;
     } else if (hasEndingTag.endsWith(RUNE_LINE)) {
       modType = ModifierType.Rune;
-    } else if (hasEndingTag.endsWith(DESECRATED_LINE)) {
-      modType = ModifierType.Desecrated;
+    } else if (hasEndingTag.startsWith(_$.GRANTS_SKILL)) {
+      modType = ModifierType.Skill;
     } else {
       throw new Error("Invalid ending tag");
     }
@@ -993,9 +997,8 @@ function parseModifiers(section: string[], item: ParsedItem) {
   const recognizedLine = section.find(
     (line) =>
       line.endsWith(ENCHANT_LINE) ||
-      line.endsWith(SCOURGE_LINE) ||
       line.endsWith(RUNE_LINE) ||
-      line.endsWith(DESECRATED_LINE) ||
+      line.startsWith(_$.GRANTS_SKILL) ||
       isModInfoLine(line),
   );
 
@@ -1025,8 +1028,8 @@ function parseModifiers(section: string[], item: ParsedItem) {
     const modInfo: ModifierInfo = {
       type: recognizedLine.endsWith(ENCHANT_LINE)
         ? ModifierType.Enchant
-        : recognizedLine.endsWith(SCOURGE_LINE)
-          ? ModifierType.Scourge
+        : recognizedLine.startsWith(_$.GRANTS_SKILL)
+          ? ModifierType.Skill
           : ModifierType.Rune,
       tags: [],
     };
@@ -1159,16 +1162,14 @@ function parseSpirit(section: string[], item: ParsedItem) {
 }
 
 function parsePriceNote(section: string[], item: ParsedItem) {
-  let isParsed: SectionParseResult = "SECTION_SKIPPED";
-
   for (const line of section) {
     if (line.startsWith(_$.PRICE_NOTE)) {
-      isParsed = "SECTION_PARSED";
-      break;
+      item.note = line.slice(_$.PRICE_NOTE.length);
+      return "SECTION_PARSED";
     }
   }
 
-  return isParsed;
+  return "SECTION_SKIPPED";
 }
 
 function parseFracturedText(section: string[], _item: ParsedItem) {
@@ -1191,9 +1192,6 @@ function parseUnneededText(section: string[], item: ParsedItem) {
     item.category !== ItemCategory.Relic &&
     item.category !== ItemCategory.Tablet &&
     item.info.refName !== "Expedition Logbook" &&
-    item.category !== ItemCategory.Sceptre &&
-    item.category !== ItemCategory.Wand &&
-    item.category !== ItemCategory.Staff &&
     item.category !== ItemCategory.Shield &&
     item.category !== ItemCategory.Spear &&
     item.category !== ItemCategory.Buckler
@@ -1699,4 +1697,7 @@ export const __testExports = {
   itemTextToSections,
   parseNamePlate,
   isUncutSkillGem,
+  parseWeapon,
+  parseArmour,
+  parseModifiers,
 };

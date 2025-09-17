@@ -69,6 +69,7 @@
     "rune_sockets": "插槽：{0}",
     "sentinel_charge": "充能：{0}",
     "find_in_stash": "在倉庫中尋找",
+    "find_same_price": "Filter by Price",
     "parse_error": "解析物品時發生錯誤",
     "parse_error_help": "這可能是一個錯誤，你可以在 GitHub 上報告。",
     "unknown": "未知物品",
@@ -167,6 +168,7 @@
     "hide_for_crafting": "僅在作為基礎物品價格檢查時選擇",
     "hide_empty_mod": "僅在物品有 6 個詞綴（其中 1 個已製作）或有 5 個詞綴時選擇",
     "hide_low_ilvl": "Item has too low an item level to roll all mods",
+    "hide_not_max_level": "Non max level granted skills rarely add value",
     "tag_implicit": "隨機",
     "tag_fractured": "破裂",
     "tag_crafted": "已製作",
@@ -191,6 +193,7 @@
     "tag_added_rune": "符文",
     "tag_sanctum": "聖域聯盟",
     "tag_desecrated": "褻瀆",
+    "tag_skill": "Skill",
     "fill_rune_iron": "Fill Runes(Iron)",
     "grade": "等級 {0}",
     "hybrid_note": "階級可能因複合詞綴的存在而顯示不正確"

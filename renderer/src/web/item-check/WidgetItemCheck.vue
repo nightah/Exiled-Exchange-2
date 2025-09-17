@@ -33,6 +33,7 @@ export default {
         poedbKey: null,
         craftOfExileKey: null,
         stashSearchKey: null,
+        samePricedKey: null,
         maps: {
           profile: 1,
           showNewStats: false,

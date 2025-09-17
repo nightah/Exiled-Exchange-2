@@ -69,6 +69,7 @@
     "rune_sockets": "ソケット: {0}",
     "sentinel_charge": "チャージ: {0}",
     "find_in_stash": "スタッシュで見つける",
+    "find_same_price": "Filter by Price",
     "parse_error": "アイテムの解析中にエラーが発生しました",
     "parse_error_help": "これはおそらくバグであり、GitHubで報告できます。",
     "unknown": "不明なアイテム",
@@ -167,6 +168,7 @@
     "hide_for_crafting": "クラフト用のベースアイテムとして価格を確認する場合のみ選択",
     "hide_empty_mod": "アイテムに6つの修飾子（そのうち1つはクラフト済み）または5つの修飾子がある場合のみ選択",
     "hide_low_ilvl": "Item has too low an item level to roll all mods",
+    "hide_not_max_level": "Non max level granted skills rarely add value",
     "tag_implicit": "暗黙",
     "tag_fractured": "フラクチャー",
     "tag_crafted": "クラフト",
@@ -191,6 +193,7 @@
     "tag_added_rune": "ルーン",
     "tag_sanctum": "Sanctum",
     "tag_desecrated": "冒涜",
+    "tag_skill": "Skill",
     "fill_rune_iron": "Fill Runes(Iron)",
     "grade": "グレード {0}",
     "hybrid_note": "Tier may be incorrect due to the potential for a hybrid mod"

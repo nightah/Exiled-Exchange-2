@@ -162,4 +162,5 @@ export enum ModifierType {
   AddedRune = "added-rune",
   Sanctum = "sanctum",
   Desecrated = "desecrated",
+  Skill = "skill",
 }

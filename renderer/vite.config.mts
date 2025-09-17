@@ -24,6 +24,7 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "./src"),
       "@ipc": path.resolve(__dirname, "./src/../../ipc"),
+      "@specs": path.resolve(__dirname, "./specs"),
     },
   },
   define: {
