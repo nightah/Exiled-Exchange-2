@@ -102,12 +102,14 @@ const parsers: Array<ParserFn | { virtual: VirtualParserFn }> = [
   parseModifiers, // enchant
   parseModifiers, // rune
   parseModifiers, // implicit
+  parseModifiers, // grant skill
   parseModifiers, // explicit
   // catch enchant and rune since they don't have curlys rn
   parseModifiersPoe2, // enchant
   parseModifiersPoe2, // rune
   // HACK: catch implicit and explicit for controllers
   parseModifiersPoe2, // implicit
+  parseModifiersPoe2, // grant skill
   parseModifiersPoe2, // explicit
   { virtual: transformToLegacyModifiers },
   { virtual: parseFractured },
@@ -378,7 +380,7 @@ function parseNamePlate(section: string[]) {
   let line = section.shift();
   let uncutSkillGem = false;
   if (!line?.startsWith(_$.ITEM_CLASS)) {
-    // HACK: Uncut skill gems
+    // FIXME: Uncut skill gems (remove)
     if (line && section.unshift(line) && isUncutSkillGem(section)) {
       uncutSkillGem = true;
     } else {
@@ -933,7 +935,8 @@ export function parseModifiersPoe2(section: string[], item: ParsedItem) {
       line.endsWith(SCOURGE_LINE) ||
       line.endsWith(RUNE_LINE) ||
       line.endsWith(ADDED_RUNE_LINE) ||
-      line.endsWith(DESECRATED_LINE),
+      line.endsWith(DESECRATED_LINE) ||
+      line.startsWith(_$.GRANTS_SKILL),
   );
 
   if (hasEndingTag) {
@@ -950,6 +953,8 @@ export function parseModifiersPoe2(section: string[], item: ParsedItem) {
       modType = ModifierType.Rune;
     } else if (hasEndingTag.endsWith(DESECRATED_LINE)) {
       modType = ModifierType.Desecrated;
+    } else if (hasEndingTag.startsWith(_$.GRANTS_SKILL)) {
+      modType = ModifierType.Skill;
     } else {
       throw new Error("Invalid ending tag");
     }
@@ -996,8 +1001,8 @@ function parseModifiers(section: string[], item: ParsedItem) {
   const recognizedLine = section.find(
     (line) =>
       line.endsWith(ENCHANT_LINE) ||
-      line.endsWith(SCOURGE_LINE) ||
       line.endsWith(RUNE_LINE) ||
+      line.startsWith(_$.GRANTS_SKILL) ||
       isModInfoLine(line),
   );
 
@@ -1027,8 +1032,8 @@ function parseModifiers(section: string[], item: ParsedItem) {
     const modInfo: ModifierInfo = {
       type: recognizedLine.endsWith(ENCHANT_LINE)
         ? ModifierType.Enchant
-        : recognizedLine.endsWith(SCOURGE_LINE)
-          ? ModifierType.Scourge
+        : recognizedLine.startsWith(_$.GRANTS_SKILL)
+          ? ModifierType.Skill
           : ModifierType.Rune,
       tags: [],
     };
@@ -1191,9 +1196,6 @@ function parseUnneededText(section: string[], item: ParsedItem) {
     item.category !== ItemCategory.Relic &&
     item.category !== ItemCategory.Tablet &&
     item.info.refName !== "Expedition Logbook" &&
-    item.category !== ItemCategory.Sceptre &&
-    item.category !== ItemCategory.Wand &&
-    item.category !== ItemCategory.Staff &&
     item.category !== ItemCategory.Shield &&
     item.category !== ItemCategory.Spear &&
     item.category !== ItemCategory.Buckler
@@ -1701,4 +1703,5 @@ export const __testExports = {
   isUncutSkillGem,
   parseWeapon,
   parseArmour,
+  parseModifiers,
 };

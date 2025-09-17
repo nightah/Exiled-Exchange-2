@@ -3,7 +3,7 @@ import { ItemCategory, ItemInfluence, ItemRarity, ParsedItem } from "@/parser";
 import { ParsedModifier } from "@/parser/advanced-mod-desc";
 import { StatCalculated, ModifierType } from "@/parser/modifiers";
 
-class TestItem implements ParsedItem {
+export class TestItem implements ParsedItem {
   // #region ParsedItem
   rarity?: ItemRarity | undefined;
   itemLevel?: number | undefined;
@@ -120,6 +120,7 @@ NormalItem.armourAR = 174;
 NormalItem.armourES = 60;
 NormalItem.itemLevel = 81;
 
+NormalItem.info.refName = "Divine Crown";
 NormalItem.sectionCount = 4;
 // #endregion
 
@@ -151,6 +152,7 @@ MagicItem.weaponCRIT = 5;
 MagicItem.weaponAS = 1.2;
 MagicItem.itemLevel = 32;
 
+MagicItem.info.refName = "Temple Maul";
 MagicItem.sectionCount = 5;
 MagicItem.prefixCount = 1;
 MagicItem.suffixCount = 1;
@@ -193,6 +195,7 @@ RareItem.weaponAS = 1.2;
 RareItem.weaponCRIT = 5;
 RareItem.itemLevel = 80;
 
+RareItem.info.refName = "Rider Bow";
 RareItem.sectionCount = 5;
 RareItem.prefixCount = 3;
 RareItem.suffixCount = 1;
@@ -229,6 +232,8 @@ UniqueItem.rarity = ItemRarity.Unique;
 UniqueItem.armourES = 44;
 UniqueItem.itemLevel = 81;
 
+// NOTE: requires step through to verify use of Name here is right
+UniqueItem.info.refName = "The Eternal Spark";
 UniqueItem.sectionCount = 6;
 UniqueItem.uniqueAffixCount = 5;
 UniqueItem.rollingUniqueAffixCount = 2;
@@ -261,6 +266,7 @@ RareWithImplicit.category = ItemCategory.Ring;
 RareWithImplicit.rarity = ItemRarity.Rare;
 RareWithImplicit.itemLevel = 79;
 
+RareWithImplicit.info.refName = "Prismatic Ring";
 RareWithImplicit.sectionCount = 5;
 RareWithImplicit.implicitCount = 1;
 RareWithImplicit.prefixCount = 1;
@@ -392,6 +398,7 @@ HighDamageRareItem.weaponCRIT = 5;
 HighDamageRareItem.weaponReload = 0.6;
 HighDamageRareItem.itemLevel = 82;
 
+HighDamageRareItem.info.refName = "Siege Crossbow";
 HighDamageRareItem.sectionCount = 9;
 HighDamageRareItem.prefixCount = 3;
 HighDamageRareItem.suffixCount = 3;
@@ -442,10 +449,10 @@ ArmourHighValueRareItem.rarity = ItemRarity.Rare;
 ArmourHighValueRareItem.armourAR = 3075;
 ArmourHighValueRareItem.itemLevel = 80;
 
+ArmourHighValueRareItem.info.refName = "Soldier Cuirass";
 ArmourHighValueRareItem.sectionCount = 8;
 ArmourHighValueRareItem.prefixCount = 3;
 ArmourHighValueRareItem.suffixCount = 3;
-ArmourHighValueRareItem.implicitCount = 1;
 
 ArmourHighValueRareItem.runeSockets = {
   empty: 0,
@@ -453,4 +460,69 @@ ArmourHighValueRareItem.runeSockets = {
   normal: 2,
 };
 ArmourHighValueRareItem.note = "~b/o 10 divine";
+// #endregion
+
+// #region WandRareItem
+export const WandRareItem = new TestItem(`Item Class: Wands
+Rarity: Rare
+Doom Bite
+Withered Wand
+--------
+Requires: Level 90 (unmet), 125 (augmented) Int
+--------
+Item Level: 82
+--------
+Grants Skill: Level 20 Chaos Bolt
+--------
+{ Prefix Modifier "Malignant" (Tier: 4) — Damage, Chaos }
+71(65-74)% increased Chaos Damage
+{ Prefix Modifier "Frostbound" (Tier: 1) — Damage, Elemental, Cold }
+Gain 28(28-30)% of Damage as Extra Cold Damage
+{ Suffix Modifier "of the Hearth" (Tier: 1) — Mana }
+22(18-22)% increased Mana Regeneration Rate
+15% increased Light Radius
+{ Suffix Modifier "of the Apt" (Tier: 4) }
+20% reduced Attribute Requirements
+--------
+Note: ~b/o 5 exalted
+`);
+WandRareItem.category = ItemCategory.Wand;
+WandRareItem.rarity = ItemRarity.Rare;
+WandRareItem.itemLevel = 82;
+
+WandRareItem.info.refName = "Withered Wand";
+WandRareItem.sectionCount = 6;
+WandRareItem.prefixCount = 2;
+WandRareItem.suffixCount = 2;
+WandRareItem.implicitCount = 1;
+
+WandRareItem.note = "~b/o 5 exalted";
+// #endregion
+
+// #region NormalShield
+export const NormalShield = new TestItem(`Item Class: Shields
+Rarity: Normal
+Polished Targe
+--------
+Block chance: 25%
+Armour: 71
+Evasion Rating: 64
+--------
+Requires: Level 54, 42 Str, 42 Dex
+--------
+Item Level: 54
+--------
+Grants Skill: Raise Shield
+--------
+Note: ~b/o 1 aug
+`);
+NormalShield.category = ItemCategory.Shield;
+NormalShield.rarity = ItemRarity.Normal;
+NormalShield.itemLevel = 82;
+
+NormalShield.info.refName = "Polished Targe";
+NormalShield.sectionCount = 6;
+NormalShield.implicitCount = 1;
+
+NormalShield.note = "~b/o 1 aug";
 // #endregion

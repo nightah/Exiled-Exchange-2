@@ -165,14 +165,14 @@ export function makeGenerator2Bases() {
     "Gold",
     "Map", // ++
     "DivinationCard", // ++
-    "Active Skill Gem", // ++
-    "Support Skill Gem", // ++
-    "Meta Skill Gem", // ++
+    "Active  Gem", // ++
+    "Support  Gem", // ++
+    "Meta  Gem", // ++
     "SoulCore",
-    "UncutSkillGem",
+    "UncutGem",
     "UncutSupportGem",
     "ConventionTreasure",
-    "SkillGemToken",
+    "GemToken",
     "PinnacleKey",
     "UltimatumKey",
     "UncutReservationGem",

@@ -3,12 +3,12 @@
 {"ref": "# Desecrated Prefix Modifiers", "better": 1, "matchers": [{"string": "# Desecrated Prefix Modifiers"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_number_of_desecrated_prefix_mods"]}}}
 {"ref": "# Desecrated Suffix Modifiers", "better": 1, "matchers": [{"string": "# Desecrated Suffix Modifiers"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_number_of_desecrated_suffix_mods"]}}}
 {"ref": "# Dexterity Requirement", "better": 1, "matchers": [{"string": "# Geschick-Anforderung"}], "trade": {"ids": {"explicit": ["explicit.stat_1133453872"]}}, "id": "local_dexterity_requirement_+"}
-{"ref": "# Empty Modifiers", "better": 1, "matchers": [{"string": "# Empty Modifiers"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_number_of_empty_affix_mods"]}}}
-{"ref": "# Empty Prefix Modifiers", "better": 1, "matchers": [{"string": "# Empty Prefix Modifiers"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_number_of_empty_prefix_mods"]}}}
-{"ref": "# Empty Suffix Modifiers", "better": 1, "matchers": [{"string": "# Empty Suffix Modifiers"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_number_of_empty_suffix_mods"]}}}
-{"ref": "# Enchant Modifiers", "better": 1, "matchers": [{"string": "# Enchant Modifiers"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_number_of_enchant_mods"]}}}
-{"ref": "# Fractured Modifiers", "better": 1, "matchers": [{"string": "# Fractured Modifiers"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_number_of_fractured_mods"]}}}
-{"ref": "# Implicit Modifiers", "better": 1, "matchers": [{"string": "# Implicit Modifiers"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_number_of_implicit_mods"]}}}
+{"ref": "# Empty Modifiers", "better": 1, "matchers": [{"string": "# Freie Modifikatoren"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_number_of_empty_affix_mods"]}}}
+{"ref": "# Empty Prefix Modifiers", "better": 1, "matchers": [{"string": "# Freie Präfix-Modifikatoren"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_number_of_empty_prefix_mods"]}}}
+{"ref": "# Empty Suffix Modifiers", "better": 1, "matchers": [{"string": "# Freie Suffix-Modifikatoren"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_number_of_empty_suffix_mods"]}}}
+{"ref": "# Enchant Modifiers", "better": 1, "matchers": [{"string": "# Verzauberungsmodifikatoren"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_number_of_enchant_mods"]}}}
+{"ref": "# Fractured Modifiers", "better": 1, "matchers": [{"string": "# Brüchige Modifikatoren"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_number_of_fractured_mods"]}}}
+{"ref": "# Implicit Modifiers", "better": 1, "matchers": [{"string": "# implizite Modifikatoren"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_number_of_implicit_mods"]}}}
 {"ref": "# Intelligence Requirement", "better": 1, "matchers": [{"string": "# Intelligenz-Anforderung"}], "trade": {"ids": {"explicit": ["explicit.stat_2153364323"]}}, "id": "local_intelligence_requirement_+"}
 {"ref": "# Life Regeneration per second", "dp": true, "better": 1, "matchers": [{"string": "Regeneriert # Leben pro Sekunde"}], "trade": {"ids": {"explicit": ["explicit.stat_3325883026"], "implicit": ["implicit.stat_3325883026"], "fractured": ["fractured.stat_3325883026"], "desecrated": ["desecrated.stat_3325883026"]}}, "id": "base_life_regeneration_rate_per_minute"}
 {"ref": "# Life Regeneration per second per Socket filled", "dp": true, "better": 1, "matchers": [{"string": "# Lebensregeneration pro Sekunde pro belegter Fassung"}], "trade": {"ids": {"explicit": ["explicit.stat_332337290"]}}, "id": "local_base_life_regeneration_rate_per_minute_+_per_rune_or_soul_core"}
@@ -19,17 +19,17 @@
 {"ref": "# Maps in Range contain Expedition Encounters", "better": 1, "matchers": [{"string": "# Karten in Reichweite enthalten Expedition-Begegnungen"}], "trade": {"ids": {"implicit": ["implicit.stat_1714888636"]}}, "id": "tower_add_expedition_to_X_maps"}
 {"ref": "# Maps in Range contain Mirrors of Delirium", "better": 1, "matchers": [{"string": "# Karten in Reichweite enthalten Spiegel des Deliriums"}], "trade": {"ids": {"implicit": ["implicit.stat_3879011313"]}}, "id": "tower_add_delirium_to_X_maps"}
 {"ref": "# Maps in Range contain Ritual Altars", "better": 1, "matchers": [{"string": "# Karten in Reichweite enthalten Ritual-Altäre"}], "trade": {"ids": {"implicit": ["implicit.stat_3166002380"]}}, "id": "tower_add_ritual_to_X_maps"}
-{"ref": "# Modifiers", "better": 1, "matchers": [{"string": "# Modifiers"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_number_of_affix_mods"]}}}
+{"ref": "# Modifiers", "better": 1, "matchers": [{"string": "# Modifikatoren"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_number_of_affix_mods"]}}}
 {"ref": "# Physical Damage taken from Attack Hits", "better": 1, "matchers": [{"string": "Erleidet # physischen Schaden von Angriffstreffern"}], "trade": {"ids": {"explicit": ["explicit.stat_3441651621"]}}, "id": "physical_attack_damage_taken_+"}
 {"ref": "# Physical Damage taken from Hits", "better": 1, "matchers": [{"string": "Erleidet # physischen Schaden von Treffern"}], "trade": {"ids": {"explicit": ["explicit.stat_321765853"]}}, "id": "physical_damage_taken_+"}
 {"ref": "# Physical Damage taken on Minion Death", "better": 1, "matchers": [{"string": "Erleidet bei Tod einer Kreatur # physischen Schaden"}], "trade": {"ids": {"explicit": ["explicit.stat_4176970656"]}}, "id": "physical_damage_taken_on_minion_death"}
 {"ref": "# Physical damage taken from Projectile Attacks", "better": 1, "matchers": [{"string": "# erhöhter physischen Schaden von Projektilangriffen"}], "trade": {"ids": {"explicit": ["explicit.stat_3612407781"]}}, "id": "physical_ranged_attack_damage_taken_+"}
 {"ref": "# Prefix Modifier allowed", "better": 1, "matchers": [{"string": "# Präfix-Modifikator erlaubt"}, {"string": "# Präfix-Modifikatoren erlaubt"}], "trade": {"ids": {"implicit": ["implicit.stat_3182714256"]}}, "id": "local_maximum_prefixes_allowed_+"}
-{"ref": "# Prefix Modifiers", "better": 1, "matchers": [{"string": "# Prefix Modifiers"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_number_of_prefix_mods"]}}}
+{"ref": "# Prefix Modifiers", "better": 1, "matchers": [{"string": "# Präfix-Modifikatoren"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_number_of_prefix_mods"]}}}
 {"ref": "# Resolve Aegis", "better": 1, "matchers": [{"string": "# Willenskraft-Obhut"}], "trade": {"ids": {"sanctum": ["sanctum.stat_2410906123"]}}, "id": "sanctum_damage_aegis_max_absorption"}
 {"ref": "# Strength Requirement", "better": 1, "matchers": [{"string": "# Stärke-Anforderung"}], "trade": {"ids": {"explicit": ["explicit.stat_2833226514"]}}, "id": "local_strength_requirement_+"}
 {"ref": "# Suffix Modifier allowed", "better": 1, "matchers": [{"string": "# Suffix-Modifikator erlaubt"}, {"string": "# Suffix-Modifikatoren erlaubt"}], "trade": {"ids": {"implicit": ["implicit.stat_718638445"]}}, "id": "local_maximum_suffixes_allowed_+"}
-{"ref": "# Suffix Modifiers", "better": 1, "matchers": [{"string": "# Suffix Modifiers"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_number_of_suffix_mods"]}}}
+{"ref": "# Suffix Modifiers", "better": 1, "matchers": [{"string": "# Suffix-Modifikatoren"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_number_of_suffix_mods"]}}}
 {"ref": "# Unrevealed Modifiers", "better": 1, "matchers": [{"string": "# Unrevealed Modifiers"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_number_of_unrevealed_mods"]}}}
 {"ref": "# Unrevealed Prefix Modifiers", "better": 1, "matchers": [{"string": "# Unrevealed Prefix Modifiers"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_number_of_unrevealed_prefix_mods"]}}}
 {"ref": "# Unrevealed Suffix Modifiers", "better": 1, "matchers": [{"string": "# Unrevealed Suffix Modifiers"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_number_of_unrevealed_suffix_mods"]}}}
@@ -94,8 +94,8 @@
 {"ref": "# to maximum number of Elemental Infusions", "better": 1, "matchers": [{"string": "# zu maximaler Anzahl von Elementarinfusionen"}], "trade": {"ids": {"explicit": ["explicit.stat_4097212302"], "desecrated": ["desecrated.stat_4097212302"]}}, "id": "additional_maximum_infusion_stacks"}
 {"ref": "# to maximum number of Summoned Ballista Totems", "better": 1, "matchers": [{"string": "# zu maximaler Anzahl beschworener Ballistentotems"}], "trade": {"ids": {"explicit": ["explicit.stat_1823942939"], "desecrated": ["desecrated.stat_1823942939"]}}, "id": "additional_ballista_totems_allowed"}
 {"ref": "# to maximum number of Summoned Totems", "better": 1, "matchers": [{"string": "# zu maximaler Anzahl beschworener Totems"}], "trade": {"ids": {"explicit": ["explicit.stat_429867172"]}}, "id": "number_of_additional_totems_allowed"}
-{"ref": "# total Elemental Resistances", "better": 1, "matchers": [{"string": "# total Elemental Resistances"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_count_elemental_resistances"]}}}
-{"ref": "# total Resistances", "better": 1, "matchers": [{"string": "# total Resistances"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_count_resistances"]}}}
+{"ref": "# total Elemental Resistances", "better": 1, "matchers": [{"string": "# gesamte Elementarwiderstände"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_count_elemental_resistances"]}}}
+{"ref": "# total Resistances", "better": 1, "matchers": [{"string": "# gesamte Widerstände"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_count_resistances"]}}}
 {"ref": "#% Chance to gain a Charge when you Kill an Enemy", "better": 1, "matchers": [{"string": "#% Chance, eine Füllung zu erhalten, wenn Ihr einen Gegner tötet"}], "trade": {"ids": {"explicit": ["explicit.stat_828533480"]}}, "id": "local_%_chance_to_gain_flask_charge_on_kill"}
 {"ref": "#% Monster Elemental Resistances", "better": 1, "matchers": [{"string": "#% zu Monster-Elementarwiderständen"}], "trade": {"ids": {"explicit": ["explicit.stat_1054098949"], "desecrated": ["desecrated.stat_1054098949"]}}, "fromAreaMods": true, "id": "map_monsters_additional_elemental_resistance"}
 {"ref": "#% Resolve Mitigation from Enemy Hits", "better": 1, "matchers": [{"string": "#% Willenskraft-Minderung von gegnerischen Treffern", "negate": true}], "trade": {"ids": {"sanctum": ["sanctum.stat_142859883"]}}, "id": "sanctum_damage_taken_+%_final_from_armour"}
@@ -562,22 +562,22 @@
 {"ref": "#% to all Maximum Resistances", "better": 1, "matchers": [{"string": "#% maximale Spielerwiderstände"}], "trade": {"ids": {"sanctum": ["sanctum.stat_3376488707"]}}, "fromAreaMods": true, "id": "map_additional_player_maximum_resistances_%"}
 {"ref": "#% to all maximum Resistances", "better": 1, "matchers": [{"string": "#% zu allen maximalen Widerständen"}], "trade": {"ids": {"explicit": ["explicit.stat_569299859"], "desecrated": ["desecrated.stat_569299859"]}}, "id": "additional_maximum_all_resistances_%"}
 {"ref": "#% to maximum Block chance", "better": 1, "matchers": [{"string": "#% zu maximaler Blockchance"}], "trade": {"ids": {"explicit": ["explicit.stat_480796730"], "enchant": ["enchant.stat_480796730"], "desecrated": ["desecrated.stat_480796730"]}}, "id": "additional_maximum_block_%"}
-{"ref": "#% total Elemental Resistance", "better": 1, "matchers": [{"string": "#% total Elemental Resistance"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_total_elemental_resistance"]}}}
-{"ref": "#% total Resistance", "better": 1, "matchers": [{"string": "#% total Resistance"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_total_resistance"]}}}
-{"ref": "#% total increased maximum Energy Shield", "better": 1, "matchers": [{"string": "#% total increased maximum Energy Shield"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_increased_energy_shield"]}}}
-{"ref": "#% total to Chaos Resistance", "better": 1, "matchers": [{"string": "#% total to Chaos Resistance"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_total_chaos_resistance"]}}}
-{"ref": "#% total to Cold Resistance", "better": 1, "matchers": [{"string": "#% total to Cold Resistance"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_total_cold_resistance"]}}}
-{"ref": "#% total to Fire Resistance", "better": 1, "matchers": [{"string": "#% total to Fire Resistance"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_total_fire_resistance"]}}}
-{"ref": "#% total to Lightning Resistance", "better": 1, "matchers": [{"string": "#% total to Lightning Resistance"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_total_lightning_resistance"]}}}
-{"ref": "#% total to all Elemental Resistances", "better": 1, "matchers": [{"string": "#% total to all Elemental Resistances"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_total_all_elemental_resistances"]}}}
+{"ref": "#% total Elemental Resistance", "better": 1, "matchers": [{"string": "#% gesamt Elementarwiderstand"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_total_elemental_resistance"]}}}
+{"ref": "#% total Resistance", "better": 1, "matchers": [{"string": "#% gesamter Widerstand"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_total_resistance"]}}}
+{"ref": "#% total increased maximum Energy Shield", "better": 1, "matchers": [{"string": "#% gesamtes erhöhtes maximales Energieschild"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_increased_energy_shield"]}}}
+{"ref": "#% total to Chaos Resistance", "better": 1, "matchers": [{"string": "+X% gesamt zu Chaoswiderstand"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_total_chaos_resistance"]}}}
+{"ref": "#% total to Cold Resistance", "better": 1, "matchers": [{"string": "#% gesamt zu Kältewiderstand"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_total_cold_resistance"]}}}
+{"ref": "#% total to Fire Resistance", "better": 1, "matchers": [{"string": "#% gesamt zu Feuerwiderstand"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_total_fire_resistance"]}}}
+{"ref": "#% total to Lightning Resistance", "better": 1, "matchers": [{"string": "#% gesamt zu Blitzwiderstand"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_total_lightning_resistance"]}}}
+{"ref": "#% total to all Elemental Resistances", "better": 1, "matchers": [{"string": "#% gesamt zu allen Elementarwiderständen"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_total_all_elemental_resistances"]}}}
 {"ref": "+# to Spirit per Socket filled", "better": 1, "matchers": [{"string": "# zu Wille pro belegter Fassung"}], "trade": {"ids": {"explicit": ["explicit.stat_4163415912"]}}, "id": "local_spirit_+_per_rune_or_soul_core"}
-{"ref": "+# total maximum Energy Shield", "better": 1, "matchers": [{"string": "+# total maximum Energy Shield"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_total_energy_shield"]}}}
-{"ref": "+# total maximum Life", "better": 1, "matchers": [{"string": "+# total maximum Life"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_total_life"]}}}
-{"ref": "+# total maximum Mana", "better": 1, "matchers": [{"string": "+# total maximum Mana"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_total_mana"]}}}
-{"ref": "+# total to Dexterity", "better": 1, "matchers": [{"string": "+# total to Dexterity"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_total_dexterity"]}}}
-{"ref": "+# total to Intelligence", "better": 1, "matchers": [{"string": "+# total to Intelligence"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_total_intelligence"]}}}
-{"ref": "+# total to Strength", "better": 1, "matchers": [{"string": "+# total to Strength"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_total_strength"]}}}
-{"ref": "+# total to all Attributes", "better": 1, "matchers": [{"string": "+# total to all Attributes"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_total_all_attributes"]}}}
+{"ref": "+# total maximum Energy Shield", "better": 1, "matchers": [{"string": "+# gesamt zu maximalem Energieschild"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_total_energy_shield"]}}}
+{"ref": "+# total maximum Life", "better": 1, "matchers": [{"string": "+# gesamt zu maximalem Leben"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_total_life"]}}}
+{"ref": "+# total maximum Mana", "better": 1, "matchers": [{"string": "+# gesamt zu maximalem Mana"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_total_mana"]}}}
+{"ref": "+# total to Dexterity", "better": 1, "matchers": [{"string": "+# gesamt zu Geschick"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_total_dexterity"]}}}
+{"ref": "+# total to Intelligence", "better": 1, "matchers": [{"string": "+# gesamt zu Intelligenz"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_total_intelligence"]}}}
+{"ref": "+# total to Strength", "better": 1, "matchers": [{"string": "+# gesamt zu Stärke"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_total_strength"]}}}
+{"ref": "+# total to all Attributes", "better": 1, "matchers": [{"string": "+# gesamt zu allen Attributen"}], "trade": {"ids": {"pseudo": ["pseudo.pseudo_total_all_attributes"]}}}
 {"ref": "+1 to Maximum Spirit per # Maximum Life", "better": 1, "matchers": [{"string": "1 zu maximalem Wille pro # maximalem Leben"}], "trade": {"ids": {"explicit": ["explicit.stat_1345486764"]}}, "id": "unique_prism_guardian_spirit_+_per_X_maximum_life"}
 {"ref": "+100% of Armour also applies to Lightning Damage", "better": 1, "matchers": [{"string": "100% der Rüstung werden auch auf Blitzschaden angewendet"}], "trade": {"ids": {"explicit": ["explicit.stat_2134207902"]}}, "id": "base_armour_applies_to_lightning_damage"}
 {"ref": "1% increased Movement Speed per # Evasion Rating\nOther Modifiers to Movement Speed do not apply", "better": 1, "matchers": [{"string": "1% erhöht Bewegungsgeschwindigkeit pro # Ausweichwert\nAndere Modifikatoren der Bewegungsgeschwindigkeit werden nicht angewendet"}], "trade": {"ids": {"explicit": ["explicit.stat_3881997959"]}}, "id": "movement_speed_is_only_base_+1%_per_x_evasion_rating"}
@@ -948,61 +948,61 @@
 {"ref": "Grants #% of Life Recovery to Minions", "better": 1, "matchers": [{"string": "Gewährt Euren Kreaturen #% der Lebenswiederherstellung"}], "trade": {"ids": {"explicit": ["explicit.stat_2416869319"]}}, "id": "local_flask_minion_heal_%"}
 {"ref": "Grants 1 additional Skill Slot", "better": 1, "matchers": [{"string": "Gewährt # zusätzliche Fertigkeitenplätze"}, {"string": "Gewährt 1 zusätzlichen Fertigkeitenplatz", "value": 1}], "trade": {"ids": {"implicit": ["implicit.stat_958696139"]}}, "id": "local_item_additional_skill_slots"}
 {"ref": "Grants Onslaught during effect", "better": 1, "matchers": [{"string": "Gewährt während der Wirkung Ansturm"}], "trade": {"ids": {"explicit": ["explicit.stat_618665892"]}}, "id": "charm_gain_onslaught_during_effect"}
-{"ref": "Grants Skill: Level # Black Powder Blitz", "better": 1, "matchers": [{"string": "Grants Skill: Level # Black Powder Blitz"}], "trade": {"ids": {"skill": ["skill.black_powder_blitz_reservation"]}}}
-{"ref": "Grants Skill: Level # Blink", "better": 1, "matchers": [{"string": "Grants Skill: Level # Blink"}], "trade": {"ids": {"skill": ["skill.blink"]}}}
-{"ref": "Grants Skill: Level # Bone Blast", "better": 1, "matchers": [{"string": "Grants Skill: Level # Bone Blast"}], "trade": {"ids": {"skill": ["skill.bone_blast"]}}}
-{"ref": "Grants Skill: Level # Bursting Fen Toad", "better": 1, "matchers": [{"string": "Grants Skill: Level # Bursting Fen Toad"}], "trade": {"ids": {"skill": ["skill.exploding_poison_toad"]}}}
-{"ref": "Grants Skill: Level # Cast on Block", "better": 1, "matchers": [{"string": "Grants Skill: Level # Cast on Block"}], "trade": {"ids": {"skill": ["skill.cast_on_block"]}}}
-{"ref": "Grants Skill: Level # Cast on Charm Use", "better": 1, "matchers": [{"string": "Grants Skill: Level # Cast on Charm Use"}], "trade": {"ids": {"skill": ["skill.cast_on_using_charm"]}}}
-{"ref": "Grants Skill: Level # Chaos Bolt", "better": 1, "matchers": [{"string": "Grants Skill: Level # Chaos Bolt"}], "trade": {"ids": {"skill": ["skill.weapon_granted_chaosbolt"]}}}
-{"ref": "Grants Skill: Level # Chaotic Surge", "better": 1, "matchers": [{"string": "Grants Skill: Level # Chaotic Surge"}], "trade": {"ids": {"skill": ["skill.trigger_chaos_infusion"]}}}
-{"ref": "Grants Skill: Level # Compose Requiem", "better": 1, "matchers": [{"string": "Grants Skill: Level # Compose Requiem"}], "trade": {"ids": {"skill": ["skill.rapid_shot_requiem_ammo"]}}}
-{"ref": "Grants Skill: Level # Consecrate", "better": 1, "matchers": [{"string": "Grants Skill: Level # Consecrate"}], "trade": {"ids": {"skill": ["skill.consecrate"]}}}
-{"ref": "Grants Skill: Level # Crackling Palm", "better": 1, "matchers": [{"string": "Grants Skill: Level # Crackling Palm"}], "trade": {"ids": {"skill": ["skill.thunderfist"]}}}
-{"ref": "Grants Skill: Level # Decompose", "better": 1, "matchers": [{"string": "Grants Skill: Level # Decompose"}], "trade": {"ids": {"skill": ["skill.corpse_cloud"]}}}
-{"ref": "Grants Skill: Level # Discipline", "better": 1, "matchers": [{"string": "Grants Skill: Level # Discipline"}], "trade": {"ids": {"skill": ["skill.discipline"]}}}
-{"ref": "Grants Skill: Level # Ember Fusillade", "better": 1, "matchers": [{"string": "Grants Skill: Level # Ember Fusillade"}], "trade": {"ids": {"skill": ["skill.unique_dusk_vigil_triggered_blazing_cluster"]}}}
-{"ref": "Grants Skill: Level # Enervating Nova", "better": 1, "matchers": [{"string": "Grants Skill: Level # Enervating Nova"}], "trade": {"ids": {"skill": ["skill.new_shock_nova"]}}}
-{"ref": "Grants Skill: Level # Feast of Flesh", "better": 1, "matchers": [{"string": "Grants Skill: Level # Feast of Flesh"}], "trade": {"ids": {"skill": ["skill.feast_of_flesh"]}}}
-{"ref": "Grants Skill: Level # Firebolt", "better": 1, "matchers": [{"string": "Grants Skill: Level # Firebolt"}], "trade": {"ids": {"skill": ["skill.fireball"]}}}
-{"ref": "Grants Skill: Level # Freezing Shards", "better": 1, "matchers": [{"string": "Grants Skill: Level # Freezing Shards"}], "trade": {"ids": {"skill": ["skill.freezing_shards"]}}}
-{"ref": "Grants Skill: Level # Fulmination", "better": 1, "matchers": [{"string": "Grants Skill: Level # Fulmination"}], "trade": {"ids": {"skill": ["skill.wrath_aura"]}}}
-{"ref": "Grants Skill: Level # Future-Past", "better": 1, "matchers": [{"string": "Grants Skill: Level # Future-Past"}], "trade": {"ids": {"skill": ["skill.foresight"]}}}
-{"ref": "Grants Skill: Level # Galvanic Field", "better": 1, "matchers": [{"string": "Grants Skill: Level # Galvanic Field"}], "trade": {"ids": {"skill": ["skill.galvanic_field"]}}}
-{"ref": "Grants Skill: Level # Gemini Surge", "better": 1, "matchers": [{"string": "Grants Skill: Level # Gemini Surge"}], "trade": {"ids": {"skill": ["skill.trigger_doublevision_infusion"]}}}
-{"ref": "Grants Skill: Level # Heart of Ice", "better": 1, "matchers": [{"string": "Grants Skill: Level # Heart of Ice"}], "trade": {"ids": {"skill": ["skill.chilling_aura"]}}}
-{"ref": "Grants Skill: Level # Herald of Ash", "better": 1, "matchers": [{"string": "Grants Skill: Level # Herald of Ash"}], "trade": {"ids": {"skill": ["skill.herald_of_ash"]}}}
-{"ref": "Grants Skill: Level # Herald of Ice", "better": 1, "matchers": [{"string": "Grants Skill: Level # Herald of Ice"}], "trade": {"ids": {"skill": ["skill.herald_of_ice"]}}}
-{"ref": "Grants Skill: Level # Herald of Thunder", "better": 1, "matchers": [{"string": "Grants Skill: Level # Herald of Thunder"}], "trade": {"ids": {"skill": ["skill.herald_of_thunder"]}}}
-{"ref": "Grants Skill: Level # His Foul Emergence", "better": 1, "matchers": [{"string": "Grants Skill: Level # His Foul Emergence"}], "trade": {"ids": {"skill": ["skill.screaming_devastation"]}}}
-{"ref": "Grants Skill: Level # His Scattering Calamity", "better": 1, "matchers": [{"string": "Grants Skill: Level # His Scattering Calamity"}], "trade": {"ids": {"skill": ["skill.scattering_calamity"]}}}
-{"ref": "Grants Skill: Level # His Vile Intrusion", "better": 1, "matchers": [{"string": "Grants Skill: Level # His Vile Intrusion"}], "trade": {"ids": {"skill": ["skill.vile_disruption"]}}}
-{"ref": "Grants Skill: Level # His Winnowing Flame", "better": 1, "matchers": [{"string": "Grants Skill: Level # His Winnowing Flame"}], "trade": {"ids": {"skill": ["skill.winnowing_flame"]}}}
-{"ref": "Grants Skill: Level # Icestorm", "better": 1, "matchers": [{"string": "Grants Skill: Level # Icestorm"}], "trade": {"ids": {"skill": ["skill.ice_storm"]}}}
-{"ref": "Grants Skill: Level # Impurity", "better": 1, "matchers": [{"string": "Grants Skill: Level # Impurity"}], "trade": {"ids": {"skill": ["skill.chaos_resist_aura"]}}}
-{"ref": "Grants Skill: Level # Lightning Bolt", "better": 1, "matchers": [{"string": "Grants Skill: Level # Lightning Bolt"}], "trade": {"ids": {"skill": ["skill.lightning_bolt", "skill.unique_breach_lightning_bolt"]}}}
-{"ref": "Grants Skill: Level # Living Bomb", "better": 1, "matchers": [{"string": "Grants Skill: Level # Living Bomb"}], "trade": {"ids": {"skill": ["skill.living_bomb_player"]}}}
-{"ref": "Grants Skill: Level # Malice", "better": 1, "matchers": [{"string": "Grants Skill: Level # Malice"}], "trade": {"ids": {"skill": ["skill.aura_crit_against_enemy"]}}}
-{"ref": "Grants Skill: Level # Mana Drain", "better": 1, "matchers": [{"string": "Grants Skill: Level # Mana Drain"}], "trade": {"ids": {"skill": ["skill.mana_drain"]}}}
-{"ref": "Grants Skill: Level # Parry", "better": 1, "matchers": [{"string": "Grants Skill: Level # Parry"}], "trade": {"ids": {"skill": ["skill.parry"]}}}
-{"ref": "Grants Skill: Level # Phantasmal Arrow", "better": 1, "matchers": [{"string": "Grants Skill: Level # Phantasmal Arrow"}], "trade": {"ids": {"skill": ["skill.ghostfuse_arrow"]}}}
-{"ref": "Grants Skill: Level # Pinnacle of Power", "better": 1, "matchers": [{"string": "Grants Skill: Level # Pinnacle of Power"}], "trade": {"ids": {"skill": ["skill.elemental_power"]}}}
-{"ref": "Grants Skill: Level # Power Siphon", "better": 1, "matchers": [{"string": "Grants Skill: Level # Power Siphon"}], "trade": {"ids": {"skill": ["skill.power_siphon"]}}}
-{"ref": "Grants Skill: Level # Purity of Fire", "better": 1, "matchers": [{"string": "Grants Skill: Level # Purity of Fire"}], "trade": {"ids": {"skill": ["skill.fire_resist_aura"]}}}
-{"ref": "Grants Skill: Level # Purity of Ice", "better": 1, "matchers": [{"string": "Grants Skill: Level # Purity of Ice"}], "trade": {"ids": {"skill": ["skill.cold_resist_aura"]}}}
-{"ref": "Grants Skill: Level # Purity of Lightning", "better": 1, "matchers": [{"string": "Grants Skill: Level # Purity of Lightning"}], "trade": {"ids": {"skill": ["skill.lightning_resist_aura"]}}}
-{"ref": "Grants Skill: Level # Raise Shield", "better": 1, "matchers": [{"string": "Grants Skill: Level # Raise Shield"}], "trade": {"ids": {"skill": ["skill.shield_block"]}}}
-{"ref": "Grants Skill: Level # Reap", "better": 1, "matchers": [{"string": "Grants Skill: Level # Reap"}], "trade": {"ids": {"skill": ["skill.reap"]}}}
-{"ref": "Grants Skill: Level # Sigil of Power", "better": 1, "matchers": [{"string": "Grants Skill: Level # Sigil of Power"}], "trade": {"ids": {"skill": ["skill.circle_of_power"]}}}
-{"ref": "Grants Skill: Level # Skeletal Warrior Minion", "better": 1, "matchers": [{"string": "Grants Skill: Level # Skeletal Warrior Minion"}], "trade": {"ids": {"skill": ["skill.summon_skeleton_warrior"]}}}
-{"ref": "Grants Skill: Level # Solar Orb", "better": 1, "matchers": [{"string": "Grants Skill: Level # Solar Orb"}], "trade": {"ids": {"skill": ["skill.solar_orb"]}}}
-{"ref": "Grants Skill: Level # Spark", "better": 1, "matchers": [{"string": "Grants Skill: Level # Spark"}], "trade": {"ids": {"skill": ["skill.unique_earthbound_triggered_spark"]}}}
-{"ref": "Grants Skill: Level # Spellslinger", "better": 1, "matchers": [{"string": "Grants Skill: Level # Spellslinger"}], "trade": {"ids": {"skill": ["skill.spellslinger_invocation"]}}}
-{"ref": "Grants Skill: Level # Thundergod's Wrath", "better": 1, "matchers": [{"string": "Grants Skill: Level # Thundergod's Wrath"}], "trade": {"ids": {"skill": ["skill.cast_lightning_spell_on_hit"]}}}
-{"ref": "Grants Skill: Level # Unleash", "better": 1, "matchers": [{"string": "Grants Skill: Level # Unleash"}], "trade": {"ids": {"skill": ["skill.unleash"]}}}
-{"ref": "Grants Skill: Level # Valako's Charge", "better": 1, "matchers": [{"string": "Grants Skill: Level # Valako's Charge"}], "trade": {"ids": {"skill": ["skill.valakos_luck"]}}}
-{"ref": "Grants Skill: Level # Volatile Dead", "better": 1, "matchers": [{"string": "Grants Skill: Level # Volatile Dead"}], "trade": {"ids": {"skill": ["skill.volatile_dead"]}}}
-{"ref": "Grants Skill: Level # Withering Presence", "better": 1, "matchers": [{"string": "Grants Skill: Level # Withering Presence"}], "trade": {"ids": {"skill": ["skill.withering_presence"]}}}
+{"ref": "Grants Skill: Level # Black Powder Blitz", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Schwarzpulver-Blitz"}], "trade": {"ids": {"skill": ["skill.black_powder_blitz_reservation"]}}}
+{"ref": "Grants Skill: Level # Blink", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Blinzeln"}], "trade": {"ids": {"skill": ["skill.blink"]}}}
+{"ref": "Grants Skill: Level # Bone Blast", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Knochensprengung"}], "trade": {"ids": {"skill": ["skill.bone_blast"]}}}
+{"ref": "Grants Skill: Level # Bursting Fen Toad", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Berstende Moorkröte"}], "trade": {"ids": {"skill": ["skill.exploding_poison_toad"]}}}
+{"ref": "Grants Skill: Level # Cast on Block", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Zaubern bei Blocken"}], "trade": {"ids": {"skill": ["skill.cast_on_block"]}}}
+{"ref": "Grants Skill: Level # Cast on Charm Use", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Zaubern bei Phiolennutzung"}], "trade": {"ids": {"skill": ["skill.cast_on_using_charm"]}}}
+{"ref": "Grants Skill: Level # Chaos Bolt", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Chaosbolzen"}], "trade": {"ids": {"skill": ["skill.weapon_granted_chaosbolt"]}}}
+{"ref": "Grants Skill: Level # Chaotic Surge", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Chaoswoge"}], "trade": {"ids": {"skill": ["skill.trigger_chaos_infusion"]}}}
+{"ref": "Grants Skill: Level # Compose Requiem", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Requiem komponieren"}], "trade": {"ids": {"skill": ["skill.rapid_shot_requiem_ammo"]}}}
+{"ref": "Grants Skill: Level # Consecrate", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Weihen"}], "trade": {"ids": {"skill": ["skill.consecrate"]}}}
+{"ref": "Grants Skill: Level # Crackling Palm", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Knisternde Hand"}], "trade": {"ids": {"skill": ["skill.thunderfist"]}}}
+{"ref": "Grants Skill: Level # Decompose", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Zersetzen"}], "trade": {"ids": {"skill": ["skill.corpse_cloud"]}}}
+{"ref": "Grants Skill: Level # Discipline", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Disziplin"}], "trade": {"ids": {"skill": ["skill.discipline"]}}}
+{"ref": "Grants Skill: Level # Ember Fusillade", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Glühende Salve"}], "trade": {"ids": {"skill": ["skill.unique_dusk_vigil_triggered_blazing_cluster"]}}}
+{"ref": "Grants Skill: Level # Enervating Nova", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Enervierende Nova"}], "trade": {"ids": {"skill": ["skill.new_shock_nova"]}}}
+{"ref": "Grants Skill: Level # Feast of Flesh", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Fest des Fleisches"}], "trade": {"ids": {"skill": ["skill.feast_of_flesh"]}}}
+{"ref": "Grants Skill: Level # Firebolt", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Feuerbolzen"}], "trade": {"ids": {"skill": ["skill.fireball"]}}}
+{"ref": "Grants Skill: Level # Freezing Shards", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Einfrierende Splitter"}], "trade": {"ids": {"skill": ["skill.freezing_shards"]}}}
+{"ref": "Grants Skill: Level # Fulmination", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Wutausbruch"}], "trade": {"ids": {"skill": ["skill.wrath_aura"]}}}
+{"ref": "Grants Skill: Level # Future-Past", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Zukunft und Vergangenheit"}], "trade": {"ids": {"skill": ["skill.foresight"]}}}
+{"ref": "Grants Skill: Level # Galvanic Field", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Galvanisches Feld"}], "trade": {"ids": {"skill": ["skill.galvanic_field"]}}}
+{"ref": "Grants Skill: Level # Gemini Surge", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Zwillingswoge"}], "trade": {"ids": {"skill": ["skill.trigger_doublevision_infusion"]}}}
+{"ref": "Grants Skill: Level # Heart of Ice", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Hearz aus Eis"}], "trade": {"ids": {"skill": ["skill.chilling_aura"]}}}
+{"ref": "Grants Skill: Level # Herald of Ash", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Herold der Asche"}], "trade": {"ids": {"skill": ["skill.herald_of_ash"]}}}
+{"ref": "Grants Skill: Level # Herald of Ice", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Herold des Eises"}], "trade": {"ids": {"skill": ["skill.herald_of_ice"]}}}
+{"ref": "Grants Skill: Level # Herald of Thunder", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Herold des Donners"}], "trade": {"ids": {"skill": ["skill.herald_of_thunder"]}}}
+{"ref": "Grants Skill: Level # His Foul Emergence", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Sein übles Aufkommen"}], "trade": {"ids": {"skill": ["skill.screaming_devastation"]}}}
+{"ref": "Grants Skill: Level # His Scattering Calamity", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Seine zerstreuende Katastrophe"}], "trade": {"ids": {"skill": ["skill.scattering_calamity"]}}}
+{"ref": "Grants Skill: Level # His Vile Intrusion", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Sein abscheulicher Übergriff"}], "trade": {"ids": {"skill": ["skill.vile_disruption"]}}}
+{"ref": "Grants Skill: Level # His Winnowing Flame", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Seine reinigende Flamme"}], "trade": {"ids": {"skill": ["skill.winnowing_flame"]}}}
+{"ref": "Grants Skill: Level # Icestorm", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Eissturm"}], "trade": {"ids": {"skill": ["skill.ice_storm"]}}}
+{"ref": "Grants Skill: Level # Impurity", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Unreinheit"}], "trade": {"ids": {"skill": ["skill.chaos_resist_aura"]}}}
+{"ref": "Grants Skill: Level # Lightning Bolt", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Schleuderblitz"}], "trade": {"ids": {"skill": ["skill.lightning_bolt", "skill.unique_breach_lightning_bolt"]}}}
+{"ref": "Grants Skill: Level # Living Bomb", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Lebendige Bombe"}], "trade": {"ids": {"skill": ["skill.living_bomb_player"]}}}
+{"ref": "Grants Skill: Level # Malice", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Bosheit"}], "trade": {"ids": {"skill": ["skill.aura_crit_against_enemy"]}}}
+{"ref": "Grants Skill: Level # Mana Drain", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Manaentzug"}], "trade": {"ids": {"skill": ["skill.mana_drain"]}}}
+{"ref": "Grants Skill: Level # Parry", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Parieren"}], "trade": {"ids": {"skill": ["skill.parry"]}}}
+{"ref": "Grants Skill: Level # Phantasmal Arrow", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Geisterhafter Pfeil"}], "trade": {"ids": {"skill": ["skill.ghostfuse_arrow"]}}}
+{"ref": "Grants Skill: Level # Pinnacle of Power", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Spitze der Macht"}], "trade": {"ids": {"skill": ["skill.elemental_power"]}}}
+{"ref": "Grants Skill: Level # Power Siphon", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Energieentladung"}], "trade": {"ids": {"skill": ["skill.power_siphon"]}}}
+{"ref": "Grants Skill: Level # Purity of Fire", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Reinheit des Feuers"}], "trade": {"ids": {"skill": ["skill.fire_resist_aura"]}}}
+{"ref": "Grants Skill: Level # Purity of Ice", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Reinheit des Eises"}], "trade": {"ids": {"skill": ["skill.cold_resist_aura"]}}}
+{"ref": "Grants Skill: Level # Purity of Lightning", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Reinheit des Blitzes"}], "trade": {"ids": {"skill": ["skill.lightning_resist_aura"]}}}
+{"ref": "Grants Skill: Level # Raise Shield", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Schild heben"}], "trade": {"ids": {"skill": ["skill.shield_block"]}}}
+{"ref": "Grants Skill: Level # Reap", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Sense"}], "trade": {"ids": {"skill": ["skill.reap"]}}}
+{"ref": "Grants Skill: Level # Sigil of Power", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Rune der Macht"}], "trade": {"ids": {"skill": ["skill.circle_of_power"]}}}
+{"ref": "Grants Skill: Level # Skeletal Warrior Minion", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Skelettkrieger"}], "trade": {"ids": {"skill": ["skill.summon_skeleton_warrior"]}}}
+{"ref": "Grants Skill: Level # Solar Orb", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Solarsphäre"}], "trade": {"ids": {"skill": ["skill.solar_orb"]}}}
+{"ref": "Grants Skill: Level # Spark", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Funken"}], "trade": {"ids": {"skill": ["skill.unique_earthbound_triggered_spark"]}}}
+{"ref": "Grants Skill: Level # Spellslinger", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Zauberkünstler"}], "trade": {"ids": {"skill": ["skill.spellslinger_invocation"]}}}
+{"ref": "Grants Skill: Level # Thundergod's Wrath", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Zorn des Donnergotts"}], "trade": {"ids": {"skill": ["skill.cast_lightning_spell_on_hit"]}}}
+{"ref": "Grants Skill: Level # Unleash", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Entfesseln"}], "trade": {"ids": {"skill": ["skill.unleash"]}}}
+{"ref": "Grants Skill: Level # Valako's Charge", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Valakos Aufladung"}], "trade": {"ids": {"skill": ["skill.valakos_luck"]}}}
+{"ref": "Grants Skill: Level # Volatile Dead", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Explosiver Tod"}], "trade": {"ids": {"skill": ["skill.volatile_dead"]}}}
+{"ref": "Grants Skill: Level # Withering Presence", "better": 1, "matchers": [{"string": "Gewährt Fertigkeit: Stufe # Verkümmernde Präsenz"}], "trade": {"ids": {"skill": ["skill.withering_presence"]}}}
 {"ref": "Grants a Frenzy Charge on use", "better": 1, "matchers": [{"string": "Gewährt bei Nutzung eine Raserei-Ladung"}], "trade": {"ids": {"explicit": ["explicit.stat_280890192"]}}, "id": "charm_grants_frenzy_charge_when_used"}
 {"ref": "Grants a Power Charge on use", "better": 1, "matchers": [{"string": "Gewährt bei Nutzung eine Energie-Ladung"}], "trade": {"ids": {"explicit": ["explicit.stat_2566921799"]}}, "id": "charm_grants_power_charge_when_used"}
 {"ref": "Grants effect of Dreaming Gloom Shrine", "better": 1, "matchers": [{"string": "Gewährt Wirkung des Traumhaften Finsterschreins"}], "trade": {"ids": {"explicit": ["explicit.stat_3742268652"]}}, "id": "has_unique_chaos_shrine_effect"}
@@ -1013,103 +1013,103 @@
 {"ref": "Grenade Skills Fire an additional Projectile", "better": 1, "matchers": [{"string": "Granaten-Fertigkeiten feuern # zusätzliche Projektile"}, {"string": "Granaten-Fertigkeiten feuern ein zusätzliches Projektil", "value": 1}], "trade": {"ids": {"implicit": ["implicit.stat_1980802737"]}}, "id": "grenade_skill_number_of_additional_projectiles"}
 {"ref": "Grenade Skills have +# Cooldown Use", "better": 1, "matchers": [{"string": "Granaten-Fertigkeiten haben +# Abklingzeit-Nutzungen"}, {"string": "Granaten-Fertigkeiten haben +# Abklingzeit-Nutzung", "value": 1}], "trade": {"ids": {"explicit": ["explicit.stat_2250681686"], "desecrated": ["desecrated.stat_2250681686"]}}, "id": "grenade_skill_cooldown_count_+"}
 {"ref": "Grenades have #% chance to activate a second time", "better": 1, "matchers": [{"string": "Granaten haben #% Chance, ein zweites Mal aktiviert zu werden"}, {"string": "Granaten werden ein zweites Mal aktiviert", "value": 100}], "trade": {"ids": {"explicit": ["explicit.stat_538981065"], "desecrated": ["desecrated.stat_538981065"]}}, "id": "grenade_skill_%_chance_to_explode_twice"}
-{"ref": "Has ", "better": 1, "matchers": [{"string": "Has "}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_0"]}}}
+{"ref": "Has ", "better": 1, "matchers": [{"string": "Hat "}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_0"]}}}
 {"ref": "Has # Charm Slot", "better": 1, "matchers": [{"string": "Hat # Phiolen-Plätze"}, {"string": "Hat # Phiolen-Platz", "value": 1}], "trade": {"ids": {"explicit": ["explicit.stat_1416292992"], "implicit": ["implicit.stat_1416292992"]}}, "id": "local_charm_slots"}
-{"ref": "Has Adrenaline Vial", "better": 1, "matchers": [{"string": "Has Adrenaline Vial"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_59406"]}}}
-{"ref": "Has Ahkeli's Guard", "better": 1, "matchers": [{"string": "Has Ahkeli's Guard"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_47837"]}}}
-{"ref": "Has All-Seeing Eye", "better": 1, "matchers": [{"string": "Has All-Seeing Eye"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_9121"]}}}
-{"ref": "Has Assassin's Blade", "better": 1, "matchers": [{"string": "Has Assassin's Blade"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_6090"]}}}
-{"ref": "Has Balbala's Gift", "better": 1, "matchers": [{"string": "Has Balbala's Gift"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_52622"]}}}
-{"ref": "Has Black Pearl", "better": 1, "matchers": [{"string": "Has Black Pearl"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_41498"]}}}
-{"ref": "Has Black Smoke", "better": 1, "matchers": [{"string": "Has Black Smoke"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_34448"]}}}
-{"ref": "Has Blunt Sword", "better": 1, "matchers": [{"string": "Has Blunt Sword"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_40008"]}}}
-{"ref": "Has Branded Balbalakh", "better": 1, "matchers": [{"string": "Has Branded Balbalakh"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_19039"]}}}
-{"ref": "Has Chains of Binding", "better": 1, "matchers": [{"string": "Has Chains of Binding"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_25062"]}}}
-{"ref": "Has Chipped Dice", "better": 1, "matchers": [{"string": "Has Chipped Dice"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_60796"]}}}
-{"ref": "Has Chiselled Stone", "better": 1, "matchers": [{"string": "Has Chiselled Stone"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_6958"]}}}
-{"ref": "Has Corrosive Concoction", "better": 1, "matchers": [{"string": "Has Corrosive Concoction"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_55502"]}}}
-{"ref": "Has Costly Aid", "better": 1, "matchers": [{"string": "Has Costly Aid"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_32085"]}}}
-{"ref": "Has Crystal Shard", "better": 1, "matchers": [{"string": "Has Crystal Shard"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_30042"]}}}
-{"ref": "Has Dark Pit", "better": 1, "matchers": [{"string": "Has Dark Pit"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_62584"]}}}
-{"ref": "Has Deadly Snare", "better": 1, "matchers": [{"string": "Has Deadly Snare"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_41921"]}}}
-{"ref": "Has Death Toll", "better": 1, "matchers": [{"string": "Has Death Toll"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_59642"]}}}
-{"ref": "Has Deceptive Mirror", "better": 1, "matchers": [{"string": "Has Deceptive Mirror"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_14131"]}}}
-{"ref": "Has Dekhara's Necklace", "better": 1, "matchers": [{"string": "Has Dekhara's Necklace"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_13598"]}}}
-{"ref": "Has Dishonoured Tattoo", "better": 1, "matchers": [{"string": "Has Dishonoured Tattoo"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_5501"]}}}
-{"ref": "Has Diverted River", "better": 1, "matchers": [{"string": "Has Diverted River"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_45401"]}}}
-{"ref": "Has Earned Honour", "better": 1, "matchers": [{"string": "Has Earned Honour"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_24603"]}}}
-{"ref": "Has Enchanted Urn", "better": 1, "matchers": [{"string": "Has Enchanted Urn"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_38167"]}}}
-{"ref": "Has Exhausted Wells", "better": 1, "matchers": [{"string": "Has Exhausted Wells"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_35912"]}}}
-{"ref": "Has Fiendish Wings", "better": 1, "matchers": [{"string": "Has Fiendish Wings"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_28313"]}}}
-{"ref": "Has Flooding Rivers", "better": 1, "matchers": [{"string": "Has Flooding Rivers"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_44476"]}}}
-{"ref": "Has Forgotten Traditions", "better": 1, "matchers": [{"string": "Has Forgotten Traditions"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_18125"]}}}
-{"ref": "Has Fountain of Youth", "better": 1, "matchers": [{"string": "Has Fountain of Youth"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_40142"]}}}
-{"ref": "Has Fright Mask", "better": 1, "matchers": [{"string": "Has Fright Mask"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_15442"]}}}
-{"ref": "Has Garukhan's Favour", "better": 1, "matchers": [{"string": "Has Garukhan's Favour"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_38171"]}}}
-{"ref": "Has Gate Toll", "better": 1, "matchers": [{"string": "Has Gate Toll"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_35767"]}}}
-{"ref": "Has Ghastly Scythe", "better": 1, "matchers": [{"string": "Has Ghastly Scythe"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_32300"]}}}
-{"ref": "Has Glass Shard", "better": 1, "matchers": [{"string": "Has Glass Shard"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_45600"]}}}
-{"ref": "Has Glowing Orb", "better": 1, "matchers": [{"string": "Has Glowing Orb"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_3157"]}}}
-{"ref": "Has Golden Smoke", "better": 1, "matchers": [{"string": "Has Golden Smoke"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_1198"]}}}
-{"ref": "Has Haemorrhage", "better": 1, "matchers": [{"string": "Has Haemorrhage"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_34171"]}}}
-{"ref": "Has Hare Foot", "better": 1, "matchers": [{"string": "Has Hare Foot"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_13820"]}}}
-{"ref": "Has Holy Water", "better": 1, "matchers": [{"string": "Has Holy Water"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_28826"]}}}
-{"ref": "Has Honed Claws", "better": 1, "matchers": [{"string": "Has Honed Claws"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_62326"]}}}
-{"ref": "Has Honoured Challenger", "better": 1, "matchers": [{"string": "Has Honoured Challenger"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_4682"]}}}
-{"ref": "Has Hungry Fangs", "better": 1, "matchers": [{"string": "Has Hungry Fangs"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_359"]}}}
-{"ref": "Has Imperial Seal", "better": 1, "matchers": [{"string": "Has Imperial Seal"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_44836"]}}}
-{"ref": "Has Iron Manacles", "better": 1, "matchers": [{"string": "Has Iron Manacles"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_35578"]}}}
-{"ref": "Has Leaking Waterskin", "better": 1, "matchers": [{"string": "Has Leaking Waterskin"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_61003"]}}}
+{"ref": "Has Adrenaline Vial", "better": 1, "matchers": [{"string": "Hat Phiole des Adrenalins"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_59406"]}}}
+{"ref": "Has Ahkeli's Guard", "better": 1, "matchers": [{"string": "Hat Ahkelis Wache"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_47837"]}}}
+{"ref": "Has All-Seeing Eye", "better": 1, "matchers": [{"string": "Hat Allsehendes Auge"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_9121"]}}}
+{"ref": "Has Assassin's Blade", "better": 1, "matchers": [{"string": "Hat Klinge des Assassinen"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_6090"]}}}
+{"ref": "Has Balbala's Gift", "better": 1, "matchers": [{"string": "Hat Balbalas Geschenk"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_52622"]}}}
+{"ref": "Has Black Pearl", "better": 1, "matchers": [{"string": "Hat Schwarze Perle"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_41498"]}}}
+{"ref": "Has Black Smoke", "better": 1, "matchers": [{"string": "Hat Schwarzer Rauch"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_34448"]}}}
+{"ref": "Has Blunt Sword", "better": 1, "matchers": [{"string": "Hat Stumpfes Schwert"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_40008"]}}}
+{"ref": "Has Branded Balbalakh", "better": 1, "matchers": [{"string": "Hat Gebrandmarkte Balbalakh"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_19039"]}}}
+{"ref": "Has Chains of Binding", "better": 1, "matchers": [{"string": "Hat Fesselnde Ketten"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_25062"]}}}
+{"ref": "Has Chipped Dice", "better": 1, "matchers": [{"string": "Hat Lädierte Würfel"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_60796"]}}}
+{"ref": "Has Chiselled Stone", "better": 1, "matchers": [{"string": "Hat Gemeißelter Stein"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_6958"]}}}
+{"ref": "Has Corrosive Concoction", "better": 1, "matchers": [{"string": "Hat Korrosives Gebräu"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_55502"]}}}
+{"ref": "Has Costly Aid", "better": 1, "matchers": [{"string": "Hat Kostspielige Hilfe"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_32085"]}}}
+{"ref": "Has Crystal Shard", "better": 1, "matchers": [{"string": "Hat Kristallscherbe"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_30042"]}}}
+{"ref": "Has Dark Pit", "better": 1, "matchers": [{"string": "Hat Dunkle Grube"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_62584"]}}}
+{"ref": "Has Deadly Snare", "better": 1, "matchers": [{"string": "Hat Tödliche Falle"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_41921"]}}}
+{"ref": "Has Death Toll", "better": 1, "matchers": [{"string": "Hat Blutzoll"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_59642"]}}}
+{"ref": "Has Deceptive Mirror", "better": 1, "matchers": [{"string": "Hat Verzerrender Spiegel"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_14131"]}}}
+{"ref": "Has Dekhara's Necklace", "better": 1, "matchers": [{"string": "Hat Halskette der Dekhara"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_13598"]}}}
+{"ref": "Has Dishonoured Tattoo", "better": 1, "matchers": [{"string": "Hat Unehrenhafte Tätowierung"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_5501"]}}}
+{"ref": "Has Diverted River", "better": 1, "matchers": [{"string": "Hat Umgeleiteter Fluss"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_45401"]}}}
+{"ref": "Has Earned Honour", "better": 1, "matchers": [{"string": "Hat Verdiente Ehre"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_24603"]}}}
+{"ref": "Has Enchanted Urn", "better": 1, "matchers": [{"string": "Hat Verzauberte Urne"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_38167"]}}}
+{"ref": "Has Exhausted Wells", "better": 1, "matchers": [{"string": "Hat Erschöpfte Brunnen"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_35912"]}}}
+{"ref": "Has Fiendish Wings", "better": 1, "matchers": [{"string": "Hat Teuflische Flügel"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_28313"]}}}
+{"ref": "Has Flooding Rivers", "better": 1, "matchers": [{"string": "Hat Überschwemmende Flüsse"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_44476"]}}}
+{"ref": "Has Forgotten Traditions", "better": 1, "matchers": [{"string": "Hat Vergessene Traditionen"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_18125"]}}}
+{"ref": "Has Fountain of Youth", "better": 1, "matchers": [{"string": "Hat Jungbrunnen"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_40142"]}}}
+{"ref": "Has Fright Mask", "better": 1, "matchers": [{"string": "Hat Schreckensmaske"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_15442"]}}}
+{"ref": "Has Garukhan's Favour", "better": 1, "matchers": [{"string": "Hat Garukhans Gunst"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_38171"]}}}
+{"ref": "Has Gate Toll", "better": 1, "matchers": [{"string": "Hat Pfortenzoll"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_35767"]}}}
+{"ref": "Has Ghastly Scythe", "better": 1, "matchers": [{"string": "Hat Grausige Sense"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_32300"]}}}
+{"ref": "Has Glass Shard", "better": 1, "matchers": [{"string": "Hat Glasscherbe"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_45600"]}}}
+{"ref": "Has Glowing Orb", "better": 1, "matchers": [{"string": "Hat Leuchtende Sphäre"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_3157"]}}}
+{"ref": "Has Golden Smoke", "better": 1, "matchers": [{"string": "Hat Goldener Rauch"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_1198"]}}}
+{"ref": "Has Haemorrhage", "better": 1, "matchers": [{"string": "Hat Ausbluten"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_34171"]}}}
+{"ref": "Has Hare Foot", "better": 1, "matchers": [{"string": "Hat Hasenpfote"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_13820"]}}}
+{"ref": "Has Holy Water", "better": 1, "matchers": [{"string": "Hat Weihwasser"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_28826"]}}}
+{"ref": "Has Honed Claws", "better": 1, "matchers": [{"string": "Hat Gewetzte Krallen"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_62326"]}}}
+{"ref": "Has Honoured Challenger", "better": 1, "matchers": [{"string": "Hat Geehrter Herausforderer"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_4682"]}}}
+{"ref": "Has Hungry Fangs", "better": 1, "matchers": [{"string": "Hat Hungrige Fangzähne"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_359"]}}}
+{"ref": "Has Imperial Seal", "better": 1, "matchers": [{"string": "Hat Kaiserliches Siegel"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_44836"]}}}
+{"ref": "Has Iron Manacles", "better": 1, "matchers": [{"string": "Hat Eiserne Fesseln"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_35578"]}}}
+{"ref": "Has Leaking Waterskin", "better": 1, "matchers": [{"string": "Hat Undichte Wasserhaut"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_61003"]}}}
 {"ref": "Has Logbook Faction: Black Scythe Mercenaries", "better": 0, "matchers": [{"string": "Söldner der Schwarzen Sense"}], "trade": {"ids": null}, "id": "black_scythe_mercenaries"}
 {"ref": "Has Logbook Faction: Druids of the Broken Circle", "better": 0, "matchers": [{"string": "Druiden des Gebrochenen Zirkels"}], "trade": {"ids": null}, "id": "druids_of_the_broken_circle"}
 {"ref": "Has Logbook Faction: Knights of the Sun", "better": 0, "matchers": [{"string": "Ritter der Sonne"}], "trade": {"ids": null}, "id": "knights_of_the_sun"}
 {"ref": "Has Logbook Faction: Order of the Chalice", "better": 0, "matchers": [{"string": "Orden des Kelches"}], "trade": {"ids": null}, "id": "order_of_the_chalice"}
-{"ref": "Has Low Rivers", "better": 1, "matchers": [{"string": "Has Low Rivers"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_21680"]}}}
-{"ref": "Has Lustrous Lacquer", "better": 1, "matchers": [{"string": "Has Lustrous Lacquer"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_379"]}}}
-{"ref": "Has Lustrous Pearl", "better": 1, "matchers": [{"string": "Has Lustrous Pearl"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_51140"]}}}
-{"ref": "Has Mirror of Fortune", "better": 1, "matchers": [{"string": "Has Mirror of Fortune"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_45428"]}}}
-{"ref": "Has Moment's Peace", "better": 1, "matchers": [{"string": "Has Moment's Peace"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_30866"]}}}
-{"ref": "Has Myriad Aspersions", "better": 1, "matchers": [{"string": "Has Myriad Aspersions"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_56996"]}}}
-{"ref": "Has Orb of Negation", "better": 1, "matchers": [{"string": "Has Orb of Negation"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_43834"]}}}
-{"ref": "Has Orbala Statuette", "better": 1, "matchers": [{"string": "Has Orbala Statuette"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_54204"]}}}
-{"ref": "Has Orbala's Leathers", "better": 1, "matchers": [{"string": "Has Orbala's Leathers"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_44077"]}}}
-{"ref": "Has Ornate Dagger", "better": 1, "matchers": [{"string": "Has Ornate Dagger"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_29924"]}}}
-{"ref": "Has Pledge to the Afflicted", "better": 1, "matchers": [{"string": "Has Pledge to the Afflicted"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_48548"]}}}
-{"ref": "Has Pledge to the Deserted", "better": 1, "matchers": [{"string": "Has Pledge to the Deserted"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_60079"]}}}
-{"ref": "Has Pledge to the Guileful", "better": 1, "matchers": [{"string": "Has Pledge to the Guileful"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_62382"]}}}
-{"ref": "Has Pledge to the Powerful", "better": 1, "matchers": [{"string": "Has Pledge to the Powerful"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_27532"]}}}
-{"ref": "Has Purple Smoke", "better": 1, "matchers": [{"string": "Has Purple Smoke"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_28906"]}}}
-{"ref": "Has Raincaller", "better": 1, "matchers": [{"string": "Has Raincaller"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_31580"]}}}
-{"ref": "Has Rapid Quicksand", "better": 1, "matchers": [{"string": "Has Rapid Quicksand"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_56047"]}}}
-{"ref": "Has Red Smoke", "better": 1, "matchers": [{"string": "Has Red Smoke"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_17084"]}}}
-{"ref": "Has Reparations", "better": 1, "matchers": [{"string": "Has Reparations"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_46242"]}}}
-{"ref": "Has Rusted Mallet", "better": 1, "matchers": [{"string": "Has Rusted Mallet"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_30450"]}}}
-{"ref": "Has Sacred Mirror", "better": 1, "matchers": [{"string": "Has Sacred Mirror"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_27130"]}}}
-{"ref": "Has Sanguine Vial", "better": 1, "matchers": [{"string": "Has Sanguine Vial"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_41741"]}}}
-{"ref": "Has Scrying Crystal", "better": 1, "matchers": [{"string": "Has Scrying Crystal"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_44243"]}}}
-{"ref": "Has Season of Famine", "better": 1, "matchers": [{"string": "Has Season of Famine"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_35605"]}}}
-{"ref": "Has Sekhema's Cloak", "better": 1, "matchers": [{"string": "Has Sekhema's Cloak"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_34499"]}}}
-{"ref": "Has Sharpened Arrowhead", "better": 1, "matchers": [{"string": "Has Sharpened Arrowhead"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_48487"]}}}
-{"ref": "Has Shattered Shield", "better": 1, "matchers": [{"string": "Has Shattered Shield"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_16335"]}}}
-{"ref": "Has Silver Chalice", "better": 1, "matchers": [{"string": "Has Silver Chalice"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_51458"]}}}
-{"ref": "Has Silver Tongue", "better": 1, "matchers": [{"string": "Has Silver Tongue"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_24536"]}}}
-{"ref": "Has Spiked Exit", "better": 1, "matchers": [{"string": "Has Spiked Exit"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_53929"]}}}
-{"ref": "Has Spiked Shell", "better": 1, "matchers": [{"string": "Has Spiked Shell"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_13875"]}}}
-{"ref": "Has Suspected Sympathiser", "better": 1, "matchers": [{"string": "Has Suspected Sympathiser"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_9350"]}}}
-{"ref": "Has Tattered Blindfold", "better": 1, "matchers": [{"string": "Has Tattered Blindfold"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_48875"]}}}
-{"ref": "Has Trade Tariff", "better": 1, "matchers": [{"string": "Has Trade Tariff"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_34561"]}}}
-{"ref": "Has Tradition's Demand", "better": 1, "matchers": [{"string": "Has Tradition's Demand"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_55120"]}}}
-{"ref": "Has UNUSED", "better": 1, "matchers": [{"string": "Has UNUSED"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_16773"]}}}
-{"ref": "Has Unassuming Brick", "better": 1, "matchers": [{"string": "Has Unassuming Brick"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_50613"]}}}
-{"ref": "Has Unquenched Thirst", "better": 1, "matchers": [{"string": "Has Unquenched Thirst"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_38381"]}}}
-{"ref": "Has Untouchable", "better": 1, "matchers": [{"string": "Has Untouchable"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_9853"]}}}
-{"ref": "Has Upward Path", "better": 1, "matchers": [{"string": "Has Upward Path"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_3716"]}}}
-{"ref": "Has Veiled Sight", "better": 1, "matchers": [{"string": "Has Veiled Sight"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_43384"]}}}
-{"ref": "Has Viscous Ichor", "better": 1, "matchers": [{"string": "Has Viscous Ichor"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_57507"]}}}
-{"ref": "Has Weakened Flesh", "better": 1, "matchers": [{"string": "Has Weakened Flesh"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_24131"]}}}
-{"ref": "Has Winter Drought", "better": 1, "matchers": [{"string": "Has Winter Drought"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_20573"]}}}
-{"ref": "Has Wooden Effigy", "better": 1, "matchers": [{"string": "Has Wooden Effigy"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_46977"]}}}
-{"ref": "Has Worn Sandals", "better": 1, "matchers": [{"string": "Has Worn Sandals"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_30473"]}}}
+{"ref": "Has Low Rivers", "better": 1, "matchers": [{"string": "Hat Niedrige Flüsse"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_21680"]}}}
+{"ref": "Has Lustrous Lacquer", "better": 1, "matchers": [{"string": "Hat Glänzender Lack"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_379"]}}}
+{"ref": "Has Lustrous Pearl", "better": 1, "matchers": [{"string": "Hat Glänzende Perle"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_51140"]}}}
+{"ref": "Has Mirror of Fortune", "better": 1, "matchers": [{"string": "Hat Glücksspiegel"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_45428"]}}}
+{"ref": "Has Moment's Peace", "better": 1, "matchers": [{"string": "Hat Moment der Ruhe"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_30866"]}}}
+{"ref": "Has Myriad Aspersions", "better": 1, "matchers": [{"string": "Hat Unzählige Aspersionen"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_56996"]}}}
+{"ref": "Has Orb of Negation", "better": 1, "matchers": [{"string": "Hat Sphäre der Negation"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_43834"]}}}
+{"ref": "Has Orbala Statuette", "better": 1, "matchers": [{"string": "Hat Orbalas Statuette"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_54204"]}}}
+{"ref": "Has Orbala's Leathers", "better": 1, "matchers": [{"string": "Hat Orbalas Leder"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_44077"]}}}
+{"ref": "Has Ornate Dagger", "better": 1, "matchers": [{"string": "Hat Verzierter Dolch"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_29924"]}}}
+{"ref": "Has Pledge to the Afflicted", "better": 1, "matchers": [{"string": "Hat Schwur an die Bürdebelasteten"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_48548"]}}}
+{"ref": "Has Pledge to the Deserted", "better": 1, "matchers": [{"string": "Hat Schwur an die Verlassenen"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_60079"]}}}
+{"ref": "Has Pledge to the Guileful", "better": 1, "matchers": [{"string": "Hat Schwur an die Arglistigen"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_62382"]}}}
+{"ref": "Has Pledge to the Powerful", "better": 1, "matchers": [{"string": "Hat Schwur an die Mächtigen"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_27532"]}}}
+{"ref": "Has Purple Smoke", "better": 1, "matchers": [{"string": "Hat Violetter Rauch"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_28906"]}}}
+{"ref": "Has Raincaller", "better": 1, "matchers": [{"string": "Hat Regenrufer"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_31580"]}}}
+{"ref": "Has Rapid Quicksand", "better": 1, "matchers": [{"string": "Hat Schneller Treibsand"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_56047"]}}}
+{"ref": "Has Red Smoke", "better": 1, "matchers": [{"string": "Hat Roter Rauch"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_17084"]}}}
+{"ref": "Has Reparations", "better": 1, "matchers": [{"string": "Hat Reparationen"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_46242"]}}}
+{"ref": "Has Rusted Mallet", "better": 1, "matchers": [{"string": "Hat Rostiger Hammer"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_30450"]}}}
+{"ref": "Has Sacred Mirror", "better": 1, "matchers": [{"string": "Hat Heiliger Spiegel"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_27130"]}}}
+{"ref": "Has Sanguine Vial", "better": 1, "matchers": [{"string": "Hat Phiole des Bluts"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_41741"]}}}
+{"ref": "Has Scrying Crystal", "better": 1, "matchers": [{"string": "Hat Kristallkugel"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_44243"]}}}
+{"ref": "Has Season of Famine", "better": 1, "matchers": [{"string": "Hat Zeit der Hungersnot"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_35605"]}}}
+{"ref": "Has Sekhema's Cloak", "better": 1, "matchers": [{"string": "Hat Umhang der Sekhema"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_34499"]}}}
+{"ref": "Has Sharpened Arrowhead", "better": 1, "matchers": [{"string": "Hat Geschärfte Pfeilspitze"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_48487"]}}}
+{"ref": "Has Shattered Shield", "better": 1, "matchers": [{"string": "Hat Zerschmetterter Schild"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_16335"]}}}
+{"ref": "Has Silver Chalice", "better": 1, "matchers": [{"string": "Hat Silberkelch"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_51458"]}}}
+{"ref": "Has Silver Tongue", "better": 1, "matchers": [{"string": "Hat Silberzunge"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_24536"]}}}
+{"ref": "Has Spiked Exit", "better": 1, "matchers": [{"string": "Hat Stachliger Ausgang"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_53929"]}}}
+{"ref": "Has Spiked Shell", "better": 1, "matchers": [{"string": "Hat Stachelpanzer"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_13875"]}}}
+{"ref": "Has Suspected Sympathiser", "better": 1, "matchers": [{"string": "Hat Verdächtiger Sympathisant"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_9350"]}}}
+{"ref": "Has Tattered Blindfold", "better": 1, "matchers": [{"string": "Hat Zerrissene Augenbinde"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_48875"]}}}
+{"ref": "Has Trade Tariff", "better": 1, "matchers": [{"string": "Hat Handelstarif"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_34561"]}}}
+{"ref": "Has Tradition's Demand", "better": 1, "matchers": [{"string": "Hat Preis der Tradition"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_55120"]}}}
+{"ref": "Has UNUSED", "better": 1, "matchers": [{"string": "Hat Verderbter Dietrich"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_16773"]}}}
+{"ref": "Has Unassuming Brick", "better": 1, "matchers": [{"string": "Hat Unscheinbare Mauer"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_50613"]}}}
+{"ref": "Has Unquenched Thirst", "better": 1, "matchers": [{"string": "Hat Ungestillter Durst"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_38381"]}}}
+{"ref": "Has Untouchable", "better": 1, "matchers": [{"string": "Hat Unberührbar"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_9853"]}}}
+{"ref": "Has Upward Path", "better": 1, "matchers": [{"string": "Hat Weg nach oben"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_3716"]}}}
+{"ref": "Has Veiled Sight", "better": 1, "matchers": [{"string": "Hat Verhüllte Sicht"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_43384"]}}}
+{"ref": "Has Viscous Ichor", "better": 1, "matchers": [{"string": "Hat Zähflüssiges Sekret"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_57507"]}}}
+{"ref": "Has Weakened Flesh", "better": 1, "matchers": [{"string": "Hat Geschwächter Körper"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_24131"]}}}
+{"ref": "Has Winter Drought", "better": 1, "matchers": [{"string": "Hat Winterliche Dürre"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_20573"]}}}
+{"ref": "Has Wooden Effigy", "better": 1, "matchers": [{"string": "Hat Holzfigur"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_46977"]}}}
+{"ref": "Has Worn Sandals", "better": 1, "matchers": [{"string": "Hat Abgetragene Sandalen"}], "trade": {"ids": {"sanctum": ["sanctum.sanctum_effect_30473"]}}}
 {"ref": "Has no Accuracy Penalty from Range", "better": 1, "matchers": [{"string": "Hat keinen Malus auf die Treffgenauigkeit von der Reichweite"}], "trade": {"ids": {"implicit": ["implicit.stat_1050883682"]}}, "id": "local_weapon_accuracy_is_unaffected_by_distance"}
 {"ref": "Heavy Stuns Enemies that are on Full Life", "better": 1, "matchers": [{"string": "Betäubt Gegner mit vollem Leben schwer"}], "trade": {"ids": {"explicit": ["explicit.stat_668076381"]}}, "id": "local_always_heavy_stun_on_full_life"}
 {"ref": "Herald Skills deal #% increased Damage", "better": 1, "matchers": [{"string": "Herold-Fertigkeiten verursachen #% erhöhten Schaden"}, {"string": "Herold-Fertigkeiten verursachen #% verringerten Schaden", "negate": true}], "trade": {"ids": {"explicit": ["explicit.stat_21071013"], "fractured": ["fractured.stat_21071013"], "desecrated": ["desecrated.stat_21071013"]}}, "id": "damage_+%_with_herald_skills"}

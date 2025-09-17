@@ -604,6 +604,11 @@ export function finalFilterTweaks(ctx: FiltersCreationContext) {
         // hide only if fractured or desecrated mod has corresponding explicit variant
         filter.hidden = "filters.hide_for_crafting";
       }
+    } else if (filter.tag === FilterTag.Skill && filter.roll) {
+      filter.disabled = filter.roll.value < 20;
+      if (filter.disabled) {
+        filter.hidden = "filters.hide_not_max_level";
+      }
     }
   }
 

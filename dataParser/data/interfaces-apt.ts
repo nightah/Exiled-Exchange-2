@@ -48,7 +48,7 @@ export enum ItemCategory {
   Tincture = "Tincture",
   Charm = "Charm",
   Crossbow = "Crossbow",
-  SkillGem = "Skill Gem",
+  Gem = " Gem",
   SupportGem = "Support Gem",
   MetaGem = "Meta Gem",
   Focus = "Focus",

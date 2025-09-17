@@ -1,6 +1,5 @@
-// itemTextToSections.test.ts
 import { __testExports } from "@/parser/Parser";
-import { beforeEach, describe, expect, test } from "vitest";
+import { beforeEach, describe, expect, it, test } from "vitest";
 import { setupTests } from "@specs/vitest.setup";
 import {
   ArmourHighValueRareItem,
@@ -10,6 +9,7 @@ import {
   RareItem,
   RareWithImplicit,
   UniqueItem,
+  WandRareItem,
 } from "./items";
 import { loadForLang } from "@/assets/data";
 import { ParsedItem } from "@/parser";
@@ -22,31 +22,19 @@ describe("itemTextToSections", () => {
   test("empty string should not throw", () => {
     expect(() => __testExports.itemTextToSections("")).not.toThrow();
   });
-  test("standard item", () => {
-    const sections = __testExports.itemTextToSections(RareItem.rawText);
-    expect(sections.length).toBe(RareItem.sectionCount);
-  });
-  test("magic item", () => {
-    const sections = __testExports.itemTextToSections(MagicItem.rawText);
-    expect(sections.length).toBe(MagicItem.sectionCount);
-  });
-  test("normal item", () => {
-    const sections = __testExports.itemTextToSections(NormalItem.rawText);
-    expect(sections.length).toBe(NormalItem.sectionCount);
-  });
-  test("unique item", () => {
-    const sections = __testExports.itemTextToSections(UniqueItem.rawText);
-    expect(sections.length).toBe(UniqueItem.sectionCount);
-  });
-  test("rare item with implicit", () => {
-    const sections = __testExports.itemTextToSections(RareWithImplicit.rawText);
-    expect(sections.length).toBe(RareWithImplicit.sectionCount);
-  });
-  test("high damage rare item", () => {
-    const sections = __testExports.itemTextToSections(
-      HighDamageRareItem.rawText,
-    );
-    expect(sections.length).toBe(HighDamageRareItem.sectionCount);
+
+  it.each([
+    [RareItem.rawText, RareItem.sectionCount],
+    [MagicItem.rawText, MagicItem.sectionCount],
+    [NormalItem.rawText, NormalItem.sectionCount],
+    [UniqueItem.rawText, UniqueItem.sectionCount],
+    [RareWithImplicit.rawText, RareWithImplicit.sectionCount],
+    [HighDamageRareItem.rawText, HighDamageRareItem.sectionCount],
+    [ArmourHighValueRareItem.rawText, ArmourHighValueRareItem.sectionCount],
+    [WandRareItem.rawText, WandRareItem.sectionCount],
+  ])("standard item", (text: string, sectionCount: number) => {
+    const sections = __testExports.itemTextToSections(text);
+    expect(sections.length).toBe(sectionCount);
   });
 });
 
