@@ -11,13 +11,13 @@ number of stackable unique jewels [1]
 
 
 Megalomaniac Diamond
-Allocates Passive
-Allocates Passive
-Allocates Passive
+Allocates Passive Skill
+Allocates Passive Skill
+Allocates Passive Skill
 
 
 From Nothing Diamond
-Passives in Radius of Passive  can be Allocated
+Passives in Radius of Passive Skill can be Allocated
 without being connected to your tree
 Corrupted
 
@@ -30,11 +30,11 @@ Passives in Radius can be Allocated without being connected to your tree
 
 
 Prism of Belief Diamond
-+(1–3) to Level of all Specific  s
++(1–3) to Level of all Specific Skill Skills
 
 
 The Adorned Diamond
-(0–100)% increased Effect of Jewel Socket Passive s
+(0–100)% increased Effect of Jewel Socket Passive Skills
 containing Corrupted Magic Jewels
 
 
@@ -120,7 +120,7 @@ Idol of Uldurn Crimson Amulet
 (2–4) Life Regeneration per second
 +(60–80) to maximum Life
 +(10–20) to Dexterity
-s have +1 to Limit
+Skills have +1 to Limit
 
 
 The Everlasting Gaze Azure Amulet
@@ -171,10 +171,10 @@ Surefooted Sigil Jade Amulet
 
 Choir of the Storm Jade Amulet
 +(10–15) to Dexterity
-Grants : Lightning Bolt
+Grants Skill: Lightning Bolt
 +(20–30)% to Lightning Resistance
 Critical Hits Ignore Enemy Monster Lightning Resistance
-Trigger Greater Lightning Bolt  on Critical Hit
+Trigger Greater Lightning Bolt Skill on Critical Hit
 
 
 Defiance of Destiny Jade Amulet
@@ -202,7 +202,7 @@ Blind Chilled enemies on Hit
 
 Rondel of Fragility Lunar Amulet
 +(20–30) to maximum Energy Shield
-(15–30)% increased  Speed
+(15–30)% increased Skill Speed
 (20–30)% increased Critical Hit Chance
 -30% to all Elemental Resistances
 (30–50)% increased Damage
@@ -211,7 +211,7 @@ Rondel of Fragility Lunar Amulet
 The Anvil Bloodstone Amulet
 +(30–40) to maximum Life
 10% reduced Movement Speed
-10% reduced  Speed
+10% reduced Skill Speed
 (25–50)% increased Armour
 20% increased Block chance
 +(3–5)% to maximum Block chance
@@ -251,7 +251,7 @@ Fireflower Solar Amulet
 (10–20)% increased Rarity of Items found
 (30–40)% increased Mana Regeneration Rate
 Take 100 Fire Damage when you Ignite an Enemy
-+(1–4) to Level of all Fire s
++(1–4) to Level of all Fire Skills
 
 
 Eye of Chayula Gold Amulet
@@ -295,7 +295,7 @@ Seed of Cataclysm Lazuli Ring
 (30–50)% increased Critical Hit Chance for Spells
 (30–50)% increased Critical Spell Damage Bonus
 +(17–23)% to Chaos Resistance
-10% increased Mana Cost of s
+10% increased Mana Cost of Skills
 
 
 Cracklecreep Ruby Ring
@@ -331,7 +331,7 @@ You cannot be Chilled or Frozen
 
 Whisper of the Brotherhood Sapphire Ring
 +(20–30)% to Cold Resistance
-(5–10)% increased  Speed
+(5–10)% increased Skill Speed
 +(10–20) to Dexterity
 (30–50)% increased Mana Regeneration Rate
 100% of Cold Damage Converted to Lightning Damage
@@ -357,7 +357,7 @@ Levinstone Topaz Ring
 +(20–30)% to Lightning Resistance
 +(40–60) to maximum Mana
 (10–20)% increased chance to Shock
-+1 to Level of all Lightning s
++1 to Level of all Lightning Skills
 
 
 Ming's Heart Amethyst Ring
@@ -621,7 +621,7 @@ Culling Strike against Frozen Enemies
 Trenchtimbre Spiked Club
 Adds (13–15) to (22–25) Physical Damage
 (20–30)% increased Attack Speed
-+(1–3) to Level of all Minion s
++(1–3) to Level of all Minion Skills
 Increases and Reductions to Minion Attack Speed also affect you
 
 
@@ -653,7 +653,7 @@ Causes (30–50)% increased Stun Buildup
 (80–120)% increased Physical Damage
 +(10–15) to Strength
 Gain (10–20) Life per Enemy Killed
-Slam s you use yourself cause Aftershocks
+Slam Skills you use yourself cause Aftershocks
 
 
 Trephina Forge Maul
@@ -741,7 +741,7 @@ Adds 1 to (19–29) Lightning Damage
 +(3–5)% to Critical Hit Chance
 (15–20)% increased Attack Speed
 (25–40)% increased Mana Regeneration Rate
-s reserve 50% less Spirit
+Skills reserve 50% less Spirit
 
 
 Nazir's Judgement Steelpoint Quarterstaff
@@ -754,12 +754,12 @@ Causes Daze buildup equal to 100% of Damage dealt
 Collapsing Horizon Wyrm Quarterstaff
 100% increased Elemental Damage with Attacks
 +(5–10)% to Critical Hit Chance
-+(2–4) to Level of all Elemental s
-Trigger s refund half of Energy spent
++(2–4) to Level of all Elemental Skills
+Trigger skills refund half of Energy spent
 
 
 Sanguine Diviner Bone Wand
-Grants : Bone Blast
+Grants Skill: Bone Blast
 (80–100)% increased Spell Damage
 Gain (10–15) Life per Enemy Killed
 25% chance to inflict Bleeding on Hit
@@ -767,15 +767,15 @@ Gain (10–15) Life per Enemy Killed
 
 
 Lifesprig Attuned Wand
-Grants : Mana Drain
+Grants Skill: Mana Drain
 +(10–20) to maximum Mana
-+(1–3) to Level of all Spell s
++(1–3) to Level of all Spell Skills
 (5–10)% increased Cast Speed
 Leeches 1% of maximum Life when you Cast a Spell
 
 
 Enezun's Charge Volatile Wand
-Grants : Volatile Dead
+Grants Skill: Volatile Dead
 (80–100)% increased Spell Damage
 (30–50)% increased Critical Hit Chance for Spells
 Gain (10–15) Mana per Enemy Killed
@@ -783,16 +783,16 @@ Gain (10–15) Mana per Enemy Killed
 
 
 Dusk Vigil Ashen Staff
-Grants : Firebolt
-Grants : Ember Fusillade
+Grants Skill: Firebolt
+Grants Skill: Ember Fusillade
 (60–80)% increased Spell Damage
 Gain (5–10) Life per Enemy Killed
 25% increased Mana Regeneration Rate
-Trigger Ember Fusillade  on casting a Spell
+Trigger Ember Fusillade Skill on casting a Spell
 
 
 Taryn's Shiver Gelid Staff
-Grants : Freezing Shards
+Grants Skill: Freezing Shards
 (80–120)% increased Cold Damage
 (10–20)% increased Cast Speed
 100% increased Freeze Buildup
@@ -800,16 +800,16 @@ Enemies Frozen by you take 50% increased Damage
 
 
 Earthbound Voltaic Staff
-Grants : Lightning Bolt
-Grants : Spark
+Grants Skill: Lightning Bolt
+Grants Skill: Spark
 (80–120)% increased Lightning Damage
 (10–20)% increased Cast Speed
 (20–30)% increased Mana Regeneration Rate
-Trigger Spark  on killing a Shocked Enemy
+Trigger Spark Skill on killing a Shocked Enemy
 
 
 The Searing Touch Pyrophyte Staff
-Grants : Living Bomb
+Grants Skill: Living Bomb
 (80–120)% increased Fire Damage
 (10–20)% increased Cast Speed
 100% increased chance to Ignite
@@ -817,10 +817,10 @@ Grants : Living Bomb
 
 
 The Burden of Shadows Chiming Staff
-Grants : Sigil of Power
+Grants Skill: Sigil of Power
 (20–30)% increased Cast Speed
- Mana Costs Converted to Life Costs
-s gain 1% of Damage as Chaos Damage per 3 Life Cost
+Skill Mana Costs Converted to Life Costs
+Skills gain 1% of Damage as Chaos Damage per 3 Life Cost
 
 
 Widowhail Crude Bow
@@ -866,7 +866,7 @@ Rampart Raptor Tense Crossbow
 
 
 The Dark Defiler Rattling Sceptre
-Grants : Skeletal Warrior
+Grants Skill: Skeletal Warrior
 +(20–30) to maximum Mana
 +(5–10) to Intelligence
 (10–30)% increased Mana Regeneration Rate
@@ -874,7 +874,7 @@ Gain 5% of Damage as Chaos Damage per Undead Minion
 
 
 Font of Power Omen Sceptre
-Grants : Malice
+Grants Skill: Malice
 (30–50)% increased Spirit
 +(40–60) to maximum Mana
 (20–30)% increased Mana Regeneration Rate
@@ -883,7 +883,7 @@ Sacrifice 20% of Mana and they Leech that Mana
 
 
 Sacred Flame Shrine Sceptre
-Grants : Purity of Fire
+Grants Skill: Purity of Fire
 Gain (40–60)% of Damage as Extra Fire Damage
 Allies in your Presence Gain (20–30)% of Damage as Extra Fire Damage
 Allies in your Presence Regenerate (2–3)% of their Maximum Life per second
@@ -891,7 +891,7 @@ Enemies in your Presence Resist Elemental Damage based on their Lowest Resistanc
 
 
 Guiding Palm Shrine Sceptre
-Grants : Purity of Fire
+Grants Skill: Purity of Fire
 Allies in your Presence deal (4–6) to (7–10) additional Attack Fire Damage
 +(5–10) to all Attributes
 25% increased Light Radius
@@ -1081,7 +1081,7 @@ Temporalis Silk Robe
 +(10–20)% to all Elemental Resistances
 (5–30)% of Damage taken Recouped as Life
 (5–30)% of Damage taken Recouped as Mana
-s have (-4–-2) seconds to Cooldown
+Skills have (-4–-2) seconds to Cooldown
 
 
 Prayers for Rain Keth Raiment
@@ -1104,7 +1104,7 @@ The Covenant Altar Robe
 (100–150)% increased Energy Shield
 +(100–150) to maximum Life
 5% of Spell Damage Leeched as Life
-s gain a Base Life Cost equal to 50% of Base Mana Cost
+Skills gain a Base Life Cost equal to 50% of Base Mana Cost
 
 
 Coat of Red Chain Mail
@@ -1135,7 +1135,7 @@ Pariah's Embrace Cloaked Mail
 +50 to Spirit
 +(10–15) to all Attributes
 (10–15) Life Regeneration per second
-20% reduced Mana Cost of s
+20% reduced Mana Cost of Skills
 
 
 Belly of the Beast Explorer Armour
@@ -1284,7 +1284,7 @@ Deidbell Elite Greathelm
 (20–30)% increased Warcry Speed
 Corpses in your Presence Explode when you Warcry,
 dealing 10% of their Life as Physical Damage
-Warcry s have (20–30)% increased Area of Effect
+Warcry Skills have (20–30)% increased Area of Effect
 
 
 Corona of the Red Sun Warrior Greathelm
@@ -1339,7 +1339,7 @@ Presence Radius is doubled
 
 Crown of Thorns Twig Circlet
 +(100–150) to maximum Energy Shield
-Lose 5 Life when you use a
+Lose 5 Life when you use a Skill
 (3–5) to (6–10) Physical Thorns damage
 Pain Attunement
 
@@ -1439,14 +1439,14 @@ Assailum Closed Helm
 (50–100)% increased Armour and Evasion
 +(200–400) to Accuracy Rating
 (30–50)% increased Critical Hit Chance
-s have a (100–150)% longer Perfect Timing window
+Skills have a (100–150)% longer Perfect Timing window
 
 
 Crown of the Victor Iron Crown
 (10–20)% increased Rarity of Items found
 Gain 10 Life per Enemy Killed
 Gain 10 Mana per Enemy Killed
-+1 to Level of all s
++1 to Level of all Skills
 
 
 Bronzebeard Horned Crown
@@ -1525,7 +1525,7 @@ The Vertex Tribal Mask
 (100–150)% increased Evasion and Energy Shield
 (30–50)% increased Critical Hit Chance
 +(13–17)% to Chaos Resistance
-Equipment and  Gems have 50% reduced Attribute Requirements
+Equipment and Skill Gems have 50% reduced Attribute Requirements
 
 
 Glimpse of Chaos Tribal Mask
@@ -1555,7 +1555,7 @@ Giant's Blood
 
 
 Lochtonial Caress Tempered Mitts
-(10–15)% increased  Speed
+(10–15)% increased Skill Speed
 +(15–25) to Armour
 +(40–60) to maximum Life
 (10–15)% reduced maximum Mana
@@ -1659,7 +1659,7 @@ Jarngreipr Ringmail Gauntlets
 Adds (2–3) to (5–6) Physical Damage to Attacks
 +(60–80) to maximum Life
 (4–8)% increased Attack Speed
-Strength can satisfy other Attribute Requirements of Melee Weapons and Melee s
+Strength can satisfy other Attribute Requirements of Melee Weapons and Melee Skills
 
 
 Aurseize Layered Gauntlets
@@ -1747,11 +1747,11 @@ Legionstride Rough Greaves
 
 
 Corpsewade Iron Greaves
-Grants : Decompose
+Grants Skill: Decompose
 10% increased Movement Speed
 (30–50)% increased Armour
 +(5–10) to Strength
-Trigger Decompose  on Step
+Trigger Decompose Skill on Step
 
 
 The Infinite Pursuit Bronze Greaves
@@ -1898,7 +1898,7 @@ Aggravate Bleeding on Enemies when they Enter your Presence
 
 
 Dionadair Splintered Tower Shield
-Grants : Raise Shield
+Grants Skill: Raise Shield
 (60–80)% increased Armour
 +(10–15) to Strength
 (3–5) Life Regeneration per second
@@ -1907,7 +1907,7 @@ Double Stun Threshold while Shield is Raised
 
 
 Wulfsbane Painted Tower Shield
-Grants : Raise Shield
+Grants Skill: Raise Shield
 +(40–60) to maximum Life
 +(10–15) to Strength
 +(60–80) to Stun Threshold
@@ -1915,7 +1915,7 @@ Permanently Intimidate enemies on Block
 
 
 Doomgate Braced Tower Shield
-Grants : Raise Shield
+Grants Skill: Raise Shield
 80% increased Block chance
 (100–150)% increased Armour
 +(13–17)% to Chaos Resistance
@@ -1924,16 +1924,16 @@ Enemies are Culled on Block
 
 
 The Wailing Wall Effigial Tower Shield
-Grants : Raise Shield
+Grants Skill: Raise Shield
 10% reduced Movement Speed
 (100–150)% increased Armour
 +(100–150) to Stun Threshold
 Can Block damage from all Hits
-Cannot use Shield s
+Cannot use Shield Skills
 
 
 Lycosidae Rampart Tower Shield
-Grants : Raise Shield
+Grants Skill: Raise Shield
 (30–40)% increased Block chance
 (60–100)% increased Armour
 Accuracy Rating is Doubled
@@ -1941,7 +1941,7 @@ Blocking Damage Poisons the Enemy as though dealing 200 Base Chaos Damage
 
 
 The Surrender Stone Tower Shield
-Grants : Raise Shield
+Grants Skill: Raise Shield
 (40–60)% increased Block chance
 (150–200)% increased Armour
 +(150–200) to Stun Threshold
@@ -1949,25 +1949,25 @@ Recover 4% of Life when you Block
 
 
 Svalinn Crucible Tower Shield
-Grants : Raise Shield
-Grants : Cast on Block
+Grants Skill: Raise Shield
+Grants Skill: Cast on Block
 (100–150)% increased Armour
 (-20–-10)% to maximum Block chance
 Block chance is Lucky
 
 
 Arvil's Wheel Hardwood Targe
-Grants : Raise Shield
+Grants Skill: Raise Shield
 (60–100)% increased Armour and Evasion
 +(40–60) to maximum Life
 +(40–60) to maximum Mana
 Lose 1% of Life on Kill
 Lose 1% of Mana on Kill
-(30–50)% increased  Effect Duration
+(30–50)% increased Skill Effect Duration
 
 
 Merit of Service Pelage Targe
-Grants : Raise Shield
+Grants Skill: Raise Shield
 (30–50)% increased Block chance
 (60–80)% increased Armour and Evasion
 +(60–80) to Stun Threshold
@@ -1975,7 +1975,7 @@ Allies in your Presence have Block Chance equal to yours
 
 
 Feathered Fortress Crescent Targe
-Grants : Raise Shield
+Grants Skill: Raise Shield
 +(20–30) to Strength
 +(20–30) to Dexterity
 +(20–30)% to Fire Resistance
@@ -1984,7 +1984,7 @@ No Movement Speed Penalty while Shield is Raised
 
 
 Alkem Eira Blazon Crest Shield
-Grants : Raise Shield
+Grants Skill: Raise Shield
 (30–40)% increased Block chance
 (30–50)% increased Armour and Energy Shield
 +(50–70) to maximum Mana
@@ -1992,7 +1992,7 @@ Damage Blocked is Recouped as Mana
 
 
 Oaksworn Sigil Crest Shield
-Grants : Raise Shield
+Grants Skill: Raise Shield
 (40–60)% increased Block chance
 (80–120)% increased Armour and Energy Shield
 +50 to Spirit
@@ -2000,7 +2000,7 @@ Grants : Raise Shield
 
 
 Saffell's Frame Emblem Crest Shield
-Grants : Raise Shield
+Grants Skill: Raise Shield
 +(15–25)% to Fire Resistance
 +(15–25)% to Cold Resistance
 +(30–40)% to Lightning Resistance
@@ -2010,7 +2010,7 @@ Modifiers to Maximum Block Chance instead apply to Maximum Resistances
 
 
 Crest of Ardura Jingling Crest Shield
-Grants : Raise Shield
+Grants Skill: Raise Shield
 (60–100)% increased Armour and Energy Shield
 +(10–20) to Intelligence
 (30–50)% increased Mana Regeneration Rate
@@ -2018,13 +2018,13 @@ Grants : Raise Shield
 
 
 Mahuxotl's Machination Omen Crest Shield
-Grants : Raise Shield
+Grants Skill: Raise Shield
 (333–666)% increased Armour and Energy Shield
 (333–666)% increased effect of Socketed Soul Cores
 
 
 Rise of the Phoenix Omen Crest Shield
-Grants : Raise Shield
+Grants Skill: Raise Shield
 +5% to Maximum Fire Resistance
 +(20–25)% to Fire Resistance
 +25% to Fire Resistance while on Low Life
@@ -2086,12 +2086,12 @@ Solus Ipse Grand Visage
 +(60–100) to maximum Mana
 25% increased Light Radius
 (100–150)% increased Armour, Evasion and Energy Shield
-Equipment and  Gems have 25% increased Attribute Requirements
-You can use two copies of the same Support Gem in different s
+Equipment and Skill Gems have 25% increased Attribute Requirements
+You can use two copies of the same Support Gem in different Skills
 
 
 Sine Aequo Grand Manchettes
-(10–15)% increased  Speed
+(10–15)% increased Skill Speed
 (40–60)% increased Armour, Evasion and Energy Shield
 Immobilise enemies at 50% buildup instead of 100%
 Enemies Immobilised by you take 25% less Damage
@@ -2101,4 +2101,4 @@ Ab Aeterno Grand Cuisses
 (15–30)% increased Movement Speed
 (60–80)% increased Armour, Evasion and Energy Shield
 Dodge Roll avoids all Hits
-10% less Movement and  Speed per Dodge Roll in the past 20 seconds
+10% less Movement and Skill Speed per Dodge Roll in the past 20 seconds

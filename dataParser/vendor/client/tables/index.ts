@@ -117,7 +117,7 @@ interface StatsRow {
   Text: string;
   IsVirtual: boolean;
   HASH32: number;
-  BelongsActivesKey: string[];
+  BelongsActiveSkillsKey: string[];
   IsScalable: boolean;
 }
 
