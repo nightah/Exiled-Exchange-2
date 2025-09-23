@@ -596,7 +596,8 @@ function parseStackSize(section: string[], item: ParsedItem) {
   if (
     item.rarity !== ItemRarity.Normal &&
     item.category !== ItemCategory.Currency &&
-    item.category !== ItemCategory.DivinationCard
+    item.category !== ItemCategory.DivinationCard &&
+    item.category !== ItemCategory.MapFragment
   ) {
     return "PARSER_SKIPPED";
   }
@@ -607,7 +608,9 @@ function parseStackSize(section: string[], item: ParsedItem) {
       .replace(/[^\d/]/g, "")
       .split("/")
       .map(Number);
-    item.stackSize = { value, max };
+    if (item.info.refName !== "Idol of Estazunti") {
+      item.stackSize = { value, max };
+    }
 
     return "SECTION_PARSED";
   }

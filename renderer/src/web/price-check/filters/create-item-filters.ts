@@ -49,7 +49,7 @@ export function createFilters(
     },
   };
 
-  if (item.category === ItemCategory.Gem) {
+  if (item.category === ItemCategory.Gem && !tradeTag(item)) {
     return createGemFilters(item, filters, opts);
   }
   if (item.category === ItemCategory.UncutGem) {
@@ -158,7 +158,9 @@ export function createFilters(
       baseTypeTrade: t(opts, item.info),
     };
     filters.areaLevel = {
-      value: floorToBracket(item.areaLevel!, [1, 68, 73, 79, 83]),
+      // Seems like flooring area level doesn't quite matter for poe2
+      // value: floorToBracket(item.areaLevel!, [1, 68, 73, 79, 83]),
+      value: item.areaLevel!,
       disabled: false,
     };
   } else if (item.category === ItemCategory.HeistBlueprint) {
@@ -315,8 +317,12 @@ export function createFilters(
     filters.rarity = {
       value: "magic",
     };
-  } else if (item.rarity === ItemRarity.Normal && opts.exact) {
-    // Sinc chance orbs only work on normal items
+  } else if (
+    item.rarity === ItemRarity.Normal &&
+    item.info.refName !== "Idol of Estazunti" &&
+    opts.exact
+  ) {
+    // Since chance orbs only work on normal items
     filters.rarity = {
       value: "normal",
     };
