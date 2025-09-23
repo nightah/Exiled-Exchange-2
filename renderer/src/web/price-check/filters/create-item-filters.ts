@@ -317,8 +317,12 @@ export function createFilters(
     filters.rarity = {
       value: "magic",
     };
-  } else if (item.rarity === ItemRarity.Normal && opts.exact) {
-    // Sinc chance orbs only work on normal items
+  } else if (
+    item.rarity === ItemRarity.Normal &&
+    item.info.refName !== "Idol of Estazunti" &&
+    opts.exact
+  ) {
+    // Since chance orbs only work on normal items
     filters.rarity = {
       value: "normal",
     };

@@ -74,6 +74,7 @@ export const CATEGORY_TO_TRADE_ID = new Map([
   [ItemCategory.Flail, "weapon.flail"],
   [ItemCategory.Buckler, "armour.buckler"],
   [ItemCategory.Tablet, "map.tablet"],
+  [ItemCategory.MapFragment, "map.fragment"],
 ]);
 
 const TOTAL_MODS_TEXT = {

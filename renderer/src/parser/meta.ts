@@ -60,6 +60,7 @@ export enum ItemCategory {
   Spear = "Spear",
   Flail = "Flail",
   Buckler = "Buckler",
+  MapFragment = "MapFragment",
 }
 
 export const WEAPON_ONE_HANDED_MELEE = new Set([
