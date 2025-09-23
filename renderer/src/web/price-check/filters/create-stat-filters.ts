@@ -108,8 +108,11 @@ export function createExactStatFilters(
 
   for (const filter of ctx.filters) {
     filter.hidden = undefined;
-
-    if (filter.tag === FilterTag.Explicit) {
+    if (item.category === ItemCategory.Tablet) {
+      if (filter.tag === FilterTag.Explicit) {
+        filter.disabled = false;
+      }
+    } else if (filter.tag === FilterTag.Explicit) {
       filter.disabled = !filter.sources.some(
         (source) =>
           source.modifier.info.tier != null && source.modifier.info.tier <= 2,
@@ -148,8 +151,7 @@ export function createExactStatFilters(
     item.category === ItemCategory.MemoryLine ||
     item.category === ItemCategory.SanctumRelic ||
     item.category === ItemCategory.Charm ||
-    item.category === ItemCategory.Relic ||
-    item.category === ItemCategory.Tablet
+    item.category === ItemCategory.Relic
   ) {
     enableAllFilters(ctx.filters);
   }
