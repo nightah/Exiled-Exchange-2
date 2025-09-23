@@ -39,6 +39,13 @@ export function isValuableBasetype(item: ParsedItem): boolean {
 }
 
 export function getDetailsId(item: ParsedItem) {
+  return {
+    ns: "ITEM",
+    name: item.info.refName,
+    variant: undefined,
+  };
+
+  // eslint-disable-next-line no-unreachable
   if (item.category === ItemCategory.Gem) {
     return forSkillGem(item);
   }

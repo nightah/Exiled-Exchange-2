@@ -49,7 +49,7 @@ export function createFilters(
     },
   };
 
-  if (item.category === ItemCategory.Gem) {
+  if (item.category === ItemCategory.Gem && !tradeTag(item)) {
     return createGemFilters(item, filters, opts);
   }
   if (item.category === ItemCategory.UncutGem) {
