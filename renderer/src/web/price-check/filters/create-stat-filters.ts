@@ -64,7 +64,9 @@ export function createExactStatFilters(
   }
 
   if (
-    item.rarity === ItemRarity.Magic &&
+    (item.rarity === ItemRarity.Magic ||
+      (item.rarity === ItemRarity.Rare &&
+        explicitModifierCount(item).total < 5)) &&
     item.category !== ItemCategory.ClusterJewel &&
     item.category !== ItemCategory.Map &&
     item.category !== ItemCategory.HeistContract &&
