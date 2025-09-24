@@ -496,15 +496,13 @@ function hideNotVariableStat(filter: StatFilter, item: ParsedItem) {
   if (filter.tag === FilterTag.Implicit && item.category === ItemCategory.Jewel)
     return;
   if (
-    filter.tag !== FilterTag.Implicit &&
-    filter.tag !== FilterTag.Explicit &&
-    filter.tag !== FilterTag.Pseudo
+    (filter.tag !== FilterTag.Implicit &&
+      filter.tag !== FilterTag.Explicit &&
+      filter.tag !== FilterTag.Pseudo) ||
+    (filter.tag === FilterTag.Pseudo &&
+      filter.sources.some((s) => s.modifier.info.type === ModifierType.Enchant))
   )
     return;
-  // show all rolls for
-  if (item.info.refName === "Morior Invictus") {
-    return;
-  }
 
   if (!filter.roll) {
     filter.hidden = "filters.hide_const_roll";
