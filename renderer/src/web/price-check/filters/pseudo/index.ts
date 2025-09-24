@@ -158,7 +158,7 @@ const PSEUDO_RULES: PseudoRule[] = [
     stats: [
       { ref: stat("# to maximum Life"), required: true },
       ...ATTRIBUTES_INFO.filter((info) => info.attributes.includes("str")).map(
-        (info) => ({ ref: info.ref, multiplier: 5 / 10 }),
+        (info) => ({ ref: info.ref, multiplier: 2 }),
       ),
     ],
   },
@@ -167,7 +167,7 @@ const PSEUDO_RULES: PseudoRule[] = [
     stats: [
       { ref: stat("# to maximum Mana"), required: true },
       ...ATTRIBUTES_INFO.filter((info) => info.attributes.includes("int")).map(
-        (info) => ({ ref: info.ref, multiplier: 5 / 10 }),
+        (info) => ({ ref: info.ref, multiplier: 2 }),
       ),
     ],
   },

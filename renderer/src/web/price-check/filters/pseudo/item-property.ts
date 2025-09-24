@@ -337,7 +337,7 @@ function weaponProps(ctx: FiltersCreationContext) {
       item.weaponCRIT,
       {
         incr: ["#% increased Critical Hit Chance"],
-        flat: ["+#% to Critical Hit Chance"],
+        flat: ["#% to Critical Hit Chance"],
       },
       item,
     );

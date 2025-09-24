@@ -49,13 +49,7 @@ export function applyAnointmentRules(filters: StatFilter[], item: ParsedItem) {
     anointment.disabled = false;
   } else if (itemIsModifiable(item)) {
     const oils = anointment.oils!;
-    if (
-      !(
-        oils.includes("Concentrated Liquid Isolation") ||
-        oils.includes("Concentrated Liquid Suffering") ||
-        oils.includes("Concentrated Liquid Fear")
-      )
-    ) {
+    if (!oils.includes("Concentrated Liquid Isolation")) {
       anointment.hidden = "filters.hide_anointment";
       anointment.disabled = true;
     }
